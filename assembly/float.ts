@@ -25,8 +25,8 @@ export namespace Randomf64 {
     return lo + (hi - lo) * Math.random();
   }
 
-  /** Bernulli distribution */
-  export function bernulli(prob: f64 = 0.5): f64 {
+  /** Bernoulli distribution */
+  export function bernoulli(prob: f64 = 0.5): f64 {
     return f64(Math.random() >= clamp01(prob));
   }
 
@@ -372,8 +372,8 @@ export namespace Randomf32 {
   }
 
 
-  /** Bernulli distribution */
-  export function bernulli(prob: f32 = 0.5): f32 {
+  /** Bernoulli distribution */
+  export function bernoulli(prob: f32 = 0.5): f32 {
     return f32(Mathf.random() >= clamp01(prob));
   }
 
