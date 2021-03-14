@@ -204,6 +204,8 @@
  (export "Randomf32.gamma" (func $assembly/float/Randomf32.gamma@varargs))
  (export "Randomf32.beta" (func $assembly/float/Randomf32.beta@varargs))
  (export "Randomf32.betaprime" (func $assembly/float/Randomf32.betaprime@varargs))
+ (export "Randomf32.chi" (func $assembly/float/Randomf32.chi@varargs))
+ (export "Randomf32.chisquare" (func $assembly/float/Randomf32.chisquare@varargs))
  (export "Randomf32.students" (func $assembly/float/Randomf32.students@varargs))
  (export "Randomf64.seed" (func $assembly/float/Randomf32.seed))
  (export "Randomf64.uniform" (func $assembly/float/Randomf64.uniform@varargs))
@@ -227,6 +229,8 @@
  (export "Randomf64.gamma" (func $assembly/float/Randomf64.gamma@varargs))
  (export "Randomf64.beta" (func $assembly/float/Randomf64.beta@varargs))
  (export "Randomf64.betaprime" (func $assembly/float/Randomf64.betaprime@varargs))
+ (export "Randomf64.chi" (func $assembly/float/Randomf64.chi@varargs))
+ (export "Randomf64.chisquare" (func $assembly/float/Randomf64.chisquare@varargs))
  (export "Randomf64.students" (func $assembly/float/Randomf64.students@varargs))
  (export "Randomi32.seed" (func $assembly/integer/Randomi32.seed))
  (export "Randomi32.uniform" (func $assembly/integer/Randomi32.uniform@varargs))
@@ -7386,6 +7390,57 @@
   call $assembly/float/Randomf32.gamma
   f32.div
  )
+ (func $assembly/float/Randomf32.chi@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result f32)
+   f32.const 0
+  else
+   local.get $0
+   f32.const 0.5
+   f32.mul
+   f32.const 0.5
+   call $assembly/float/Randomf32.gamma
+  end
+  f32.sqrt
+ )
+ (func $assembly/float/Randomf32.chisquare@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result f32)
+   f32.const 0
+  else
+   local.get $0
+   f32.const 0.5
+   f32.mul
+   f32.const 0.5
+   call $assembly/float/Randomf32.gamma
+  end
+ )
  (func $assembly/float/Randomf32.students@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
@@ -8001,6 +8056,57 @@
   f64.const 1
   call $assembly/float/Randomf64.gamma
   f64.div
+ )
+ (func $assembly/float/Randomf64.chi@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result f64)
+   f64.const 0
+  else
+   local.get $0
+   f64.const 0.5
+   f64.mul
+   f64.const 0.5
+   call $assembly/float/Randomf64.gamma
+  end
+  f64.sqrt
+ )
+ (func $assembly/float/Randomf64.chisquare@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result f64)
+   f64.const 0
+  else
+   local.get $0
+   f64.const 0.5
+   f64.mul
+   f64.const 0.5
+   call $assembly/float/Randomf64.gamma
+  end
  )
  (func $assembly/float/Randomf64.students@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2

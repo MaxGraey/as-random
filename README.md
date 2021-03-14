@@ -26,9 +26,11 @@ Work in Progress
 - **Uniform** _(with range)_
 - Bernoulli
 - Beta
-- Betaprime
+- Beta-Prime
 - Binominal
 - Cauchy
+- Chi
+- Chi-Square
 - Exponential
 - Fisher _(von Mises-Fisher)_
 - Frechet

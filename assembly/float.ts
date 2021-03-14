@@ -373,6 +373,17 @@ export namespace Randomf64 {
     return gamma(alpha) / gamma(beta);
   }
 
+  /** Chi distribution */
+  export function chi(k: f64 = 1.0): f64 {
+    return Math.sqrt(chisquare(k));
+  }
+
+  /** Chi-square distribution */
+  export function chisquare(k: f64 = 1.0): f64 {
+    if (k <= 0.0) return 0.0;
+    return gamma(k * 0.5, 0.5);
+  }
+
   /** Student's T distribution. */
   export function students(nu: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
     let n = normal();
@@ -656,6 +667,17 @@ export namespace Randomf32 {
   /** Beta prime distribution. */
   export function betaprime(alpha: f32 = 2.0, beta: f32 = 3.0): f32 {
     return gamma(alpha) / gamma(beta);
+  }
+
+  /** Chi distribution */
+  export function chi(k: f32 = 1.0): f32 {
+    return Mathf.sqrt(chisquare(k));
+  }
+
+  /** Chi-square distribution */
+  export function chisquare(k: f32 = 1.0): f32 {
+    if (k <= 0.0) return 0.0;
+    return gamma(k * 0.5, 0.5);
   }
 
   /** Student's T distribution. */
