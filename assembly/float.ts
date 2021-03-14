@@ -164,7 +164,7 @@ export namespace Randomf64 {
     const pi2 = 2.0 * Math.PI;
 
     if (isNaN(mean) || isNaN(kappa)) {
-      return NaN;
+      return mean + kappa;
     }
 
     if (kappa <= 1e-7) {
@@ -195,7 +195,7 @@ export namespace Randomf64 {
 
   /** Poisson distribution. */
   export function poisson(lambda: f64): f64 {
-    if (isNaN(lambda)) return NaN;
+    if (isNaN(lambda)) return lambda;
 
     if (lambda < 30.0) {
       // Knuth's algorithm
@@ -236,7 +236,7 @@ export namespace Randomf64 {
 
   /** Binominal distribution. */
   export function binominal(n: u32, prob: f64 = 0.5): f64 {
-    if (isNaN(prob)) return NaN;
+    if (isNaN(prob)) return prob;
     if (prob >= 1.0) return n as f64;
     if (prob <= 0.0) return 0.0;
     let p = prob > 0.5
@@ -297,7 +297,7 @@ export namespace Randomf64 {
     const EPS = 1e-7;
 
     if (isNaN(alpha) || isNaN(beta)) {
-      return NaN;
+      return alpha + beta;
     }
 
     if (alpha <= EPS || beta <= EPS) {
@@ -528,7 +528,7 @@ export namespace Randomf32 {
     // University Press, 1993.
 
     if (isNaN(mean) || isNaN(kappa)) {
-      return NaN;
+      return mean + kappa;
     }
 
     const pi2: f32 = 2.0 * Mathf.PI;
@@ -574,7 +574,7 @@ export namespace Randomf32 {
     const EPS: f32 = 1e-6;
 
     if (isNaN(alpha) || isNaN(beta)) {
-      return NaN;
+      return alpha + beta;
     }
 
     if (alpha <= EPS || beta <= EPS) {

@@ -2167,7 +2167,9 @@
   f32.ne
   select
   if
-   f32.const nan:0x400000
+   local.get $0
+   local.get $1
+   f32.add
    return
   end
   local.get $1
@@ -3081,7 +3083,7 @@
   local.get $0
   f64.ne
   if
-   f64.const nan:0x8000000000000
+   local.get $0
    return
   end
   local.get $0
@@ -4034,7 +4036,7 @@
   local.get $1
   f64.ne
   if
-   f64.const nan:0x8000000000000
+   local.get $1
    return
   end
   local.get $1
@@ -4252,7 +4254,9 @@
   f32.ne
   select
   if
-   f32.const nan:0x400000
+   local.get $0
+   local.get $1
+   f32.add
    return
   end
   i32.const 1
@@ -6103,7 +6107,9 @@
   f64.ne
   select
   if
-   f64.const nan:0x8000000000000
+   local.get $0
+   local.get $1
+   f64.add
    return
   end
   local.get $1
@@ -6371,7 +6377,9 @@
   f64.ne
   select
   if
-   f64.const nan:0x8000000000000
+   local.get $0
+   local.get $1
+   f64.add
    return
   end
   i32.const 1
