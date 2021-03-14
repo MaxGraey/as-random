@@ -4296,7 +4296,7 @@
    f32.sqrt
    local.tee $5
    f32.add
-   local.set $7
+   local.set $6
    loop $while-continue|0 (result f32)
     i32.const 1
     call $~lib/math/NativeMathf.random
@@ -4311,7 +4311,7 @@
     f32.const 1
     call $~lib/math/NativeMathf.random
     f32.sub
-    local.set $8
+    local.set $7
     local.get $0
     local.get $2
     f32.const 1
@@ -4321,24 +4321,24 @@
     call $~lib/math/NativeMathf.log
     local.get $5
     f32.div
-    local.tee $6
+    local.tee $8
     call $~lib/math/NativeMathf.exp
     f32.mul
     local.set $3
     local.get $4
-    local.get $7
     local.get $6
+    local.get $8
     f32.mul
     f32.add
     local.get $3
     f32.sub
-    local.tee $6
+    local.tee $8
     f32.const 2.504077434539795
     f32.add
     local.get $2
     local.get $2
     f32.mul
-    local.get $8
+    local.get $7
     f32.mul
     local.tee $2
     f32.const 4.5
@@ -4351,7 +4351,7 @@
     else
      local.get $2
      call $~lib/math/NativeMathf.log
-     local.get $6
+     local.get $8
      f32.le
     end
     i32.eqz
@@ -4367,11 +4367,19 @@
    f32.const 2.7182817459106445
    f32.div
    local.set $4
+   local.get $0
+   f32.const 1
+   f32.sub
+   local.set $5
+   f32.const 1
+   local.get $0
+   f32.div
+   local.set $6
    loop $while-continue|1 (result f32)
     call $~lib/math/NativeMathf.random
     local.set $2
     call $~lib/math/NativeMathf.random
-    local.set $5
+    local.set $7
     local.get $4
     local.get $2
     f32.mul
@@ -4380,9 +4388,7 @@
     f32.le
     if (result f32)
      local.get $2
-     f32.const 1
-     local.get $0
-     f32.div
+     local.get $6
      call $~lib/math/NativeMathf.pow
     else
      local.get $4
@@ -4399,16 +4405,14 @@
     f32.gt
     if (result f32)
      local.get $3
-     local.get $0
-     f32.const 1
-     f32.sub
+     local.get $5
      call $~lib/math/NativeMathf.pow
     else
      local.get $3
      f32.neg
      call $~lib/math/NativeMathf.exp
     end
-    local.get $5
+    local.get $7
     f32.ge
     i32.eqz
     br_if $while-continue|1
@@ -6411,7 +6415,7 @@
    f64.sqrt
    local.tee $5
    f64.add
-   local.set $7
+   local.set $6
    loop $while-continue|0 (result f64)
     i32.const 1
     call $~lib/math/NativeMath.random
@@ -6426,7 +6430,7 @@
     f64.const 1
     call $~lib/math/NativeMath.random
     f64.sub
-    local.set $8
+    local.set $7
     local.get $0
     local.get $2
     f64.const 1
@@ -6436,24 +6440,24 @@
     call $~lib/math/NativeMath.log
     local.get $5
     f64.div
-    local.tee $6
+    local.tee $8
     call $~lib/math/NativeMath.exp
     f64.mul
     local.set $3
     local.get $4
-    local.get $7
     local.get $6
+    local.get $8
     f64.mul
     f64.add
     local.get $3
     f64.sub
-    local.tee $6
+    local.tee $8
     f64.const 2.504077396776274
     f64.add
     local.get $2
     local.get $2
     f64.mul
-    local.get $8
+    local.get $7
     f64.mul
     local.tee $2
     f64.const 4.5
@@ -6466,7 +6470,7 @@
     else
      local.get $2
      call $~lib/math/NativeMath.log
-     local.get $6
+     local.get $8
      f64.le
     end
     i32.eqz
@@ -6482,11 +6486,19 @@
    f64.const 2.718281828459045
    f64.div
    local.set $4
+   local.get $0
+   f64.const 1
+   f64.sub
+   local.set $5
+   f64.const 1
+   local.get $0
+   f64.div
+   local.set $6
    loop $while-continue|1 (result f64)
     call $~lib/math/NativeMath.random
     local.set $2
     call $~lib/math/NativeMath.random
-    local.set $5
+    local.set $7
     local.get $4
     local.get $2
     f64.mul
@@ -6495,9 +6507,7 @@
     f64.le
     if (result f64)
      local.get $2
-     f64.const 1
-     local.get $0
-     f64.div
+     local.get $6
      call $~lib/math/NativeMath.pow
     else
      local.get $4
@@ -6514,16 +6524,14 @@
     f64.gt
     if (result f64)
      local.get $3
-     local.get $0
-     f64.const 1
-     f64.sub
+     local.get $5
      call $~lib/math/NativeMath.pow
     else
      local.get $3
      f64.neg
      call $~lib/math/NativeMath.exp
     end
-    local.get $5
+    local.get $7
     f64.ge
     i32.eqz
     br_if $while-continue|1

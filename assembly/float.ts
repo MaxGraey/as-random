@@ -180,7 +180,7 @@ export namespace Randomf64 {
       u2 = Math.random();
       z  = Math.cos(u1 * Math.PI);
       s  = z / (r + z);
-    } while ((u2 >= 1.0 - s * s) && (u2 > (1.0 - s) * Math.exp(s)));
+    } while (u2 >= 1.0 - s * s && u2 > (1.0 - s) * Math.exp(s));
 
     let q = 1.0 / r;
     let a = (q + z) / (1.0 + q * z);
@@ -337,6 +337,8 @@ export namespace Randomf64 {
       // Uses Kennedy & Gentle, "Statistical Computing"
 
       let B = (Math.E + alpha) / Math.E;
+      let deca = alpha - 1.0;
+      let inva = 1.0 / alpha;
 
       while (true) {
         let u1 = Math.random();
@@ -344,11 +346,11 @@ export namespace Randomf64 {
         let p  = B * u1;
 
         let x = p <= 1.0
-          ? Math.pow(p, 1.0 / alpha)
+          ? Math.pow(p, inva)
           :-Math.log((B - p) / alpha);
 
         let t = p > 1.0
-          ? Math.pow(x, alpha - 1.0)
+          ? Math.pow(x, deca)
           : Math.exp(-x);
 
         if (u2 <= t) {
@@ -544,7 +546,7 @@ export namespace Randomf32 {
       u2 = Mathf.random();
       z  = Mathf.cos(u1 * Mathf.PI);
       s  = z / (r + z);
-    } while ((u2 >= 1.0 - s * s) && (u2 > (1.0 - s) * Mathf.exp(s)));
+    } while (u2 >= 1.0 - s * s && u2 > (1.0 - s) * Mathf.exp(s));
 
     let q = 1.0 as f32 / r;
     let a = (q + z) / (1.0 as f32 + q * z);
@@ -612,6 +614,8 @@ export namespace Randomf32 {
       // Uses Kennedy & Gentle, "Statistical Computing"
 
       let B: f32 = (Mathf.E + alpha) / Mathf.E;
+      let deca = alpha - 1.0 as f32;
+      let inva = 1.0 as f32 / alpha;
 
       while (true) {
         let u1 = Mathf.random();
@@ -619,11 +623,11 @@ export namespace Randomf32 {
         let p  = B * u1;
 
         let x = p <= 1.0
-          ? Mathf.pow(p, 1.0 / alpha)
+          ? Mathf.pow(p, inva)
           :-Mathf.log((B - p) / alpha);
 
         let t = p > 1.0
-          ? Mathf.pow(x, alpha - 1.0)
+          ? Mathf.pow(x, deca)
           : Mathf.exp(-x);
 
         if (u2 <= t) {

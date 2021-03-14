@@ -5775,6 +5775,8 @@
   (local $12 f32)
   (local $13 f32)
   (local $14 f32)
+  (local $15 f32)
+  (local $16 f32)
   local.get $0
   local.get $0
   f32.ne
@@ -5924,58 +5926,62 @@
    global.get $~lib/math/NativeMathf.E
    f32.div
    local.set $4
+   local.get $0
+   f32.const 1
+   f32.sub
+   local.set $3
+   f32.const 1
+   local.get $0
+   f32.div
+   local.set $2
    loop $while-continue|1
     i32.const 1
     local.set $5
     local.get $5
     if
      call $~lib/math/NativeMathf.random
-     local.set $3
-     call $~lib/math/NativeMathf.random
-     local.set $2
-     local.get $4
-     local.get $3
-     f32.mul
      local.set $12
+     call $~lib/math/NativeMathf.random
+     local.set $13
+     local.get $4
      local.get $12
+     f32.mul
+     local.set $14
+     local.get $14
      f32.const 1
      f32.le
      if (result f32)
-      local.get $12
-      f32.const 1
-      local.get $0
-      f32.div
+      local.get $14
+      local.get $2
       call $~lib/math/NativeMathf.pow
      else
       local.get $4
-      local.get $12
+      local.get $14
       f32.sub
       local.get $0
       f32.div
       call $~lib/math/NativeMathf.log
       f32.neg
      end
-     local.set $13
-     local.get $12
+     local.set $15
+     local.get $14
      f32.const 1
      f32.gt
      if (result f32)
-      local.get $13
-      local.get $0
-      f32.const 1
-      f32.sub
+      local.get $15
+      local.get $3
       call $~lib/math/NativeMathf.pow
      else
-      local.get $13
+      local.get $15
       f32.neg
       call $~lib/math/NativeMathf.exp
      end
-     local.set $14
-     local.get $2
-     local.get $14
+     local.set $16
+     local.get $13
+     local.get $16
      f32.le
      if
-      local.get $13
+      local.get $15
       local.get $1
       f32.mul
       return
@@ -8761,6 +8767,8 @@
   (local $12 f64)
   (local $13 f64)
   (local $14 f64)
+  (local $15 f64)
+  (local $16 f64)
   local.get $0
   local.get $0
   f64.ne
@@ -8910,58 +8918,62 @@
    global.get $~lib/math/NativeMath.E
    f64.div
    local.set $4
+   local.get $0
+   f64.const 1
+   f64.sub
+   local.set $3
+   f64.const 1
+   local.get $0
+   f64.div
+   local.set $2
    loop $while-continue|1
     i32.const 1
     local.set $5
     local.get $5
     if
      call $~lib/math/NativeMath.random
-     local.set $3
-     call $~lib/math/NativeMath.random
-     local.set $2
-     local.get $4
-     local.get $3
-     f64.mul
      local.set $12
+     call $~lib/math/NativeMath.random
+     local.set $13
+     local.get $4
      local.get $12
+     f64.mul
+     local.set $14
+     local.get $14
      f64.const 1
      f64.le
      if (result f64)
-      local.get $12
-      f64.const 1
-      local.get $0
-      f64.div
+      local.get $14
+      local.get $2
       call $~lib/math/NativeMath.pow
      else
       local.get $4
-      local.get $12
+      local.get $14
       f64.sub
       local.get $0
       f64.div
       call $~lib/math/NativeMath.log
       f64.neg
      end
-     local.set $13
-     local.get $12
+     local.set $15
+     local.get $14
      f64.const 1
      f64.gt
      if (result f64)
-      local.get $13
-      local.get $0
-      f64.const 1
-      f64.sub
+      local.get $15
+      local.get $3
       call $~lib/math/NativeMath.pow
      else
-      local.get $13
+      local.get $15
       f64.neg
       call $~lib/math/NativeMath.exp
      end
-     local.set $14
-     local.get $2
-     local.get $14
+     local.set $16
+     local.get $13
+     local.get $16
      f64.le
      if
-      local.get $13
+      local.get $15
       local.get $1
       f64.mul
       return
