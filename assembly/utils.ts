@@ -33,21 +33,21 @@ export function random64(): u64 {
 export function random32UpTo(limit: u32): u32 {
   let x = random32();
   if (limit >= 1 << 31) {
-	  while (x >= limit) x = random32();
-	  return x;
+    while (x >= limit) x = random32();
+    return x;
   }
   let lim64 = u64(limit);
   let r = u64(x) * lim64;
   let l = u32(r);
   if (l < limit) {
-	  let t = -limit;
-	  t -= limit;
-	  if (t >= limit) t %= limit;
-	  while (l < t) {
-	    x = random32();
-	    r = u64(x) * lim64;
-	    l = u32(r);
-	  }
+    let t = -limit;
+    t -= limit;
+    if (t >= limit) t %= limit;
+    while (l < t) {
+      x = random32();
+      r = u64(x) * lim64;
+      l = u32(r);
+    }
   }
   return u32(r >> 32);
 }
@@ -57,16 +57,16 @@ export function random32UpTo(limit: u32): u32 {
 export function random64UpTo(limit: u64): u64 {
   let r = random64();
   if (r < limit) {
-	  let t = -limit;
-	  if (t >= limit) {
-	    t -= limit;
-	    if (t >= limit) t %= limit;
-	  }
-	  while (r < t) r = random64();
+    let t = -limit;
+    if (t >= limit) {
+      t -= limit;
+      if (t >= limit) t %= limit;
+    }
+    while (r < t) r = random64();
   }
   if (r >= limit) {
-	  r -= limit;
-	  if (r >= limit) r %= limit;
+    r -= limit;
+    if (r >= limit) r %= limit;
   }
   return r;
 }
