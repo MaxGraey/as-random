@@ -383,6 +383,13 @@ export namespace Randomf64 {
     return gamma(k * 0.5, 0.5);
   }
 
+  /** Snedecor's F distribution. */
+  export function snedecor(d1: f64 = 1.0, d2: f64 = 1.0): f64 {
+    let u1 = chisquare(d1);
+    let u2 = chisquare(d2);
+    return (u1 / d1) / (u2 / d2);
+  }
+
   /** Student's T distribution. */
   export function students(nu: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
     let n = normal();
@@ -676,6 +683,13 @@ export namespace Randomf32 {
   /** Chi-square distribution */
   export function chisquare(k: f32 = 1.0): f32 {
     return gamma(k * 0.5, 0.5);
+  }
+
+  /** Snedecor's F distribution. */
+  export function snedecor(d1: f32 = 1.0, d2: f32 = 1.0): f32 {
+    let u1 = chisquare(d1);
+    let u2 = chisquare(d2);
+    return (u1 / d1) / (u2 / d2);
   }
 
   /** Student's T distribution. */
