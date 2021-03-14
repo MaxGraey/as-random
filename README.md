@@ -18,7 +18,7 @@ Work in Progress
 ### Discrete integer distributions:
 
 - **Uniform** _(with range)_
-- Bernulli
+- Bernoulli
 - Boolean
 
 ### Floating point distributions:
