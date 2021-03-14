@@ -380,7 +380,6 @@ export namespace Randomf64 {
 
   /** Chi-square distribution */
   export function chisquare(k: f64 = 1.0): f64 {
-    if (k <= 0.0) return 0.0;
     return gamma(k * 0.5, 0.5);
   }
 
@@ -676,7 +675,6 @@ export namespace Randomf32 {
 
   /** Chi-square distribution */
   export function chisquare(k: f32 = 1.0): f32 {
-    if (k <= 0.0) return 0.0;
     return gamma(k * 0.5, 0.5);
   }
 

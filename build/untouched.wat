@@ -6035,13 +6035,6 @@
  )
  (func $assembly/float/Randomf32.chisquare (param $0 f32) (result f32)
   local.get $0
-  f32.const 0
-  f32.le
-  if
-   f32.const 0
-   return
-  end
-  local.get $0
   f32.const 0.5
   f32.mul
   f32.const 0.5
@@ -9081,13 +9074,6 @@
   f64.div
  )
  (func $assembly/float/Randomf64.chisquare (param $0 f64) (result f64)
-  local.get $0
-  f64.const 0
-  f64.le
-  if
-   f64.const 0
-   return
-  end
   local.get $0
   f64.const 0.5
   f64.mul

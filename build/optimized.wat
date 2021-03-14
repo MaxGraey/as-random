@@ -7403,17 +7403,10 @@
    local.set $0
   end
   local.get $0
-  f32.const 0
-  f32.le
-  if (result f32)
-   f32.const 0
-  else
-   local.get $0
-   f32.const 0.5
-   f32.mul
-   f32.const 0.5
-   call $assembly/float/Randomf32.gamma
-  end
+  f32.const 0.5
+  f32.mul
+  f32.const 0.5
+  call $assembly/float/Randomf32.gamma
   f32.sqrt
  )
  (func $assembly/float/Randomf32.chisquare@varargs (param $0 f32) (result f32)
@@ -7429,17 +7422,10 @@
    local.set $0
   end
   local.get $0
-  f32.const 0
-  f32.le
-  if (result f32)
-   f32.const 0
-  else
-   local.get $0
-   f32.const 0.5
-   f32.mul
-   f32.const 0.5
-   call $assembly/float/Randomf32.gamma
-  end
+  f32.const 0.5
+  f32.mul
+  f32.const 0.5
+  call $assembly/float/Randomf32.gamma
  )
  (func $assembly/float/Randomf32.students@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
@@ -8070,17 +8056,10 @@
    local.set $0
   end
   local.get $0
-  f64.const 0
-  f64.le
-  if (result f64)
-   f64.const 0
-  else
-   local.get $0
-   f64.const 0.5
-   f64.mul
-   f64.const 0.5
-   call $assembly/float/Randomf64.gamma
-  end
+  f64.const 0.5
+  f64.mul
+  f64.const 0.5
+  call $assembly/float/Randomf64.gamma
   f64.sqrt
  )
  (func $assembly/float/Randomf64.chisquare@varargs (param $0 f64) (result f64)
@@ -8096,17 +8075,10 @@
    local.set $0
   end
   local.get $0
-  f64.const 0
-  f64.le
-  if (result f64)
-   f64.const 0
-  else
-   local.get $0
-   f64.const 0.5
-   f64.mul
-   f64.const 0.5
-   call $assembly/float/Randomf64.gamma
-  end
+  f64.const 0.5
+  f64.mul
+  f64.const 0.5
+  call $assembly/float/Randomf64.gamma
  )
  (func $assembly/float/Randomf64.students@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
