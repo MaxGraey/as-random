@@ -26,6 +26,7 @@ Work in Progress
 - **Uniform** _(with range)_
 - Bernoulli
 - Beta
+- Betaprime
 - Binominal
 - Cauchy
 - Exponential
