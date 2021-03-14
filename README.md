@@ -10,6 +10,7 @@ Work in Progress
 
 - Exposes fast integer random generator with proper range reduction
 - Uses most novel and fast algorithms for all kind of distributions
+- All input parameters are valid and don't throw exceptions
 
 ---
 ### Descreate integer distributions:
