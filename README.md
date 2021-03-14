@@ -8,8 +8,8 @@ Work in Progress
 
 ### Features
 
-- Expose fast integer random generator with proper range reduction
-- Use most novel and fast alghoritms for all kind of distributions
+- Exposes fast integer random generator with proper range reduction
+- Uses most novel and fast algorithms for all kind of distributions
 
 ---
 ### Descreate integer distributions:
