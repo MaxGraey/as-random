@@ -372,6 +372,14 @@ export namespace Randomf64 {
   export function betaprime(alpha: f64 = 2.0, beta: f64 = 3.0): f64 {
     return gamma(alpha) / gamma(beta);
   }
+
+  /** Student's T distribution. */
+  export function students(nu: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+    let n = normal();
+    let g = gamma(nu * 0.5, 0.5);
+    let z = n / Math.sqrt(g / nu);
+    return mean + sigma * z;
+  }
 }
 
 
@@ -648,5 +656,13 @@ export namespace Randomf32 {
   /** Beta prime distribution. */
   export function betaprime(alpha: f32 = 2.0, beta: f32 = 3.0): f32 {
     return gamma(alpha) / gamma(beta);
+  }
+
+  /** Student's T distribution. */
+  export function students(nu: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+    let n = normal();
+    let g = gamma(nu * 0.5, 0.5);
+    let z = n / Mathf.sqrt(g / nu);
+    return mean + sigma * z;
   }
 }

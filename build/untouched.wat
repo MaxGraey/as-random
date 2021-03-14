@@ -4,10 +4,10 @@
  (type $f64_=>_f64 (func (param f64) (result f64)))
  (type $f32_=>_f32 (func (param f32) (result f32)))
  (type $i64_=>_none (func (param i64)))
- (type $i32_=>_i32 (func (param i32) (result i32)))
- (type $i64_=>_i64 (func (param i64) (result i64)))
  (type $f32_f32_f32_=>_f32 (func (param f32 f32 f32) (result f32)))
  (type $f64_f64_f64_=>_f64 (func (param f64 f64 f64) (result f64)))
+ (type $i32_=>_i32 (func (param i32) (result i32)))
+ (type $i64_=>_i64 (func (param i64) (result i64)))
  (type $none_=>_i32 (func (result i32)))
  (type $i32_i32_=>_i32 (func (param i32 i32) (result i32)))
  (type $i64_i64_=>_i64 (func (param i64 i64) (result i64)))
@@ -89,6 +89,7 @@
  (export "Randomf32.gamma" (func $assembly/float/Randomf32.gamma@varargs))
  (export "Randomf32.beta" (func $assembly/float/Randomf32.beta@varargs))
  (export "Randomf32.betaprime" (func $assembly/float/Randomf32.betaprime@varargs))
+ (export "Randomf32.students" (func $assembly/float/Randomf32.students@varargs))
  (export "Randomf64.seed" (func $assembly/float/Randomf64.seed))
  (export "Randomf64.uniform" (func $assembly/float/Randomf64.uniform@varargs))
  (export "Randomf64.bernoulli" (func $assembly/float/Randomf64.bernoulli@varargs))
@@ -111,6 +112,7 @@
  (export "Randomf64.gamma" (func $assembly/float/Randomf64.gamma@varargs))
  (export "Randomf64.beta" (func $assembly/float/Randomf64.beta@varargs))
  (export "Randomf64.betaprime" (func $assembly/float/Randomf64.betaprime@varargs))
+ (export "Randomf64.students" (func $assembly/float/Randomf64.students@varargs))
  (export "Randomi32.seed" (func $assembly/integer/Randomi32.seed))
  (export "Randomi32.uniform" (func $assembly/integer/Randomi32.uniform@varargs))
  (export "Randomi32.bernoulli" (func $assembly/integer/Randomi32.bernoulli@varargs))
@@ -6027,6 +6029,35 @@
   call $assembly/float/Randomf32.gamma
   f32.div
  )
+ (func $assembly/float/Randomf32.students (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  (local $4 f32)
+  (local $5 f32)
+  f32.const 0
+  f32.const 1
+  call $assembly/float/Randomf32.normal
+  local.set $3
+  local.get $0
+  f32.const 0.5
+  f32.mul
+  f32.const 0.5
+  call $assembly/float/Randomf32.gamma
+  local.set $4
+  local.get $3
+  local.get $4
+  local.get $0
+  f32.div
+  local.set $5
+  local.get $5
+  f32.sqrt
+  f32.div
+  local.set $5
+  local.get $1
+  local.get $2
+  local.get $5
+  f32.mul
+  f32.add
+ )
  (func $assembly/float/Randomf64.seed (param $0 i64)
   local.get $0
   call $~lib/math/NativeMath.seedRandom
@@ -9023,6 +9054,35 @@
   call $assembly/float/Randomf64.gamma
   f64.div
  )
+ (func $assembly/float/Randomf64.students (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  f64.const 0
+  f64.const 1
+  call $assembly/float/Randomf64.normal
+  local.set $3
+  local.get $0
+  f64.const 0.5
+  f64.mul
+  f64.const 0.5
+  call $assembly/float/Randomf64.gamma
+  local.set $4
+  local.get $3
+  local.get $4
+  local.get $0
+  f64.div
+  local.set $5
+  local.get $5
+  f64.sqrt
+  f64.div
+  local.set $5
+  local.get $1
+  local.get $2
+  local.get $5
+  f64.mul
+  f64.add
+ )
  (func $assembly/utils/splitMix32 (param $0 i32) (result i32)
   local.get $0
   i32.const 1831565813
@@ -9879,6 +9939,29 @@
   local.get $1
   call $assembly/float/Randomf32.betaprime
  )
+ (func $assembly/float/Randomf32.students@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.students
+ )
  (func $assembly/float/Randomf64.uniform@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
@@ -10261,6 +10344,29 @@
   local.get $0
   local.get $1
   call $assembly/float/Randomf64.betaprime
+ )
+ (func $assembly/float/Randomf64.students@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.students
  )
  (func $assembly/integer/Randomi32.uniform@varargs (param $0 i32) (param $1 i32) (result i32)
   block $2of2
