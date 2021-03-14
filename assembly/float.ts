@@ -161,8 +161,11 @@ export namespace Randomf64 {
     // Based upon an algorithm published in: Fisher, N.I.,
     // "Statistical Analysis of Circular Data", Cambridge
     // University Press, 1993.
-
     const pi2 = 2.0 * Math.PI;
+
+    if (isNaN(mean) || isNaN(kappa)) {
+      return NaN;
+    }
 
     if (kappa <= 1e-7) {
       return pi2 * Math.random();
@@ -192,6 +195,8 @@ export namespace Randomf64 {
 
   /** Poisson distribution. */
   export function poisson(lambda: f64): f64 {
+    if (isNaN(lambda)) return NaN;
+
     if (lambda < 30.0) {
       // Knuth's algorithm
       let r = 1.0, n = 1;
@@ -231,6 +236,7 @@ export namespace Randomf64 {
 
   /** Binominal distribution. */
   export function binominal(n: u32, prob: f64 = 0.5): f64 {
+    if (isNaN(prob)) return NaN;
     if (prob >= 1.0) return n as f64;
     if (prob <= 0.0) return 0.0;
     let p = prob > 0.5
@@ -289,6 +295,11 @@ export namespace Randomf64 {
   /** Gamma distribution. */
   export function gamma(alpha: f64 = 1.0, beta: f64 = 1.0): f64 {
     const EPS = 1e-7;
+
+    if (isNaN(alpha) || isNaN(beta)) {
+      return NaN;
+    }
+
     if (alpha <= EPS || beta <= EPS) {
       return 0.0;
     }
@@ -353,6 +364,11 @@ export namespace Randomf64 {
     return y != 0.0
       ? y / (y + gamma(beta))
       : 0.0;
+  }
+
+  /** Beta prime distribution. */
+  export function betaprime(alpha: f64 = 2.0, beta: f64 = 3.0): f64 {
+    return gamma(alpha) / gamma(beta);
   }
 }
 
@@ -509,6 +525,10 @@ export namespace Randomf32 {
     // "Statistical Analysis of Circular Data", Cambridge
     // University Press, 1993.
 
+    if (isNaN(mean) || isNaN(kappa)) {
+      return NaN;
+    }
+
     const pi2: f32 = 2.0 * Mathf.PI;
 
     if (kappa <= 1e-5) {
@@ -550,6 +570,11 @@ export namespace Randomf32 {
   /** Gamma distribution. */
   export function gamma(alpha: f32 = 1.0, beta: f32 = 1.0): f32 {
     const EPS: f32 = 1e-6;
+
+    if (isNaN(alpha) || isNaN(beta)) {
+      return NaN;
+    }
+
     if (alpha <= EPS || beta <= EPS) {
       return 0.0;
     }
@@ -575,7 +600,7 @@ export namespace Randomf32 {
         if (u1 <= EPS || u1 >= 1.0 - EPS) continue;
 
         let u2 = 1.0 as f32 - Mathf.random();
-        let v = Mathf.log(u1 / (1.0 - u1)) / a0;
+        let v = Mathf.log(u1 / (1.0 as f32 - u1)) / a0;
         let x = alpha * Mathf.exp(v);
         let z = u1 * u1 * u2;
         let r = a1 + a2 * v - x;
@@ -614,5 +639,10 @@ export namespace Randomf32 {
     return y != 0.0
       ? y / (y + gamma(beta))
       : 0.0;
+  }
+
+  /** Beta prime distribution. */
+  export function betaprime(alpha: f32 = 2.0, beta: f32 = 3.0): f32 {
+    return gamma(alpha) / gamma(beta);
   }
 }

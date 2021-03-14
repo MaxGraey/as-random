@@ -69,7 +69,7 @@
  (global $~lib/builtins/u64.MAX_VALUE i64 (i64.const -1))
  (export "Randomf32.seed" (func $assembly/float/Randomf32.seed))
  (export "Randomf32.uniform" (func $assembly/float/Randomf32.uniform@varargs))
- (export "Randomf32.bernulli" (func $assembly/float/Randomf32.bernulli@varargs))
+ (export "Randomf32.bernoulli" (func $assembly/float/Randomf32.bernoulli@varargs))
  (export "Randomf32.triangular" (func $assembly/float/Randomf32.triangular@varargs))
  (export "Randomf32.geometric" (func $assembly/float/Randomf32.geometric@varargs))
  (export "Randomf32.normal" (func $assembly/float/Randomf32.normal@varargs))
@@ -88,9 +88,10 @@
  (export "Randomf32.binominal" (func $assembly/float/Randomf32.binominal@varargs))
  (export "Randomf32.gamma" (func $assembly/float/Randomf32.gamma@varargs))
  (export "Randomf32.beta" (func $assembly/float/Randomf32.beta@varargs))
+ (export "Randomf32.betaprime" (func $assembly/float/Randomf32.betaprime@varargs))
  (export "Randomf64.seed" (func $assembly/float/Randomf64.seed))
  (export "Randomf64.uniform" (func $assembly/float/Randomf64.uniform@varargs))
- (export "Randomf64.bernulli" (func $assembly/float/Randomf64.bernulli@varargs))
+ (export "Randomf64.bernoulli" (func $assembly/float/Randomf64.bernoulli@varargs))
  (export "Randomf64.triangular" (func $assembly/float/Randomf64.triangular@varargs))
  (export "Randomf64.geometric" (func $assembly/float/Randomf64.geometric@varargs))
  (export "Randomf64.normal" (func $assembly/float/Randomf64.normal@varargs))
@@ -109,13 +110,14 @@
  (export "Randomf64.binominal" (func $assembly/float/Randomf64.binominal@varargs))
  (export "Randomf64.gamma" (func $assembly/float/Randomf64.gamma@varargs))
  (export "Randomf64.beta" (func $assembly/float/Randomf64.beta@varargs))
+ (export "Randomf64.betaprime" (func $assembly/float/Randomf64.betaprime@varargs))
  (export "Randomi32.seed" (func $assembly/integer/Randomi32.seed))
  (export "Randomi32.uniform" (func $assembly/integer/Randomi32.uniform@varargs))
- (export "Randomi32.bernulli" (func $assembly/integer/Randomi32.bernulli@varargs))
+ (export "Randomi32.bernoulli" (func $assembly/integer/Randomi32.bernoulli@varargs))
  (export "Randomi32.boolean" (func $assembly/integer/Randomi32.boolean))
  (export "Randomi64.seed" (func $assembly/integer/Randomi64.seed))
  (export "Randomi64.uniform" (func $assembly/integer/Randomi64.uniform@varargs))
- (export "Randomi64.bernulli" (func $assembly/integer/Randomi64.bernulli@varargs))
+ (export "Randomi64.bernoulli" (func $assembly/integer/Randomi64.bernoulli@varargs))
  (export "Randomi64.boolean" (func $assembly/integer/Randomi64.boolean))
  (export "memory" (memory $0))
  (export "__setArgumentsLength" (func $~setArgumentsLength))
@@ -303,7 +305,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.bernulli (param $0 f32) (result f32)
+ (func $assembly/float/Randomf32.bernoulli (param $0 f32) (result f32)
   (local $1 f32)
   call $~lib/math/NativeMathf.random
   local.get $0
@@ -3503,6 +3505,20 @@
   (local $7 i32)
   (local $8 f32)
   (local $9 f32)
+  local.get $0
+  local.get $0
+  f32.ne
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   local.get $1
+   f32.ne
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
   local.get $1
   f32.const 9.999999747378752e-06
   f32.le
@@ -4333,6 +4349,13 @@
   (local $9 f64)
   (local $10 f64)
   (local $11 f64)
+  local.get $0
+  local.get $0
+  f64.ne
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   local.get $0
   f64.const 30
   f64.lt
@@ -5495,6 +5518,13 @@
   (local $17 f64)
   (local $18 f64)
   local.get $1
+  local.get $1
+  f64.ne
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
   f64.const 1
   f64.ge
   if
@@ -5746,6 +5776,20 @@
   (local $13 f32)
   (local $14 f32)
   local.get $0
+  local.get $0
+  f32.ne
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   local.get $1
+   f32.ne
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
   f32.const 9.999999974752427e-07
   f32.le
   if (result i32)
@@ -5964,6 +6008,15 @@
    f32.const 0
   end
  )
+ (func $assembly/float/Randomf32.betaprime (param $0 f32) (param $1 f32) (result f32)
+  local.get $0
+  f32.const 1
+  call $assembly/float/Randomf32.gamma
+  local.get $1
+  f32.const 1
+  call $assembly/float/Randomf32.gamma
+  f32.div
+ )
  (func $assembly/float/Randomf64.seed (param $0 i64)
   local.get $0
   call $~lib/math/NativeMath.seedRandom
@@ -5977,7 +6030,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.bernulli (param $0 f64) (result f64)
+ (func $assembly/float/Randomf64.bernoulli (param $0 f64) (result f64)
   (local $1 f64)
   call $~lib/math/NativeMath.random
   local.get $0
@@ -8563,6 +8616,20 @@
   (local $7 i32)
   (local $8 f64)
   (local $9 f64)
+  local.get $0
+  local.get $0
+  f64.ne
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   local.get $1
+   f64.ne
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   local.get $1
   f64.const 1e-07
   f64.le
@@ -8694,6 +8761,20 @@
   (local $12 f64)
   (local $13 f64)
   (local $14 f64)
+  local.get $0
+  local.get $0
+  f64.ne
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   local.get $1
+   f64.ne
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   local.get $0
   f64.const 1e-07
   f64.le
@@ -8912,6 +8993,15 @@
   else
    f64.const 0
   end
+ )
+ (func $assembly/float/Randomf64.betaprime (param $0 f64) (param $1 f64) (result f64)
+  local.get $0
+  f64.const 1
+  call $assembly/float/Randomf64.gamma
+  local.get $1
+  f64.const 1
+  call $assembly/float/Randomf64.gamma
+  f64.div
  )
  (func $assembly/utils/splitMix32 (param $0 i32) (result i32)
   local.get $0
@@ -9181,7 +9271,7 @@
   call $assembly/utils/random32UpTo
   i32.add
  )
- (func $assembly/integer/Randomi32.bernulli (param $0 i32) (result i32)
+ (func $assembly/integer/Randomi32.bernoulli (param $0 i32) (result i32)
   global.get $assembly/utils/NOT_SEEDED
   if
    call $~lib/builtins/seed
@@ -9192,7 +9282,7 @@
   local.get $0
   i32.ge_u
  )
- (func $assembly/integer/Randomi32.bernulli@varargs (param $0 i32) (result i32)
+ (func $assembly/integer/Randomi32.bernoulli@varargs (param $0 i32) (result i32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9207,13 +9297,13 @@
    local.set $0
   end
   local.get $0
-  call $assembly/integer/Randomi32.bernulli
+  call $assembly/integer/Randomi32.bernoulli
  )
  (func $assembly/integer/Randomi32.boolean (result i32)
   i32.const 0
   global.set $~argumentsLength
   i32.const 0
-  call $assembly/integer/Randomi32.bernulli@varargs
+  call $assembly/integer/Randomi32.bernoulli@varargs
   i32.const 0
   i32.ne
  )
@@ -9349,7 +9439,7 @@
   call $assembly/utils/random64UpTo
   i64.add
  )
- (func $assembly/integer/Randomi64.bernulli (param $0 i64) (result i64)
+ (func $assembly/integer/Randomi64.bernoulli (param $0 i64) (result i64)
   global.get $assembly/utils/NOT_SEEDED
   if
    call $~lib/builtins/seed
@@ -9361,7 +9451,7 @@
   i64.ge_u
   i64.extend_i32_u
  )
- (func $assembly/integer/Randomi64.bernulli@varargs (param $0 i64) (result i64)
+ (func $assembly/integer/Randomi64.bernoulli@varargs (param $0 i64) (result i64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9376,13 +9466,13 @@
    local.set $0
   end
   local.get $0
-  call $assembly/integer/Randomi64.bernulli
+  call $assembly/integer/Randomi64.bernoulli
  )
  (func $assembly/integer/Randomi64.boolean (result i32)
   i32.const 0
   global.set $~argumentsLength
   i64.const 0
-  call $assembly/integer/Randomi64.bernulli@varargs
+  call $assembly/integer/Randomi64.bernoulli@varargs
   i64.const 0
   i64.ne
  )
@@ -9406,7 +9496,7 @@
   local.get $1
   call $assembly/float/Randomf32.uniform
  )
- (func $assembly/float/Randomf32.bernulli@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randomf32.bernoulli@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9419,7 +9509,7 @@
    local.set $0
   end
   local.get $0
-  call $assembly/float/Randomf32.bernulli
+  call $assembly/float/Randomf32.bernoulli
  )
  (func $assembly/float/Randomf32.triangular@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
@@ -9749,6 +9839,26 @@
   local.get $1
   call $assembly/float/Randomf32.beta
  )
+ (func $assembly/float/Randomf32.betaprime@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 2
+    local.set $0
+   end
+   f32.const 3
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.betaprime
+ )
  (func $assembly/float/Randomf64.uniform@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
@@ -9769,7 +9879,7 @@
   local.get $1
   call $assembly/float/Randomf64.uniform
  )
- (func $assembly/float/Randomf64.bernulli@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randomf64.bernoulli@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9782,7 +9892,7 @@
    local.set $0
   end
   local.get $0
-  call $assembly/float/Randomf64.bernulli
+  call $assembly/float/Randomf64.bernoulli
  )
  (func $assembly/float/Randomf64.triangular@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
@@ -10111,6 +10221,26 @@
   local.get $0
   local.get $1
   call $assembly/float/Randomf64.beta
+ )
+ (func $assembly/float/Randomf64.betaprime@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 2
+    local.set $0
+   end
+   f64.const 3
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.betaprime
  )
  (func $assembly/integer/Randomi32.uniform@varargs (param $0 i32) (param $1 i32) (result i32)
   block $2of2
