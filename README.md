@@ -9,7 +9,7 @@ Work in Progress
 ### Features
 
 - Expose fast integer random generator with proper range reduction
-- Use most novel and fast alghoritms for kind of distributions
+- Use most novel and fast alghoritms for all kind of distributions
 
 ---
 ### Descreate integer distributions:
