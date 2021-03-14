@@ -26,8 +26,8 @@ export namespace Randomf64 {
   }
 
   /** Bernulli distribution */
-  export function bernulli(probability: f64 = 0.5): f64 {
-    return f64(Math.random() >= clamp01(probability));
+  export function bernulli(prob: f64 = 0.5): f64 {
+    return f64(Math.random() >= clamp01(prob));
   }
 
   /** Triangular distribution.
@@ -56,12 +56,12 @@ export namespace Randomf64 {
   /** Geometric distribution.
    *
    * Returned values in range:
-   * + Infinity, when probability == 0
-   * + 1,        when probability == 1
-   * + 1 < N < Infinity, when 0 < probability < 1
+   * + Infinity, when prob == 0
+   * + 1,        when prob == 1
+   * + 1 < N < Infinity, when 0 < prob < 1
   */
-  export function geometric(probability: f64 = 0.5): f64 {
-    return 1.0 + Math.floor(Math.log1p(-Math.random()) / Math.log1p(-clamp01(probability)));
+  export function geometric(prob: f64 = 0.5): f64 {
+    return 1.0 + Math.floor(Math.log1p(-Math.random()) / Math.log1p(-clamp01(prob)));
   }
 
   /** Normal distribution. */
@@ -373,8 +373,8 @@ export namespace Randomf32 {
 
 
   /** Bernulli distribution */
-  export function bernulli(probability: f32 = 0.5): f32 {
-    return f32(Mathf.random() >= clamp01(probability));
+  export function bernulli(prob: f32 = 0.5): f32 {
+    return f32(Mathf.random() >= clamp01(prob));
   }
 
   /** Triangular distribution.
@@ -403,12 +403,12 @@ export namespace Randomf32 {
   /** Geometric distribution.
    *
    * Returned values in range:
-   * + Infinity, when probability == 0
-   * + 1,        when probability == 1
-   * + 1 < N < Infinity, when 0 < probability < 1
+   * + Infinity, when prob == 0
+   * + 1,        when prob == 1
+   * + 1 < N < Infinity, when 0 < prob < 1
    */
-  export function geometric(probability: f32 = 0.5): f32 {
-    return 1.0 + Mathf.floor(Mathf.log1p(-Mathf.random()) / Mathf.log1p(-clamp01(probability)));
+  export function geometric(prob: f32 = 0.5): f32 {
+    return 1.0 + Mathf.floor(Mathf.log1p(-Mathf.random()) / Mathf.log1p(-clamp01(prob)));
   }
 
   /** Normal distribution. */

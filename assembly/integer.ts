@@ -21,9 +21,9 @@ export namespace Randomi32 {
   }
 
   /** Bernulli distribution */
-  export function bernulli(probability: u32 = u32.MAX_VALUE / 2): i32 {
+  export function bernulli(prob: u32 = u32.MAX_VALUE / 2): i32 {
     setupSeedIfNeeded();
-    return i32(random32() >= probability);
+    return i32(random32() >= prob);
   }
 
   /** Returns true or false with 50/50 probability */
@@ -46,9 +46,9 @@ export namespace Randomi64 {
   }
 
   /** Bernulli distribution */
-  export function bernulli(probability: u64 = u64.MAX_VALUE / 2): i64 {
+  export function bernulli(prob: u64 = u64.MAX_VALUE / 2): i64 {
     setupSeedIfNeeded();
-    return i64(random64() >= probability);
+    return i64(random64() >= prob);
   }
 
   /** Returns true or false with 50/50 probability */
