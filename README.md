@@ -8,12 +8,12 @@ Work in Progress
 
 ### Features
 
-- Exposes fast integer random generator with proper range reduction
-- Uses most novel and fast algorithms for all kind of distributions
+- Expose fast integer random generator with proper range reduction
+- Use most novel and fast algorithms for all kind of distributions
 - All input parameters are valid and don't throw exceptions
 
 ---
-### Descreate integer distributions:
+### Discrete integer distributions:
 
 - **Uniform** _(with range)_
 - Bernulli
