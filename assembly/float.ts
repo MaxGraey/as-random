@@ -88,7 +88,7 @@ export namespace Randomf64 {
       prob = clamp01(prob);
       if (x == 0.0) return 1.0 - prob;
       if (x == 1.0) return prob;
-      return Math.pow(prob, x) * Math.pow(1.0 - prob, 1.0 - x);
+      return 0.0;
     }
 
     /** Eval the cumulative density function for Bernoulli distribution. */
@@ -769,7 +769,7 @@ export namespace Randomf32 {
       prob = clamp01(prob);
       if (x == 0.0) return 1 - prob;
       if (x == 1.0) return prob;
-      return Mathf.pow(prob, x) * Mathf.pow(1 - prob, 1 - x);
+      return 0.0;
     }
 
     /** Eval the cumulative density function for Bernoulli distribution. */

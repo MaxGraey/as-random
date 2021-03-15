@@ -683,6 +683,607 @@
   f32.ge
   f32.convert_i32_u
  )
+ (func $assembly/float/Randomf32.bernoulli.pmf (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $1
+  local.set $2
+  local.get $2
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $1
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   f32.const 1
+   local.get $1
+   f32.sub
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.eq
+  if
+   local.get $1
+   return
+  end
+  f32.const 0
+ )
+ (func $assembly/float/Randomf32.bernoulli.cdf (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.ge
+  if
+   f32.const 1
+   return
+  end
+  f32.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  f32.sub
+ )
+ (func $assembly/float/Randomf32.bernoulli.quantile (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  f32.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  f32.sub
+  f32.gt
+  f32.convert_i32_u
+ )
+ (func $assembly/float/Randomf32.bernoulli.mean (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+ )
+ (func $assembly/float/Randomf32.bernoulli.median (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0.5
+  f32.gt
+  f32.convert_i32_u
+ )
+ (func $assembly/float/Randomf32.bernoulli.variance (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  f32.const 1
+  local.get $0
+  f32.sub
+  local.get $0
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.bernoulli.stdev (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.variance
+  local.set $1
+  local.get $1
+  f32.sqrt
+ )
+ (func $assembly/float/Randomf32.bernoulli.skewness (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   f32.const inf
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.eq
+  if
+   f32.const inf
+   f32.neg
+   return
+  end
+  f32.const 1
+  f32.const 2
+  local.get $0
+  f32.mul
+  f32.sub
+  local.get $0
+  f32.const 1
+  local.get $0
+  f32.sub
+  f32.mul
+  local.set $1
+  local.get $1
+  f32.sqrt
+  f32.div
+ )
+ (func $assembly/float/Randomf32.bernoulli.entropy (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  local.get $0
+  f32.const 0
+  f32.eq
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f32.const 1
+   f32.eq
+  end
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.sub
+  f32.const 1
+  local.get $0
+  f32.sub
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  local.get $0
+  local.get $0
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  f32.sub
+ )
+ (func $assembly/float/Randomf32.triangular (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  (local $4 f32)
+  (local $5 f32)
+  (local $6 f32)
+  local.get $1
+  local.get $0
+  f32.sub
+  local.set $3
+  local.get $3
+  f32.const 0
+  f32.eq
+  if
+   local.get $0
+   return
+  end
+  call $~lib/math/NativeMathf.random
+  local.set $4
+  local.get $2
+  local.get $2
+  f32.ne
+  if (result f32)
+   f32.const 0.5
+  else
+   local.get $2
+   local.get $0
+   f32.sub
+   local.get $3
+   f32.div
+  end
+  local.set $5
+  local.get $4
+  local.get $5
+  f32.gt
+  if
+   f32.const 1
+   local.get $4
+   f32.sub
+   local.set $4
+   f32.const 1
+   local.get $5
+   f32.sub
+   local.set $5
+   local.get $1
+   local.set $6
+   local.get $0
+   local.set $1
+   local.get $6
+   local.set $0
+  end
+  local.get $0
+  local.get $3
+  local.get $4
+  local.get $5
+  f32.mul
+  local.set $6
+  local.get $6
+  f32.sqrt
+  f32.mul
+  f32.add
+ )
+ (func $assembly/float/Randomf32.triangular.pdf (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+  (local $4 f32)
+  local.get $1
+  local.get $3
+  f32.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   local.get $2
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.le
+  if
+   f32.const 0
+   return
+  end
+  local.get $2
+  local.get $1
+  f32.sub
+  local.set $4
+  local.get $0
+  local.get $3
+  f32.le
+  if
+   local.get $0
+   local.get $3
+   f32.lt
+   if
+    f32.const 2
+    local.get $0
+    local.get $1
+    f32.sub
+    f32.mul
+    local.get $4
+    local.get $3
+    local.get $1
+    f32.sub
+    f32.mul
+    f32.div
+    return
+   else
+    f32.const 2
+    local.get $4
+    f32.div
+    return
+   end
+   unreachable
+  else
+   local.get $0
+   local.get $2
+   f32.le
+   if
+    f32.const 2
+    local.get $2
+    local.get $0
+    f32.sub
+    f32.mul
+    local.get $4
+    local.get $2
+    local.get $3
+    f32.sub
+    f32.mul
+    f32.div
+    return
+   else
+    f32.const 0
+    return
+   end
+   unreachable
+  end
+  unreachable
+ )
+ (func $assembly/float/Randomf32.triangular.cdf (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+  (local $4 f32)
+  (local $5 f32)
+  (local $6 f32)
+  local.get $1
+  local.get $3
+  f32.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   local.get $2
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.le
+  if
+   f32.const 0
+   return
+  end
+  local.get $2
+  local.get $1
+  f32.sub
+  local.set $4
+  local.get $4
+  local.get $3
+  local.get $1
+  f32.sub
+  f32.mul
+  local.set $5
+  local.get $4
+  local.get $2
+  local.get $3
+  f32.sub
+  f32.mul
+  local.set $6
+  local.get $0
+  local.get $3
+  f32.le
+  if
+   local.get $0
+   local.get $1
+   f32.sub
+   local.get $0
+   local.get $1
+   f32.sub
+   f32.mul
+   local.get $5
+   f32.div
+   return
+  end
+  local.get $0
+  local.get $2
+  f32.lt
+  if
+   f32.const 1
+   local.get $2
+   local.get $0
+   f32.sub
+   local.get $2
+   local.get $0
+   f32.sub
+   f32.mul
+   local.get $6
+   f32.div
+   f32.sub
+   return
+  end
+  f32.const 1
+ )
+ (func $assembly/float/Randomf32.triangular.quantile (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+  (local $4 f32)
+  (local $5 f32)
+  (local $6 f32)
+  (local $7 f32)
+  (local $8 f32)
+  local.get $1
+  local.get $3
+  f32.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   local.get $2
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.set $4
+  local.get $4
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  local.get $2
+  local.get $1
+  f32.sub
+  local.set $4
+  local.get $3
+  local.get $1
+  f32.sub
+  local.get $4
+  f32.div
+  local.set $5
+  local.get $4
+  local.get $3
+  local.get $1
+  f32.sub
+  f32.mul
+  local.set $6
+  local.get $4
+  local.get $2
+  local.get $3
+  f32.sub
+  f32.mul
+  local.set $7
+  local.get $0
+  local.get $5
+  f32.lt
+  if
+   local.get $1
+   local.get $6
+   local.get $0
+   f32.mul
+   local.set $8
+   local.get $8
+   f32.sqrt
+   f32.add
+   return
+  end
+  local.get $0
+  local.get $5
+  f32.gt
+  if
+   local.get $2
+   local.get $7
+   f32.const 1
+   local.get $0
+   f32.sub
+   f32.mul
+   local.set $8
+   local.get $8
+   f32.sqrt
+   f32.sub
+   return
+  end
+  local.get $3
+ )
+ (func $assembly/float/Randomf32.triangular.mean (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $0
+  local.get $2
+  f32.add
+  local.get $1
+  f32.add
+  f32.const 3
+  f32.div
+ )
+ (func $assembly/float/Randomf32.triangular.median (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  (local $4 f32)
+  (local $5 f32)
+  local.get $0
+  local.get $2
+  f32.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   local.get $1
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 0.5
+  local.get $1
+  local.get $0
+  f32.sub
+  f32.mul
+  local.set $3
+  f32.const 0.5
+  local.get $1
+  local.get $0
+  f32.add
+  f32.mul
+  local.set $4
+  local.get $2
+  local.get $4
+  f32.ge
+  if (result f32)
+   local.get $0
+   local.get $3
+   local.get $2
+   local.get $0
+   f32.sub
+   f32.mul
+   local.set $5
+   local.get $5
+   f32.sqrt
+   f32.add
+  else
+   local.get $1
+   local.get $3
+   local.get $1
+   local.get $2
+   f32.sub
+   f32.mul
+   local.set $5
+   local.get $5
+   f32.sqrt
+   f32.sub
+  end
+ )
+ (func $assembly/float/Randomf32.triangular.variance (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $0
+  local.get $2
+  f32.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   local.get $1
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  local.get $1
+  f32.mul
+  local.get $2
+  local.get $2
+  f32.mul
+  f32.add
+  local.get $0
+  local.get $0
+  f32.mul
+  f32.add
+  local.get $0
+  local.get $1
+  f32.mul
+  f32.sub
+  local.get $0
+  local.get $2
+  f32.mul
+  f32.sub
+  local.get $1
+  local.get $2
+  f32.mul
+  f32.sub
+  f32.const 18
+  f32.div
+ )
+ (func $assembly/float/Randomf32.triangular.stdev (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.triangular.variance
+  local.set $3
+  local.get $3
+  f32.sqrt
+ )
  (func $~lib/math/NativeMathf.pow (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
   (local $3 f32)
@@ -1296,617 +1897,6 @@
    f32.demote_f64
   end
   return
- )
- (func $assembly/float/Randomf32.bernoulli.pmf (param $0 f32) (param $1 f32) (result f32)
-  (local $2 f32)
-  local.get $1
-  local.set $2
-  local.get $2
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  local.set $1
-  local.get $0
-  f32.const 0
-  f32.eq
-  if
-   f32.const 1
-   local.get $1
-   f32.sub
-   return
-  end
-  local.get $0
-  f32.const 1
-  f32.eq
-  if
-   local.get $1
-   return
-  end
-  local.get $1
-  local.get $0
-  call $~lib/math/NativeMathf.pow
-  f32.const 1
-  local.get $1
-  f32.sub
-  f32.const 1
-  local.get $0
-  f32.sub
-  call $~lib/math/NativeMathf.pow
-  f32.mul
- )
- (func $assembly/float/Randomf32.bernoulli.cdf (param $0 f32) (param $1 f32) (result f32)
-  (local $2 f32)
-  local.get $0
-  f32.const 0
-  f32.lt
-  if
-   f32.const 0
-   return
-  end
-  local.get $0
-  f32.const 1
-  f32.ge
-  if
-   f32.const 1
-   return
-  end
-  f32.const 1
-  local.get $1
-  local.set $2
-  local.get $2
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  f32.sub
- )
- (func $assembly/float/Randomf32.bernoulli.quantile (param $0 f32) (param $1 f32) (result f32)
-  (local $2 f32)
-  local.get $0
-  f32.const 1
-  local.get $1
-  local.set $2
-  local.get $2
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  f32.sub
-  f32.gt
-  f32.convert_i32_u
- )
- (func $assembly/float/Randomf32.bernoulli.mean (param $0 f32) (result f32)
-  (local $1 f32)
-  local.get $0
-  local.set $1
-  local.get $1
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
- )
- (func $assembly/float/Randomf32.bernoulli.median (param $0 f32) (result f32)
-  local.get $0
-  f32.const 0.5
-  f32.gt
-  f32.convert_i32_u
- )
- (func $assembly/float/Randomf32.bernoulli.variance (param $0 f32) (result f32)
-  (local $1 f32)
-  local.get $0
-  local.set $1
-  local.get $1
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  local.set $0
-  f32.const 1
-  local.get $0
-  f32.sub
-  local.get $0
-  f32.mul
- )
- (func $assembly/float/Randomf32.bernoulli.stdev (param $0 f32) (result f32)
-  (local $1 f32)
-  local.get $0
-  call $assembly/float/Randomf32.bernoulli.variance
-  local.set $1
-  local.get $1
-  f32.sqrt
- )
- (func $assembly/float/Randomf32.bernoulli.skewness (param $0 f32) (result f32)
-  (local $1 f32)
-  local.get $0
-  local.set $1
-  local.get $1
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  local.set $0
-  local.get $0
-  f32.const 0
-  f32.eq
-  if
-   f32.const inf
-   return
-  end
-  local.get $0
-  f32.const 1
-  f32.eq
-  if
-   f32.const inf
-   f32.neg
-   return
-  end
-  f32.const 1
-  f32.const 2
-  local.get $0
-  f32.mul
-  f32.sub
-  local.get $0
-  f32.const 1
-  local.get $0
-  f32.sub
-  f32.mul
-  local.set $1
-  local.get $1
-  f32.sqrt
-  f32.div
- )
- (func $assembly/float/Randomf32.bernoulli.entropy (param $0 f32) (result f32)
-  (local $1 f32)
-  local.get $0
-  local.set $1
-  local.get $1
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  local.set $0
-  local.get $0
-  f32.const 0
-  f32.eq
-  if (result i32)
-   i32.const 1
-  else
-   local.get $0
-   f32.const 1
-   f32.eq
-  end
-  if
-   f32.const 0
-   return
-  end
-  local.get $0
-  f32.const 1
-  f32.sub
-  f32.const 1
-  local.get $0
-  f32.sub
-  call $~lib/math/NativeMathf.log
-  f32.mul
-  local.get $0
-  local.get $0
-  call $~lib/math/NativeMathf.log
-  f32.mul
-  f32.sub
- )
- (func $assembly/float/Randomf32.triangular (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
-  (local $3 f32)
-  (local $4 f32)
-  (local $5 f32)
-  (local $6 f32)
-  local.get $1
-  local.get $0
-  f32.sub
-  local.set $3
-  local.get $3
-  f32.const 0
-  f32.eq
-  if
-   local.get $0
-   return
-  end
-  call $~lib/math/NativeMathf.random
-  local.set $4
-  local.get $2
-  local.get $2
-  f32.ne
-  if (result f32)
-   f32.const 0.5
-  else
-   local.get $2
-   local.get $0
-   f32.sub
-   local.get $3
-   f32.div
-  end
-  local.set $5
-  local.get $4
-  local.get $5
-  f32.gt
-  if
-   f32.const 1
-   local.get $4
-   f32.sub
-   local.set $4
-   f32.const 1
-   local.get $5
-   f32.sub
-   local.set $5
-   local.get $1
-   local.set $6
-   local.get $0
-   local.set $1
-   local.get $6
-   local.set $0
-  end
-  local.get $0
-  local.get $3
-  local.get $4
-  local.get $5
-  f32.mul
-  local.set $6
-  local.get $6
-  f32.sqrt
-  f32.mul
-  f32.add
- )
- (func $assembly/float/Randomf32.triangular.pdf (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
-  (local $4 f32)
-  local.get $1
-  local.get $3
-  f32.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $3
-   local.get $2
-   f32.gt
-  end
-  if
-   f32.const nan:0x400000
-   return
-  end
-  local.get $0
-  local.get $1
-  f32.le
-  if
-   f32.const 0
-   return
-  end
-  local.get $2
-  local.get $1
-  f32.sub
-  local.set $4
-  local.get $0
-  local.get $3
-  f32.le
-  if
-   local.get $0
-   local.get $3
-   f32.lt
-   if
-    f32.const 2
-    local.get $0
-    local.get $1
-    f32.sub
-    f32.mul
-    local.get $4
-    local.get $3
-    local.get $1
-    f32.sub
-    f32.mul
-    f32.div
-    return
-   else
-    f32.const 2
-    local.get $4
-    f32.div
-    return
-   end
-   unreachable
-  else
-   local.get $0
-   local.get $2
-   f32.le
-   if
-    f32.const 2
-    local.get $2
-    local.get $0
-    f32.sub
-    f32.mul
-    local.get $4
-    local.get $2
-    local.get $3
-    f32.sub
-    f32.mul
-    f32.div
-    return
-   else
-    f32.const 0
-    return
-   end
-   unreachable
-  end
-  unreachable
- )
- (func $assembly/float/Randomf32.triangular.cdf (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
-  (local $4 f32)
-  (local $5 f32)
-  (local $6 f32)
-  local.get $1
-  local.get $3
-  f32.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $3
-   local.get $2
-   f32.gt
-  end
-  if
-   f32.const nan:0x400000
-   return
-  end
-  local.get $0
-  local.get $1
-  f32.le
-  if
-   f32.const 0
-   return
-  end
-  local.get $2
-  local.get $1
-  f32.sub
-  local.set $4
-  local.get $4
-  local.get $3
-  local.get $1
-  f32.sub
-  f32.mul
-  local.set $5
-  local.get $4
-  local.get $2
-  local.get $3
-  f32.sub
-  f32.mul
-  local.set $6
-  local.get $0
-  local.get $3
-  f32.le
-  if
-   local.get $0
-   local.get $1
-   f32.sub
-   local.get $0
-   local.get $1
-   f32.sub
-   f32.mul
-   local.get $5
-   f32.div
-   return
-  end
-  local.get $0
-  local.get $2
-  f32.lt
-  if
-   f32.const 1
-   local.get $2
-   local.get $0
-   f32.sub
-   local.get $2
-   local.get $0
-   f32.sub
-   f32.mul
-   local.get $6
-   f32.div
-   f32.sub
-   return
-  end
-  f32.const 1
- )
- (func $assembly/float/Randomf32.triangular.quantile (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
-  (local $4 f32)
-  (local $5 f32)
-  (local $6 f32)
-  (local $7 f32)
-  (local $8 f32)
-  local.get $1
-  local.get $3
-  f32.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $3
-   local.get $2
-   f32.gt
-  end
-  if
-   f32.const nan:0x400000
-   return
-  end
-  local.get $0
-  local.set $4
-  local.get $4
-  f32.const 0
-  f32.max
-  f32.const 1
-  f32.min
-  local.set $0
-  local.get $2
-  local.get $1
-  f32.sub
-  local.set $4
-  local.get $3
-  local.get $1
-  f32.sub
-  local.get $4
-  f32.div
-  local.set $5
-  local.get $4
-  local.get $3
-  local.get $1
-  f32.sub
-  f32.mul
-  local.set $6
-  local.get $4
-  local.get $2
-  local.get $3
-  f32.sub
-  f32.mul
-  local.set $7
-  local.get $0
-  local.get $5
-  f32.lt
-  if
-   local.get $1
-   local.get $6
-   local.get $0
-   f32.mul
-   local.set $8
-   local.get $8
-   f32.sqrt
-   f32.add
-   return
-  end
-  local.get $0
-  local.get $5
-  f32.gt
-  if
-   local.get $2
-   local.get $7
-   f32.const 1
-   local.get $0
-   f32.sub
-   f32.mul
-   local.set $8
-   local.get $8
-   f32.sqrt
-   f32.sub
-   return
-  end
-  local.get $3
- )
- (func $assembly/float/Randomf32.triangular.mean (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
-  local.get $0
-  local.get $2
-  f32.add
-  local.get $1
-  f32.add
-  f32.const 3
-  f32.div
- )
- (func $assembly/float/Randomf32.triangular.median (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
-  (local $3 f32)
-  (local $4 f32)
-  (local $5 f32)
-  local.get $0
-  local.get $2
-  f32.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $2
-   local.get $1
-   f32.gt
-  end
-  if
-   f32.const nan:0x400000
-   return
-  end
-  f32.const 0.5
-  local.get $1
-  local.get $0
-  f32.sub
-  f32.mul
-  local.set $3
-  f32.const 0.5
-  local.get $1
-  local.get $0
-  f32.add
-  f32.mul
-  local.set $4
-  local.get $2
-  local.get $4
-  f32.ge
-  if (result f32)
-   local.get $0
-   local.get $3
-   local.get $2
-   local.get $0
-   f32.sub
-   f32.mul
-   local.set $5
-   local.get $5
-   f32.sqrt
-   f32.add
-  else
-   local.get $1
-   local.get $3
-   local.get $1
-   local.get $2
-   f32.sub
-   f32.mul
-   local.set $5
-   local.get $5
-   f32.sqrt
-   f32.sub
-  end
- )
- (func $assembly/float/Randomf32.triangular.variance (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
-  local.get $0
-  local.get $2
-  f32.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $2
-   local.get $1
-   f32.gt
-  end
-  if
-   f32.const nan:0x400000
-   return
-  end
-  local.get $1
-  local.get $1
-  f32.mul
-  local.get $2
-  local.get $2
-  f32.mul
-  f32.add
-  local.get $0
-  local.get $0
-  f32.mul
-  f32.add
-  local.get $0
-  local.get $1
-  f32.mul
-  f32.sub
-  local.get $0
-  local.get $2
-  f32.mul
-  f32.sub
-  local.get $1
-  local.get $2
-  f32.mul
-  f32.sub
-  f32.const 18
-  f32.div
- )
- (func $assembly/float/Randomf32.triangular.stdev (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
-  (local $3 f32)
-  local.get $0
-  local.get $1
-  local.get $2
-  call $assembly/float/Randomf32.triangular.variance
-  local.set $3
-  local.get $3
-  f32.sqrt
  )
  (func $assembly/float/Randomf32.triangular.skewness (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   (local $3 f32)
@@ -8371,6 +8361,607 @@
   f64.ge
   f64.convert_i32_u
  )
+ (func $assembly/float/Randomf64.bernoulli.pmf (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $1
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const 1
+   local.get $1
+   f64.sub
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   local.get $1
+   return
+  end
+  f64.const 0
+ )
+ (func $assembly/float/Randomf64.bernoulli.cdf (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.ge
+  if
+   f64.const 1
+   return
+  end
+  f64.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  f64.sub
+ )
+ (func $assembly/float/Randomf64.bernoulli.quantile (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  f64.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  f64.sub
+  f64.gt
+  f64.convert_i32_u
+ )
+ (func $assembly/float/Randomf64.bernoulli.mean (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+ )
+ (func $assembly/float/Randomf64.bernoulli.median (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0.5
+  f64.gt
+  f64.convert_i32_u
+ )
+ (func $assembly/float/Randomf64.bernoulli.variance (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  f64.const 1
+  local.get $0
+  f64.sub
+  local.get $0
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.bernoulli.stdev (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.variance
+  local.set $1
+  local.get $1
+  f64.sqrt
+ )
+ (func $assembly/float/Randomf64.bernoulli.skewness (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const inf
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   f64.const inf
+   f64.neg
+   return
+  end
+  f64.const 1
+  f64.const 2
+  local.get $0
+  f64.mul
+  f64.sub
+  local.get $0
+  f64.const 1
+  local.get $0
+  f64.sub
+  f64.mul
+  local.set $1
+  local.get $1
+  f64.sqrt
+  f64.div
+ )
+ (func $assembly/float/Randomf64.bernoulli.entropy (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  local.get $0
+  f64.const 0
+  f64.eq
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.const 1
+   f64.eq
+  end
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.sub
+  f64.const 1
+  local.get $0
+  f64.sub
+  call $~lib/math/NativeMath.log
+  f64.mul
+  local.get $0
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.mul
+  f64.sub
+ )
+ (func $assembly/float/Randomf64.triangular (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  local.get $1
+  local.get $0
+  f64.sub
+  local.set $3
+  local.get $3
+  f64.const 0
+  f64.eq
+  if
+   local.get $0
+   return
+  end
+  call $~lib/math/NativeMath.random
+  local.set $4
+  local.get $2
+  local.get $2
+  f64.ne
+  if (result f64)
+   f64.const 0.5
+  else
+   local.get $2
+   local.get $0
+   f64.sub
+   local.get $3
+   f64.div
+  end
+  local.set $5
+  local.get $4
+  local.get $5
+  f64.gt
+  if
+   f64.const 1
+   local.get $4
+   f64.sub
+   local.set $4
+   f64.const 1
+   local.get $5
+   f64.sub
+   local.set $5
+   local.get $1
+   local.set $6
+   local.get $0
+   local.set $1
+   local.get $6
+   local.set $0
+  end
+  local.get $0
+  local.get $3
+  local.get $4
+  local.get $5
+  f64.mul
+  local.set $6
+  local.get $6
+  f64.sqrt
+  f64.mul
+  f64.add
+ )
+ (func $assembly/float/Randomf64.triangular.pdf (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+  (local $4 f64)
+  local.get $1
+  local.get $3
+  f64.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   local.get $2
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.le
+  if
+   f64.const 0
+   return
+  end
+  local.get $2
+  local.get $1
+  f64.sub
+  local.set $4
+  local.get $0
+  local.get $3
+  f64.le
+  if
+   local.get $0
+   local.get $3
+   f64.lt
+   if
+    f64.const 2
+    local.get $0
+    local.get $1
+    f64.sub
+    f64.mul
+    local.get $4
+    local.get $3
+    local.get $1
+    f64.sub
+    f64.mul
+    f64.div
+    return
+   else
+    f64.const 2
+    local.get $4
+    f64.div
+    return
+   end
+   unreachable
+  else
+   local.get $0
+   local.get $2
+   f64.le
+   if
+    f64.const 2
+    local.get $2
+    local.get $0
+    f64.sub
+    f64.mul
+    local.get $4
+    local.get $2
+    local.get $3
+    f64.sub
+    f64.mul
+    f64.div
+    return
+   else
+    f64.const 0
+    return
+   end
+   unreachable
+  end
+  unreachable
+ )
+ (func $assembly/float/Randomf64.triangular.cdf (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  local.get $1
+  local.get $3
+  f64.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   local.get $2
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.le
+  if
+   f64.const 0
+   return
+  end
+  local.get $2
+  local.get $1
+  f64.sub
+  local.set $4
+  local.get $4
+  local.get $3
+  local.get $1
+  f64.sub
+  f64.mul
+  local.set $5
+  local.get $4
+  local.get $2
+  local.get $3
+  f64.sub
+  f64.mul
+  local.set $6
+  local.get $0
+  local.get $3
+  f64.le
+  if
+   local.get $0
+   local.get $1
+   f64.sub
+   local.get $0
+   local.get $1
+   f64.sub
+   f64.mul
+   local.get $5
+   f64.div
+   return
+  end
+  local.get $0
+  local.get $2
+  f64.lt
+  if
+   f64.const 1
+   local.get $2
+   local.get $0
+   f64.sub
+   local.get $2
+   local.get $0
+   f64.sub
+   f64.mul
+   local.get $6
+   f64.div
+   f64.sub
+   return
+  end
+  f64.const 1
+ )
+ (func $assembly/float/Randomf64.triangular.quantile (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  local.get $1
+  local.get $3
+  f64.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   local.get $2
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.set $4
+  local.get $4
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  local.get $2
+  local.get $1
+  f64.sub
+  local.set $4
+  local.get $3
+  local.get $1
+  f64.sub
+  local.get $4
+  f64.div
+  local.set $5
+  local.get $4
+  local.get $3
+  local.get $1
+  f64.sub
+  f64.mul
+  local.set $6
+  local.get $4
+  local.get $2
+  local.get $3
+  f64.sub
+  f64.mul
+  local.set $7
+  local.get $0
+  local.get $5
+  f64.lt
+  if
+   local.get $1
+   local.get $6
+   local.get $0
+   f64.mul
+   local.set $8
+   local.get $8
+   f64.sqrt
+   f64.add
+   return
+  end
+  local.get $0
+  local.get $5
+  f64.gt
+  if
+   local.get $2
+   local.get $7
+   f64.const 1
+   local.get $0
+   f64.sub
+   f64.mul
+   local.set $8
+   local.get $8
+   f64.sqrt
+   f64.sub
+   return
+  end
+  local.get $3
+ )
+ (func $assembly/float/Randomf64.triangular.mean (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $0
+  local.get $2
+  f64.add
+  local.get $1
+  f64.add
+  f64.const 3
+  f64.div
+ )
+ (func $assembly/float/Randomf64.triangular.median (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  local.get $0
+  local.get $2
+  f64.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   local.get $1
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 0.5
+  local.get $1
+  local.get $0
+  f64.sub
+  f64.mul
+  local.set $3
+  f64.const 0.5
+  local.get $1
+  local.get $0
+  f64.add
+  f64.mul
+  local.set $4
+  local.get $2
+  local.get $4
+  f64.ge
+  if (result f64)
+   local.get $0
+   local.get $3
+   local.get $2
+   local.get $0
+   f64.sub
+   f64.mul
+   local.set $5
+   local.get $5
+   f64.sqrt
+   f64.add
+  else
+   local.get $1
+   local.get $3
+   local.get $1
+   local.get $2
+   f64.sub
+   f64.mul
+   local.set $5
+   local.get $5
+   f64.sqrt
+   f64.sub
+  end
+ )
+ (func $assembly/float/Randomf64.triangular.variance (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $0
+  local.get $2
+  f64.gt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   local.get $1
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  local.get $1
+  f64.mul
+  local.get $2
+  local.get $2
+  f64.mul
+  f64.add
+  local.get $0
+  local.get $0
+  f64.mul
+  f64.add
+  local.get $0
+  local.get $1
+  f64.mul
+  f64.sub
+  local.get $0
+  local.get $2
+  f64.mul
+  f64.sub
+  local.get $1
+  local.get $2
+  f64.mul
+  f64.sub
+  f64.const 18
+  f64.div
+ )
+ (func $assembly/float/Randomf64.triangular.stdev (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.triangular.variance
+  local.set $3
+  local.get $3
+  f64.sqrt
+ )
  (func $~lib/math/NativeMath.pow (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
@@ -9350,617 +9941,6 @@
    end
   end
   return
- )
- (func $assembly/float/Randomf64.bernoulli.pmf (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  local.get $1
-  local.set $2
-  local.get $2
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $1
-  local.get $0
-  f64.const 0
-  f64.eq
-  if
-   f64.const 1
-   local.get $1
-   f64.sub
-   return
-  end
-  local.get $0
-  f64.const 1
-  f64.eq
-  if
-   local.get $1
-   return
-  end
-  local.get $1
-  local.get $0
-  call $~lib/math/NativeMath.pow
-  f64.const 1
-  local.get $1
-  f64.sub
-  f64.const 1
-  local.get $0
-  f64.sub
-  call $~lib/math/NativeMath.pow
-  f64.mul
- )
- (func $assembly/float/Randomf64.bernoulli.cdf (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  local.get $0
-  f64.const 0
-  f64.lt
-  if
-   f64.const 0
-   return
-  end
-  local.get $0
-  f64.const 1
-  f64.ge
-  if
-   f64.const 1
-   return
-  end
-  f64.const 1
-  local.get $1
-  local.set $2
-  local.get $2
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  f64.sub
- )
- (func $assembly/float/Randomf64.bernoulli.quantile (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  local.get $0
-  f64.const 1
-  local.get $1
-  local.set $2
-  local.get $2
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  f64.sub
-  f64.gt
-  f64.convert_i32_u
- )
- (func $assembly/float/Randomf64.bernoulli.mean (param $0 f64) (result f64)
-  (local $1 f64)
-  local.get $0
-  local.set $1
-  local.get $1
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
- )
- (func $assembly/float/Randomf64.bernoulli.median (param $0 f64) (result f64)
-  local.get $0
-  f64.const 0.5
-  f64.gt
-  f64.convert_i32_u
- )
- (func $assembly/float/Randomf64.bernoulli.variance (param $0 f64) (result f64)
-  (local $1 f64)
-  local.get $0
-  local.set $1
-  local.get $1
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $0
-  f64.const 1
-  local.get $0
-  f64.sub
-  local.get $0
-  f64.mul
- )
- (func $assembly/float/Randomf64.bernoulli.stdev (param $0 f64) (result f64)
-  (local $1 f64)
-  local.get $0
-  call $assembly/float/Randomf64.bernoulli.variance
-  local.set $1
-  local.get $1
-  f64.sqrt
- )
- (func $assembly/float/Randomf64.bernoulli.skewness (param $0 f64) (result f64)
-  (local $1 f64)
-  local.get $0
-  local.set $1
-  local.get $1
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $0
-  local.get $0
-  f64.const 0
-  f64.eq
-  if
-   f64.const inf
-   return
-  end
-  local.get $0
-  f64.const 1
-  f64.eq
-  if
-   f64.const inf
-   f64.neg
-   return
-  end
-  f64.const 1
-  f64.const 2
-  local.get $0
-  f64.mul
-  f64.sub
-  local.get $0
-  f64.const 1
-  local.get $0
-  f64.sub
-  f64.mul
-  local.set $1
-  local.get $1
-  f64.sqrt
-  f64.div
- )
- (func $assembly/float/Randomf64.bernoulli.entropy (param $0 f64) (result f64)
-  (local $1 f64)
-  local.get $0
-  local.set $1
-  local.get $1
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $0
-  local.get $0
-  f64.const 0
-  f64.eq
-  if (result i32)
-   i32.const 1
-  else
-   local.get $0
-   f64.const 1
-   f64.eq
-  end
-  if
-   f64.const 0
-   return
-  end
-  local.get $0
-  f64.const 1
-  f64.sub
-  f64.const 1
-  local.get $0
-  f64.sub
-  call $~lib/math/NativeMath.log
-  f64.mul
-  local.get $0
-  local.get $0
-  call $~lib/math/NativeMath.log
-  f64.mul
-  f64.sub
- )
- (func $assembly/float/Randomf64.triangular (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
-  (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  local.get $1
-  local.get $0
-  f64.sub
-  local.set $3
-  local.get $3
-  f64.const 0
-  f64.eq
-  if
-   local.get $0
-   return
-  end
-  call $~lib/math/NativeMath.random
-  local.set $4
-  local.get $2
-  local.get $2
-  f64.ne
-  if (result f64)
-   f64.const 0.5
-  else
-   local.get $2
-   local.get $0
-   f64.sub
-   local.get $3
-   f64.div
-  end
-  local.set $5
-  local.get $4
-  local.get $5
-  f64.gt
-  if
-   f64.const 1
-   local.get $4
-   f64.sub
-   local.set $4
-   f64.const 1
-   local.get $5
-   f64.sub
-   local.set $5
-   local.get $1
-   local.set $6
-   local.get $0
-   local.set $1
-   local.get $6
-   local.set $0
-  end
-  local.get $0
-  local.get $3
-  local.get $4
-  local.get $5
-  f64.mul
-  local.set $6
-  local.get $6
-  f64.sqrt
-  f64.mul
-  f64.add
- )
- (func $assembly/float/Randomf64.triangular.pdf (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
-  (local $4 f64)
-  local.get $1
-  local.get $3
-  f64.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $3
-   local.get $2
-   f64.gt
-  end
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $0
-  local.get $1
-  f64.le
-  if
-   f64.const 0
-   return
-  end
-  local.get $2
-  local.get $1
-  f64.sub
-  local.set $4
-  local.get $0
-  local.get $3
-  f64.le
-  if
-   local.get $0
-   local.get $3
-   f64.lt
-   if
-    f64.const 2
-    local.get $0
-    local.get $1
-    f64.sub
-    f64.mul
-    local.get $4
-    local.get $3
-    local.get $1
-    f64.sub
-    f64.mul
-    f64.div
-    return
-   else
-    f64.const 2
-    local.get $4
-    f64.div
-    return
-   end
-   unreachable
-  else
-   local.get $0
-   local.get $2
-   f64.le
-   if
-    f64.const 2
-    local.get $2
-    local.get $0
-    f64.sub
-    f64.mul
-    local.get $4
-    local.get $2
-    local.get $3
-    f64.sub
-    f64.mul
-    f64.div
-    return
-   else
-    f64.const 0
-    return
-   end
-   unreachable
-  end
-  unreachable
- )
- (func $assembly/float/Randomf64.triangular.cdf (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  local.get $1
-  local.get $3
-  f64.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $3
-   local.get $2
-   f64.gt
-  end
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $0
-  local.get $1
-  f64.le
-  if
-   f64.const 0
-   return
-  end
-  local.get $2
-  local.get $1
-  f64.sub
-  local.set $4
-  local.get $4
-  local.get $3
-  local.get $1
-  f64.sub
-  f64.mul
-  local.set $5
-  local.get $4
-  local.get $2
-  local.get $3
-  f64.sub
-  f64.mul
-  local.set $6
-  local.get $0
-  local.get $3
-  f64.le
-  if
-   local.get $0
-   local.get $1
-   f64.sub
-   local.get $0
-   local.get $1
-   f64.sub
-   f64.mul
-   local.get $5
-   f64.div
-   return
-  end
-  local.get $0
-  local.get $2
-  f64.lt
-  if
-   f64.const 1
-   local.get $2
-   local.get $0
-   f64.sub
-   local.get $2
-   local.get $0
-   f64.sub
-   f64.mul
-   local.get $6
-   f64.div
-   f64.sub
-   return
-  end
-  f64.const 1
- )
- (func $assembly/float/Randomf64.triangular.quantile (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  (local $7 f64)
-  (local $8 f64)
-  local.get $1
-  local.get $3
-  f64.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $3
-   local.get $2
-   f64.gt
-  end
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $0
-  local.set $4
-  local.get $4
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $0
-  local.get $2
-  local.get $1
-  f64.sub
-  local.set $4
-  local.get $3
-  local.get $1
-  f64.sub
-  local.get $4
-  f64.div
-  local.set $5
-  local.get $4
-  local.get $3
-  local.get $1
-  f64.sub
-  f64.mul
-  local.set $6
-  local.get $4
-  local.get $2
-  local.get $3
-  f64.sub
-  f64.mul
-  local.set $7
-  local.get $0
-  local.get $5
-  f64.lt
-  if
-   local.get $1
-   local.get $6
-   local.get $0
-   f64.mul
-   local.set $8
-   local.get $8
-   f64.sqrt
-   f64.add
-   return
-  end
-  local.get $0
-  local.get $5
-  f64.gt
-  if
-   local.get $2
-   local.get $7
-   f64.const 1
-   local.get $0
-   f64.sub
-   f64.mul
-   local.set $8
-   local.get $8
-   f64.sqrt
-   f64.sub
-   return
-  end
-  local.get $3
- )
- (func $assembly/float/Randomf64.triangular.mean (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
-  local.get $0
-  local.get $2
-  f64.add
-  local.get $1
-  f64.add
-  f64.const 3
-  f64.div
- )
- (func $assembly/float/Randomf64.triangular.median (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
-  (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
-  local.get $0
-  local.get $2
-  f64.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $2
-   local.get $1
-   f64.gt
-  end
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  f64.const 0.5
-  local.get $1
-  local.get $0
-  f64.sub
-  f64.mul
-  local.set $3
-  f64.const 0.5
-  local.get $1
-  local.get $0
-  f64.add
-  f64.mul
-  local.set $4
-  local.get $2
-  local.get $4
-  f64.ge
-  if (result f64)
-   local.get $0
-   local.get $3
-   local.get $2
-   local.get $0
-   f64.sub
-   f64.mul
-   local.set $5
-   local.get $5
-   f64.sqrt
-   f64.add
-  else
-   local.get $1
-   local.get $3
-   local.get $1
-   local.get $2
-   f64.sub
-   f64.mul
-   local.set $5
-   local.get $5
-   f64.sqrt
-   f64.sub
-  end
- )
- (func $assembly/float/Randomf64.triangular.variance (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
-  local.get $0
-  local.get $2
-  f64.gt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $2
-   local.get $1
-   f64.gt
-  end
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $1
-  local.get $1
-  f64.mul
-  local.get $2
-  local.get $2
-  f64.mul
-  f64.add
-  local.get $0
-  local.get $0
-  f64.mul
-  f64.add
-  local.get $0
-  local.get $1
-  f64.mul
-  f64.sub
-  local.get $0
-  local.get $2
-  f64.mul
-  f64.sub
-  local.get $1
-  local.get $2
-  f64.mul
-  f64.sub
-  f64.const 18
-  f64.div
- )
- (func $assembly/float/Randomf64.triangular.stdev (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
-  (local $3 f64)
-  local.get $0
-  local.get $1
-  local.get $2
-  call $assembly/float/Randomf64.triangular.variance
-  local.set $3
-  local.get $3
-  f64.sqrt
  )
  (func $assembly/float/Randomf64.triangular.skewness (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)

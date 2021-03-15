@@ -8930,17 +8930,7 @@
    f32.eq
    br_if $__inlined_func$assembly/float/Randomf32.bernoulli.pmf
    drop
-   local.get $1
-   local.get $0
-   call $~lib/math/NativeMathf.pow
-   f32.const 1
-   local.get $1
-   f32.sub
-   f32.const 1
-   local.get $0
-   f32.sub
-   call $~lib/math/NativeMathf.pow
-   f32.mul
+   f32.const 0
   end
  )
  (func $assembly/float/Randomf32.bernoulli.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
@@ -10986,17 +10976,7 @@
    f64.eq
    br_if $__inlined_func$assembly/float/Randomf64.bernoulli.pmf
    drop
-   local.get $1
-   local.get $0
-   call $~lib/math/NativeMath.pow
-   f64.const 1
-   local.get $1
-   f64.sub
-   f64.const 1
-   local.get $0
-   f64.sub
-   call $~lib/math/NativeMath.pow
-   f64.mul
+   f64.const 0
   end
  )
  (func $assembly/float/Randomf64.bernoulli.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
