@@ -24,6 +24,7 @@ Work in Progress
 ### Floating point distributions:
 
 - **Uniform** _(with range)_
+- Alpha-Stable
 - Bernoulli
 - Beta
 - Beta-Prime

@@ -295,6 +295,29 @@ export namespace Randomf64 {
     return (prob > 0.5 ? n - res : res) as f64;
   }
 
+  /** Alpha-stable distribution. */
+  export function alphastable(alpha: f64 = 1.0, beta: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+    // See https://en.wikipedia.org/wiki/Stable_distribution#Simulation_of_stable_variables
+    const hpi = Math.PI / 2;
+
+    let u1 = uniform(-hpi, hpi);
+    let u2 = exponential();
+
+    if (alpha == 1.0) {
+      let f = hpi + beta * u1;
+      let x = (f * Math.tan(u1) - beta * Math.log(hpi * u2 * Math.cos(u1) / f)) / hpi;
+      return mean + sigma * (x + beta * Math.log(sigma) / hpi);
+    }
+
+    let z =-beta * Math.tan(hpi * alpha);
+    let x = Math.atan(-z) / alpha;
+    let f = alpha * (u1 + x);
+    let g = Math.sqrt(1 + z * z) * Math.pow(Math.cos(u1 - f) / u2, 1.0 - alpha) / Math.cos(u1);
+    let r = Math.pow(g, 1.0 / alpha) * Math.sin(f);
+
+    return mean + sigma * r;
+  }
+
   /** Gamma distribution. */
   export function gamma(alpha: f64 = 1.0, beta: f64 = 1.0): f64 {
     const EPS = 1e-7;
@@ -598,6 +621,29 @@ export namespace Randomf32 {
   /** Binominal distribution. */
   export function binominal(n: u32, prob: f32 = 0.5): f32 {
     return Randomf64.binominal(n, prob as f64) as f32;
+  }
+
+  /** Alpha-stable distribution. */
+  export function alphastable(alpha: f32 = 1.0, beta: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+    // See https://en.wikipedia.org/wiki/Stable_distribution#Simulation_of_stable_variables
+    const hpi: f32 = Mathf.PI / 2;
+
+    let u1 = uniform(-hpi, hpi);
+    let u2 = exponential();
+
+    if (alpha == 1.0) {
+      let f = hpi + beta * u1;
+      let x = (f * Mathf.tan(u1) - beta * Mathf.log(hpi * u2 * Mathf.cos(u1) / f)) / hpi;
+      return mean + sigma * (x + beta * Mathf.log(sigma) / hpi);
+    }
+
+    let z =-beta * Mathf.tan(hpi * alpha);
+    let x = Mathf.atan(-z) / alpha;
+    let f = alpha * (u1 + x);
+    let g = Mathf.sqrt(1 + z * z) * Mathf.pow(Mathf.cos(u1 - f) / u2, 1 - alpha) / Mathf.cos(u1);
+    let r = Mathf.pow(g, 1.0 / alpha) * Mathf.sin(f);
+
+    return mean + sigma * r;
   }
 
   /** Gamma distribution. */
