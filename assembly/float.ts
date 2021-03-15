@@ -62,7 +62,8 @@ export namespace Randomf64 {
 
     /** Returns the variance of Uniform distribution. */
     export function variance(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
-      return (1.0 / 12.0) * Math.pow(hi - lo, 2.0);
+      let diff = hi - lo;
+      return (1.0 / 12.0) * (diff * diff);
     }
 
     /** Returns the skewness of Uniform distribution. */
@@ -528,7 +529,8 @@ export namespace Randomf32 {
 
     /** Returns the variance of Uniform distribution. */
     export function variance(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
-      return (1.0 / 12.0) * Mathf.pow(hi - lo, 2.0);
+      let diff = hi - lo;
+      return (1.0 / 12.0) as f32 * (diff * diff);
     }
 
     /** Returns the skewness of Uniform distribution. */
