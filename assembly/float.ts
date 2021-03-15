@@ -55,10 +55,7 @@ export namespace Randomf64 {
 
   /** Geometric distribution.
    *
-   * Returned values in range:
-   * + Infinity, when prob == 0
-   * + 1,        when prob == 1
-   * + 1 < N < Infinity, when 0 < prob < 1
+   * Returned values in range [1, Infinity] for 0 <= prob <= 1
   */
   export function geometric(prob: f64 = 0.5): f64 {
     return 1.0 + Math.floor(Math.log1p(-Math.random()) / Math.log1p(-clamp01(prob)));
@@ -445,10 +442,7 @@ export namespace Randomf32 {
 
   /** Geometric distribution.
    *
-   * Returned values in range:
-   * + Infinity, when prob == 0
-   * + 1,        when prob == 1
-   * + 1 < N < Infinity, when 0 < prob < 1
+   * Returned values in range [1, Infinity] for 0 <= prob <= 1
    */
   export function geometric(prob: f32 = 0.5): f32 {
     return 1.0 + Mathf.floor(Mathf.log1p(-Mathf.random()) / Mathf.log1p(-clamp01(prob)));
