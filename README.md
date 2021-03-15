@@ -17,13 +17,13 @@ Work in Progress
 ---
 ### Discrete integer distributions:
 
-- **Uniform** _(with range)_
+- **Uniform** _(in interval)_
 - Bernoulli
 - Boolean
 
 ### Floating point distributions:
 
-- **Uniform** _(with range)_
+- **Uniform** _(in interval)_
 - Alpha-Stable
 - Bernoulli
 - Beta
