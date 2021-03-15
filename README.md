@@ -44,6 +44,7 @@ Work in Progress
 - Normal _(Gaussian)_
 - Pareto
 - Poisson
+- Rayleigh
 - Snedecor's F
 - Student's T
 - Triangular
