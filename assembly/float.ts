@@ -300,19 +300,19 @@ export namespace Randomf64 {
     // See https://en.wikipedia.org/wiki/Stable_distribution#Simulation_of_stable_variables
     const hpi = Math.PI / 2;
 
-    let u1 = uniform(-hpi, hpi);
-    let u2 = exponential();
+    let u = uniform(-hpi, hpi);
+    let w = exponential();
 
     if (alpha == 1.0) {
-      let f = hpi + beta * u1;
-      let x = (f * Math.tan(u1) - beta * Math.log(hpi * u2 * Math.cos(u1) / f)) / hpi;
+      let f = hpi + beta * u;
+      let x = (f * Math.tan(u) - beta * Math.log(hpi * w * Math.cos(u) / f)) / hpi;
       return mean + sigma * (x + beta * Math.log(sigma) / hpi);
     }
 
     let z =-beta * Math.tan(hpi * alpha);
     let x = Math.atan(-z) / alpha;
-    let f = alpha * (u1 + x);
-    let g = Math.sqrt(1 + z * z) * Math.pow(Math.cos(u1 - f) / u2, 1.0 - alpha) / Math.cos(u1);
+    let f = alpha * (u + x);
+    let g = Math.sqrt(1 + z * z) * Math.pow(Math.cos(u - f) / w, 1.0 - alpha) / Math.cos(u);
     let r = Math.pow(g, 1.0 / alpha) * Math.sin(f);
 
     return mean + sigma * r;
@@ -628,19 +628,19 @@ export namespace Randomf32 {
     // See https://en.wikipedia.org/wiki/Stable_distribution#Simulation_of_stable_variables
     const hpi: f32 = Mathf.PI / 2;
 
-    let u1 = uniform(-hpi, hpi);
-    let u2 = exponential();
+    let u = uniform(-hpi, hpi);
+    let w = exponential();
 
     if (alpha == 1.0) {
-      let f = hpi + beta * u1;
-      let x = (f * Mathf.tan(u1) - beta * Mathf.log(hpi * u2 * Mathf.cos(u1) / f)) / hpi;
+      let f = hpi + beta * u;
+      let x = (f * Mathf.tan(u) - beta * Mathf.log(hpi * w * Mathf.cos(u) / f)) / hpi;
       return mean + sigma * (x + beta * Mathf.log(sigma) / hpi);
     }
 
     let z =-beta * Mathf.tan(hpi * alpha);
     let x = Mathf.atan(-z) / alpha;
-    let f = alpha * (u1 + x);
-    let g = Mathf.sqrt(1 + z * z) * Mathf.pow(Mathf.cos(u1 - f) / u2, 1 - alpha) / Mathf.cos(u1);
+    let f = alpha * (u + x);
+    let g = Mathf.sqrt(1 + z * z) * Mathf.pow(Mathf.cos(u - f) / w, 1 - alpha) / Mathf.cos(u);
     let r = Mathf.pow(g, 1.0 / alpha) * Mathf.sin(f);
 
     return mean + sigma * r;
