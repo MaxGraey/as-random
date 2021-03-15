@@ -25,6 +25,57 @@ export namespace Randomf64 {
     return lo + (hi - lo) * Math.random();
   }
 
+  export namespace uniform {
+    /** Eval the probability density function for Uniform distribution. */
+    export function pdf(x: f64, lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return x >= lo && x <= hi
+        ? 1.0 / (hi - lo)
+        : 0.0;
+    }
+
+    /** Eval the cumulative density function for Uniform distribution. */
+    export function cdf(x: f64, lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      if (x  < lo) return 0.0;
+      if (x >= hi) return 1.0;
+      return (x - lo) / (hi - lo);
+    }
+
+    /** Eval the quantile function for Uniform distribution. */
+    export function quantile(x: f64, lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return lo + (hi - lo) * clamp01(x);
+    }
+
+    /** Returns the mean value of Uniform distribution. */
+    export function mean(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return 0.5 * (lo + hi);
+    }
+
+    /** Returns the median value of Uniform distribution. */
+    export function median(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return 0.5 * (lo + hi);
+    }
+
+    /** Returns the standard deviation of Uniform distribution. */
+    export function stdev(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return 0.28867513459481287 * (hi - lo); // sqrt(1.0 / 12.0)
+    }
+
+    /** Returns the variance of Uniform distribution. */
+    export function variance(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return (1.0 / 12.0) * Math.pow(hi - lo, 2.0);
+    }
+
+    /** Returns the skewness of Uniform distribution. */
+    export function skewness(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Uniform distribution. */
+    export function entropy(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
+      return Math.log(hi - lo);
+    }
+  }
+
   /** Bernoulli distribution */
   export function bernoulli(prob: f64 = 0.5): f64 {
     return f64(Math.random() >= clamp01(prob));
@@ -440,6 +491,56 @@ export namespace Randomf32 {
     return lo + (hi - lo) * Mathf.random();
   }
 
+  export namespace uniform {
+    /** Eval the probability density function for Uniform distribution. */
+    export function pdf(x: f32, lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return x >= lo && x <= hi
+        ? 1.0 as f32 / (hi - lo)
+        : 0.0;
+    }
+
+    /** Eval the cumulative density function for Uniform distribution. */
+    export function cdf(x: f32, lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      if (x  < lo) return 0.0;
+      if (x >= hi) return 1.0;
+      return (x - lo) / (hi - lo);
+    }
+
+    /** Eval the quantile function for Uniform distribution. */
+    export function quantile(x: f32, lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return lo + (hi - lo) * clamp01(x);
+    }
+
+    /** Returns the mean value of Uniform distribution. */
+    export function mean(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return 0.5 * (lo + hi);
+    }
+
+    /** Returns the median value of Uniform distribution. */
+    export function median(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return 0.5 * (lo + hi);
+    }
+
+    /** Returns the standard deviation of Uniform distribution. */
+    export function stdev(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return 0.28867513459481287 as f32 * (hi - lo); // sqrt(1.0 / 12.0)
+    }
+
+    /** Returns the variance of Uniform distribution. */
+    export function variance(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return (1.0 / 12.0) * Mathf.pow(hi - lo, 2.0);
+    }
+
+    /** Returns the skewness of Uniform distribution. */
+    export function skewness(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Uniform distribution. */
+    export function entropy(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
+      return Mathf.log(hi - lo);
+    }
+  }
 
   /** Bernoulli distribution */
   export function bernoulli(prob: f32 = 0.5): f32 {
