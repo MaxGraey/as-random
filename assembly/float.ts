@@ -83,7 +83,7 @@ export namespace Randomf64 {
   }
 
   export namespace bernoulli {
-    /** Eval the probability density function for Bernoulli distribution. */
+    /** Eval the probability mass function for Bernoulli distribution. */
     export function pmf(x: f64, prob: f64 = 0.5): f64 {
       prob = clamp01(prob);
       if (x == 0.0) return 1.0 - prob;
@@ -273,6 +273,7 @@ export namespace Randomf64 {
   }
 
   export namespace geometric {
+    /** Eval the probability mass function for Geometric distribution. */
     export function pmf(x: f64, prob: f64 = 0.5): f64 {
       prob = clamp01(prob);
       return Math.pow(1 - prob, x - 1.0) * prob;
@@ -763,7 +764,7 @@ export namespace Randomf32 {
   }
 
   export namespace bernoulli {
-    /** Eval the probability density function for Bernoulli distribution. */
+    /** Eval the probability mass function for Bernoulli distribution. */
     export function pmf(x: f32, prob: f32 = 0.5): f32 {
       prob = clamp01(prob);
       if (x == 0.0) return 1 - prob;
@@ -953,6 +954,7 @@ export namespace Randomf32 {
   }
 
   export namespace geometric {
+    /** Eval the probability mass function for Geometric distribution. */
     export function pmf(x: f32, prob: f32 = 0.5): f32 {
       prob = clamp01(prob);
       return Mathf.pow(1 - prob, x - 1) * prob;
