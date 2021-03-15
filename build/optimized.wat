@@ -197,6 +197,7 @@
  (export "Randomf32.laplace" (func $assembly/float/Randomf32.laplace@varargs))
  (export "Randomf32.frechet" (func $assembly/float/Randomf32.frechet@varargs))
  (export "Randomf32.weibull" (func $assembly/float/Randomf32.weibull@varargs))
+ (export "Randomf32.rayleigh" (func $assembly/float/Randomf32.rayleigh@varargs))
  (export "Randomf32.maxwell" (func $assembly/float/Randomf32.maxwell@varargs))
  (export "Randomf32.fisher" (func $assembly/float/Randomf32.fisher@varargs))
  (export "Randomf32.poisson" (func $assembly/float/Randomf32.poisson))
@@ -207,7 +208,7 @@
  (export "Randomf32.chi" (func $assembly/float/Randomf32.chi@varargs))
  (export "Randomf32.chisquare" (func $assembly/float/Randomf32.chisquare@varargs))
  (export "Randomf32.snedecor" (func $assembly/float/Randomf32.snedecor@varargs))
- (export "Randomf32.students" (func $assembly/float/Randomf32.students@varargs))
+ (export "Randomf32.student" (func $assembly/float/Randomf32.student@varargs))
  (export "Randomf64.seed" (func $assembly/float/Randomf32.seed))
  (export "Randomf64.uniform" (func $assembly/float/Randomf64.uniform@varargs))
  (export "Randomf64.bernoulli" (func $assembly/float/Randomf64.bernoulli@varargs))
@@ -223,6 +224,7 @@
  (export "Randomf64.laplace" (func $assembly/float/Randomf64.laplace@varargs))
  (export "Randomf64.frechet" (func $assembly/float/Randomf64.frechet@varargs))
  (export "Randomf64.weibull" (func $assembly/float/Randomf64.weibull@varargs))
+ (export "Randomf64.rayleigh" (func $assembly/float/Randomf64.rayleigh@varargs))
  (export "Randomf64.maxwell" (func $assembly/float/Randomf64.maxwell@varargs))
  (export "Randomf64.fisher" (func $assembly/float/Randomf64.fisher@varargs))
  (export "Randomf64.poisson" (func $assembly/float/Randomf64.poisson))
@@ -233,7 +235,7 @@
  (export "Randomf64.chi" (func $assembly/float/Randomf64.chi@varargs))
  (export "Randomf64.chisquare" (func $assembly/float/Randomf64.chisquare@varargs))
  (export "Randomf64.snedecor" (func $assembly/float/Randomf64.snedecor@varargs))
- (export "Randomf64.students" (func $assembly/float/Randomf64.students@varargs))
+ (export "Randomf64.student" (func $assembly/float/Randomf64.student@varargs))
  (export "Randomi32.seed" (func $assembly/integer/Randomi32.seed))
  (export "Randomi32.uniform" (func $assembly/integer/Randomi32.uniform@varargs))
  (export "Randomi32.bernoulli" (func $assembly/integer/Randomi32.bernoulli@varargs))
@@ -7234,6 +7236,26 @@
   end
   f32.mul
  )
+ (func $assembly/float/Randomf32.rayleigh@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $~lib/math/NativeMathf.random
+  call $~lib/math/NativeMathf.log
+  f32.const -2
+  f32.mul
+  f32.sqrt
+  f32.mul
+ )
  (func $assembly/float/Randomf32.maxwell@varargs (param $0 f32) (result f32)
   (local $1 f32)
   (local $2 f32)
@@ -7461,7 +7483,7 @@
   f32.div
   f32.div
  )
- (func $assembly/float/Randomf32.students@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randomf32.student@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -7921,6 +7943,26 @@
   end
   f64.mul
  )
+ (func $assembly/float/Randomf64.rayleigh@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $~lib/math/NativeMath.random
+  call $~lib/math/NativeMath.log
+  f64.const -2
+  f64.mul
+  f64.sqrt
+  f64.mul
+ )
  (func $assembly/float/Randomf64.maxwell@varargs (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 f64)
@@ -8146,7 +8188,7 @@
   f64.div
   f64.div
  )
- (func $assembly/float/Randomf64.students@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randomf64.student@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2

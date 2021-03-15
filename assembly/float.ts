@@ -140,6 +140,11 @@ export namespace Randomf64 {
     return lambda * (k == 0.0 ? -Math.log(u) : Math.pow(u, 1.0 / k));
   }
 
+  /** Rayleigh distribution. */
+  export function rayleigh(sigma: f64 = 1.0): f64 {
+    return sigma * Math.sqrt(-2.0 * Math.log(Math.random()));
+  }
+
   /** Maxwell-Boltzmann distribution. */
   export function maxwell(sigma: f64 = 1.0): f64 {
     // Based on Nader M.A. Mohamed, title "Efficient Algorithm for Generating Maxwell Random Variables".
@@ -525,6 +530,11 @@ export namespace Randomf32 {
   export function weibull(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
     let u = -Mathf.log1p(-Mathf.random());
     return lambda * (k == 0.0 ? -Mathf.log(u) : Mathf.pow(u, 1.0 / k));
+  }
+
+  /** Rayleigh distribution. */
+  export function rayleigh(sigma: f32 = 1.0): f32 {
+    return sigma * Mathf.sqrt(-2.0 * Mathf.log(Mathf.random()));
   }
 
   /** Maxwell-Boltzmann distribution. */
