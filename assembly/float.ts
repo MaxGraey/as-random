@@ -168,20 +168,20 @@ export namespace Randomf64 {
     /** Eval the probability density function for Triangular distribution. */
     export function pdf(x: f64, lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
       if (lo > mode || mode > hi) return NaN;
-      if (x <= lo) return 0;
+      if (x <= lo) return 0.0;
 
       let range = hi - lo;
       if (x <= mode) {
         if (x < mode) {
-          return 2 * (x - lo) / (range * (mode - lo));
+          return 2.0 * (x - lo) / (range * (mode - lo));
         } else {
-          return 2 / range;
+          return 2.0 / range;
         }
       } else {
         if (x <= hi) {
-          return 2 * (hi - x) / (range * (hi - mode));
+          return 2.0 * (hi - x) / (range * (hi - mode));
         } else {
-          return 0;
+          return 0.0;
         }
       }
     }
@@ -189,14 +189,14 @@ export namespace Randomf64 {
     /** Eval the cumulative density function for Triangular distribution. */
     export function cdf(x: f64, lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
       if (lo > mode || mode > hi) return NaN;
-      if (x <= lo) return 0;
+      if (x <= lo) return 0.0;
 
       let range = hi - lo;
       let f1 = range * (mode - lo);
 	    let f2 = range * (hi - mode);
       if (x <= mode) return (x - lo) * (x - lo) / f1;
-      if (x  < hi)   return 1 - (hi - x) * (hi - x) / f2;
-      return 1;
+      if (x  < hi)   return 1.0 - (hi - x) * (hi - x) / f2;
+      return 1.0;
     }
 
     /** Eval the quantile function for Triangular distribution. */
@@ -808,7 +808,7 @@ export namespace Randomf32 {
         if (x <= hi) {
           return 2.0 * (hi - x) / (range * (hi - mode));
         } else {
-          return 0;
+          return 0.0;
         }
       }
     }
@@ -823,7 +823,7 @@ export namespace Randomf32 {
 	    let f2 = range * (hi - mode);
       if (x <= mode) return (x - lo) * (x - lo) / f1;
       if (x  < hi)   return 1.0 as f32 - (hi - x) * (hi - x) / f2;
-      return 1;
+      return 1.0;
     }
 
     /** Eval the quantile function for Triangular distribution. */
