@@ -161,7 +161,7 @@ export namespace Randomf64 {
       let t = hi; hi = lo; lo = t;
     }
 
-    return lo + (hi - lo) * Math.sqrt(urand * midpt);
+    return lo + range * Math.sqrt(urand * midpt);
   }
 
   export namespace triangular {
@@ -788,7 +788,7 @@ export namespace Randomf32 {
       let t = hi; hi = lo; lo = t;
     }
 
-    return lo + (hi - lo) * Mathf.sqrt(urand * midpt);
+    return lo + range * Mathf.sqrt(urand * midpt);
   }
 
   export namespace triangular {

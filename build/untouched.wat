@@ -901,9 +901,7 @@
    local.set $0
   end
   local.get $0
-  local.get $1
-  local.get $0
-  f32.sub
+  local.get $3
   local.get $4
   local.get $5
   f32.mul
@@ -8240,9 +8238,7 @@
    local.set $0
   end
   local.get $0
-  local.get $1
-  local.get $0
-  f64.sub
+  local.get $3
   local.get $4
   local.get $5
   f64.mul

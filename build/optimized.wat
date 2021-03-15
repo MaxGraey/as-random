@@ -8810,45 +8810,41 @@
    local.get $1
    local.get $0
    f32.sub
-   local.tee $3
+   local.tee $4
    f32.const 0
    f32.eq
    br_if $__inlined_func$assembly/float/Randomf32.triangular
    drop
    call $~lib/math/NativeMathf.random
-   local.tee $4
+   local.tee $3
    f32.const 0.5
    local.get $2
    local.get $0
    f32.sub
-   local.get $3
+   local.get $4
    f32.div
    local.get $2
    local.get $2
    f32.ne
    select
-   local.tee $3
+   local.tee $2
    f32.gt
-   if
-    f32.const 1
-    local.get $4
-    f32.sub
-    local.set $4
+   if (result f32)
     f32.const 1
     local.get $3
     f32.sub
     local.set $3
+    f32.const 1
+    local.get $2
+    f32.sub
+    local.set $2
     local.get $1
+   else
     local.get $0
-    local.set $1
-    local.set $0
    end
-   local.get $0
-   local.get $1
-   local.get $0
-   f32.sub
    local.get $4
    local.get $3
+   local.get $2
    f32.mul
    f32.sqrt
    f32.mul
@@ -10625,45 +10621,41 @@
    local.get $1
    local.get $0
    f64.sub
-   local.tee $3
+   local.tee $4
    f64.const 0
    f64.eq
    br_if $__inlined_func$assembly/float/Randomf64.triangular
    drop
    call $~lib/math/NativeMath.random
-   local.tee $4
+   local.tee $3
    f64.const 0.5
    local.get $2
    local.get $0
    f64.sub
-   local.get $3
+   local.get $4
    f64.div
    local.get $2
    local.get $2
    f64.ne
    select
-   local.tee $3
+   local.tee $2
    f64.gt
-   if
-    f64.const 1
-    local.get $4
-    f64.sub
-    local.set $4
+   if (result f64)
     f64.const 1
     local.get $3
     f64.sub
     local.set $3
+    f64.const 1
+    local.get $2
+    f64.sub
+    local.set $2
     local.get $1
+   else
     local.get $0
-    local.set $1
-    local.set $0
    end
-   local.get $0
-   local.get $1
-   local.get $0
-   f64.sub
    local.get $4
    local.get $3
+   local.get $2
    f64.mul
    f64.sqrt
    f64.mul
