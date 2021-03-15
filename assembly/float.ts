@@ -84,23 +84,23 @@ export namespace Randomf64 {
 
   export namespace bernoulli {
     /** Eval the probability density function for Bernoulli distribution. */
-    export function pdf(x: f64, prob: f64 = 0.5): f64 {
+    export function pmf(x: f64, prob: f64 = 0.5): f64 {
       prob = clamp01(prob);
-      if (x == 0.0) return 1 - prob;
+      if (x == 0.0) return 1.0 - prob;
       if (x == 1.0) return prob;
-      return 0.0;
+      return Math.pow(prob, x) * Math.pow(1.0 - prob, 1.0 - x);
     }
 
     /** Eval the cumulative density function for Bernoulli distribution. */
     export function cdf(x: f64, prob: f64 = 0.5): f64 {
       if (x  < 0.0) return 0;
       if (x >= 1.0) return 1;
-      return 1 - clamp01(prob);
+      return 1.0 - clamp01(prob);
     }
 
     /** Eval the quantile function for Bernoulli distribution. */
     export function quantile(x: f64, prob: f64 = 0.5): f64 {
-      return f64(x > 1 - clamp01(prob));
+      return f64(x > 1.0 - clamp01(prob));
     }
 
     /** Returns the mean value of Bernoulli distribution. */
@@ -135,8 +135,7 @@ export namespace Randomf64 {
     /** Returns the differential entropy of Bernoulli distribution. */
     export function entropy(prob: f64 = 0.5): f64 {
       prob = clamp01(prob);
-      if (prob === 0.0) return 0;
-      if (prob === 1.0) return 0;
+      if (prob === 0.0 || prob === 1.0) return 0;
       return (prob - 1) * Math.log(1 - prob) - prob * Math.log(prob);
     }
   }
@@ -271,6 +270,60 @@ export namespace Randomf64 {
   */
   export function geometric(prob: f64 = 0.5): f64 {
     return 1.0 + Math.floor(Math.log1p(-Math.random()) / Math.log1p(-clamp01(prob)));
+  }
+
+  export namespace geometric {
+    export function pmf(x: f64, prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return Math.pow(1 - prob, x - 1.0) * prob;
+    }
+
+    /** Eval the cumulative density function for Geometric distribution. */
+    export function cdf(x: f64, prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return 1.0 - Math.pow(1.0 - prob, x);
+    }
+
+    /** Eval the quantile function for Geometric distribution. */
+    export function quantile(x: f64, prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return Math.ceil(Math.log1p(-x) / Math.log1p(-prob));
+    }
+
+    /** Returns the mean value of Geometric distribution. */
+    export function mean(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return 1.0 / prob;
+    }
+
+    /** Returns the median value of Geometric distribution. */
+    export function median(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return Math.ceil(-1.0 / Math.log2(1.0 - prob));
+    }
+
+    /** Returns the standard deviation of Geometric distribution. */
+    export function stdev(prob: f64 = 0.5): f64 {
+      return Math.sqrt(variance(prob));
+    }
+
+    /** Returns the variance of Geometric distribution. */
+    export function variance(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return (1.0 - prob) / (prob * prob);
+    }
+
+    /** Returns the skewness of Geometric distribution. */
+    export function skewness(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return (2.0 - prob) / Math.sqrt(1.0 - prob);
+    }
+
+    /** Returns the differential entropy of Geometric distribution. */
+    export function entropy(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return ((prob - 1.0) * Math.log2(1.0 - prob) - prob * Math.log2(prob)) / prob;
+    }
   }
 
   /** Normal distribution. */
@@ -711,11 +764,11 @@ export namespace Randomf32 {
 
   export namespace bernoulli {
     /** Eval the probability density function for Bernoulli distribution. */
-    export function pdf(x: f32, prob: f32 = 0.5): f32 {
+    export function pmf(x: f32, prob: f32 = 0.5): f32 {
       prob = clamp01(prob);
       if (x == 0.0) return 1 - prob;
       if (x == 1.0) return prob;
-      return 0.0;
+      return Mathf.pow(prob, x) * Mathf.pow(1 - prob, 1 - x);
     }
 
     /** Eval the cumulative density function for Bernoulli distribution. */
@@ -762,8 +815,7 @@ export namespace Randomf32 {
     /** Returns the differential entropy of Bernoulli distribution. */
     export function entropy(prob: f32 = 0.5): f32 {
       prob = clamp01(prob);
-      if (prob === 0.0) return 0.0;
-      if (prob === 1.0) return 0.0;
+      if (prob === 0.0 || prob === 1.0) return 0.0;
       return (prob - 1.0) * Mathf.log(1.0 - prob) - prob * Mathf.log(prob);
     }
   }
@@ -898,6 +950,60 @@ export namespace Randomf32 {
    */
   export function geometric(prob: f32 = 0.5): f32 {
     return 1.0 + Mathf.floor(Mathf.log1p(-Mathf.random()) / Mathf.log1p(-clamp01(prob)));
+  }
+
+  export namespace geometric {
+    export function pmf(x: f32, prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return Mathf.pow(1 - prob, x - 1) * prob;
+    }
+
+    /** Eval the cumulative density function for Geometric distribution. */
+    export function cdf(x: f32, prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return 1 - Mathf.pow(1 - prob, x);
+    }
+
+    /** Eval the quantile function for Geometric distribution. */
+    export function quantile(x: f32, prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return Mathf.ceil(Mathf.log1p(-x) / Mathf.log1p(-prob));
+    }
+
+    /** Returns the mean value of Geometric distribution. */
+    export function mean(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return 1.0 / prob;
+    }
+
+    /** Returns the median value of Geometric distribution. */
+    export function median(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return Mathf.ceil(-1.0 / Mathf.log2(1 - prob));
+    }
+
+    /** Returns the standard deviation of Geometric distribution. */
+    export function stdev(prob: f32 = 0.5): f32 {
+      return Mathf.sqrt(variance(prob));
+    }
+
+    /** Returns the variance of Geometric distribution. */
+    export function variance(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return (1 - prob) / (prob * prob);
+    }
+
+    /** Returns the skewness of Geometric distribution. */
+    export function skewness(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return (2 - prob) / Mathf.sqrt(1.0 - prob);
+    }
+
+    /** Returns the differential entropy of Geometric distribution. */
+    export function entropy(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return ((prob - 1.0) * Mathf.log2(1 - prob) - prob * Mathf.log2(prob)) / prob;
+    }
   }
 
   /** Normal distribution. */
