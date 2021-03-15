@@ -81,6 +81,15 @@
  (export "Randomf32.uniform.skewness" (func $assembly/float/Randomf32.uniform.skewness@varargs))
  (export "Randomf32.uniform.entropy" (func $assembly/float/Randomf32.uniform.entropy@varargs))
  (export "Randomf32.bernoulli" (func $assembly/float/Randomf32.bernoulli@varargs))
+ (export "Randomf32.bernoulli.pdf" (func $assembly/float/Randomf32.bernoulli.pdf@varargs))
+ (export "Randomf32.bernoulli.cdf" (func $assembly/float/Randomf32.bernoulli.cdf@varargs))
+ (export "Randomf32.bernoulli.quantile" (func $assembly/float/Randomf32.bernoulli.quantile@varargs))
+ (export "Randomf32.bernoulli.mean" (func $assembly/float/Randomf32.bernoulli.mean@varargs))
+ (export "Randomf32.bernoulli.median" (func $assembly/float/Randomf32.bernoulli.median@varargs))
+ (export "Randomf32.bernoulli.stdev" (func $assembly/float/Randomf32.bernoulli.stdev@varargs))
+ (export "Randomf32.bernoulli.variance" (func $assembly/float/Randomf32.bernoulli.variance@varargs))
+ (export "Randomf32.bernoulli.skewness" (func $assembly/float/Randomf32.bernoulli.skewness@varargs))
+ (export "Randomf32.bernoulli.entropy" (func $assembly/float/Randomf32.bernoulli.entropy@varargs))
  (export "Randomf32.triangular" (func $assembly/float/Randomf32.triangular@varargs))
  (export "Randomf32.geometric" (func $assembly/float/Randomf32.geometric@varargs))
  (export "Randomf32.normal" (func $assembly/float/Randomf32.normal@varargs))
@@ -118,6 +127,15 @@
  (export "Randomf64.uniform.skewness" (func $assembly/float/Randomf64.uniform.skewness@varargs))
  (export "Randomf64.uniform.entropy" (func $assembly/float/Randomf64.uniform.entropy@varargs))
  (export "Randomf64.bernoulli" (func $assembly/float/Randomf64.bernoulli@varargs))
+ (export "Randomf64.bernoulli.pdf" (func $assembly/float/Randomf64.bernoulli.pdf@varargs))
+ (export "Randomf64.bernoulli.cdf" (func $assembly/float/Randomf64.bernoulli.cdf@varargs))
+ (export "Randomf64.bernoulli.quantile" (func $assembly/float/Randomf64.bernoulli.quantile@varargs))
+ (export "Randomf64.bernoulli.mean" (func $assembly/float/Randomf64.bernoulli.mean@varargs))
+ (export "Randomf64.bernoulli.median" (func $assembly/float/Randomf64.bernoulli.median@varargs))
+ (export "Randomf64.bernoulli.stdev" (func $assembly/float/Randomf64.bernoulli.stdev@varargs))
+ (export "Randomf64.bernoulli.variance" (func $assembly/float/Randomf64.bernoulli.variance@varargs))
+ (export "Randomf64.bernoulli.skewness" (func $assembly/float/Randomf64.bernoulli.skewness@varargs))
+ (export "Randomf64.bernoulli.entropy" (func $assembly/float/Randomf64.bernoulli.entropy@varargs))
  (export "Randomf64.triangular" (func $assembly/float/Randomf64.triangular@varargs))
  (export "Randomf64.geometric" (func $assembly/float/Randomf64.geometric@varargs))
  (export "Randomf64.normal" (func $assembly/float/Randomf64.normal@varargs))
@@ -624,6 +642,193 @@
   f32.min
   f32.ge
   f32.convert_i32_u
+ )
+ (func $assembly/float/Randomf32.bernoulli.pdf (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $1
+  local.set $2
+  local.get $2
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $1
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   f32.const 1
+   local.get $1
+   f32.sub
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.eq
+  if
+   local.get $1
+   return
+  end
+  f32.const 0
+ )
+ (func $assembly/float/Randomf32.bernoulli.cdf (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.ge
+  if
+   f32.const 1
+   return
+  end
+  f32.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  f32.sub
+ )
+ (func $assembly/float/Randomf32.bernoulli.quantile (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  f32.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  f32.sub
+  f32.gt
+  f32.convert_i32_u
+ )
+ (func $assembly/float/Randomf32.bernoulli.mean (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+ )
+ (func $assembly/float/Randomf32.bernoulli.median (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0.5
+  f32.gt
+  f32.convert_i32_u
+ )
+ (func $assembly/float/Randomf32.bernoulli.variance (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  f32.const 1
+  local.get $0
+  f32.sub
+  local.get $0
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.bernoulli.stdev (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.variance
+  local.set $1
+  local.get $1
+  f32.sqrt
+ )
+ (func $assembly/float/Randomf32.bernoulli.skewness (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   f32.const inf
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.eq
+  if
+   f32.const inf
+   f32.neg
+   return
+  end
+  f32.const 1
+  f32.const 2
+  local.get $0
+  f32.mul
+  f32.sub
+  local.get $0
+  f32.const 1
+  local.get $0
+  f32.sub
+  f32.mul
+  local.set $1
+  local.get $1
+  f32.sqrt
+  f32.div
+ )
+ (func $assembly/float/Randomf32.bernoulli.entropy (param $0 f32) (result f32)
+  (local $1 f32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.eq
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.sub
+  f32.const 1
+  local.get $0
+  f32.sub
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  local.get $0
+  local.get $0
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  f32.sub
  )
  (func $assembly/float/Randomf32.triangular (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   (local $3 f32)
@@ -7319,6 +7524,193 @@
   f64.ge
   f64.convert_i32_u
  )
+ (func $assembly/float/Randomf64.bernoulli.pdf (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $1
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const 1
+   local.get $1
+   f64.sub
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   local.get $1
+   return
+  end
+  f64.const 0
+ )
+ (func $assembly/float/Randomf64.bernoulli.cdf (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.ge
+  if
+   f64.const 1
+   return
+  end
+  f64.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  f64.sub
+ )
+ (func $assembly/float/Randomf64.bernoulli.quantile (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  f64.const 1
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  f64.sub
+  f64.gt
+  f64.convert_i32_u
+ )
+ (func $assembly/float/Randomf64.bernoulli.mean (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+ )
+ (func $assembly/float/Randomf64.bernoulli.median (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0.5
+  f64.gt
+  f64.convert_i32_u
+ )
+ (func $assembly/float/Randomf64.bernoulli.variance (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  f64.const 1
+  local.get $0
+  f64.sub
+  local.get $0
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.bernoulli.stdev (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.variance
+  local.set $1
+  local.get $1
+  f64.sqrt
+ )
+ (func $assembly/float/Randomf64.bernoulli.skewness (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const inf
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   f64.const inf
+   f64.neg
+   return
+  end
+  f64.const 1
+  f64.const 2
+  local.get $0
+  f64.mul
+  f64.sub
+  local.get $0
+  f64.const 1
+  local.get $0
+  f64.sub
+  f64.mul
+  local.set $1
+  local.get $1
+  f64.sqrt
+  f64.div
+ )
+ (func $assembly/float/Randomf64.bernoulli.entropy (param $0 f64) (result f64)
+  (local $1 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.sub
+  f64.const 1
+  local.get $0
+  f64.sub
+  call $~lib/math/NativeMath.log
+  f64.mul
+  local.get $0
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.mul
+  f64.sub
+ )
  (func $assembly/float/Randomf64.triangular (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)
   (local $4 f64)
@@ -11963,6 +12355,150 @@
   local.get $0
   call $assembly/float/Randomf32.bernoulli
  )
+ (func $assembly/float/Randomf32.bernoulli.pdf@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.bernoulli.pdf
+ )
+ (func $assembly/float/Randomf32.bernoulli.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.bernoulli.cdf
+ )
+ (func $assembly/float/Randomf32.bernoulli.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.bernoulli.quantile
+ )
+ (func $assembly/float/Randomf32.bernoulli.mean@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.mean
+ )
+ (func $assembly/float/Randomf32.bernoulli.median@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.median
+ )
+ (func $assembly/float/Randomf32.bernoulli.stdev@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.stdev
+ )
+ (func $assembly/float/Randomf32.bernoulli.variance@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.variance
+ )
+ (func $assembly/float/Randomf32.bernoulli.skewness@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.skewness
+ )
+ (func $assembly/float/Randomf32.bernoulli.entropy@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.bernoulli.entropy
+ )
  (func $assembly/float/Randomf32.triangular@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
@@ -12652,6 +13188,150 @@
   end
   local.get $0
   call $assembly/float/Randomf64.bernoulli
+ )
+ (func $assembly/float/Randomf64.bernoulli.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.bernoulli.pdf
+ )
+ (func $assembly/float/Randomf64.bernoulli.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.bernoulli.cdf
+ )
+ (func $assembly/float/Randomf64.bernoulli.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.bernoulli.quantile
+ )
+ (func $assembly/float/Randomf64.bernoulli.mean@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.mean
+ )
+ (func $assembly/float/Randomf64.bernoulli.median@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.median
+ )
+ (func $assembly/float/Randomf64.bernoulli.stdev@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.stdev
+ )
+ (func $assembly/float/Randomf64.bernoulli.variance@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.variance
+ )
+ (func $assembly/float/Randomf64.bernoulli.skewness@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.skewness
+ )
+ (func $assembly/float/Randomf64.bernoulli.entropy@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 0.5
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.bernoulli.entropy
  )
  (func $assembly/float/Randomf64.triangular@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3

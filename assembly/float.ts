@@ -82,6 +82,65 @@ export namespace Randomf64 {
     return f64(Math.random() >= clamp01(prob));
   }
 
+  export namespace bernoulli {
+    /** Eval the probability density function for Bernoulli distribution. */
+    export function pdf(x: f64, prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      if (x == 0.0) return 1 - prob;
+      if (x == 1.0) return prob;
+      return 0.0;
+    }
+
+    /** Eval the cumulative density function for Bernoulli distribution. */
+    export function cdf(x: f64, prob: f64 = 0.5): f64 {
+      if (x  < 0.0) return 0;
+      if (x >= 1.0) return 1;
+      return 1 - clamp01(prob);
+    }
+
+    /** Eval the quantile function for Bernoulli distribution. */
+    export function quantile(x: f64, prob: f64 = 0.5): f64 {
+      return f64(x > 1 - clamp01(prob));
+    }
+
+    /** Returns the mean value of Bernoulli distribution. */
+    export function mean(prob: f64 = 0.5): f64 {
+      return clamp01(prob);
+    }
+
+    /** Returns the median value of Bernoulli distribution. */
+    export function median(prob: f64 = 0.5): f64 {
+      return f64(prob > 0.5);
+    }
+
+    /** Returns the standard deviation of Bernoulli distribution. */
+    export function stdev(prob: f64 = 0.5): f64 {
+      return Math.sqrt(variance(prob));
+    }
+
+    /** Returns the variance of Bernoulli distribution. */
+    export function variance(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      return (1 - prob) * prob;
+    }
+
+    /** Returns the skewness of Bernoulli distribution. */
+    export function skewness(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      if (prob === 0.0) return  Infinity;
+      if (prob === 1.0) return -Infinity;
+      return (1 - 2 * prob) / Math.sqrt(prob * (1 - prob));
+    }
+
+    /** Returns the differential entropy of Bernoulli distribution. */
+    export function entropy(prob: f64 = 0.5): f64 {
+      prob = clamp01(prob);
+      if (prob === 0.0) return 0;
+      if (prob === 1.0) return 0;
+      return (prob - 1) * Math.log(1 - prob) - prob * Math.log(prob);
+    }
+  }
+
   /** Triangular distribution.
    *
    *  Return a random floating point number in lo <= N <= hi bounds and
@@ -547,6 +606,65 @@ export namespace Randomf32 {
   /** Bernoulli distribution */
   export function bernoulli(prob: f32 = 0.5): f32 {
     return f32(Mathf.random() >= clamp01(prob));
+  }
+
+  export namespace bernoulli {
+    /** Eval the probability density function for Bernoulli distribution. */
+    export function pdf(x: f32, prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      if (x == 0.0) return 1 - prob;
+      if (x == 1.0) return prob;
+      return 0.0;
+    }
+
+    /** Eval the cumulative density function for Bernoulli distribution. */
+    export function cdf(x: f32, prob: f32 = 0.5): f32 {
+      if (x  < 0.0) return 0;
+      if (x >= 1.0) return 1;
+      return 1 - clamp01(prob);
+    }
+
+    /** Eval the quantile function for Bernoulli distribution. */
+    export function quantile(x: f32, prob: f32 = 0.5): f32 {
+      return f32(x > 1 - clamp01(prob));
+    }
+
+    /** Returns the mean value of Bernoulli distribution. */
+    export function mean(prob: f32 = 0.5): f32 {
+      return clamp01(prob);
+    }
+
+    /** Returns the median value of Bernoulli distribution. */
+    export function median(prob: f32 = 0.5): f32 {
+      return f32(prob > 0.5);
+    }
+
+    /** Returns the standard deviation of Bernoulli distribution. */
+    export function stdev(prob: f32 = 0.5): f32 {
+      return Mathf.sqrt(variance(prob));
+    }
+
+    /** Returns the variance of Bernoulli distribution. */
+    export function variance(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      return (1 - prob) * prob;
+    }
+
+    /** Returns the skewness of Bernoulli distribution. */
+    export function skewness(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      if (prob === 0.0) return  Infinity;
+      if (prob === 1.0) return -Infinity;
+      return (1 - 2 * prob) / Mathf.sqrt(prob * (1 - prob));
+    }
+
+    /** Returns the differential entropy of Bernoulli distribution. */
+    export function entropy(prob: f32 = 0.5): f32 {
+      prob = clamp01(prob);
+      if (prob === 0.0) return 0.0;
+      if (prob === 1.0) return 0.0;
+      return (prob - 1.0) * Mathf.log(1.0 - prob) - prob * Mathf.log(prob);
+    }
   }
 
   /** Triangular distribution.
