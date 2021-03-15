@@ -1650,19 +1650,18 @@
   return
  )
  (func $assembly/float/Randomf32.pareto (param $0 f32) (result f32)
-  (local $1 f32)
-  (local $2 f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if
+   f32.const 0
+   return
+  end
   f32.const 1
   call $~lib/math/NativeMathf.random
   f32.sub
   f32.const 1
-  f32.const 0
-  local.set $2
   local.get $0
-  local.set $1
-  local.get $2
-  local.get $1
-  f32.max
   f32.neg
   f32.div
   call $~lib/math/NativeMathf.pow
@@ -7546,19 +7545,18 @@
   return
  )
  (func $assembly/float/Randomf64.pareto (param $0 f64) (result f64)
-  (local $1 f64)
-  (local $2 f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  if
+   f64.const 0
+   return
+  end
   f64.const 1
   call $~lib/math/NativeMath.random
   f64.sub
   f64.const 1
-  f64.const 0
-  local.set $2
   local.get $0
-  local.set $1
-  local.get $2
-  local.get $1
-  f64.max
   f64.neg
   f64.div
   call $~lib/math/NativeMath.pow

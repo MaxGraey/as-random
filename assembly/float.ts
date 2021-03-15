@@ -104,7 +104,8 @@ export namespace Randomf64 {
 
   /** Pareto distribution. */
   export function pareto(alpha: f64 = 1.0): f64 {
-    return Math.pow(1.0 - Math.random(), 1.0 / -Math.max(0, alpha));
+    if (alpha <= 0.0) return 0.0;
+    return Math.pow(1.0 - Math.random(), 1.0 / -alpha);
   }
 
   /** Logistic distribution. */
@@ -496,7 +497,8 @@ export namespace Randomf32 {
 
   /** Pareto distribution. */
   export function pareto(alpha: f32 = 1.0): f32 {
-    return Mathf.pow(1.0 - Mathf.random(), 1.0 / -Mathf.max(0, alpha));
+    if (alpha <= 0.0) return 0.0;
+    return Mathf.pow(1.0 - Mathf.random(), 1.0 / -alpha);
   }
 
   /** Logistic distribution. */

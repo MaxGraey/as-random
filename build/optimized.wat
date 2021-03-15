@@ -7034,15 +7034,20 @@
    f32.const 1
    local.set $0
   end
-  f32.const 1
-  call $~lib/math/NativeMathf.random
-  f32.sub
-  f32.const -1
-  f32.const 0
   local.get $0
-  f32.max
-  f32.div
-  call $~lib/math/NativeMathf.pow
+  f32.const 0
+  f32.le
+  if (result f32)
+   f32.const 0
+  else
+   f32.const 1
+   call $~lib/math/NativeMathf.random
+   f32.sub
+   f32.const -1
+   local.get $0
+   f32.div
+   call $~lib/math/NativeMathf.pow
+  end
  )
  (func $assembly/float/Randomf32.logistic@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
@@ -7741,15 +7746,20 @@
    f64.const 1
    local.set $0
   end
-  f64.const 1
-  call $~lib/math/NativeMath.random
-  f64.sub
-  f64.const -1
-  f64.const 0
   local.get $0
-  f64.max
-  f64.div
-  call $~lib/math/NativeMath.pow
+  f64.const 0
+  f64.le
+  if (result f64)
+   f64.const 0
+  else
+   f64.const 1
+   call $~lib/math/NativeMath.random
+   f64.sub
+   f64.const -1
+   local.get $0
+   f64.div
+   call $~lib/math/NativeMath.pow
+  end
  )
  (func $assembly/float/Randomf64.logistic@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
