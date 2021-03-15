@@ -164,6 +164,107 @@ export namespace Randomf64 {
     return lo + (hi - lo) * Math.sqrt(urand * midpt);
   }
 
+  export namespace triangular {
+    /** Eval the probability density function for Triangular distribution. */
+    export function pdf(x: f64, lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+      if (x <= lo) return 0;
+
+      let range = hi - lo;
+      if (x <= mode) {
+        if (x < mode) {
+          return 2 * (x - lo) / (range * (mode - lo));
+        } else {
+          return 2 / range;
+        }
+      } else {
+        if (x <= hi) {
+          return 2 * (hi - x) / (range * (hi - mode));
+        } else {
+          return 0;
+        }
+      }
+    }
+
+    /** Eval the cumulative density function for Triangular distribution. */
+    export function cdf(x: f64, lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+      if (x <= lo) return 0;
+
+      let range = hi - lo;
+      let f1 = range * (mode - lo);
+	    let f2 = range * (hi - mode);
+      if (x <= mode) return (x - lo) * (x - lo) / f1;
+      if (x  < hi)   return 1 - (hi - x) * (hi - x) / f2;
+      return 1;
+    }
+
+    /** Eval the quantile function for Triangular distribution. */
+    export function quantile(x: f64, lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+
+      x = clamp01(x);
+      let range = hi - lo;
+      let p  = (mode - lo) / range;
+      let f1 = range * (mode - lo);
+      let f2 = range * (hi - mode);
+      if (x < p) return lo + Math.sqrt(f1 * x);
+      if (x > p) return hi - Math.sqrt(f2 * (1.0 - x));
+      return mode;
+    }
+
+    /** Returns the mean value of Triangular distribution. */
+    export function mean(lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      return (lo + mode + hi) / 3.0;
+    }
+
+    /** Returns the median value of Triangular distribution. */
+    export function median(lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+
+      let cent = 0.5 * (hi - lo);
+      let mean = 0.5 * (hi + lo);
+      return mode >= mean
+        ? lo + Math.sqrt(cent * (mode - lo))
+        : hi - Math.sqrt(cent * (hi - mode));
+    }
+
+    /** Returns the standard deviation of Triangular distribution. */
+    export function stdev(lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      return Math.sqrt(variance(lo, hi, mode));
+    }
+
+    /** Returns the variance of Triangular distribution. */
+    export function variance(lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+
+      return (
+        hi * hi + mode * mode + lo * lo -
+        lo * hi - lo * mode - hi * mode
+      ) / 18.0;
+    }
+
+    /** Returns the skewness of Triangular distribution. */
+    export function skewness(lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+
+      let a = lo + hi - 2.0 * mode;
+      let b = 2.0 * lo - hi - mode;
+      let c = lo - 2.0 * hi + mode;
+      let d = Math.SQRT2 * a * b * c;
+      return d / 5.0 * Math.pow(
+        hi * hi + mode * mode + lo * lo -
+        lo * hi - lo * mode - hi * mode
+      , 1.5);
+    }
+
+    /** Returns the differential entropy of Triangular distribution. */
+    export function entropy(lo: f64 = 0.0, hi: f64 = 1.0, mode: f64 = 0.5): f64 {
+      if (lo > mode || mode > hi) return NaN;
+      return 0.5 + Math.log(0.5 * (hi - lo));
+    }
+  }
+
   /** Geometric distribution.
    *
    * Returned values in range [1, Infinity] for 0 <= prob <= 1
@@ -688,6 +789,107 @@ export namespace Randomf32 {
     }
 
     return lo + (hi - lo) * Mathf.sqrt(urand * midpt);
+  }
+
+  export namespace triangular {
+    /** Eval the probability density function for Triangular distribution. */
+    export function pdf(x: f32, lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+      if (x <= lo) return 0;
+
+      let range = hi - lo;
+      if (x <= mode) {
+        if (x < mode) {
+          return 2.0 * (x - lo) / (range * (mode - lo));
+        } else {
+          return 2.0 as f32 / range;
+        }
+      } else {
+        if (x <= hi) {
+          return 2.0 * (hi - x) / (range * (hi - mode));
+        } else {
+          return 0;
+        }
+      }
+    }
+
+    /** Eval the cumulative density function for Triangular distribution. */
+    export function cdf(x: f32, lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+      if (x <= lo) return 0;
+
+      let range = hi - lo;
+      let f1 = range * (mode - lo);
+	    let f2 = range * (hi - mode);
+      if (x <= mode) return (x - lo) * (x - lo) / f1;
+      if (x  < hi)   return 1.0 as f32 - (hi - x) * (hi - x) / f2;
+      return 1;
+    }
+
+    /** Eval the quantile function for Triangular distribution. */
+    export function quantile(x: f32, lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+
+      x = clamp01(x);
+      let range = hi - lo;
+      let p  = (mode - lo) / range;
+      let f1 = range * (mode - lo);
+      let f2 = range * (hi - mode);
+      if (x < p) return lo + Mathf.sqrt(f1 * x);
+      if (x > p) return hi - Mathf.sqrt(f2 * (1.0 as f32 - x));
+      return mode;
+    }
+
+    /** Returns the mean value of Triangular distribution. */
+    export function mean(lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      return (lo + mode + hi) / (3.0 as f32);
+    }
+
+    /** Returns the median value of Triangular distribution. */
+    export function median(lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+
+      let cent = 0.5 as f32 * (hi - lo);
+      let mean = 0.5 as f32 * (hi + lo);
+      return mode >= mean
+        ? lo + Mathf.sqrt(cent * (mode - lo))
+        : hi - Mathf.sqrt(cent * (hi - mode));
+    }
+
+    /** Returns the standard deviation of Triangular distribution. */
+    export function stdev(lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      return Mathf.sqrt(variance(lo, hi, mode));
+    }
+
+    /** Returns the variance of Triangular distribution. */
+    export function variance(lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+
+      return (
+        hi * hi + mode * mode + lo * lo -
+        lo * hi - lo * mode - hi * mode
+      ) / (18.0 as f32);
+    }
+
+    /** Returns the skewness of Triangular distribution. */
+    export function skewness(lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+
+      let a = lo + hi - 2.0 as f32 * mode;
+      let b = 2.0 as f32 * lo - hi - mode;
+      let c = lo - 2.0 as f32 * hi + mode;
+      let d = Mathf.SQRT2 * a * b * c;
+      return d / (5.0 as f32) * Mathf.pow(
+        hi * hi + mode * mode + lo * lo -
+        lo * hi - lo * mode - hi * mode
+      , 1.5);
+    }
+
+    /** Returns the differential entropy of Triangular distribution. */
+    export function entropy(lo: f32 = 0.0, hi: f32 = 1.0, mode: f32 = 0.5): f32 {
+      if (lo > mode || mode > hi) return NaN;
+      return 0.5 as f32 + Mathf.log(0.5 * (hi - lo));
+    }
   }
 
   /** Geometric distribution.
