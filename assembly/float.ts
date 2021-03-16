@@ -781,15 +781,15 @@ export namespace Randomf64 {
     export function stdev(sigma: f64 = 1.0): f64 {
       if (sigma < 0.0) return NaN;
       const a = 0.6734396116428514; // sqrt((3 * pi - 8) / pi)
-			return a * sigma;
+      return a * sigma;
     }
 
     /** Returns the variance of Maxwell-Boltzman distribution. */
     export function variance(sigma: f64 = 1.0): f64 {
       if (sigma < 0.0) return NaN;
       const a = 0.4535209105296745; // (3 * pi - 8) / pi
-			return a * sigma * sigma;
-		}
+      return a * sigma * sigma;
+    }
 
     /** Returns the skewness of Maxwell-Boltzman distribution. */
     export function skewness(sigma: f64 = 1.0): f64 {
