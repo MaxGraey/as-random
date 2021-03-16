@@ -430,22 +430,22 @@ export namespace Randomf64 {
 
       if (0.0 < p && p < lo) {
         let q = Math.sqrt(-2.0 * Math.log(p));
-        let a = ((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6;
-        let b = (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
-        return a / b;
+        let c = ((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6;
+        let d =  (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
+        return c / d;
 
       } else if (lo <= p && p <= hi) {
         let q = p - 0.5;
         let r = q * q;
         let a = (((((a1 * r + a2) * r + a3) * r + a4) * r + a5) * r + a6) * q;
-        let b = ((((b1 * r + b2) * r + b3) * r + b4) * r + b5) * r + 1.0;
+        let b =  ((((b1 * r + b2) * r + b3) * r + b4) * r + b5) * r + 1.0;
         return a / b;
 
       } else {  // hi < p && p < 1.0
         let q = Math.sqrt(-2.0 * Math.log1p(-p));
-        let a = ((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6;
-        let b = (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
-        return -(a / b);
+        let c = ((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6;
+        let d =  (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
+        return -(c / d);
       }
     }
 
