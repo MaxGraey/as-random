@@ -367,12 +367,31 @@ export namespace Randomf64 {
       if (sigma == 0.0) {
         return f64(x >= mean);
       }
-      // Use approximation
-      // See Equation (4.5) from https://www.uv.mx/personal/hvazquez/files/2012/02/124029.pdf
-      // Max relative error ~ 8e-5 in x ∈ [-2, 4] range
-      let p = clamp01((x - mean) / sigma);
-      let a = (-358.0 / 23.0) * p + 111.0 * Math.atan(37.0 / 294.0 * p);
-      return 1.0 / (1.0 + Math.exp(a));
+      // See Abramowitz and Stegun "Handbook of Mathemathical functions for description"
+      // Max relative error < 1e-8
+
+      const b1 =  0.319381530;
+      const b2 = -0.356563782;
+      const b3 =  1.781477937;
+      const b4 = -1.821255978;
+      const b5 =  1.330274429;
+      const p  =  0.231641900;
+      const c2 =  0.398942300;
+
+      let z = (x - mean) / sigma;
+
+      if (z >  6.0) return 1.0;
+      if (z == 0.0) return 0.5;
+      if (z < -6.0) return 0.0;
+
+      let a = Math.abs(z);
+      let t = 1.0 / (1.0 + a * p);
+      let b = c2 * Math.exp(-z * (z * 0.5));
+      let n = ((((b5 * t + b4) * t + b3) * t + b2) * t + b1) * t;
+      n = 1.0 - b * n;
+      if (z < 0.0) n = 1.0 - n;
+
+      return n;
     }
 
     /** Eval the quantile function for Normal distribution. */

@@ -2858,264 +2858,6 @@
   f32.sqrt
   f32.div
  )
- (func $~lib/math/NativeMath.atan (param $0 f64) (result f64)
-  (local $1 i32)
-  (local $2 f64)
-  (local $3 f64)
-  (local $4 i32)
-  (local $5 f64)
-  (local $6 f64)
-  (local $7 f64)
-  (local $8 f64)
-  (local $9 i32)
-  local.get $0
-  i64.reinterpret_f64
-  i64.const 32
-  i64.shr_u
-  i32.wrap_i64
-  local.set $1
-  local.get $0
-  local.set $2
-  local.get $1
-  i32.const 2147483647
-  i32.and
-  local.set $1
-  local.get $1
-  i32.const 1141899264
-  i32.ge_u
-  if
-   local.get $0
-   local.get $0
-   f64.ne
-   if
-    local.get $0
-    return
-   end
-   f64.const 1.5707963267948966
-   f32.const 7.52316384526264e-37
-   f64.promote_f32
-   f64.add
-   local.set $3
-   local.get $3
-   local.get $2
-   f64.copysign
-   return
-  end
-  local.get $1
-  i32.const 1071382528
-  i32.lt_u
-  if
-   local.get $1
-   i32.const 1044381696
-   i32.lt_u
-   if
-    local.get $0
-    return
-   end
-   i32.const -1
-   local.set $4
-  else
-   local.get $0
-   f64.abs
-   local.set $0
-   local.get $1
-   i32.const 1072889856
-   i32.lt_u
-   if
-    local.get $1
-    i32.const 1072037888
-    i32.lt_u
-    if
-     i32.const 0
-     local.set $4
-     f64.const 2
-     local.get $0
-     f64.mul
-     f64.const 1
-     f64.sub
-     f64.const 2
-     local.get $0
-     f64.add
-     f64.div
-     local.set $0
-    else
-     i32.const 1
-     local.set $4
-     local.get $0
-     f64.const 1
-     f64.sub
-     local.get $0
-     f64.const 1
-     f64.add
-     f64.div
-     local.set $0
-    end
-   else
-    local.get $1
-    i32.const 1073971200
-    i32.lt_u
-    if
-     i32.const 2
-     local.set $4
-     local.get $0
-     f64.const 1.5
-     f64.sub
-     f64.const 1
-     f64.const 1.5
-     local.get $0
-     f64.mul
-     f64.add
-     f64.div
-     local.set $0
-    else
-     i32.const 3
-     local.set $4
-     f64.const -1
-     local.get $0
-     f64.div
-     local.set $0
-    end
-   end
-  end
-  local.get $0
-  local.get $0
-  f64.mul
-  local.set $3
-  local.get $3
-  local.get $3
-  f64.mul
-  local.set $5
-  local.get $3
-  f64.const 0.3333333333333293
-  local.get $5
-  f64.const 0.14285714272503466
-  local.get $5
-  f64.const 0.09090887133436507
-  local.get $5
-  f64.const 0.06661073137387531
-  local.get $5
-  f64.const 0.049768779946159324
-  local.get $5
-  f64.const 0.016285820115365782
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  local.set $6
-  local.get $5
-  f64.const -0.19999999999876483
-  local.get $5
-  f64.const -0.11111110405462356
-  local.get $5
-  f64.const -0.0769187620504483
-  local.get $5
-  f64.const -0.058335701337905735
-  local.get $5
-  f64.const -0.036531572744216916
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  f64.add
-  f64.mul
-  local.set $7
-  local.get $0
-  local.get $6
-  local.get $7
-  f64.add
-  f64.mul
-  local.set $8
-  local.get $4
-  i32.const 0
-  i32.lt_s
-  if
-   local.get $0
-   local.get $8
-   f64.sub
-   return
-  end
-  block $break|0
-   block $case4|0
-    block $case3|0
-     block $case2|0
-      block $case1|0
-       block $case0|0
-        local.get $4
-        local.set $9
-        local.get $9
-        i32.const 0
-        i32.eq
-        br_if $case0|0
-        local.get $9
-        i32.const 1
-        i32.eq
-        br_if $case1|0
-        local.get $9
-        i32.const 2
-        i32.eq
-        br_if $case2|0
-        local.get $9
-        i32.const 3
-        i32.eq
-        br_if $case3|0
-        br $case4|0
-       end
-       f64.const 0.4636476090008061
-       local.get $8
-       f64.const 2.2698777452961687e-17
-       f64.sub
-       local.get $0
-       f64.sub
-       f64.sub
-       local.set $3
-       br $break|0
-      end
-      f64.const 0.7853981633974483
-      local.get $8
-      f64.const 3.061616997868383e-17
-      f64.sub
-      local.get $0
-      f64.sub
-      f64.sub
-      local.set $3
-      br $break|0
-     end
-     f64.const 0.982793723247329
-     local.get $8
-     f64.const 1.3903311031230998e-17
-     f64.sub
-     local.get $0
-     f64.sub
-     f64.sub
-     local.set $3
-     br $break|0
-    end
-    f64.const 1.5707963267948966
-    local.get $8
-    f64.const 6.123233995736766e-17
-    f64.sub
-    local.get $0
-    f64.sub
-    f64.sub
-    local.set $3
-    br $break|0
-   end
-   unreachable
-  end
-  local.get $3
-  local.get $2
-  f64.copysign
- )
  (func $~lib/math/NativeMath.exp (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 i64)
@@ -3401,6 +3143,9 @@
  (func $assembly/float/Randomf64.normal.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)
   (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
   local.get $2
   f64.const 0
   f64.eq
@@ -3418,32 +3163,85 @@
   f64.div
   local.set $3
   local.get $3
+  f64.const 6
+  f64.gt
+  if
+   f64.const 1
+   return
+  end
+  local.get $3
   f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $3
-  f64.const -358
-  f64.const 23
-  f64.div
+  f64.eq
+  if
+   f64.const 0.5
+   return
+  end
   local.get $3
-  f64.mul
-  f64.const 111
-  f64.const 37
-  f64.const 294
-  f64.div
+  f64.const -6
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
   local.get $3
-  f64.mul
-  call $~lib/math/NativeMath.atan
-  f64.mul
-  f64.add
+  local.set $4
+  local.get $4
+  f64.abs
   local.set $4
   f64.const 1
   f64.const 1
   local.get $4
-  call $~lib/math/NativeMath.exp
+  f64.const 0.2316419
+  f64.mul
   f64.add
   f64.div
+  local.set $5
+  f64.const 0.3989423
+  local.get $3
+  f64.neg
+  local.get $3
+  f64.const 0.5
+  f64.mul
+  f64.mul
+  call $~lib/math/NativeMath.exp
+  f64.mul
+  local.set $6
+  f64.const 1.330274429
+  local.get $5
+  f64.mul
+  f64.const -1.821255978
+  f64.add
+  local.get $5
+  f64.mul
+  f64.const 1.781477937
+  f64.add
+  local.get $5
+  f64.mul
+  f64.const -0.356563782
+  f64.add
+  local.get $5
+  f64.mul
+  f64.const 0.31938153
+  f64.add
+  local.get $5
+  f64.mul
+  local.set $7
+  f64.const 1
+  local.get $6
+  local.get $7
+  f64.mul
+  f64.sub
+  local.set $7
+  local.get $3
+  f64.const 0
+  f64.lt
+  if
+   f64.const 1
+   local.get $7
+   f64.sub
+   local.set $7
+  end
+  local.get $7
  )
  (func $assembly/float/Randomf32.normal.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   local.get $0
@@ -12948,6 +12746,264 @@
    end
   end
   local.get $9
+ )
+ (func $~lib/math/NativeMath.atan (param $0 f64) (result f64)
+  (local $1 i32)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 i32)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  (local $9 i32)
+  local.get $0
+  i64.reinterpret_f64
+  i64.const 32
+  i64.shr_u
+  i32.wrap_i64
+  local.set $1
+  local.get $0
+  local.set $2
+  local.get $1
+  i32.const 2147483647
+  i32.and
+  local.set $1
+  local.get $1
+  i32.const 1141899264
+  i32.ge_u
+  if
+   local.get $0
+   local.get $0
+   f64.ne
+   if
+    local.get $0
+    return
+   end
+   f64.const 1.5707963267948966
+   f32.const 7.52316384526264e-37
+   f64.promote_f32
+   f64.add
+   local.set $3
+   local.get $3
+   local.get $2
+   f64.copysign
+   return
+  end
+  local.get $1
+  i32.const 1071382528
+  i32.lt_u
+  if
+   local.get $1
+   i32.const 1044381696
+   i32.lt_u
+   if
+    local.get $0
+    return
+   end
+   i32.const -1
+   local.set $4
+  else
+   local.get $0
+   f64.abs
+   local.set $0
+   local.get $1
+   i32.const 1072889856
+   i32.lt_u
+   if
+    local.get $1
+    i32.const 1072037888
+    i32.lt_u
+    if
+     i32.const 0
+     local.set $4
+     f64.const 2
+     local.get $0
+     f64.mul
+     f64.const 1
+     f64.sub
+     f64.const 2
+     local.get $0
+     f64.add
+     f64.div
+     local.set $0
+    else
+     i32.const 1
+     local.set $4
+     local.get $0
+     f64.const 1
+     f64.sub
+     local.get $0
+     f64.const 1
+     f64.add
+     f64.div
+     local.set $0
+    end
+   else
+    local.get $1
+    i32.const 1073971200
+    i32.lt_u
+    if
+     i32.const 2
+     local.set $4
+     local.get $0
+     f64.const 1.5
+     f64.sub
+     f64.const 1
+     f64.const 1.5
+     local.get $0
+     f64.mul
+     f64.add
+     f64.div
+     local.set $0
+    else
+     i32.const 3
+     local.set $4
+     f64.const -1
+     local.get $0
+     f64.div
+     local.set $0
+    end
+   end
+  end
+  local.get $0
+  local.get $0
+  f64.mul
+  local.set $3
+  local.get $3
+  local.get $3
+  f64.mul
+  local.set $5
+  local.get $3
+  f64.const 0.3333333333333293
+  local.get $5
+  f64.const 0.14285714272503466
+  local.get $5
+  f64.const 0.09090887133436507
+  local.get $5
+  f64.const 0.06661073137387531
+  local.get $5
+  f64.const 0.049768779946159324
+  local.get $5
+  f64.const 0.016285820115365782
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  local.set $6
+  local.get $5
+  f64.const -0.19999999999876483
+  local.get $5
+  f64.const -0.11111110405462356
+  local.get $5
+  f64.const -0.0769187620504483
+  local.get $5
+  f64.const -0.058335701337905735
+  local.get $5
+  f64.const -0.036531572744216916
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  local.set $7
+  local.get $0
+  local.get $6
+  local.get $7
+  f64.add
+  f64.mul
+  local.set $8
+  local.get $4
+  i32.const 0
+  i32.lt_s
+  if
+   local.get $0
+   local.get $8
+   f64.sub
+   return
+  end
+  block $break|0
+   block $case4|0
+    block $case3|0
+     block $case2|0
+      block $case1|0
+       block $case0|0
+        local.get $4
+        local.set $9
+        local.get $9
+        i32.const 0
+        i32.eq
+        br_if $case0|0
+        local.get $9
+        i32.const 1
+        i32.eq
+        br_if $case1|0
+        local.get $9
+        i32.const 2
+        i32.eq
+        br_if $case2|0
+        local.get $9
+        i32.const 3
+        i32.eq
+        br_if $case3|0
+        br $case4|0
+       end
+       f64.const 0.4636476090008061
+       local.get $8
+       f64.const 2.2698777452961687e-17
+       f64.sub
+       local.get $0
+       f64.sub
+       f64.sub
+       local.set $3
+       br $break|0
+      end
+      f64.const 0.7853981633974483
+      local.get $8
+      f64.const 3.061616997868383e-17
+      f64.sub
+      local.get $0
+      f64.sub
+      f64.sub
+      local.set $3
+      br $break|0
+     end
+     f64.const 0.982793723247329
+     local.get $8
+     f64.const 1.3903311031230998e-17
+     f64.sub
+     local.get $0
+     f64.sub
+     f64.sub
+     local.set $3
+     br $break|0
+    end
+    f64.const 1.5707963267948966
+    local.get $8
+    f64.const 6.123233995736766e-17
+    f64.sub
+    local.get $0
+    f64.sub
+    f64.sub
+    local.set $3
+    br $break|0
+   end
+   unreachable
+  end
+  local.get $3
+  local.get $2
+  f64.copysign
  )
  (func $~lib/math/NativeMath.sin (param $0 f64) (result f64)
   (local $1 i64)
