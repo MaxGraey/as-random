@@ -525,13 +525,13 @@ export namespace Randomf64 {
     /** Returns the variance of Log-Normal distribution. */
     export function variance(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       let sq = sigma * sigma;
-	    return (Math.exp(sq) - 1.0) * Math.exp(2.0 * mean + sq);
+      return (Math.exp(sq) - 1.0) * Math.exp(2.0 * mean + sq);
     }
 
     /** Returns the skewness of Log-Normal distribution. */
     export function skewness(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       let esq = Math.exp(sigma * sigma);
-	    return (esq + 2.0) * Math.sqrt(esq - 1.0);
+      return (esq + 2.0) * Math.sqrt(esq - 1.0);
     }
 
     /** Returns the differential entropy of Log-Normal distribution. */
@@ -1377,13 +1377,13 @@ export namespace Randomf32 {
     /** Returns the variance of Log-Normal distribution. */
     export function variance(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       let sq = sigma * sigma;
-	    return (Mathf.exp(sq) - 1.0) * Mathf.exp(2.0 * mean + sq);
+      return (Mathf.exp(sq) - 1.0) * Mathf.exp(2.0 * mean + sq);
     }
 
     /** Returns the skewness of Log-Normal distribution. */
     export function skewness(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       let esq = Mathf.exp(sigma * sigma);
-	    return (esq + 2.0) * Mathf.sqrt(esq - 1.0);
+      return (esq + 2.0) * Mathf.sqrt(esq - 1.0);
     }
 
     /** Returns the differential entropy of Log-Normal distribution. */
