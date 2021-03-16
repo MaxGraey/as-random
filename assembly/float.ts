@@ -359,7 +359,7 @@ export namespace Randomf64 {
       }
       let xc = x - mean;
       let sq = sigma * sigma;
-      return Math.exp(-0.5 / sq * (xc * xc)) / Math.sqrt(2.0 * Math.PI * sq);
+      return Math.exp(-0.5 * xc * xc / sq) / Math.sqrt(2.0 * Math.PI * sq);
     }
 
     /** Eval the cumulative density function for Normal distribution. */
@@ -483,6 +483,61 @@ export namespace Randomf64 {
   /** Log-Normal distribution. */
   export function logNormal(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
     return Math.exp(Randomf64.normal(mean, sigma));
+  }
+
+  export namespace logNormal {
+    /** Eval the probability mass function for Log-Normal distribution. */
+    export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (x <= 0.0) return 0.0;
+
+      let sq = sigma * sigma;
+      let xc = Math.log(x) - mean;
+      return x / Math.sqrt(2.0 * Math.PI * sq) * Math.exp(-0.5 * xc * xc / sq);
+    }
+
+    /** Eval the cumulative density function for Log-Normal distribution. */
+    export function cdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (x <= 0.0) return 0.0;
+      return normal.cdf(Math.log(x), mean, sigma);
+    }
+
+    /** Eval the quantile function for Log-Normal distribution. */
+    export function quantile(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (x < 0.0 || x > 1.0) return NaN;
+      return Math.exp(mean + (sigma * normal.quantile(x)));
+    }
+
+    /** Returns the mean value of Log-Normal distribution. */
+    export function mean(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return Math.exp(mean + 0.5 * sigma * sigma);
+    }
+
+    /** Returns the median value of Log-Normal distribution. */
+    export function median(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return Math.exp(mean);
+    }
+
+    /** Returns the standard deviation of Log-Normal distribution. */
+    export function stdev(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return Math.sqrt(variance(mean, sigma));
+    }
+
+    /** Returns the variance of Log-Normal distribution. */
+    export function variance(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      let sq = sigma * sigma;
+	    return (Math.exp(sq) - 1.0) * Math.exp(2.0 * mean + sq);
+    }
+
+    /** Returns the skewness of Log-Normal distribution. */
+    export function skewness(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      let esq = Math.exp(sigma * sigma);
+	    return (esq + 2.0) * Math.sqrt(esq - 1.0);
+    }
+
+    /** Returns the differential entropy of Log-Normal distribution. */
+    export function entropy(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return Math.log(sigma * Math.exp(mean + 0.5) * Math.sqrt(2 * Math.PI));
+    }
   }
 
   /** Exponential distribution.
@@ -1169,7 +1224,7 @@ export namespace Randomf32 {
       }
       let xc = x - mean;
       let sq = sigma * sigma;
-      return Mathf.exp(-0.5 / sq * (xc * xc)) / Mathf.sqrt(2.0 * Mathf.PI * sq);
+      return Mathf.exp(-0.5 * xc * xc / sq) / Mathf.sqrt(2.0 * Mathf.PI * sq);
     }
 
     /** Eval the cumulative density function for Normal distribution. */
@@ -1217,6 +1272,61 @@ export namespace Randomf32 {
   /** Log-Normal distribution. */
   export function logNormal(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
     return Mathf.exp(Randomf32.normal(mean, sigma));
+  }
+
+  export namespace logNormal {
+    /** Eval the probability mass function for Log-Normal distribution. */
+    export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (x <= 0.0) return 0.0;
+
+      let sq = sigma * sigma;
+      let xc = Mathf.log(x) - mean;
+      return x / Mathf.sqrt(2.0 * Mathf.PI * sq) * Mathf.exp(-0.5 * xc * xc / sq);
+    }
+
+    /** Eval the cumulative density function for Log-Normal distribution. */
+    export function cdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (x <= 0.0) return 0.0;
+      return normal.cdf(Mathf.log(x), mean, sigma);
+    }
+
+    /** Eval the quantile function for Log-Normal distribution. */
+    export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (x < 0.0 || x > 1.0) return NaN;
+      return Mathf.exp(mean + (sigma * normal.quantile(x)));
+    }
+
+    /** Returns the mean value of Log-Normal distribution. */
+    export function mean(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Mathf.exp(mean + 0.5 * sigma * sigma);
+    }
+
+    /** Returns the median value of Log-Normal distribution. */
+    export function median(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Mathf.exp(mean);
+    }
+
+    /** Returns the standard deviation of Log-Normal distribution. */
+    export function stdev(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Mathf.sqrt(variance(mean, sigma));
+    }
+
+    /** Returns the variance of Log-Normal distribution. */
+    export function variance(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      let sq = sigma * sigma;
+	    return (Mathf.exp(sq) - 1.0) * Mathf.exp(2.0 * mean + sq);
+    }
+
+    /** Returns the skewness of Log-Normal distribution. */
+    export function skewness(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      let esq = Mathf.exp(sigma * sigma);
+	    return (esq + 2.0) * Mathf.sqrt(esq - 1.0);
+    }
+
+    /** Returns the differential entropy of Log-Normal distribution. */
+    export function entropy(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Mathf.log(sigma * Mathf.exp(mean + 0.5) * Mathf.sqrt(2 * Mathf.PI));
+    }
   }
 
   /** Exponential distribution.
