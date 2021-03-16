@@ -3225,23 +3225,19 @@
   f64.add
   local.get $5
   f64.mul
-  local.set $7
-  f64.const 1
   local.get $6
-  local.get $7
   f64.mul
-  f64.sub
   local.set $7
   local.get $3
   f64.const 0
   f64.lt
-  if
+  if (result f64)
+   local.get $7
+  else
    f64.const 1
    local.get $7
    f64.sub
-   local.set $7
   end
-  local.get $7
  )
  (func $assembly/float/Randomf32.normal.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   local.get $0

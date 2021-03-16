@@ -1781,17 +1781,6 @@
    return
   end
   f64.const 1
-  f64.const 1
-  local.get $0
-  f64.neg
-  local.get $0
-  f64.const 0.5
-  f64.mul
-  f64.mul
-  call $~lib/math/NativeMath.exp
-  f64.const 0.3989423
-  f64.mul
-  f64.const 1
   local.get $0
   f64.abs
   f64.const 0.2316419
@@ -1818,11 +1807,20 @@
   f64.add
   local.get $1
   f64.mul
+  local.get $0
+  f64.neg
+  local.get $0
+  f64.const 0.5
   f64.mul
-  f64.sub
+  f64.mul
+  call $~lib/math/NativeMath.exp
+  f64.const 0.3989423
+  f64.mul
+  f64.mul
   local.tee $1
-  f64.sub
+  f64.const 1
   local.get $1
+  f64.sub
   local.get $0
   f64.const 0
   f64.lt
