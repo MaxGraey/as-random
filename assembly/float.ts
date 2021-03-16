@@ -558,7 +558,7 @@ export namespace Randomf64 {
       if (lambda < 0.0) return NaN;
       if (x < 0.0) return 0.0;
 
-	    return lambda * Math.exp(-lambda * x);
+      return lambda * Math.exp(-lambda * x);
     }
 
     /** Eval the cumulative density function for Exponential distribution. */
@@ -605,7 +605,7 @@ export namespace Randomf64 {
     /** Returns the skewness of Exponential distribution. */
     export function skewness(lambda: f64 = 1.0): f64 {
       if (lambda < 0.0) return NaN;
-	    return 2.0;
+      return 2.0;
     }
 
     /** Returns the differential entropy of Exponential distribution. */
@@ -1410,7 +1410,7 @@ export namespace Randomf32 {
       if (lambda < 0.0) return NaN;
       if (x < 0.0) return 0.0;
 
-	    return lambda * Mathf.exp(-lambda * x);
+      return lambda * Mathf.exp(-lambda * x);
     }
 
     /** Eval the cumulative density function for Exponential distribution. */
@@ -1457,7 +1457,7 @@ export namespace Randomf32 {
     /** Returns the skewness of Exponential distribution. */
     export function skewness(lambda: f32 = 1.0): f32 {
       if (lambda < 0.0) return NaN;
-	    return 2.0;
+      return 2.0;
     }
 
     /** Returns the differential entropy of Exponential distribution. */
