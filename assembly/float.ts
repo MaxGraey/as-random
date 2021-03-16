@@ -427,7 +427,8 @@ export namespace Randomf64 {
       const lo = 0.02425;
       const hi = 1.0 - lo;
 
-      let p = clamp01((x - mean) / sigma);
+      let p = (x - mean) / sigma;
+      if (p < 0 || p >= 1.0 - f64.EPSILON) return NaN;
 
       if (0.0 < p && p < lo) {
         let q = Math.sqrt(-2.0 * Math.log(p));

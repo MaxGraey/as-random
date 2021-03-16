@@ -52,6 +52,7 @@
  (global $assembly/float/CACHED_NORM32 (mut f32) (f32.const inf))
  (global $~lib/math/NativeMath.PI f64 (f64.const 3.141592653589793))
  (global $~lib/math/NativeMathf.PI f32 (f32.const 3.1415927410125732))
+ (global $~lib/builtins/f64.EPSILON f64 (f64.const 2.220446049250313e-16))
  (global $~lib/math/NativeMath.E f64 (f64.const 2.718281828459045))
  (global $~lib/math/NativeMathf.E f32 (f32.const 2.7182817459106445))
  (global $~lib/math/rempio2f_y (mut f64) (f64.const 0))
@@ -3844,10 +3845,20 @@
   local.set $3
   local.get $3
   f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
-  local.set $3
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   f64.const 1
+   global.get $~lib/builtins/f64.EPSILON
+   f64.sub
+   f64.ge
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   f64.const 0
   local.get $3
   f64.lt

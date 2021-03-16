@@ -2271,16 +2271,24 @@
    local.get $1
    return
   end
+  i32.const 1
   local.get $0
   local.get $1
   f64.sub
   local.get $2
   f64.div
-  f64.const 0
-  f64.max
-  f64.const 1
-  f64.min
   local.tee $0
+  f64.const 0.9999999999999998
+  f64.ge
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
   f64.const 0.02425
   f64.lt
   i32.const 0
