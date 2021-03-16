@@ -615,10 +615,68 @@ export namespace Randomf64 {
     }
   }
 
-  /** Pareto distribution. */
-  export function pareto(alpha: f64 = 1.0): f64 {
+  /** Pareto (Type I) distribution. */
+  export function pareto(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
     if (alpha <= 0.0) return 0.0;
-    return Math.pow(1.0 - Math.random(), 1.0 / -alpha);
+	  return xmin / Math.pow(Math.random(), 1.0 / alpha);
+  }
+
+  export namespace pareto {
+    /** Eval the probability mass function for Pareto (Type I) distribution. */
+    export function pdf(x: f64, alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      if (x < xmin) return 0.0;
+      return alpha * Math.pow(xmin, alpha) / Math.pow(x, alpha + 1.0);
+    }
+
+    /** Eval the cumulative density function for Pareto (Type I) distribution. */
+    export function cdf(x: f64, alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      if (x < xmin) return 0.0;
+      return -Math.expm1(alpha * Math.log(xmin / x));
+    }
+
+    /** Eval the quantile function for Pareto (Type I) distribution. */
+    export function quantile(x: f64, alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      if (x < 0.0 || x > 1.0) return NaN;
+      return xmin / Math.pow(1.0 - x, 1.0 / alpha);
+    }
+
+    /** Returns the mean value of Pareto (Type I) distribution. */
+    export function mean(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      if (alpha <= 1.0) return Infinity;
+      return alpha * xmin / (alpha - 1.0);
+    }
+
+    /** Returns the median value of Pareto (Type I) distribution. */
+    export function median(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      return xmin * Math.exp(0.6931471805599453 / alpha);
+    }
+
+    /** Returns the standard deviation of Pareto (Type I) distribution. */
+    export function stdev(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      return Math.sqrt(variance(alpha, xmin));
+    }
+
+    /** Returns the variance of Pareto (Type I) distribution. */
+    export function variance(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      if (alpha <= 2.0) return Infinity
+      let a = alpha - 1.0;
+      return xmin * xmin * alpha / (a * a * (alpha - 2.0));
+    }
+
+    /** Returns the skewness of Pareto (Type I) distribution. */
+    export function skewness(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      let a0 = alpha - 0.0;
+      let a1 = alpha - 1.0;
+      let a2 = alpha - 2.0;
+      let a3 = alpha - 3.0;
+
+      return Math.sqrt(a2 / a0) * (a1 / a3) * 2.0;
+    }
+
+    /** Returns the differential entropy of Pareto (Type I) distribution. */
+    export function entropy(alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
+      return Math.log(xmin) - Math.log(alpha) + (1.0 + 1.0 / alpha);
+    }
   }
 
   /** Logistic distribution. */
@@ -1467,10 +1525,68 @@ export namespace Randomf32 {
     }
   }
 
-  /** Pareto distribution. */
-  export function pareto(alpha: f32 = 1.0): f32 {
+  /** Pareto (Type I) distribution. */
+  export function pareto(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
     if (alpha <= 0.0) return 0.0;
-    return Mathf.pow(1.0 - Mathf.random(), 1.0 / -alpha);
+    return xmin / Mathf.pow(Mathf.random(), 1.0 / alpha);
+  }
+
+  export namespace pareto {
+    /** Eval the probability mass function for Pareto (Type I) distribution. */
+    export function pdf(x: f32, alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      if (x < xmin) return 0.0;
+      return alpha * Mathf.pow(xmin, alpha) / Mathf.pow(x, alpha + 1.0);
+    }
+
+    /** Eval the cumulative density function for Pareto (Type I) distribution. */
+    export function cdf(x: f32, alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      if (x < xmin) return 0.0;
+      return -Mathf.expm1(alpha * Mathf.log(xmin / x));
+    }
+
+    /** Eval the quantile function for Pareto (Type I) distribution. */
+    export function quantile(x: f32, alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      if (x < 0.0 || x > 1.0) return NaN;
+      return xmin / Mathf.pow(1.0 - x, 1.0 / alpha);
+    }
+
+    /** Returns the mean value of Pareto (Type I) distribution. */
+    export function mean(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      if (alpha <= 1.0) return Infinity;
+      return alpha * xmin / (alpha - 1.0);
+    }
+
+    /** Returns the median value of Pareto (Type I) distribution. */
+    export function median(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      return xmin * Mathf.exp(0.6931471805599453 / alpha);
+    }
+
+    /** Returns the standard deviation of Pareto (Type I) distribution. */
+    export function stdev(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      return Mathf.sqrt(variance(alpha, xmin));
+    }
+
+    /** Returns the variance of Pareto (Type I) distribution. */
+    export function variance(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      if (alpha <= 2.0) return Infinity
+      let a = alpha - 1.0;
+      return xmin * xmin * alpha / (a * a * (alpha - 2.0));
+    }
+
+    /** Returns the skewness of Pareto (Type I) distribution. */
+    export function skewness(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      let a0 = alpha - 0.0;
+      let a1 = alpha - 1.0;
+      let a2 = alpha - 2.0;
+      let a3 = alpha - 3.0;
+
+      return Mathf.sqrt(a2 / a0) * (a1 / a3) * 2.0;
+    }
+
+    /** Returns the differential entropy of Pareto (Type I) distribution. */
+    export function entropy(alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
+      return Mathf.log(xmin) - Mathf.log(alpha) + (1.0 + 1.0 / alpha);
+    }
   }
 
   /** Logistic distribution. */

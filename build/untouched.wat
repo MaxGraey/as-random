@@ -148,6 +148,15 @@
  (export "Randomf32.exponential.skewness" (func $assembly/float/Randomf32.exponential.skewness@varargs))
  (export "Randomf32.exponential.entropy" (func $assembly/float/Randomf32.exponential.entropy@varargs))
  (export "Randomf32.pareto" (func $assembly/float/Randomf32.pareto@varargs))
+ (export "Randomf32.pareto.pdf" (func $assembly/float/Randomf32.pareto.pdf@varargs))
+ (export "Randomf32.pareto.cdf" (func $assembly/float/Randomf32.pareto.cdf@varargs))
+ (export "Randomf32.pareto.quantile" (func $assembly/float/Randomf32.pareto.quantile@varargs))
+ (export "Randomf32.pareto.mean" (func $assembly/float/Randomf32.pareto.mean@varargs))
+ (export "Randomf32.pareto.median" (func $assembly/float/Randomf32.pareto.median@varargs))
+ (export "Randomf32.pareto.stdev" (func $assembly/float/Randomf32.pareto.stdev@varargs))
+ (export "Randomf32.pareto.variance" (func $assembly/float/Randomf32.pareto.variance@varargs))
+ (export "Randomf32.pareto.skewness" (func $assembly/float/Randomf32.pareto.skewness@varargs))
+ (export "Randomf32.pareto.entropy" (func $assembly/float/Randomf32.pareto.entropy@varargs))
  (export "Randomf32.logistic" (func $assembly/float/Randomf32.logistic@varargs))
  (export "Randomf32.cauchy" (func $assembly/float/Randomf32.cauchy@varargs))
  (export "Randomf32.gumbel" (func $assembly/float/Randomf32.gumbel@varargs))
@@ -239,6 +248,15 @@
  (export "Randomf64.exponential.skewness" (func $assembly/float/Randomf64.exponential.skewness@varargs))
  (export "Randomf64.exponential.entropy" (func $assembly/float/Randomf64.exponential.entropy@varargs))
  (export "Randomf64.pareto" (func $assembly/float/Randomf64.pareto@varargs))
+ (export "Randomf64.pareto.pdf" (func $assembly/float/Randomf64.pareto.pdf@varargs))
+ (export "Randomf64.pareto.cdf" (func $assembly/float/Randomf64.pareto.cdf@varargs))
+ (export "Randomf64.pareto.quantile" (func $assembly/float/Randomf64.pareto.quantile@varargs))
+ (export "Randomf64.pareto.mean" (func $assembly/float/Randomf64.pareto.mean@varargs))
+ (export "Randomf64.pareto.median" (func $assembly/float/Randomf64.pareto.median@varargs))
+ (export "Randomf64.pareto.stdev" (func $assembly/float/Randomf64.pareto.stdev@varargs))
+ (export "Randomf64.pareto.variance" (func $assembly/float/Randomf64.pareto.variance@varargs))
+ (export "Randomf64.pareto.skewness" (func $assembly/float/Randomf64.pareto.skewness@varargs))
+ (export "Randomf64.pareto.entropy" (func $assembly/float/Randomf64.pareto.entropy@varargs))
  (export "Randomf64.logistic" (func $assembly/float/Randomf64.logistic@varargs))
  (export "Randomf64.cauchy" (func $assembly/float/Randomf64.cauchy@varargs))
  (export "Randomf64.gumbel" (func $assembly/float/Randomf64.gumbel@varargs))
@@ -4457,7 +4475,7 @@
   call $~lib/math/NativeMathf.log
   f32.sub
  )
- (func $assembly/float/Randomf32.pareto (param $0 f32) (result f32)
+ (func $assembly/float/Randomf32.pareto (param $0 f32) (param $1 f32) (result f32)
   local.get $0
   f32.const 0
   f32.le
@@ -4465,14 +4483,476 @@
    f32.const 0
    return
   end
-  f32.const 1
+  local.get $1
   call $~lib/math/NativeMathf.random
-  f32.sub
   f32.const 1
   local.get $0
-  f32.neg
   f32.div
   call $~lib/math/NativeMathf.pow
+  f32.div
+ )
+ (func $assembly/float/Randomf32.pareto.pdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $0
+  local.get $2
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $1
+  local.get $2
+  local.get $1
+  call $~lib/math/NativeMathf.pow
+  f32.mul
+  local.get $0
+  local.get $1
+  f32.const 1
+  f32.add
+  call $~lib/math/NativeMathf.pow
+  f32.div
+ )
+ (func $~lib/math/NativeMathf.expm1 (param $0 f32) (result f32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 f32)
+  (local $5 f32)
+  (local $6 i32)
+  (local $7 f32)
+  (local $8 f32)
+  (local $9 f32)
+  (local $10 f32)
+  (local $11 f32)
+  (local $12 f32)
+  (local $13 f32)
+  (local $14 f32)
+  local.get $0
+  i32.reinterpret_f32
+  local.set $1
+  local.get $1
+  i32.const 2147483647
+  i32.and
+  local.set $2
+  local.get $1
+  i32.const 31
+  i32.shr_u
+  local.set $3
+  local.get $2
+  i32.const 1100331076
+  i32.ge_u
+  if
+   local.get $2
+   i32.const 2139095040
+   i32.gt_u
+   if
+    local.get $0
+    return
+   end
+   local.get $3
+   if
+    f32.const -1
+    return
+   end
+   local.get $0
+   f32.const 88.7216796875
+   f32.gt
+   if
+    local.get $0
+    f32.const 1701411834604692317316873e14
+    f32.mul
+    local.set $0
+    local.get $0
+    return
+   end
+  end
+  f32.const 0
+  local.set $4
+  local.get $2
+  i32.const 1051816472
+  i32.gt_u
+  if
+   i32.const 1
+   local.get $3
+   i32.const 1
+   i32.shl
+   i32.sub
+   f32.const 1.4426950216293335
+   local.get $0
+   f32.mul
+   f32.const 0.5
+   local.get $0
+   f32.copysign
+   f32.add
+   i32.trunc_f32_s
+   local.get $2
+   i32.const 1065686418
+   i32.lt_u
+   select
+   local.set $6
+   local.get $6
+   f32.convert_i32_s
+   local.set $5
+   local.get $0
+   local.get $5
+   f32.const 0.6931381225585938
+   f32.mul
+   f32.sub
+   local.set $7
+   local.get $5
+   f32.const 9.05800061445916e-06
+   f32.mul
+   local.set $8
+   local.get $7
+   local.get $8
+   f32.sub
+   local.set $0
+   local.get $7
+   local.get $0
+   f32.sub
+   local.get $8
+   f32.sub
+   local.set $4
+  else
+   local.get $2
+   i32.const 855638016
+   i32.lt_u
+   if
+    local.get $0
+    return
+   else
+    i32.const 0
+    local.set $6
+   end
+  end
+  f32.const 0.5
+  local.get $0
+  f32.mul
+  local.set $9
+  local.get $0
+  local.get $9
+  f32.mul
+  local.set $10
+  f32.const 1
+  local.get $10
+  f32.const -0.03333321213722229
+  local.get $10
+  f32.const 1.5807170420885086e-03
+  f32.mul
+  f32.add
+  f32.mul
+  f32.add
+  local.set $11
+  f32.const 3
+  local.get $11
+  local.get $9
+  f32.mul
+  f32.sub
+  local.set $5
+  local.get $10
+  local.get $11
+  local.get $5
+  f32.sub
+  f32.const 6
+  local.get $0
+  local.get $5
+  f32.mul
+  f32.sub
+  f32.div
+  f32.mul
+  local.set $12
+  local.get $6
+  i32.const 0
+  i32.eq
+  if
+   local.get $0
+   local.get $0
+   local.get $12
+   f32.mul
+   local.get $10
+   f32.sub
+   f32.sub
+   return
+  end
+  local.get $0
+  local.get $12
+  local.get $4
+  f32.sub
+  f32.mul
+  local.get $4
+  f32.sub
+  local.set $12
+  local.get $12
+  local.get $10
+  f32.sub
+  local.set $12
+  local.get $6
+  i32.const -1
+  i32.eq
+  if
+   f32.const 0.5
+   local.get $0
+   local.get $12
+   f32.sub
+   f32.mul
+   f32.const 0.5
+   f32.sub
+   return
+  end
+  local.get $6
+  i32.const 1
+  i32.eq
+  if
+   local.get $0
+   f32.const -0.25
+   f32.lt
+   if
+    f32.const -2
+    local.get $12
+    local.get $0
+    f32.const 0.5
+    f32.add
+    f32.sub
+    f32.mul
+    return
+   end
+   f32.const 1
+   f32.const 2
+   local.get $0
+   local.get $12
+   f32.sub
+   f32.mul
+   f32.add
+   return
+  end
+  i32.const 127
+  local.get $6
+  i32.add
+  i32.const 23
+  i32.shl
+  local.set $1
+  local.get $1
+  f32.reinterpret_i32
+  local.set $13
+  local.get $6
+  i32.const 0
+  i32.lt_s
+  if (result i32)
+   i32.const 1
+  else
+   local.get $6
+   i32.const 56
+   i32.gt_s
+  end
+  if
+   local.get $0
+   local.get $12
+   f32.sub
+   f32.const 1
+   f32.add
+   local.set $14
+   local.get $6
+   i32.const 128
+   i32.eq
+   if
+    local.get $14
+    f32.const 2
+    f32.mul
+    f32.const 1701411834604692317316873e14
+    f32.mul
+    local.set $14
+   else
+    local.get $14
+    local.get $13
+    f32.mul
+    local.set $14
+   end
+   local.get $14
+   f32.const 1
+   f32.sub
+   return
+  end
+  i32.const 127
+  local.get $6
+  i32.sub
+  i32.const 23
+  i32.shl
+  local.set $1
+  local.get $1
+  f32.reinterpret_i32
+  local.set $14
+  local.get $6
+  i32.const 20
+  i32.lt_s
+  if
+   f32.const 1
+   local.get $14
+   f32.sub
+   local.get $12
+   f32.sub
+   local.set $14
+  else
+   f32.const 1
+   local.get $12
+   local.get $14
+   f32.add
+   f32.sub
+   local.set $14
+  end
+  local.get $0
+  local.get $14
+  f32.add
+  local.get $13
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.pareto.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $0
+  local.get $2
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $1
+  local.get $2
+  local.get $0
+  f32.div
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  call $~lib/math/NativeMathf.expm1
+  f32.neg
+ )
+ (func $assembly/float/Randomf32.pareto.quantile (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f32.const 1
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $2
+  f32.const 1
+  local.get $0
+  f32.sub
+  f32.const 1
+  local.get $1
+  f32.div
+  call $~lib/math/NativeMathf.pow
+  f32.div
+ )
+ (func $assembly/float/Randomf32.pareto.mean (param $0 f32) (param $1 f32) (result f32)
+  local.get $0
+  f32.const 1
+  f32.le
+  if
+   f32.const inf
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.mul
+  local.get $0
+  f32.const 1
+  f32.sub
+  f32.div
+ )
+ (func $assembly/float/Randomf32.pareto.median (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0.6931471824645996
+  local.get $0
+  f32.div
+  call $~lib/math/NativeMathf.exp
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.pareto.variance (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  f32.const 2
+  f32.le
+  if
+   f32.const inf
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.sub
+  local.set $2
+  local.get $1
+  local.get $1
+  f32.mul
+  local.get $0
+  f32.mul
+  local.get $2
+  local.get $2
+  f32.mul
+  local.get $0
+  f32.const 2
+  f32.sub
+  f32.mul
+  f32.div
+ )
+ (func $assembly/float/Randomf32.pareto.stdev (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.variance
+  local.set $2
+  local.get $2
+  f32.sqrt
+ )
+ (func $assembly/float/Randomf32.pareto.skewness (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  (local $3 f32)
+  (local $4 f32)
+  (local $5 f32)
+  (local $6 f32)
+  local.get $0
+  f32.const 0
+  f32.sub
+  local.set $2
+  local.get $0
+  f32.const 1
+  f32.sub
+  local.set $3
+  local.get $0
+  f32.const 2
+  f32.sub
+  local.set $4
+  local.get $0
+  f32.const 3
+  f32.sub
+  local.set $5
+  local.get $4
+  local.get $2
+  f32.div
+  local.set $6
+  local.get $6
+  f32.sqrt
+  local.get $3
+  local.get $5
+  f32.div
+  f32.mul
+  f32.const 2
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.pareto.entropy (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  call $~lib/math/NativeMathf.log
+  local.get $0
+  call $~lib/math/NativeMathf.log
+  f32.sub
+  f32.const 1
+  f32.const 1
+  local.get $0
+  f32.div
+  f32.add
+  f32.add
  )
  (func $assembly/float/Randomf32.logistic (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
@@ -12096,7 +12576,7 @@
   call $~lib/math/NativeMath.log
   f64.sub
  )
- (func $assembly/float/Randomf64.pareto (param $0 f64) (result f64)
+ (func $assembly/float/Randomf64.pareto (param $0 f64) (param $1 f64) (result f64)
   local.get $0
   f64.const 0
   f64.le
@@ -12104,14 +12584,496 @@
    f64.const 0
    return
   end
-  f64.const 1
+  local.get $1
   call $~lib/math/NativeMath.random
-  f64.sub
   f64.const 1
   local.get $0
-  f64.neg
   f64.div
   call $~lib/math/NativeMath.pow
+  f64.div
+ )
+ (func $assembly/float/Randomf64.pareto.pdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $0
+  local.get $2
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $1
+  local.get $2
+  local.get $1
+  call $~lib/math/NativeMath.pow
+  f64.mul
+  local.get $0
+  local.get $1
+  f64.const 1
+  f64.add
+  call $~lib/math/NativeMath.pow
+  f64.div
+ )
+ (func $~lib/math/NativeMath.expm1 (param $0 f64) (result f64)
+  (local $1 i64)
+  (local $2 i32)
+  (local $3 i32)
+  (local $4 i32)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  (local $9 f64)
+  (local $10 f64)
+  (local $11 f64)
+  (local $12 f64)
+  (local $13 f64)
+  (local $14 f64)
+  (local $15 f64)
+  local.get $0
+  i64.reinterpret_f64
+  local.set $1
+  local.get $1
+  i64.const 32
+  i64.shr_u
+  i64.const 2147483647
+  i64.and
+  i32.wrap_i64
+  local.set $2
+  i32.const 0
+  local.set $3
+  local.get $1
+  i64.const 63
+  i64.shr_u
+  i32.wrap_i64
+  local.set $4
+  local.get $2
+  i32.const 1078159482
+  i32.ge_u
+  if
+   local.get $0
+   local.get $0
+   f64.ne
+   if
+    local.get $0
+    return
+   end
+   local.get $4
+   if
+    f64.const -1
+    return
+   end
+   local.get $0
+   f64.const 709.782712893384
+   f64.gt
+   if
+    local.get $0
+    f64.const 8988465674311579538646525e283
+    f64.mul
+    return
+   end
+  end
+  f64.const 0
+  local.set $5
+  local.get $2
+  i32.const 1071001154
+  i32.gt_u
+  if
+   i32.const 1
+   local.get $4
+   i32.const 1
+   i32.shl
+   i32.sub
+   f64.const 1.4426950408889634
+   local.get $0
+   f64.mul
+   f64.const 0.5
+   local.get $0
+   f64.copysign
+   f64.add
+   i32.trunc_f64_s
+   local.get $2
+   i32.const 1072734898
+   i32.lt_u
+   select
+   local.set $3
+   local.get $3
+   f64.convert_i32_s
+   local.set $6
+   local.get $0
+   local.get $6
+   f64.const 0.6931471803691238
+   f64.mul
+   f64.sub
+   local.set $7
+   local.get $6
+   f64.const 1.9082149292705877e-10
+   f64.mul
+   local.set $8
+   local.get $7
+   local.get $8
+   f64.sub
+   local.set $0
+   local.get $7
+   local.get $0
+   f64.sub
+   local.get $8
+   f64.sub
+   local.set $5
+  else
+   local.get $2
+   i32.const 1016070144
+   i32.lt_u
+   if
+    local.get $0
+    return
+   end
+  end
+  f64.const 0.5
+  local.get $0
+  f64.mul
+  local.set $9
+  local.get $0
+  local.get $9
+  f64.mul
+  local.set $10
+  local.get $10
+  local.get $10
+  f64.mul
+  local.set $11
+  f64.const 1
+  local.get $10
+  f64.const -0.03333333333333313
+  f64.mul
+  f64.add
+  local.get $11
+  f64.const 1.5873015872548146e-03
+  local.get $10
+  f64.const -7.93650757867488e-05
+  f64.mul
+  f64.add
+  local.get $11
+  f64.const 4.008217827329362e-06
+  local.get $10
+  f64.const -2.0109921818362437e-07
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  local.set $12
+  f64.const 3
+  local.get $12
+  local.get $9
+  f64.mul
+  f64.sub
+  local.set $6
+  local.get $10
+  local.get $12
+  local.get $6
+  f64.sub
+  f64.const 6
+  local.get $0
+  local.get $6
+  f64.mul
+  f64.sub
+  f64.div
+  f64.mul
+  local.set $13
+  local.get $3
+  i32.const 0
+  i32.eq
+  if
+   local.get $0
+   local.get $0
+   local.get $13
+   f64.mul
+   local.get $10
+   f64.sub
+   f64.sub
+   return
+  end
+  local.get $0
+  local.get $13
+  local.get $5
+  f64.sub
+  f64.mul
+  local.get $5
+  f64.sub
+  local.set $13
+  local.get $13
+  local.get $10
+  f64.sub
+  local.set $13
+  local.get $3
+  i32.const -1
+  i32.eq
+  if
+   f64.const 0.5
+   local.get $0
+   local.get $13
+   f64.sub
+   f64.mul
+   f64.const 0.5
+   f64.sub
+   return
+  end
+  local.get $3
+  i32.const 1
+  i32.eq
+  if
+   local.get $0
+   f64.const -0.25
+   f64.lt
+   if
+    f64.const -2
+    local.get $13
+    local.get $0
+    f64.const 0.5
+    f64.add
+    f64.sub
+    f64.mul
+    return
+   end
+   f64.const 1
+   f64.const 2
+   local.get $0
+   local.get $13
+   f64.sub
+   f64.mul
+   f64.add
+   return
+  end
+  i64.const 1023
+  local.get $3
+  i64.extend_i32_s
+  i64.add
+  i64.const 52
+  i64.shl
+  local.set $1
+  local.get $1
+  f64.reinterpret_i64
+  local.set $14
+  local.get $3
+  i32.const 0
+  i32.lt_s
+  if (result i32)
+   i32.const 1
+  else
+   local.get $3
+   i32.const 56
+   i32.gt_s
+  end
+  if
+   local.get $0
+   local.get $13
+   f64.sub
+   f64.const 1
+   f64.add
+   local.set $15
+   local.get $3
+   i32.const 1024
+   i32.eq
+   if
+    local.get $15
+    f64.const 2
+    f64.mul
+    f64.const 8988465674311579538646525e283
+    f64.mul
+    local.set $15
+   else
+    local.get $15
+    local.get $14
+    f64.mul
+    local.set $15
+   end
+   local.get $15
+   f64.const 1
+   f64.sub
+   return
+  end
+  i64.const 1023
+  local.get $3
+  i64.extend_i32_s
+  i64.sub
+  i64.const 52
+  i64.shl
+  local.set $1
+  local.get $1
+  f64.reinterpret_i64
+  local.set $15
+  local.get $3
+  i32.const 20
+  i32.lt_s
+  if
+   f64.const 1
+   local.get $15
+   f64.sub
+   local.get $13
+   f64.sub
+   local.set $15
+  else
+   f64.const 1
+   local.get $13
+   local.get $15
+   f64.add
+   f64.sub
+   local.set $15
+  end
+  local.get $0
+  local.get $15
+  f64.add
+  local.get $14
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.pareto.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $0
+  local.get $2
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $1
+  local.get $2
+  local.get $0
+  f64.div
+  call $~lib/math/NativeMath.log
+  f64.mul
+  call $~lib/math/NativeMath.expm1
+  f64.neg
+ )
+ (func $assembly/float/Randomf64.pareto.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.const 1
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $2
+  f64.const 1
+  local.get $0
+  f64.sub
+  f64.const 1
+  local.get $1
+  f64.div
+  call $~lib/math/NativeMath.pow
+  f64.div
+ )
+ (func $assembly/float/Randomf64.pareto.mean (param $0 f64) (param $1 f64) (result f64)
+  local.get $0
+  f64.const 1
+  f64.le
+  if
+   f64.const inf
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.mul
+  local.get $0
+  f64.const 1
+  f64.sub
+  f64.div
+ )
+ (func $assembly/float/Randomf64.pareto.median (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0.6931471805599453
+  local.get $0
+  f64.div
+  call $~lib/math/NativeMath.exp
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.pareto.variance (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  f64.const 2
+  f64.le
+  if
+   f64.const inf
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.sub
+  local.set $2
+  local.get $1
+  local.get $1
+  f64.mul
+  local.get $0
+  f64.mul
+  local.get $2
+  local.get $2
+  f64.mul
+  local.get $0
+  f64.const 2
+  f64.sub
+  f64.mul
+  f64.div
+ )
+ (func $assembly/float/Randomf64.pareto.stdev (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.variance
+  local.set $2
+  local.get $2
+  f64.sqrt
+ )
+ (func $assembly/float/Randomf64.pareto.skewness (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  local.get $0
+  f64.const 0
+  f64.sub
+  local.set $2
+  local.get $0
+  f64.const 1
+  f64.sub
+  local.set $3
+  local.get $0
+  f64.const 2
+  f64.sub
+  local.set $4
+  local.get $0
+  f64.const 3
+  f64.sub
+  local.set $5
+  local.get $4
+  local.get $2
+  f64.div
+  local.set $6
+  local.get $6
+  f64.sqrt
+  local.get $3
+  local.get $5
+  f64.div
+  f64.mul
+  f64.const 2
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.pareto.entropy (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  call $~lib/math/NativeMath.log
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.sub
+  f64.const 1
+  f64.const 1
+  local.get $0
+  f64.div
+  f64.add
+  f64.add
  )
  (func $assembly/float/Randomf64.logistic (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
@@ -16467,20 +17429,214 @@
   local.get $0
   call $assembly/float/Randomf32.exponential.entropy
  )
- (func $assembly/float/Randomf32.pareto@varargs (param $0 f32) (result f32)
-  block $1of1
-   block $0of1
-    block $outOfRange
-     global.get $~argumentsLength
-     br_table $0of1 $1of1 $outOfRange
+ (func $assembly/float/Randomf32.pareto@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
     end
-    unreachable
+    f32.const 1
+    local.set $0
    end
    f32.const 1
-   local.set $0
+   local.set $1
   end
   local.get $0
+  local.get $1
   call $assembly/float/Randomf32.pareto
+ )
+ (func $assembly/float/Randomf32.pareto.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.pareto.pdf
+ )
+ (func $assembly/float/Randomf32.pareto.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.pareto.cdf
+ )
+ (func $assembly/float/Randomf32.pareto.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.pareto.quantile
+ )
+ (func $assembly/float/Randomf32.pareto.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.mean
+ )
+ (func $assembly/float/Randomf32.pareto.median@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.median
+ )
+ (func $assembly/float/Randomf32.pareto.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.stdev
+ )
+ (func $assembly/float/Randomf32.pareto.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.variance
+ )
+ (func $assembly/float/Randomf32.pareto.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.skewness
+ )
+ (func $assembly/float/Randomf32.pareto.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.pareto.entropy
  )
  (func $assembly/float/Randomf32.logistic@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
@@ -18201,20 +19357,214 @@
   local.get $0
   call $assembly/float/Randomf64.exponential.entropy
  )
- (func $assembly/float/Randomf64.pareto@varargs (param $0 f64) (result f64)
-  block $1of1
-   block $0of1
-    block $outOfRange
-     global.get $~argumentsLength
-     br_table $0of1 $1of1 $outOfRange
+ (func $assembly/float/Randomf64.pareto@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
     end
-    unreachable
+    f64.const 1
+    local.set $0
    end
    f64.const 1
-   local.set $0
+   local.set $1
   end
   local.get $0
+  local.get $1
   call $assembly/float/Randomf64.pareto
+ )
+ (func $assembly/float/Randomf64.pareto.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.pareto.pdf
+ )
+ (func $assembly/float/Randomf64.pareto.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.pareto.cdf
+ )
+ (func $assembly/float/Randomf64.pareto.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.pareto.quantile
+ )
+ (func $assembly/float/Randomf64.pareto.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.mean
+ )
+ (func $assembly/float/Randomf64.pareto.median@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.median
+ )
+ (func $assembly/float/Randomf64.pareto.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.stdev
+ )
+ (func $assembly/float/Randomf64.pareto.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.variance
+ )
+ (func $assembly/float/Randomf64.pareto.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.skewness
+ )
+ (func $assembly/float/Randomf64.pareto.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.pareto.entropy
  )
  (func $assembly/float/Randomf64.logistic@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
