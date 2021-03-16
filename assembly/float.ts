@@ -420,12 +420,10 @@ export namespace Randomf64 {
       const d3 =  2.445134137142996e+00;
       const d4 =  3.754408661907416e+00;
 
-      if (sigma === 0.0) {
-        return mean;
-      }
-
       const lo = 0.02425;
       const hi = 1.0 - lo;
+
+      if (sigma === 0.0) return mean;
 
       let p = (x - mean) / sigma;
       if (p < 0 || p >= 1.0 - f64.EPSILON) return NaN;
