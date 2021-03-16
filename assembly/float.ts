@@ -573,7 +573,7 @@ export namespace Randomf64 {
     export function quantile(x: f64, lambda: f64 = 1.0): f64 {
       if (lambda < 0.0) return NaN;
       if (x <= 0.0) return 0.0;
-		  if (x >= 1.0) return Infinity;
+      if (x >= 1.0) return Infinity;
 
       return -Math.log(1.0 - x) / lambda;
     }
@@ -1425,7 +1425,7 @@ export namespace Randomf32 {
     export function quantile(x: f32, lambda: f32 = 1.0): f32 {
       if (lambda < 0.0) return NaN;
       if (x <= 0.0) return 0.0;
-		  if (x >= 1.0) return Infinity;
+      if (x >= 1.0) return Infinity;
 
       return -Mathf.log(1 - x) / lambda;
     }
