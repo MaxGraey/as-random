@@ -367,7 +367,7 @@ export namespace Randomf64 {
       if (sigma == 0.0) {
         return f64(x >= mean);
       }
-      // See Abramowitz and Stegun "Handbook of Mathemathical functions for description"
+      // See M. Abramowitz and I. A. Stegun "Handbook of mathematical functions"
       // Max relative error < 1e-8
 
       const b1 =  0.319381530;
