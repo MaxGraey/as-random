@@ -55,6 +55,8 @@
  (global $~lib/builtins/f64.EPSILON f64 (f64.const 2.220446049250313e-16))
  (global $~lib/math/NativeMath.E f64 (f64.const 2.718281828459045))
  (global $~lib/math/NativeMathf.E f32 (f32.const 2.7182817459106445))
+ (global $~lib/math/NativeMath.LN2 f64 (f64.const 0.6931471805599453))
+ (global $~lib/math/NativeMathf.LN2 f32 (f32.const 0.6931471824645996))
  (global $~lib/math/rempio2f_y (mut f64) (f64.const 0))
  (global $assembly/utils/PRECOMP_254 i32 (i32.const 7008))
  (global $~lib/math/rempio2_y0 (mut f64) (f64.const 0))
@@ -136,6 +138,15 @@
  (export "Randomf32.logNormal.skewness" (func $assembly/float/Randomf32.logNormal.skewness@varargs))
  (export "Randomf32.logNormal.entropy" (func $assembly/float/Randomf32.logNormal.entropy@varargs))
  (export "Randomf32.exponential" (func $assembly/float/Randomf32.exponential@varargs))
+ (export "Randomf32.exponential.pdf" (func $assembly/float/Randomf32.exponential.pdf@varargs))
+ (export "Randomf32.exponential.cdf" (func $assembly/float/Randomf32.exponential.cdf@varargs))
+ (export "Randomf32.exponential.quantile" (func $assembly/float/Randomf32.exponential.quantile@varargs))
+ (export "Randomf32.exponential.mean" (func $assembly/float/Randomf32.exponential.mean@varargs))
+ (export "Randomf32.exponential.median" (func $assembly/float/Randomf32.exponential.median@varargs))
+ (export "Randomf32.exponential.stdev" (func $assembly/float/Randomf32.exponential.stdev@varargs))
+ (export "Randomf32.exponential.variance" (func $assembly/float/Randomf32.exponential.variance@varargs))
+ (export "Randomf32.exponential.skewness" (func $assembly/float/Randomf32.exponential.skewness@varargs))
+ (export "Randomf32.exponential.entropy" (func $assembly/float/Randomf32.exponential.entropy@varargs))
  (export "Randomf32.pareto" (func $assembly/float/Randomf32.pareto@varargs))
  (export "Randomf32.logistic" (func $assembly/float/Randomf32.logistic@varargs))
  (export "Randomf32.cauchy" (func $assembly/float/Randomf32.cauchy@varargs))
@@ -218,6 +229,15 @@
  (export "Randomf64.logNormal.skewness" (func $assembly/float/Randomf64.logNormal.skewness@varargs))
  (export "Randomf64.logNormal.entropy" (func $assembly/float/Randomf64.logNormal.entropy@varargs))
  (export "Randomf64.exponential" (func $assembly/float/Randomf64.exponential@varargs))
+ (export "Randomf64.exponential.pdf" (func $assembly/float/Randomf64.exponential.pdf@varargs))
+ (export "Randomf64.exponential.cdf" (func $assembly/float/Randomf64.exponential.cdf@varargs))
+ (export "Randomf64.exponential.quantile" (func $assembly/float/Randomf64.exponential.quantile@varargs))
+ (export "Randomf64.exponential.mean" (func $assembly/float/Randomf64.exponential.mean@varargs))
+ (export "Randomf64.exponential.median" (func $assembly/float/Randomf64.exponential.median@varargs))
+ (export "Randomf64.exponential.stdev" (func $assembly/float/Randomf64.exponential.stdev@varargs))
+ (export "Randomf64.exponential.variance" (func $assembly/float/Randomf64.exponential.variance@varargs))
+ (export "Randomf64.exponential.skewness" (func $assembly/float/Randomf64.exponential.skewness@varargs))
+ (export "Randomf64.exponential.entropy" (func $assembly/float/Randomf64.exponential.entropy@varargs))
  (export "Randomf64.pareto" (func $assembly/float/Randomf64.pareto@varargs))
  (export "Randomf64.logistic" (func $assembly/float/Randomf64.logistic@varargs))
  (export "Randomf64.cauchy" (func $assembly/float/Randomf64.cauchy@varargs))
@@ -4287,6 +4307,155 @@
   f32.neg
   local.get $0
   f32.div
+ )
+ (func $assembly/float/Randomf32.exponential.pdf (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $1
+  local.get $1
+  f32.neg
+  local.get $0
+  f32.mul
+  call $~lib/math/NativeMathf.exp
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.exponential.cdf (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  f32.const 1
+  local.get $1
+  f32.neg
+  local.get $0
+  f32.mul
+  call $~lib/math/NativeMathf.exp
+  f32.sub
+ )
+ (func $assembly/float/Randomf32.exponential.quantile (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.le
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  f32.const 1
+  f32.ge
+  if
+   f32.const inf
+   return
+  end
+  f32.const 1
+  local.get $0
+  f32.sub
+  call $~lib/math/NativeMathf.log
+  f32.neg
+  local.get $1
+  f32.div
+ )
+ (func $assembly/float/Randomf32.exponential.mean (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 1
+  local.get $0
+  f32.div
+ )
+ (func $assembly/float/Randomf32.exponential.median (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  global.get $~lib/math/NativeMathf.LN2
+  local.get $0
+  f32.div
+ )
+ (func $assembly/float/Randomf32.exponential.stdev (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 1
+  local.get $0
+  f32.div
+ )
+ (func $assembly/float/Randomf32.exponential.variance (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 1
+  local.get $0
+  local.get $0
+  f32.mul
+  f32.div
+ )
+ (func $assembly/float/Randomf32.exponential.skewness (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 2
+ )
+ (func $assembly/float/Randomf32.exponential.entropy (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 1
+  local.get $0
+  call $~lib/math/NativeMathf.log
+  f32.sub
  )
  (func $assembly/float/Randomf32.pareto (param $0 f32) (result f32)
   local.get $0
@@ -11778,6 +11947,155 @@
   local.get $0
   f64.div
  )
+ (func $assembly/float/Randomf64.exponential.pdf (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $1
+  local.get $1
+  f64.neg
+  local.get $0
+  f64.mul
+  call $~lib/math/NativeMath.exp
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.exponential.cdf (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  f64.const 1
+  local.get $1
+  f64.neg
+  local.get $0
+  f64.mul
+  call $~lib/math/NativeMath.exp
+  f64.sub
+ )
+ (func $assembly/float/Randomf64.exponential.quantile (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.le
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.ge
+  if
+   f64.const inf
+   return
+  end
+  f64.const 1
+  local.get $0
+  f64.sub
+  call $~lib/math/NativeMath.log
+  f64.neg
+  local.get $1
+  f64.div
+ )
+ (func $assembly/float/Randomf64.exponential.mean (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1
+  local.get $0
+  f64.div
+ )
+ (func $assembly/float/Randomf64.exponential.median (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  global.get $~lib/math/NativeMath.LN2
+  local.get $0
+  f64.div
+ )
+ (func $assembly/float/Randomf64.exponential.stdev (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1
+  local.get $0
+  f64.div
+ )
+ (func $assembly/float/Randomf64.exponential.variance (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1
+  local.get $0
+  local.get $0
+  f64.mul
+  f64.div
+ )
+ (func $assembly/float/Randomf64.exponential.skewness (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 2
+ )
+ (func $assembly/float/Randomf64.exponential.entropy (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.sub
+ )
  (func $assembly/float/Randomf64.pareto (param $0 f64) (result f64)
   local.get $0
   f64.const 0
@@ -16005,6 +16323,150 @@
   local.get $0
   call $assembly/float/Randomf32.exponential
  )
+ (func $assembly/float/Randomf32.exponential.pdf@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.exponential.pdf
+ )
+ (func $assembly/float/Randomf32.exponential.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.exponential.cdf
+ )
+ (func $assembly/float/Randomf32.exponential.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.exponential.quantile
+ )
+ (func $assembly/float/Randomf32.exponential.mean@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.exponential.mean
+ )
+ (func $assembly/float/Randomf32.exponential.median@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.exponential.median
+ )
+ (func $assembly/float/Randomf32.exponential.stdev@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.exponential.stdev
+ )
+ (func $assembly/float/Randomf32.exponential.variance@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.exponential.variance
+ )
+ (func $assembly/float/Randomf32.exponential.skewness@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.exponential.skewness
+ )
+ (func $assembly/float/Randomf32.exponential.entropy@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf32.exponential.entropy
+ )
  (func $assembly/float/Randomf32.pareto@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
@@ -17594,6 +18056,150 @@
   end
   local.get $0
   call $assembly/float/Randomf64.exponential
+ )
+ (func $assembly/float/Randomf64.exponential.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.exponential.pdf
+ )
+ (func $assembly/float/Randomf64.exponential.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.exponential.cdf
+ )
+ (func $assembly/float/Randomf64.exponential.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.exponential.quantile
+ )
+ (func $assembly/float/Randomf64.exponential.mean@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.exponential.mean
+ )
+ (func $assembly/float/Randomf64.exponential.median@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.exponential.median
+ )
+ (func $assembly/float/Randomf64.exponential.stdev@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.exponential.stdev
+ )
+ (func $assembly/float/Randomf64.exponential.variance@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.exponential.variance
+ )
+ (func $assembly/float/Randomf64.exponential.skewness@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.exponential.skewness
+ )
+ (func $assembly/float/Randomf64.exponential.entropy@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  call $assembly/float/Randomf64.exponential.entropy
  )
  (func $assembly/float/Randomf64.pareto@varargs (param $0 f64) (result f64)
   block $1of1

@@ -504,7 +504,7 @@ export namespace Randomf64 {
     /** Eval the quantile function for Log-Normal distribution. */
     export function quantile(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (x < 0.0 || x > 1.0) return NaN;
-      return Math.exp(mean + (sigma * normal.quantile(x)));
+      return Math.exp(mean + sigma * normal.quantile(x));
     }
 
     /** Returns the mean value of Log-Normal distribution. */
@@ -550,6 +550,69 @@ export namespace Randomf64 {
   export function exponential(lambda: f64 = 1.0): f64 {
     if (lambda == 0.0) return 0.0;
     return -Math.log1p(-Math.random()) / lambda;
+  }
+
+  export namespace exponential {
+    /** Eval the probability mass function for Exponential distribution. */
+    export function pdf(x: f64, lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+
+	    return lambda * Math.exp(-lambda * x);
+    }
+
+    /** Eval the cumulative density function for Exponential distribution. */
+    export function cdf(x: f64, lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+
+      return 1.0 - Math.exp(-lambda * x);
+    }
+
+    /** Eval the quantile function for Exponential distribution. */
+    export function quantile(x: f64, lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      if (x <= 0.0) return 0.0;
+		  if (x >= 1.0) return Infinity;
+
+      return -Math.log(1.0 - x) / lambda;
+    }
+
+    /** Returns the mean value of Exponential distribution. */
+    export function mean(lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 / lambda;
+    }
+
+    /** Returns the median value of Exponential distribution. */
+    export function median(lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      return Math.LN2 / lambda;
+    }
+
+    /** Returns the standard deviation of Exponential distribution. */
+    export function stdev(lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 / lambda;
+    }
+
+    /** Returns the variance of Exponential distribution. */
+    export function variance(lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 / (lambda * lambda);
+    }
+
+    /** Returns the skewness of Exponential distribution. */
+    export function skewness(lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+	    return 2.0;
+    }
+
+    /** Returns the differential entropy of Exponential distribution. */
+    export function entropy(lambda: f64 = 1.0): f64 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 - Math.log(lambda);
+    }
   }
 
   /** Pareto distribution. */
@@ -1293,7 +1356,7 @@ export namespace Randomf32 {
     /** Eval the quantile function for Log-Normal distribution. */
     export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (x < 0.0 || x > 1.0) return NaN;
-      return Mathf.exp(mean + (sigma * normal.quantile(x)));
+      return Mathf.exp(mean + sigma * normal.quantile(x));
     }
 
     /** Returns the mean value of Log-Normal distribution. */
@@ -1339,6 +1402,69 @@ export namespace Randomf32 {
   export function exponential(lambda: f32 = 1.0): f32 {
     if (lambda == 0.0) return 0.0;
     return -Mathf.log1p(-Mathf.random()) / lambda;
+  }
+
+  export namespace exponential {
+    /** Eval the probability mass function for Exponential distribution. */
+    export function pdf(x: f32, lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+
+	    return lambda * Mathf.exp(-lambda * x);
+    }
+
+    /** Eval the cumulative density function for Exponential distribution. */
+    export function cdf(x: f32, lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+
+      return 1.0 - Mathf.exp(-lambda * x);
+    }
+
+    /** Eval the quantile function for Exponential distribution. */
+    export function quantile(x: f32, lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      if (x <= 0.0) return 0.0;
+		  if (x >= 1.0) return Infinity;
+
+      return -Mathf.log(1 - x) / lambda;
+    }
+
+    /** Returns the mean value of Exponential distribution. */
+    export function mean(lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 / lambda;
+    }
+
+    /** Returns the median value of Exponential distribution. */
+    export function median(lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      return Mathf.LN2 / lambda;
+    }
+
+    /** Returns the standard deviation of Exponential distribution. */
+    export function stdev(lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 / lambda;
+    }
+
+    /** Returns the variance of Exponential distribution. */
+    export function variance(lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 / (lambda * lambda);
+    }
+
+    /** Returns the skewness of Exponential distribution. */
+    export function skewness(lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+	    return 2.0;
+    }
+
+    /** Returns the differential entropy of Exponential distribution. */
+    export function entropy(lambda: f32 = 1.0): f32 {
+      if (lambda < 0.0) return NaN;
+      return 1.0 - Mathf.log(lambda);
+    }
   }
 
   /** Pareto distribution. */
