@@ -15322,6 +15322,9 @@
    br_if $__inlined_func$assembly/float/Randomf64.maxwell.pdf
    drop
    local.get $0
+   local.get $1
+   f64.div
+   local.tee $0
    local.get $0
    f64.mul
    local.tee $0
@@ -15330,16 +15333,9 @@
    local.get $0
    f64.const -0.5
    f64.mul
-   local.get $1
-   local.get $1
-   f64.mul
-   local.tee $0
-   f64.div
    call $~lib/math/NativeMath.exp
    f64.mul
-   local.get $0
    local.get $1
-   f64.mul
    f64.div
   end
  )
@@ -15347,6 +15343,7 @@
   (local $2 f64)
   (local $3 f64)
   (local $4 f64)
+  (local $5 f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15376,16 +15373,17 @@
    block $__inlined_func$assembly/utils/erf_approx (result f64)
     local.get $0
     local.get $1
-    f64.const 1.4142135623730951
-    f64.mul
     f64.div
     local.tee $4
+    f64.const 1.4142135623730951
+    f64.div
+    local.tee $5
     f64.abs
     local.tee $3
     f64.const 1e-06
     f64.le
     if
-     local.get $4
+     local.get $5
      f64.const 1.1283791670955126
      f64.mul
      br $__inlined_func$assembly/utils/erf_approx
@@ -15424,19 +15422,15 @@
     call $~lib/math/NativeMath.exp
     f64.mul
     f64.sub
-    local.get $4
+    local.get $5
     f64.copysign
    end
    local.get $0
-   local.get $0
+   local.get $4
    f64.const -0.5
    f64.mul
-   local.get $0
+   local.get $4
    f64.mul
-   local.get $1
-   local.get $1
-   f64.mul
-   f64.div
    call $~lib/math/NativeMath.exp
    f64.mul
    local.get $1

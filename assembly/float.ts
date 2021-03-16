@@ -737,9 +737,9 @@ export namespace Randomf64 {
       if (x < 0.0) return 0.0;
 
       const a = 0.7978845608028654; // sqrt(2 / pi)
-      let sq = sigma * sigma;
-      let xx = x * x;
-      return a * xx * Math.exp(-0.5 * xx / sq) / (sq * sigma);
+      let xs = x / sigma;
+      xs *= xs;
+      return a * xs * Math.exp(-0.5 * xs) / sigma;
     }
 
     /** Eval the cumulative density function for Maxwell-Boltzman distribution. */
@@ -749,9 +749,9 @@ export namespace Randomf64 {
 
       const a = 0.7978845608028654; // sqrt(2 / pi)
       const b = Math.SQRT2;
-      let sq = sigma * sigma;
-      let z = erf_approx(x / (b * sigma));
-      let y = x * Math.exp(-0.5 * x * x / sq) / sigma;
+      let xs = x / sigma;
+      let z = erf_approx(xs / b);
+      let y = x * Math.exp(-0.5 * xs * xs) / sigma;
       return z - a * y;
     }
 
