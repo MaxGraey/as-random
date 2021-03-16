@@ -1,4 +1,4 @@
-import { logFactorial, logGamma } from "./utils";
+import { logFactorial, logGamma, erf_approx } from "./utils";
 
 // @ts-ignore: decorator
 @lazy let CACHED_NORM32: f32 = Infinity;
@@ -728,6 +728,81 @@ export namespace Randomf64 {
       y  = -2.0 * Math.log(u1);
     } while ((g * g) * (u1 * u1) * y < u2 * u2);
     return sigma * y;
+  }
+
+  export namespace maxwell {
+    /** Eval the probability mass function for Maxwell-Boltzman distribution. */
+    export function pdf(x: f64, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+
+      const a = 0.7978845608028654; // sqrt(2 / pi)
+      let sq = sigma * sigma;
+      let xx = x * x;
+      return a * xx * Math.exp(-0.5 * xx / sq) / (sq * sigma);
+    }
+
+    /** Eval the cumulative density function for Maxwell-Boltzman distribution. */
+    export function cdf(x: f64, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+
+      const a = 0.7978845608028654; // sqrt(2 / pi)
+      const b = Math.SQRT2;
+      let sq = sigma * sigma;
+      let z = erf_approx(x / (b * sigma));
+      let y = x * Math.exp(-0.5 * x * x / sq) / sigma;
+      return z - a * y;
+    }
+
+    /** Eval the quantile function for Maxwell-Boltzman distribution. */
+    export function quantile(x: f64, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (x <= 0.0) return 0.0;
+      if (x >= 1.0) return 1.0;
+      // TODO:
+      // return Math.sqrt(gamma.quantile(x, 3.0 / 2.0, 2.0 * sigma * sigma));
+      return 0.0;
+    }
+
+    /** Returns the mean value of Maxwell-Boltzman distribution. */
+    export function mean(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = 1.5957691216057308; // 2 * sqrt(2/pi);
+      return a * sigma;
+    }
+
+    /** Returns the median value of Maxwell-Boltzman distribution. */
+    export function median(sigma: f64 = 1.0): f64 {
+      return quantile(0.5, sigma); // TODO: simplify this
+    }
+
+    /** Returns the standard deviation of Maxwell-Boltzman distribution. */
+    export function stdev(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = 0.6734396116428514; // sqrt((3 * pi - 8) / pi)
+			return a * sigma;
+    }
+
+    /** Returns the variance of Maxwell-Boltzman distribution. */
+    export function variance(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = 0.4535209105296745; // (3 * pi - 8) / pi
+			return a * sigma * sigma;
+		}
+
+    /** Returns the skewness of Maxwell-Boltzman distribution. */
+    export function skewness(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return 21.38510516957931;
+    }
+
+    /** Returns the differential entropy of Maxwell-Boltzman distribution. */
+    export function entropy(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = 0.9961541981062054; // log(sqrt(2 * pi)) + γ - 0.5
+      return a + Math.log(sigma);
+    }
   }
 
   /** von Mises-Fisher distribution on a unit circle. */

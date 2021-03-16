@@ -1,6 +1,6 @@
 (module
- (type $f32_f32_=>_f32 (func (param f32 f32) (result f32)))
  (type $f64_f64_=>_f64 (func (param f64 f64) (result f64)))
+ (type $f32_f32_=>_f32 (func (param f32 f32) (result f32)))
  (type $f64_=>_f64 (func (param f64) (result f64)))
  (type $f32_=>_f32 (func (param f32) (result f32)))
  (type $f64_f64_f64_=>_f64 (func (param f64 f64 f64) (result f64)))
@@ -375,6 +375,15 @@
  (export "Randomf64.weibull" (func $assembly/float/Randomf64.weibull@varargs))
  (export "Randomf64.rayleigh" (func $assembly/float/Randomf64.rayleigh@varargs))
  (export "Randomf64.maxwell" (func $assembly/float/Randomf64.maxwell@varargs))
+ (export "Randomf64.maxwell.pdf" (func $assembly/float/Randomf64.maxwell.pdf@varargs))
+ (export "Randomf64.maxwell.cdf" (func $assembly/float/Randomf64.maxwell.cdf@varargs))
+ (export "Randomf64.maxwell.quantile" (func $assembly/float/Randomf64.maxwell.quantile@varargs))
+ (export "Randomf64.maxwell.mean" (func $assembly/float/Randomf64.maxwell.mean@varargs))
+ (export "Randomf64.maxwell.median" (func $assembly/float/Randomf64.maxwell.median@varargs))
+ (export "Randomf64.maxwell.stdev" (func $assembly/float/Randomf64.maxwell.stdev@varargs))
+ (export "Randomf64.maxwell.variance" (func $assembly/float/Randomf64.maxwell.variance@varargs))
+ (export "Randomf64.maxwell.skewness" (func $assembly/float/Randomf64.maxwell.skewness@varargs))
+ (export "Randomf64.maxwell.entropy" (func $assembly/float/Randomf64.maxwell.entropy@varargs))
  (export "Randomf64.fisher" (func $assembly/float/Randomf64.fisher@varargs))
  (export "Randomf64.poisson" (func $assembly/float/Randomf64.poisson))
  (export "Randomf64.binominal" (func $assembly/float/Randomf64.binominal@varargs))
@@ -15284,6 +15293,321 @@
   local.get $0
   local.get $1
   f64.mul
+ )
+ (func $assembly/float/Randomf64.maxwell.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randomf64.maxwell.pdf (result f64)
+   f64.const nan:0x8000000000000
+   local.get $1
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.pdf
+   drop
+   f64.const 0
+   local.get $0
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.pdf
+   drop
+   local.get $0
+   local.get $0
+   f64.mul
+   local.tee $0
+   f64.const 0.7978845608028654
+   f64.mul
+   local.get $0
+   f64.const -0.5
+   f64.mul
+   local.get $1
+   local.get $1
+   f64.mul
+   local.tee $0
+   f64.div
+   call $~lib/math/NativeMath.exp
+   f64.mul
+   local.get $0
+   local.get $1
+   f64.mul
+   f64.div
+  end
+ )
+ (func $assembly/float/Randomf64.maxwell.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randomf64.maxwell.cdf (result f64)
+   f64.const nan:0x8000000000000
+   local.get $1
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.cdf
+   drop
+   f64.const 0
+   local.get $0
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.cdf
+   drop
+   block $__inlined_func$assembly/utils/erf_approx (result f64)
+    local.get $0
+    local.get $1
+    f64.const 1.4142135623730951
+    f64.mul
+    f64.div
+    local.tee $4
+    f64.abs
+    local.tee $3
+    f64.const 1e-06
+    f64.le
+    if
+     local.get $4
+     f64.const 1.1283791670955126
+     f64.mul
+     br $__inlined_func$assembly/utils/erf_approx
+    end
+    f64.const 1
+    f64.const 1
+    local.get $3
+    f64.const 0.3275911
+    f64.mul
+    f64.const 1
+    f64.add
+    f64.div
+    local.tee $2
+    f64.const 1.061405429
+    f64.mul
+    f64.const -1.453152027
+    f64.add
+    local.get $2
+    f64.mul
+    f64.const 1.421413741
+    f64.add
+    local.get $2
+    f64.mul
+    f64.const -0.284496736
+    f64.add
+    local.get $2
+    f64.mul
+    f64.const 0.254829592
+    f64.add
+    local.get $2
+    f64.mul
+    local.get $3
+    f64.neg
+    local.get $3
+    f64.mul
+    call $~lib/math/NativeMath.exp
+    f64.mul
+    f64.sub
+    local.get $4
+    f64.copysign
+   end
+   local.get $0
+   local.get $0
+   f64.const -0.5
+   f64.mul
+   local.get $0
+   f64.mul
+   local.get $1
+   local.get $1
+   f64.mul
+   f64.div
+   call $~lib/math/NativeMath.exp
+   f64.mul
+   local.get $1
+   f64.div
+   f64.const 0.7978845608028654
+   f64.mul
+   f64.sub
+  end
+ )
+ (func $assembly/float/Randomf64.maxwell.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randomf64.maxwell.quantile (result f64)
+   f64.const nan:0x8000000000000
+   local.get $1
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.quantile
+   drop
+   f64.const 0
+   local.get $0
+   f64.const 0
+   f64.le
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.quantile
+   drop
+   f64.const 1
+   local.get $0
+   f64.const 1
+   f64.ge
+   br_if $__inlined_func$assembly/float/Randomf64.maxwell.quantile
+   drop
+   f64.const 0
+  end
+ )
+ (func $assembly/float/Randomf64.maxwell.mean@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 1.5957691216057308
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randomf64.maxwell.median@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  f64.const 0
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randomf64.maxwell.stdev@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 0.6734396116428514
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randomf64.maxwell.variance@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 0.4535209105296745
+  f64.mul
+  local.get $0
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randomf64.maxwell.skewness@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  f64.const 21.38510516957931
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randomf64.maxwell.entropy@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if (result f64)
+   f64.const nan:0x8000000000000
+  else
+   local.get $0
+   call $~lib/math/NativeMath.log
+   f64.const 0.9961541981062054
+   f64.add
+  end
  )
  (func $assembly/float/Randomf64.fisher@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2

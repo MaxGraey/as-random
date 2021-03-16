@@ -131,7 +131,6 @@ export function logGamma(x: f64): f64 {
   return Math.log(2.5066282746310005 * r / x) - t;
 }
 
-/*
 // Using an modified Abramowitz-Stegun approximation with a maximum error of
 // less than 1.5 * 10 ^ -7, i.e. results will start to get flaky beyond the 5th
 // standard deviation.
@@ -153,7 +152,6 @@ export function erf_approx(x: f64): f64 {
 
   return copysign(y, x);
 }
-*/
 
 // @ts-ignore: decorator
 @lazy const PRECOMP_254 = memory.data<f64>([
