@@ -3198,9 +3198,8 @@
   local.set $5
   f64.const 0.3989423
   local.get $3
-  f64.neg
   local.get $3
-  f64.const 0.5
+  f64.const -0.5
   f64.mul
   f64.mul
   call $~lib/math/NativeMath.exp

@@ -386,7 +386,7 @@ export namespace Randomf64 {
 
       let a = Math.abs(z);
       let t = 1.0 / (1.0 + a * p);
-      let b = c2 * Math.exp(-z * (z * 0.5));
+      let b = c2 * Math.exp(z * (z * -0.5));
       let n = ((((b5 * t + b4) * t + b3) * t + b2) * t + b1) * t * b;
 
       return z < 0.0 ? n : 1.0 - n;
