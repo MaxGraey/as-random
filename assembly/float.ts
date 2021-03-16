@@ -426,7 +426,7 @@ export namespace Randomf64 {
       if (sigma === 0.0) return mean;
 
       let z = (x - mean) / sigma;
-      if (z < 0 || z >= 1.0 - f64.EPSILON) return NaN;
+      if (z < 0 || z > 1.0 - f64.EPSILON) return NaN;
 
       if (0.0 < z && z < lo) {
         let q = Math.sqrt(-2.0 * Math.log(z));

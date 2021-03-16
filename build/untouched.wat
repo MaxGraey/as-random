@@ -3909,7 +3909,7 @@
    f64.const 1
    global.get $~lib/builtins/f64.EPSILON
    f64.sub
-   f64.ge
+   f64.gt
   end
   if
    f64.const nan:0x8000000000000

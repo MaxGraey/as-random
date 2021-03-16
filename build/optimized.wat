@@ -2333,7 +2333,7 @@
   f64.div
   local.tee $0
   f64.const 0.9999999999999998
-  f64.ge
+  f64.gt
   local.get $0
   f64.const 0
   f64.lt
