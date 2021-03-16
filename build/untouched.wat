@@ -13370,7 +13370,7 @@
   f64.div
   call $assembly/utils/erf_approx
   local.set $3
-  local.get $0
+  local.get $2
   f64.const -0.5
   local.get $2
   f64.mul
@@ -13378,8 +13378,6 @@
   f64.mul
   call $~lib/math/NativeMath.exp
   f64.mul
-  local.get $1
-  f64.div
   local.set $4
   local.get $3
   f64.const 0.7978845608028654

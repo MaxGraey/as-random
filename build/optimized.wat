@@ -15342,8 +15342,6 @@
  (func $assembly/float/Randomf64.maxwell.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15374,67 +15372,65 @@
     local.get $0
     local.get $1
     f64.div
-    local.tee $4
+    local.tee $1
     f64.const 1.4142135623730951
     f64.div
-    local.tee $5
-    f64.abs
     local.tee $3
+    f64.abs
+    local.tee $2
     f64.const 1e-06
     f64.le
     if
-     local.get $5
+     local.get $3
      f64.const 1.1283791670955126
      f64.mul
      br $__inlined_func$assembly/utils/erf_approx
     end
     f64.const 1
     f64.const 1
-    local.get $3
+    local.get $2
     f64.const 0.3275911
     f64.mul
     f64.const 1
     f64.add
     f64.div
-    local.tee $2
+    local.tee $0
     f64.const 1.061405429
     f64.mul
     f64.const -1.453152027
     f64.add
-    local.get $2
+    local.get $0
     f64.mul
     f64.const 1.421413741
     f64.add
-    local.get $2
+    local.get $0
     f64.mul
     f64.const -0.284496736
     f64.add
-    local.get $2
+    local.get $0
     f64.mul
     f64.const 0.254829592
     f64.add
-    local.get $2
+    local.get $0
     f64.mul
-    local.get $3
+    local.get $2
     f64.neg
-    local.get $3
+    local.get $2
     f64.mul
     call $~lib/math/NativeMath.exp
     f64.mul
     f64.sub
-    local.get $5
+    local.get $3
     f64.copysign
    end
-   local.get $0
-   local.get $4
+   local.get $1
+   local.get $1
    f64.const -0.5
    f64.mul
-   local.get $4
+   local.get $1
    f64.mul
    call $~lib/math/NativeMath.exp
    f64.mul
-   local.get $1
-   f64.div
    f64.const 0.7978845608028654
    f64.mul
    f64.sub

@@ -751,7 +751,7 @@ export namespace Randomf64 {
       const b = Math.SQRT2;
       let xs = x / sigma;
       let z = erf_approx(xs / b);
-      let y = x * Math.exp(-0.5 * xs * xs) / sigma;
+      let y = xs * Math.exp(-0.5 * xs * xs);
       return z - a * y;
     }
 
