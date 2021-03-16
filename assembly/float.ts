@@ -351,6 +351,89 @@ export namespace Randomf64 {
     return mean + sigma * u1;
   }
 
+  export namespace normal {
+    /** Eval the probability mass function for Normal distribution. */
+    export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma == 0.0) {
+        return x === mean ? Infinity : 0.0;
+      }
+      let xc = x - mean;
+      let sq = sigma * sigma;
+      return Math.exp(-0.5 / sq * (xc * xc)) / Math.sqrt(2.0 * Math.PI * sq);
+    }
+
+    /** Eval the cumulative density function for Normal distribution. */
+    export function cdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma == 0.0) {
+        return f64(x >= mean);
+      }
+      // Use approximation
+      // See Equation (4.5) from https://www.uv.mx/personal/hvazquez/files/2012/02/124029.pdf
+      // Max relative error ~ 8e-5 in x ∈ [-2, 4] range
+      let z = (x - mean) / sigma;
+      let a = (-358.0 / 23.0) * z + 111.0 * Math.atan(37.0 / 294.0 * z);
+      return 1.0 / (1.0 + Math.exp(a));
+    }
+
+    /** Eval the quantile function for Normal distribution. */
+    export function quantile(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      // Acklam's Algorithm for the Inverse Normal CDF.
+      // According to Peter J. Acklam himself:
+      // “the absolute value of the relative error is less than 1.15 × 10−9 in the entire region”.
+
+      const a1 = -3.969683028665376e+01;
+      const a2 =  2.209460984245205e+02;
+      const a3 = -2.759285104469687e+02;
+      const a4 =  1.383577518672690e+02;
+      const a5 = -3.066479806614716e+01;
+      const a6 =  2.506628277459239e+00;
+      const b1 = -5.447609879822406e+01;
+      const b2 =  1.615858368580409e+02;
+      const b3 = -1.556989798598866e+02;
+      const b4 =  6.680131188771972e+01;
+      const b5 = -1.328068155288572e+01;
+      const c1 = -7.784894002430293e-03;
+      const c2 = -3.223964580411365e-01;
+      const c3 = -2.400758277161838e+00;
+      const c4 = -2.549732539343734e+00;
+      const c5 =  4.374664141464968e+00;
+      const c6 =  2.938163982698783e+00;
+      const d1 =  7.784695709041462e-03;
+      const d2 =  3.224671290700398e-01;
+      const d3 =  2.445134137142996e+00;
+      const d4 =  3.754408661907416e+00;
+
+      if (sigma === 0.0) {
+        return mean;
+      }
+
+      const lo = 0.02425;
+      const hi = 1.0 - lo;
+
+      let p = (x - mean) / sigma;
+
+      if (0.0 < p && p < lo) {
+        let q = Math.sqrt(-2.0 * Math.log(p));
+        let a = ((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6;
+        let b = (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
+        return a / b;
+
+      } else if (lo <= p && p <= hi) {
+        let q = p - 0.5;
+        let r = q * q;
+        let a = (((((a1 * r + a2) * r + a3) * r + a4) * r + a5) * r + a6) * q;
+        let b = ((((b1 * r + b2) * r + b3) * r + b4) * r + b5) * r + 1.0;
+        return a / b;
+
+      } else {  // hi < p && p < 1.0
+        let q = Math.sqrt(-2.0 * Math.log1p(-p));
+        let a = ((((c1 * q + c2) * q + c3) * q + c4) * q + c5) * q + c6;
+        let b = (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
+        return -(a / b);
+      }
+    }
+  }
+
   /** Log-Normal distribution. */
   export function logNormal(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
     return Math.exp(Randomf64.normal(mean, sigma));
@@ -1030,6 +1113,28 @@ export namespace Randomf32 {
 
     CACHED_NORM32 = u2;
     return mean + sigma * u1;
+  }
+
+  export namespace normal {
+    /** Eval the probability mass function for Normal distribution. */
+    export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma == 0.0) {
+        return x === mean ? Infinity : 0.0;
+      }
+      let xc = x - mean;
+      let sq = sigma * sigma;
+      return Mathf.exp(-0.5 / sq * (xc * xc)) / Mathf.sqrt(2.0 * Mathf.PI * sq);
+    }
+
+    /** Eval the cumulative density function for Normal distribution. */
+    export function cdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Randomf64.normal.cdf(x as f64, mean as f64, sigma as f64) as f32;
+    }
+
+    /** Eval the quantile function for Normal distribution. */
+    export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Randomf64.normal.quantile(x as f64, mean as f64, sigma as f64) as f32;
+    }
   }
 
   /** Log-Normal distribution. */

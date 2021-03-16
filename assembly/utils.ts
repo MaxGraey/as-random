@@ -131,6 +131,30 @@ export function logGamma(x: f64): f64 {
   return Math.log(2.5066282746310005 * r / x) - t;
 }
 
+/*
+// Using an modified Abramowitz-Stegun approximation with a maximum error of
+// less than 1.5 * 10 ^ -7, i.e. results will start to get flaky beyond the 5th
+// standard deviation.
+
+// Original: https://www.johndcook.com/blog/2009/01/19/stand-alone-error-function-erf
+
+export function erf_approx(x: f64): f64 {
+  const a1 =  0.254829592;
+  const a2 = -0.284496736;
+  const a3 =  1.421413741;
+  const a4 = -1.453152027;
+  const a5 =  1.061405429;
+
+  let a = Math.abs(x);
+  if (a <= 1e-6) return 1.1283791670955126 * x;
+
+  let t = 1.0 / (1.0 + 0.3275911 * a);
+  let y = 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-a * a);
+
+  return copysign(y, x);
+}
+*/
+
 // @ts-ignore: decorator
 @lazy const PRECOMP_254 = memory.data<f64>([
      0.000000000000000,
