@@ -13346,7 +13346,6 @@
  (func $assembly/float/Randomf64.maxwell.cdf (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
-  (local $4 f64)
   local.get $1
   f64.const 0
   f64.lt
@@ -13370,18 +13369,16 @@
   f64.div
   call $assembly/utils/erf_approx
   local.set $3
+  local.get $3
+  f64.const 0.7978845608028654
   local.get $2
+  f64.mul
   f64.const -0.5
   local.get $2
   f64.mul
   local.get $2
   f64.mul
   call $~lib/math/NativeMath.exp
-  f64.mul
-  local.set $4
-  local.get $3
-  f64.const 0.7978845608028654
-  local.get $4
   f64.mul
   f64.sub
  )

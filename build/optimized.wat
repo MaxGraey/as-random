@@ -15424,14 +15424,14 @@
     f64.copysign
    end
    local.get $1
+   f64.const 0.7978845608028654
+   f64.mul
    local.get $1
    f64.const -0.5
    f64.mul
    local.get $1
    f64.mul
    call $~lib/math/NativeMath.exp
-   f64.mul
-   f64.const 0.7978845608028654
    f64.mul
    f64.sub
   end

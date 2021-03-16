@@ -750,9 +750,8 @@ export namespace Randomf64 {
       const a = 0.7978845608028654; // sqrt(2 / pi)
       const b = Math.SQRT2;
       let xs = x / sigma;
-      let z = erf_approx(xs / b);
-      let y = xs * Math.exp(-0.5 * xs * xs);
-      return z - a * y;
+      let z  = erf_approx(xs / b);
+      return z - a * xs * Math.exp(-0.5 * xs * xs);
     }
 
     /** Eval the quantile function for Maxwell-Boltzman distribution. */
