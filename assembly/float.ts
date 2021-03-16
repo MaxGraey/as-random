@@ -379,7 +379,7 @@ export namespace Randomf64 {
     export function quantile(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       // Acklam's Algorithm for the Inverse Normal CDF.
       // According to Peter J. Acklam himself:
-      // “the absolute value of the relative error is less than 1.15 × 10−9 in the entire region”.
+      // “the absolute value of the relative error is less than 1.15e−9 in the entire region”.
 
       const a1 = -3.969683028665376e+01;
       const a2 =  2.209460984245205e+02;
@@ -431,6 +431,36 @@ export namespace Randomf64 {
         let b = (((d1 * q + d2) * q + d3) * q + d4) * q + 1.0;
         return -(a / b);
       }
+    }
+
+    /** Returns the mean value of Normal distribution. */
+    export function mean(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return mean;
+    }
+
+    /** Returns the median value of Normal distribution. */
+    export function median(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return mean;
+    }
+
+    /** Returns the standard deviation of Normal distribution. */
+    export function stdev(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return sigma;
+    }
+
+    /** Returns the variance of Normal distribution. */
+    export function variance(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return sigma * sigma;
+    }
+
+    /** Returns the skewness of Normal distribution. */
+    export function skewness(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Normal distribution. */
+    export function entropy(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return 0.5 * Math.log(2.0 * Math.PI * Math.E * sigma * sigma);
     }
   }
 
@@ -1134,6 +1164,37 @@ export namespace Randomf32 {
     /** Eval the quantile function for Normal distribution. */
     export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       return Randomf64.normal.quantile(x as f64, mean as f64, sigma as f64) as f32;
+    }
+
+
+    /** Returns the mean value of Normal distribution. */
+    export function mean(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return mean;
+    }
+
+    /** Returns the median value of Normal distribution. */
+    export function median(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return mean;
+    }
+
+    /** Returns the standard deviation of Normal distribution. */
+    export function stdev(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return sigma;
+    }
+
+    /** Returns the variance of Normal distribution. */
+    export function variance(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return sigma * sigma;
+    }
+
+    /** Returns the skewness of Normal distribution. */
+    export function skewness(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Normal distribution. */
+    export function entropy(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return 0.5 * Mathf.log(2.0 * Mathf.PI * Mathf.E * sigma * sigma);
     }
   }
 
