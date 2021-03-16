@@ -1967,6 +1967,10 @@
   f64.sub
   local.get $2
   f64.div
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
   local.tee $0
   f64.const -15.565217391304348
   f64.mul
@@ -2433,6 +2437,10 @@
   f64.sub
   local.get $2
   f64.div
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
   local.tee $0
   f64.const 0.02425
   f64.lt

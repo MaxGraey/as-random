@@ -3405,6 +3405,12 @@
   local.get $2
   f64.div
   local.set $3
+  local.get $3
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $3
   f64.const -358
   f64.const 23
   f64.div
@@ -4030,6 +4036,12 @@
   f64.sub
   local.get $2
   f64.div
+  local.set $3
+  local.get $3
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
   local.set $3
   f64.const 0
   local.get $3

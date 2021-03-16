@@ -370,8 +370,8 @@ export namespace Randomf64 {
       // Use approximation
       // See Equation (4.5) from https://www.uv.mx/personal/hvazquez/files/2012/02/124029.pdf
       // Max relative error ~ 8e-5 in x ∈ [-2, 4] range
-      let z = (x - mean) / sigma;
-      let a = (-358.0 / 23.0) * z + 111.0 * Math.atan(37.0 / 294.0 * z);
+      let p = clamp01((x - mean) / sigma);
+      let a = (-358.0 / 23.0) * p + 111.0 * Math.atan(37.0 / 294.0 * p);
       return 1.0 / (1.0 + Math.exp(a));
     }
 
@@ -410,7 +410,7 @@ export namespace Randomf64 {
       const lo = 0.02425;
       const hi = 1.0 - lo;
 
-      let p = (x - mean) / sigma;
+      let p = clamp01((x - mean) / sigma);
 
       if (0.0 < p && p < lo) {
         let q = Math.sqrt(-2.0 * Math.log(p));
