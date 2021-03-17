@@ -171,11 +171,7 @@
  (export "Randomf32.cauchy.pdf" (func $assembly/float/Randomf32.cauchy.pdf@varargs))
  (export "Randomf32.cauchy.cdf" (func $assembly/float/Randomf32.cauchy.cdf@varargs))
  (export "Randomf32.cauchy.quantile" (func $assembly/float/Randomf32.cauchy.quantile@varargs))
- (export "Randomf32.cauchy.mean" (func $assembly/float/Randomf32.cauchy.mean@varargs))
  (export "Randomf32.cauchy.median" (func $assembly/float/Randomf32.cauchy.median@varargs))
- (export "Randomf32.cauchy.stdev" (func $assembly/float/Randomf32.cauchy.stdev@varargs))
- (export "Randomf32.cauchy.variance" (func $assembly/float/Randomf32.cauchy.variance@varargs))
- (export "Randomf32.cauchy.skewness" (func $assembly/float/Randomf32.cauchy.skewness@varargs))
  (export "Randomf32.cauchy.entropy" (func $assembly/float/Randomf32.cauchy.entropy@varargs))
  (export "Randomf32.gumbel" (func $assembly/float/Randomf32.gumbel@varargs))
  (export "Randomf32.laplace" (func $assembly/float/Randomf32.laplace@varargs))
@@ -289,11 +285,7 @@
  (export "Randomf64.cauchy.pdf" (func $assembly/float/Randomf64.cauchy.pdf@varargs))
  (export "Randomf64.cauchy.cdf" (func $assembly/float/Randomf64.cauchy.cdf@varargs))
  (export "Randomf64.cauchy.quantile" (func $assembly/float/Randomf64.cauchy.quantile@varargs))
- (export "Randomf64.cauchy.mean" (func $assembly/float/Randomf64.cauchy.mean@varargs))
  (export "Randomf64.cauchy.median" (func $assembly/float/Randomf64.cauchy.median@varargs))
- (export "Randomf64.cauchy.stdev" (func $assembly/float/Randomf64.cauchy.stdev@varargs))
- (export "Randomf64.cauchy.variance" (func $assembly/float/Randomf64.cauchy.variance@varargs))
- (export "Randomf64.cauchy.skewness" (func $assembly/float/Randomf64.cauchy.skewness@varargs))
  (export "Randomf64.cauchy.entropy" (func $assembly/float/Randomf64.cauchy.entropy@varargs))
  (export "Randomf64.gumbel" (func $assembly/float/Randomf64.gumbel@varargs))
  (export "Randomf64.laplace" (func $assembly/float/Randomf64.laplace@varargs))
@@ -6448,9 +6440,6 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.cauchy.mean (param $0 f32) (param $1 f32) (result f32)
-  f32.const nan:0x400000
- )
  (func $assembly/float/Randomf32.cauchy.median (param $0 f32) (param $1 f32) (result f32)
   local.get $1
   f32.const 0
@@ -6460,15 +6449,6 @@
    return
   end
   local.get $0
- )
- (func $assembly/float/Randomf32.cauchy.stdev (param $0 f32) (param $1 f32) (result f32)
-  f32.const nan:0x400000
- )
- (func $assembly/float/Randomf32.cauchy.variance (param $0 f32) (param $1 f32) (result f32)
-  f32.const nan:0x400000
- )
- (func $assembly/float/Randomf32.cauchy.skewness (param $0 f32) (param $1 f32) (result f32)
-  f32.const nan:0x400000
  )
  (func $assembly/float/Randomf32.cauchy.entropy (param $0 f32) (param $1 f32) (result f32)
   local.get $1
@@ -14565,9 +14545,6 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.cauchy.mean (param $0 f64) (param $1 f64) (result f64)
-  f64.const nan:0x8000000000000
- )
  (func $assembly/float/Randomf64.cauchy.median (param $0 f64) (param $1 f64) (result f64)
   local.get $1
   f64.const 0
@@ -14577,15 +14554,6 @@
    return
   end
   local.get $0
- )
- (func $assembly/float/Randomf64.cauchy.stdev (param $0 f64) (param $1 f64) (result f64)
-  f64.const nan:0x8000000000000
- )
- (func $assembly/float/Randomf64.cauchy.variance (param $0 f64) (param $1 f64) (result f64)
-  f64.const nan:0x8000000000000
- )
- (func $assembly/float/Randomf64.cauchy.skewness (param $0 f64) (param $1 f64) (result f64)
-  f64.const nan:0x8000000000000
  )
  (func $assembly/float/Randomf64.cauchy.entropy (param $0 f64) (param $1 f64) (result f64)
   local.get $1
@@ -19454,26 +19422,6 @@
   local.get $2
   call $assembly/float/Randomf32.cauchy.quantile
  )
- (func $assembly/float/Randomf32.cauchy.mean@varargs (param $0 f32) (param $1 f32) (result f32)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f32.const 0
-    local.set $0
-   end
-   f32.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf32.cauchy.mean
- )
  (func $assembly/float/Randomf32.cauchy.median@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
@@ -19493,66 +19441,6 @@
   local.get $0
   local.get $1
   call $assembly/float/Randomf32.cauchy.median
- )
- (func $assembly/float/Randomf32.cauchy.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f32.const 0
-    local.set $0
-   end
-   f32.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf32.cauchy.stdev
- )
- (func $assembly/float/Randomf32.cauchy.variance@varargs (param $0 f32) (param $1 f32) (result f32)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f32.const 0
-    local.set $0
-   end
-   f32.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf32.cauchy.variance
- )
- (func $assembly/float/Randomf32.cauchy.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f32.const 0
-    local.set $0
-   end
-   f32.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf32.cauchy.skewness
  )
  (func $assembly/float/Randomf32.cauchy.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
@@ -21760,26 +21648,6 @@
   local.get $2
   call $assembly/float/Randomf64.cauchy.quantile
  )
- (func $assembly/float/Randomf64.cauchy.mean@varargs (param $0 f64) (param $1 f64) (result f64)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f64.const 0
-    local.set $0
-   end
-   f64.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf64.cauchy.mean
- )
  (func $assembly/float/Randomf64.cauchy.median@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
@@ -21799,66 +21667,6 @@
   local.get $0
   local.get $1
   call $assembly/float/Randomf64.cauchy.median
- )
- (func $assembly/float/Randomf64.cauchy.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f64.const 0
-    local.set $0
-   end
-   f64.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf64.cauchy.stdev
- )
- (func $assembly/float/Randomf64.cauchy.variance@varargs (param $0 f64) (param $1 f64) (result f64)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f64.const 0
-    local.set $0
-   end
-   f64.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf64.cauchy.variance
- )
- (func $assembly/float/Randomf64.cauchy.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
-  block $2of2
-   block $1of2
-    block $0of2
-     block $outOfRange
-      global.get $~argumentsLength
-      br_table $0of2 $1of2 $2of2 $outOfRange
-     end
-     unreachable
-    end
-    f64.const 0
-    local.set $0
-   end
-   f64.const 1
-   local.set $1
-  end
-  local.get $0
-  local.get $1
-  call $assembly/float/Randomf64.cauchy.skewness
  )
  (func $assembly/float/Randomf64.cauchy.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2

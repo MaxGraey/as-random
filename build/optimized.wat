@@ -281,11 +281,7 @@
  (export "Randomf32.cauchy.pdf" (func $assembly/float/Randomf32.cauchy.pdf@varargs))
  (export "Randomf32.cauchy.cdf" (func $assembly/float/Randomf32.cauchy.cdf@varargs))
  (export "Randomf32.cauchy.quantile" (func $assembly/float/Randomf32.cauchy.quantile@varargs))
- (export "Randomf32.cauchy.mean" (func $assembly/float/Randomf32.cauchy.mean@varargs))
  (export "Randomf32.cauchy.median" (func $assembly/float/Randomf32.cauchy.median@varargs))
- (export "Randomf32.cauchy.stdev" (func $assembly/float/Randomf32.cauchy.mean@varargs))
- (export "Randomf32.cauchy.variance" (func $assembly/float/Randomf32.cauchy.mean@varargs))
- (export "Randomf32.cauchy.skewness" (func $assembly/float/Randomf32.cauchy.mean@varargs))
  (export "Randomf32.cauchy.entropy" (func $assembly/float/Randomf32.cauchy.entropy@varargs))
  (export "Randomf32.gumbel" (func $assembly/float/Randomf32.gumbel@varargs))
  (export "Randomf32.laplace" (func $assembly/float/Randomf32.laplace@varargs))
@@ -399,11 +395,7 @@
  (export "Randomf64.cauchy.pdf" (func $assembly/float/Randomf64.cauchy.pdf@varargs))
  (export "Randomf64.cauchy.cdf" (func $assembly/float/Randomf64.cauchy.cdf@varargs))
  (export "Randomf64.cauchy.quantile" (func $assembly/float/Randomf64.cauchy.quantile@varargs))
- (export "Randomf64.cauchy.mean" (func $assembly/float/Randomf64.cauchy.mean@varargs))
  (export "Randomf64.cauchy.median" (func $assembly/float/Randomf64.cauchy.median@varargs))
- (export "Randomf64.cauchy.stdev" (func $assembly/float/Randomf64.cauchy.mean@varargs))
- (export "Randomf64.cauchy.variance" (func $assembly/float/Randomf64.cauchy.mean@varargs))
- (export "Randomf64.cauchy.skewness" (func $assembly/float/Randomf64.cauchy.mean@varargs))
  (export "Randomf64.cauchy.entropy" (func $assembly/float/Randomf64.cauchy.entropy@varargs))
  (export "Randomf64.gumbel" (func $assembly/float/Randomf64.gumbel@varargs))
  (export "Randomf64.laplace" (func $assembly/float/Randomf64.laplace@varargs))
@@ -12636,16 +12628,6 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.cauchy.mean@varargs (param $0 f32) (param $1 f32) (result f32)
-  block $2of2
-   block $outOfRange
-    global.get $~argumentsLength
-    br_table $2of2 $2of2 $2of2 $outOfRange
-   end
-   unreachable
-  end
-  f32.const nan:0x400000
- )
  (func $assembly/float/Randomf32.cauchy.median@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
@@ -16364,16 +16346,6 @@
    f64.mul
    f64.add
   end
- )
- (func $assembly/float/Randomf64.cauchy.mean@varargs (param $0 f64) (param $1 f64) (result f64)
-  block $2of2
-   block $outOfRange
-    global.get $~argumentsLength
-    br_table $2of2 $2of2 $2of2 $outOfRange
-   end
-   unreachable
-  end
-  f64.const nan:0x8000000000000
  )
  (func $assembly/float/Randomf64.cauchy.median@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
