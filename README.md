@@ -10,7 +10,7 @@ Work in Progress
 
 - Expose fast integer random generator with proper range reduction
 - Use most novel and fast algorithms for all kind of distributions
-- Support random variable generators and its statistic functions and like (PDF, CDF, stddev and etc)
+- Support random variable generators and its statistic functions like PDF, CDF, stddev and etc
 - All input parameters are valid and don't throw exceptions
 - All distributions in integer namespace (Randomi32 / Randomi64) \
   don't use floating point arithmetics
