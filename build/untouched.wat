@@ -13289,59 +13289,115 @@
   (local $1 f64)
   (local $2 f64)
   (local $3 f64)
+  (local $4 f64)
   local.get $0
-  local.set $1
-  local.get $1
-  f64.abs
-  local.set $1
-  local.get $1
-  f64.const 1e-06
-  f64.le
-  if
-   f64.const 1.1283791670955126
-   local.get $0
-   f64.mul
-   return
-  end
-  f64.const 1
-  f64.const 1
-  f64.const 0.3275911
-  local.get $1
-  f64.mul
-  f64.add
-  f64.div
-  local.set $2
-  f64.const 1
-  f64.const 1.061405429
-  local.get $2
-  f64.mul
-  f64.const -1.453152027
-  f64.add
-  local.get $2
-  f64.mul
-  f64.const 1.421413741
-  f64.add
-  local.get $2
-  f64.mul
-  f64.const -0.284496736
-  f64.add
-  local.get $2
-  f64.mul
-  f64.const 0.254829592
-  f64.add
-  local.get $2
-  f64.mul
-  local.get $1
-  f64.neg
-  local.get $1
-  f64.mul
-  call $~lib/math/NativeMath.exp
-  f64.mul
-  f64.sub
   local.set $3
   local.get $3
+  f64.abs
+  local.set $3
   local.get $0
-  f64.copysign
+  local.get $0
+  f64.mul
+  local.set $4
+  local.get $3
+  f64.const 0.921875
+  f64.gt
+  if
+   f64.const 0.000017294893
+   local.get $3
+   f64.mul
+   f64.const 0.00038320868
+   f64.sub
+   local.set $1
+   f64.const 0.00388393435
+   local.get $3
+   f64.mul
+   f64.const 0.0242545605
+   f64.sub
+   local.set $2
+   local.get $1
+   local.get $4
+   f64.mul
+   local.get $2
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $3
+   f64.mul
+   f64.const 0.106777847
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $3
+   f64.mul
+   f64.const 0.634846687
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $3
+   f64.mul
+   f64.const 0.128717512
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $3
+   f64.mul
+   local.get $3
+   f64.add
+   local.set $1
+   local.get $1
+   f64.neg
+   call $~lib/math/NativeMath.exp
+   local.set $1
+   f64.const 1
+   local.get $1
+   f64.sub
+   local.set $1
+   local.get $1
+   local.get $0
+   f64.copysign
+   local.set $1
+  else
+   f64.const -0.000599104969
+   local.set $1
+   local.get $1
+   local.get $4
+   f64.mul
+   f64.const 0.00499339588
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $4
+   f64.mul
+   f64.const 0.0267667342
+   f64.sub
+   local.set $1
+   local.get $1
+   local.get $4
+   f64.mul
+   f64.const 0.112818025
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $4
+   f64.mul
+   f64.const 0.376124859
+   f64.sub
+   local.set $1
+   local.get $1
+   local.get $4
+   f64.mul
+   f64.const 0.128379151
+   f64.add
+   local.set $1
+   local.get $1
+   local.get $0
+   f64.mul
+   local.get $0
+   f64.add
+   local.set $1
+  end
+  local.get $1
  )
  (func $assembly/float/Randomf64.maxwell.cdf (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)

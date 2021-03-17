@@ -15368,68 +15368,91 @@
    f64.lt
    br_if $__inlined_func$assembly/float/Randomf64.maxwell.cdf
    drop
-   block $__inlined_func$assembly/utils/erf_approx (result f64)
-    local.get $0
-    local.get $1
-    f64.div
-    local.tee $1
-    f64.const 1.4142135623730951
-    f64.div
-    local.tee $3
-    f64.abs
-    local.tee $2
-    f64.const 1e-06
-    f64.le
-    if
-     local.get $3
-     f64.const 1.1283791670955126
-     f64.mul
-     br $__inlined_func$assembly/utils/erf_approx
-    end
-    f64.const 1
-    f64.const 1
-    local.get $2
-    f64.const 0.3275911
-    f64.mul
-    f64.const 1
-    f64.add
-    f64.div
-    local.tee $0
-    f64.const 1.061405429
-    f64.mul
-    f64.const -1.453152027
-    f64.add
-    local.get $0
-    f64.mul
-    f64.const 1.421413741
-    f64.add
-    local.get $0
-    f64.mul
-    f64.const -0.284496736
-    f64.add
-    local.get $0
-    f64.mul
-    f64.const 0.254829592
-    f64.add
-    local.get $0
-    f64.mul
-    local.get $2
-    f64.neg
-    local.get $2
-    f64.mul
-    call $~lib/math/NativeMath.exp
-    f64.mul
-    f64.sub
-    local.get $3
-    f64.copysign
-   end
+   local.get $0
    local.get $1
+   f64.div
+   local.tee $3
+   f64.const 1.4142135623730951
+   f64.div
+   local.tee $2
+   local.get $2
+   f64.mul
+   local.set $1
+   local.get $2
+   f64.abs
+   local.tee $0
+   f64.const 0.921875
+   f64.gt
+   if (result f64)
+    f64.const 1
+    local.get $0
+    f64.const 0.000017294893
+    f64.mul
+    f64.const 0.00038320868
+    f64.sub
+    local.get $1
+    f64.mul
+    local.get $0
+    f64.const 0.00388393435
+    f64.mul
+    f64.const 0.0242545605
+    f64.sub
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 0.106777847
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 0.634846687
+    f64.add
+    local.get $0
+    f64.mul
+    f64.const 0.128717512
+    f64.add
+    local.get $0
+    f64.mul
+    local.get $0
+    f64.add
+    f64.neg
+    call $~lib/math/NativeMath.exp
+    f64.sub
+    local.get $2
+    f64.copysign
+   else
+    local.get $1
+    f64.const -0.000599104969
+    f64.mul
+    f64.const 0.00499339588
+    f64.add
+    local.get $1
+    f64.mul
+    f64.const 0.0267667342
+    f64.sub
+    local.get $1
+    f64.mul
+    f64.const 0.112818025
+    f64.add
+    local.get $1
+    f64.mul
+    f64.const 0.376124859
+    f64.sub
+    local.get $1
+    f64.mul
+    f64.const 0.128379151
+    f64.add
+    local.get $2
+    f64.mul
+    local.get $2
+    f64.add
+   end
+   local.get $3
    f64.const 0.7978845608028654
    f64.mul
-   local.get $1
+   local.get $3
    f64.const -0.5
    f64.mul
-   local.get $1
+   local.get $3
    f64.mul
    call $~lib/math/NativeMath.exp
    f64.mul
