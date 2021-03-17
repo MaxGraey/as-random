@@ -4219,36 +4219,36 @@
      i32.trunc_f64_u
      local.tee $3
      i32.const 254
-     i32.gt_u
+     i32.le_u
      if
       local.get $3
-      i32.const 1
+      i32.const 3
+      i32.shl
+      i32.const 8032
       i32.add
-      f64.convert_i32_u
-      local.tee $1
-      f64.const 0.5
-      f64.sub
-      local.get $1
-      call $~lib/math/NativeMath.log
-      f64.mul
-      local.get $1
-      f64.sub
-      f64.const 0.9189385332046727
-      f64.add
-      f64.const 1
-      local.get $1
-      f64.const 12
-      f64.mul
-      f64.div
-      f64.add
+      f64.load
       br $__inlined_func$assembly/utils/logFactorial
      end
      local.get $3
-     i32.const 3
-     i32.shl
-     i32.const 8032
+     i32.const 1
      i32.add
-     f64.load
+     f64.convert_i32_u
+     local.tee $1
+     f64.const 0.5
+     f64.sub
+     local.get $1
+     call $~lib/math/NativeMath.log
+     f64.mul
+     local.get $1
+     f64.sub
+     f64.const 0.9189385332046727
+     f64.add
+     f64.const 1
+     local.get $1
+     f64.const 12
+     f64.mul
+     f64.div
+     f64.add
     end
     f64.sub
     f64.le

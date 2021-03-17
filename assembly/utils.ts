@@ -107,11 +107,9 @@ function splitMix64(h: u64): u64 {
 // https://www.johndcook.com/blog/2010/08/16/how-to-compute-log-factorial
 export function logFactorial(n: u32): f64 {
   const HALF_LOG_2PI = 0.9189385332046727; // 0.5 * Math.log(2 * Math.PI)
-  if (n > 254) {
-    let x = f64(n + 1);
-    return (x - 0.5) * Math.log(x) - x + HALF_LOG_2PI + 1.0 / (12.0 * x);
-  }
-  return load<f64>(PRECOMP_254 + (n << 3));
+  if (n <= 254) return load<f64>(PRECOMP_254 + (n << 3));
+  let x = f64(n + 1);
+  return (x - 0.5) * Math.log(x) - x + HALF_LOG_2PI + 1.0 / (12.0 * x);
 }
 
 // Returns the value ln(gamma(x)).

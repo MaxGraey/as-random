@@ -7012,37 +7012,37 @@
   (local $1 f64)
   local.get $0
   i32.const 254
-  i32.gt_u
+  i32.le_u
   if
+   global.get $assembly/utils/PRECOMP_254
    local.get $0
-   i32.const 1
+   i32.const 3
+   i32.shl
    i32.add
-   f64.convert_i32_u
-   local.set $1
-   local.get $1
-   f64.const 0.5
-   f64.sub
-   local.get $1
-   call $~lib/math/NativeMath.log
-   f64.mul
-   local.get $1
-   f64.sub
-   f64.const 0.9189385332046727
-   f64.add
-   f64.const 1
-   f64.const 12
-   local.get $1
-   f64.mul
-   f64.div
-   f64.add
+   f64.load
    return
   end
-  global.get $assembly/utils/PRECOMP_254
   local.get $0
-  i32.const 3
-  i32.shl
+  i32.const 1
   i32.add
-  f64.load
+  f64.convert_i32_u
+  local.set $1
+  local.get $1
+  f64.const 0.5
+  f64.sub
+  local.get $1
+  call $~lib/math/NativeMath.log
+  f64.mul
+  local.get $1
+  f64.sub
+  f64.const 0.9189385332046727
+  f64.add
+  f64.const 1
+  f64.const 12
+  local.get $1
+  f64.mul
+  f64.div
+  f64.add
  )
  (func $assembly/float/Randomf64.poisson (param $0 f64) (result f64)
   (local $1 f64)
