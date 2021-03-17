@@ -4,7 +4,7 @@ Generate random numbers with various distributions. Also provide some common pro
 
 ### Status
 
-Work in Progress
+Work in Progress. Untested
 
 ### Features
 
