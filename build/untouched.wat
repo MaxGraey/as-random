@@ -7207,76 +7207,91 @@
  (func $assembly/utils/logGamma (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 f64)
+  (local $3 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.abs
+  local.set $1
+  local.get $1
+  f64.const 8.470329472543003e-22
+  f64.lt
+  if
+   local.get $1
+   call $~lib/math/NativeMath.log
+   f64.neg
+   return
+  end
   local.get $0
   f64.const 5.5
   f64.add
-  local.set $1
-  local.get $1
+  local.set $2
+  local.get $2
   local.get $0
   f64.const 0.5
   f64.add
-  local.get $1
+  local.get $2
   call $~lib/math/NativeMath.log
   f64.mul
   f64.sub
-  local.set $1
-  f64.const 1.000000000190015
   local.set $2
-  local.get $2
+  f64.const 1.000000000190015
+  local.set $3
+  local.get $3
   f64.const 76.18009172947146
   local.get $0
   f64.const 1
   f64.add
   f64.div
   f64.add
-  local.set $2
-  local.get $2
+  local.set $3
+  local.get $3
   f64.const 86.50532032941678
   local.get $0
   f64.const 2
   f64.add
   f64.div
   f64.sub
-  local.set $2
-  local.get $2
+  local.set $3
+  local.get $3
   f64.const 24.01409824083091
   local.get $0
   f64.const 3
   f64.add
   f64.div
   f64.add
-  local.set $2
-  local.get $2
+  local.set $3
+  local.get $3
   f64.const 1.231739572450155
   local.get $0
   f64.const 4
   f64.add
   f64.div
   f64.sub
-  local.set $2
-  local.get $2
+  local.set $3
+  local.get $3
   f64.const 0.001208650973866179
   local.get $0
   f64.const 5
   f64.add
   f64.div
   f64.add
-  local.set $2
-  local.get $2
+  local.set $3
+  local.get $3
   f64.const 5.395239384953e-06
   local.get $0
   f64.const 6
   f64.add
   f64.div
   f64.sub
-  local.set $2
+  local.set $3
   f64.const 2.5066282746310007
-  local.get $2
+  local.get $3
   f64.mul
   local.get $0
   f64.div
   call $~lib/math/NativeMath.log
-  local.get $1
+  local.get $2
   f64.sub
  )
  (func $~lib/math/tan_kern (param $0 f64) (param $1 f64) (param $2 i32) (result f64)

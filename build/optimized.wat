@@ -4267,6 +4267,17 @@
  (func $assembly/utils/logGamma (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
+  f64.abs
+  local.tee $1
+  f64.const 8.470329472543003e-22
+  f64.lt
+  if
+   local.get $1
+   call $~lib/math/NativeMath.log
+   f64.neg
+   return
+  end
+  local.get $0
   f64.const 5.5
   f64.add
   local.tee $1

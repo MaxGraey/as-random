@@ -116,6 +116,11 @@ export function logFactorial(n: u32): f64 {
 
 // Returns the value ln(gamma(x)).
 export function logGamma(x: f64): f64 {
+  let ax = Math.abs(x);
+  if (ax < 8.470329472543003e-22) {  // |x| < 2**-70
+		return -Math.log(ax);
+	}
+
   let t: f64, r: f64;
   t  = x + 5.5;
   t -= (x + 0.5) * Math.log(t);
