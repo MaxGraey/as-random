@@ -15,6 +15,19 @@ Work in Progress. Untested
 - All distributions in integer namespace (Randomi32 / Randomi64) \
   don't use floating point arithmetics
 
+
+### Usage
+
+```ts
+import { Randomf64 } from "as-random";
+
+const rndSample = Randomf64.normal();
+const pdfSample = Randomf64.normal.pdf(0.5);
+const cdfSample = Randomf64.normal.cdf(0.5);
+const median1   = Randomf64.normal.quantile(0.5);
+const median2   = Randomf64.normal.median();
+```
+
 ---
 ### Discrete integer distributions:
 
