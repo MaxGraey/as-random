@@ -685,6 +685,68 @@ export namespace Randomf64 {
     return mean + sigma * Math.log(u / (1.0 - u));
   }
 
+  export namespace logistic {
+    /** Eval the probability mass function for Logistic distribution. */
+    export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (sigma === 0.0) return x === mean ? Infinity : 0.0;
+      let z = Math.exp(Math.abs((x - mean) / sigma));
+      return z / (sigma * (1.0 + z) * (1.0 + z));
+    }
+
+    /** Eval the cumulative density function for Logistic distribution. */
+    export function cdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (sigma === 0.0) return f64(x >= mean);
+      let z = (x - mean) / sigma;
+	    return 1.0 / (1.0 + Math.exp(-z));
+    }
+
+    /** Eval the quantile function for Logistic distribution. */
+    export function quantile(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (sigma === 0.0) return mean;
+      x = clamp01(x);
+      return mean + sigma * Math.log(x / (1.0 - x));
+    }
+
+    /** Returns the mean value of Logistic distribution. */
+    export function mean(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the median value of Logistic distribution. */
+    export function median(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the standard deviation of Logistic distribution. */
+    export function stdev(amean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return sigma * (Math.PI / Math.sqrt(3.0));
+    }
+
+    /** Returns the variance of Logistic distribution. */
+    export function variance(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return sigma * sigma * (Math.PI * Math.PI / 3.0);
+    }
+
+    /** Returns the skewness of Logistic distribution. */
+    export function skewness(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Logistic distribution. */
+    export function entropy(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return Math.log(sigma) + 2.0;
+    }
+  }
+
   /** Cauchy distribution. */
   export function cauchy(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
     return mean + sigma * Math.tan(Math.PI * (Math.random() - 0.5));
@@ -1667,6 +1729,68 @@ export namespace Randomf32 {
   export function logistic(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
     let u = Mathf.random();
     return mean + sigma * Mathf.log(u / (1.0 - u));
+  }
+
+  export namespace logistic {
+    /** Eval the probability mass function for Logistic distribution. */
+    export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      if (sigma === 0.0) return x === mean ? Infinity : 0.0;
+      let z = Mathf.exp(Mathf.abs((x - mean) / sigma));
+      return z / (sigma * (1 + z) * (1 + z));
+    }
+
+    /** Eval the cumulative density function for Logistic distribution. */
+    export function cdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      if (sigma === 0.0) return f32(x >= mean);
+      let z = (x - mean) / sigma;
+	    return 1.0 / (1 + Mathf.exp(-z));
+    }
+
+    /** Eval the quantile function for Logistic distribution. */
+    export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      if (sigma === 0.0) return mean;
+      x = clamp01(x);
+      return mean + sigma * Mathf.log(x / (1 - x));
+    }
+
+    /** Returns the mean value of Logistic distribution. */
+    export function mean(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the median value of Logistic distribution. */
+    export function median(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the standard deviation of Logistic distribution. */
+    export function stdev(amean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return sigma * (Mathf.PI / Mathf.sqrt(3.0));
+    }
+
+    /** Returns the variance of Logistic distribution. */
+    export function variance(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return sigma * sigma * (Mathf.PI * Mathf.PI / 3.0);
+    }
+
+    /** Returns the skewness of Logistic distribution. */
+    export function skewness(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Logistic distribution. */
+    export function entropy(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return Mathf.log(sigma) + 2.0;
+    }
   }
 
   /** Cauchy distribution. */

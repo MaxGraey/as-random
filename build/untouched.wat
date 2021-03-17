@@ -158,6 +158,15 @@
  (export "Randomf32.pareto.skewness" (func $assembly/float/Randomf32.pareto.skewness@varargs))
  (export "Randomf32.pareto.entropy" (func $assembly/float/Randomf32.pareto.entropy@varargs))
  (export "Randomf32.logistic" (func $assembly/float/Randomf32.logistic@varargs))
+ (export "Randomf32.logistic.pdf" (func $assembly/float/Randomf32.logistic.pdf@varargs))
+ (export "Randomf32.logistic.cdf" (func $assembly/float/Randomf32.logistic.cdf@varargs))
+ (export "Randomf32.logistic.quantile" (func $assembly/float/Randomf32.logistic.quantile@varargs))
+ (export "Randomf32.logistic.mean" (func $assembly/float/Randomf32.logistic.mean@varargs))
+ (export "Randomf32.logistic.median" (func $assembly/float/Randomf32.logistic.median@varargs))
+ (export "Randomf32.logistic.stdev" (func $assembly/float/Randomf32.logistic.stdev@varargs))
+ (export "Randomf32.logistic.variance" (func $assembly/float/Randomf32.logistic.variance@varargs))
+ (export "Randomf32.logistic.skewness" (func $assembly/float/Randomf32.logistic.skewness@varargs))
+ (export "Randomf32.logistic.entropy" (func $assembly/float/Randomf32.logistic.entropy@varargs))
  (export "Randomf32.cauchy" (func $assembly/float/Randomf32.cauchy@varargs))
  (export "Randomf32.gumbel" (func $assembly/float/Randomf32.gumbel@varargs))
  (export "Randomf32.laplace" (func $assembly/float/Randomf32.laplace@varargs))
@@ -258,6 +267,15 @@
  (export "Randomf64.pareto.skewness" (func $assembly/float/Randomf64.pareto.skewness@varargs))
  (export "Randomf64.pareto.entropy" (func $assembly/float/Randomf64.pareto.entropy@varargs))
  (export "Randomf64.logistic" (func $assembly/float/Randomf64.logistic@varargs))
+ (export "Randomf64.logistic.pdf" (func $assembly/float/Randomf64.logistic.pdf@varargs))
+ (export "Randomf64.logistic.cdf" (func $assembly/float/Randomf64.logistic.cdf@varargs))
+ (export "Randomf64.logistic.quantile" (func $assembly/float/Randomf64.logistic.quantile@varargs))
+ (export "Randomf64.logistic.mean" (func $assembly/float/Randomf64.logistic.mean@varargs))
+ (export "Randomf64.logistic.median" (func $assembly/float/Randomf64.logistic.median@varargs))
+ (export "Randomf64.logistic.stdev" (func $assembly/float/Randomf64.logistic.stdev@varargs))
+ (export "Randomf64.logistic.variance" (func $assembly/float/Randomf64.logistic.variance@varargs))
+ (export "Randomf64.logistic.skewness" (func $assembly/float/Randomf64.logistic.skewness@varargs))
+ (export "Randomf64.logistic.entropy" (func $assembly/float/Randomf64.logistic.entropy@varargs))
  (export "Randomf64.cauchy" (func $assembly/float/Randomf64.cauchy@varargs))
  (export "Randomf64.gumbel" (func $assembly/float/Randomf64.gumbel@varargs))
  (export "Randomf64.laplace" (func $assembly/float/Randomf64.laplace@varargs))
@@ -4976,6 +4994,198 @@
   f32.div
   call $~lib/math/NativeMathf.log
   f32.mul
+  f32.add
+ )
+ (func $assembly/float/Randomf32.logistic.pdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  local.get $2
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $2
+  f32.const 0
+  f32.eq
+  if
+   local.get $0
+   local.get $1
+   f32.eq
+   if (result f32)
+    f32.const inf
+   else
+    f32.const 0
+   end
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.sub
+  local.get $2
+  f32.div
+  local.set $3
+  local.get $3
+  f32.abs
+  call $~lib/math/NativeMathf.exp
+  local.set $3
+  local.get $3
+  local.get $2
+  f32.const 1
+  local.get $3
+  f32.add
+  f32.mul
+  f32.const 1
+  local.get $3
+  f32.add
+  f32.mul
+  f32.div
+ )
+ (func $assembly/float/Randomf32.logistic.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  local.get $2
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $2
+  f32.const 0
+  f32.eq
+  if
+   local.get $0
+   local.get $1
+   f32.ge
+   f32.convert_i32_u
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.sub
+  local.get $2
+  f32.div
+  local.set $3
+  f32.const 1
+  f32.const 1
+  local.get $3
+  f32.neg
+  call $~lib/math/NativeMathf.exp
+  f32.add
+  f32.div
+ )
+ (func $assembly/float/Randomf32.logistic.quantile (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  local.get $2
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $2
+  f32.const 0
+  f32.eq
+  if
+   local.get $1
+   return
+  end
+  local.get $0
+  local.set $3
+  local.get $3
+  f32.const 0
+  f32.max
+  f32.const 1
+  f32.min
+  local.set $0
+  local.get $1
+  local.get $2
+  local.get $0
+  f32.const 1
+  local.get $0
+  f32.sub
+  f32.div
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  f32.add
+ )
+ (func $assembly/float/Randomf32.logistic.mean (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randomf32.logistic.median (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randomf32.logistic.stdev (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  global.get $~lib/math/NativeMathf.PI
+  f32.const 3
+  local.set $2
+  local.get $2
+  f32.sqrt
+  f32.div
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.logistic.variance (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  local.get $1
+  f32.mul
+  global.get $~lib/math/NativeMathf.PI
+  global.get $~lib/math/NativeMathf.PI
+  f32.mul
+  f32.const 3
+  f32.div
+  f32.mul
+ )
+ (func $assembly/float/Randomf32.logistic.skewness (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 0
+ )
+ (func $assembly/float/Randomf32.logistic.entropy (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  call $~lib/math/NativeMathf.log
+  f32.const 2
   f32.add
  )
  (func $~lib/math/NativeMathf.tan (param $0 f32) (result f32)
@@ -13114,6 +13324,198 @@
   f64.mul
   f64.add
  )
+ (func $assembly/float/Randomf64.logistic.pdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  local.get $2
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $2
+  f64.const 0
+  f64.eq
+  if
+   local.get $0
+   local.get $1
+   f64.eq
+   if (result f64)
+    f64.const inf
+   else
+    f64.const 0
+   end
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.sub
+  local.get $2
+  f64.div
+  local.set $3
+  local.get $3
+  f64.abs
+  call $~lib/math/NativeMath.exp
+  local.set $3
+  local.get $3
+  local.get $2
+  f64.const 1
+  local.get $3
+  f64.add
+  f64.mul
+  f64.const 1
+  local.get $3
+  f64.add
+  f64.mul
+  f64.div
+ )
+ (func $assembly/float/Randomf64.logistic.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  local.get $2
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $2
+  f64.const 0
+  f64.eq
+  if
+   local.get $0
+   local.get $1
+   f64.ge
+   f64.convert_i32_u
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.sub
+  local.get $2
+  f64.div
+  local.set $3
+  f64.const 1
+  f64.const 1
+  local.get $3
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  f64.add
+  f64.div
+ )
+ (func $assembly/float/Randomf64.logistic.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  local.get $2
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $2
+  f64.const 0
+  f64.eq
+  if
+   local.get $1
+   return
+  end
+  local.get $0
+  local.set $3
+  local.get $3
+  f64.const 0
+  f64.max
+  f64.const 1
+  f64.min
+  local.set $0
+  local.get $1
+  local.get $2
+  local.get $0
+  f64.const 1
+  local.get $0
+  f64.sub
+  f64.div
+  call $~lib/math/NativeMath.log
+  f64.mul
+  f64.add
+ )
+ (func $assembly/float/Randomf64.logistic.mean (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randomf64.logistic.median (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randomf64.logistic.stdev (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  global.get $~lib/math/NativeMath.PI
+  f64.const 3
+  local.set $2
+  local.get $2
+  f64.sqrt
+  f64.div
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.logistic.variance (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  local.get $1
+  f64.mul
+  global.get $~lib/math/NativeMath.PI
+  global.get $~lib/math/NativeMath.PI
+  f64.mul
+  f64.const 3
+  f64.div
+  f64.mul
+ )
+ (func $assembly/float/Randomf64.logistic.skewness (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 0
+ )
+ (func $assembly/float/Randomf64.logistic.entropy (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  call $~lib/math/NativeMath.log
+  f64.const 2
+  f64.add
+ )
  (func $assembly/float/Randomf64.cauchy (param $0 f64) (param $1 f64) (result f64)
   local.get $0
   local.get $1
@@ -17960,6 +18362,195 @@
   local.get $1
   call $assembly/float/Randomf32.logistic
  )
+ (func $assembly/float/Randomf32.logistic.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.logistic.pdf
+ )
+ (func $assembly/float/Randomf32.logistic.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.logistic.cdf
+ )
+ (func $assembly/float/Randomf32.logistic.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf32.logistic.quantile
+ )
+ (func $assembly/float/Randomf32.logistic.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.logistic.mean
+ )
+ (func $assembly/float/Randomf32.logistic.median@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.logistic.median
+ )
+ (func $assembly/float/Randomf32.logistic.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.logistic.stdev
+ )
+ (func $assembly/float/Randomf32.logistic.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.logistic.variance
+ )
+ (func $assembly/float/Randomf32.logistic.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.logistic.skewness
+ )
+ (func $assembly/float/Randomf32.logistic.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf32.logistic.entropy
+ )
  (func $assembly/float/Randomf32.cauchy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
@@ -19887,6 +20478,195 @@
   local.get $0
   local.get $1
   call $assembly/float/Randomf64.logistic
+ )
+ (func $assembly/float/Randomf64.logistic.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.logistic.pdf
+ )
+ (func $assembly/float/Randomf64.logistic.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.logistic.cdf
+ )
+ (func $assembly/float/Randomf64.logistic.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randomf64.logistic.quantile
+ )
+ (func $assembly/float/Randomf64.logistic.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.logistic.mean
+ )
+ (func $assembly/float/Randomf64.logistic.median@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.logistic.median
+ )
+ (func $assembly/float/Randomf64.logistic.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.logistic.stdev
+ )
+ (func $assembly/float/Randomf64.logistic.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.logistic.variance
+ )
+ (func $assembly/float/Randomf64.logistic.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.logistic.skewness
+ )
+ (func $assembly/float/Randomf64.logistic.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randomf64.logistic.entropy
  )
  (func $assembly/float/Randomf64.cauchy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
