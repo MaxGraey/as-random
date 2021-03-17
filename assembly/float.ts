@@ -772,7 +772,9 @@ export namespace Randomf64 {
       return mean + sigma * Math.tan(Math.PI * (clamp01(x) - 0.5));
     }
 
-    /** Returns the mean value of Cauchy distribution. */
+    /** Returns the mean value of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function mean(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       return NaN;
     }
@@ -783,17 +785,23 @@ export namespace Randomf64 {
       return mean;
     }
 
-    /** Returns the standard deviation of Cauchy distribution. */
+    /** Returns the standard deviation of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function stdev(amean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       return NaN;
     }
 
-    /** Returns the variance of Cauchy distribution. */
+    /** Returns the variance of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function variance(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       return NaN;
     }
 
-    /** Returns the skewness of Cauchy distribution. */
+    /** Returns the skewness of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function skewness(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       return NaN;
     }
@@ -1871,7 +1879,9 @@ export namespace Randomf32 {
       return mean + sigma * Mathf.tan(Mathf.PI * (clamp01(x) - 0.5));
     }
 
-    /** Returns the mean value of Cauchy distribution. */
+    /** Returns the mean value of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function mean(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       return NaN;
     }
@@ -1882,17 +1892,23 @@ export namespace Randomf32 {
       return mean;
     }
 
-    /** Returns the standard deviation of Cauchy distribution. */
+    /** Returns the standard deviation of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function stdev(amean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       return NaN;
     }
 
-    /** Returns the variance of Cauchy distribution. */
+    /** Returns the variance of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function variance(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       return NaN;
     }
 
-    /** Returns the skewness of Cauchy distribution. */
+    /** Returns the skewness of Cauchy distribution.
+     * This undefined and always return NaN.
+     */
     export function skewness(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       return NaN;
     }
