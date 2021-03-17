@@ -131,6 +131,10 @@ export function logGamma(x: f64): f64 {
   return Math.log(2.5066282746310005 * r / x) - t;
 }
 
+// Returns the value ln(beta(x)).
+export function logBeta(a: f64, b: f64): f64 {
+  return logGamma(a) + logGamma(b) - logGamma(a + b);
+}
 
 // Abs error less than ~1e-9
 export function erf_approx(x: f64): f64 {
