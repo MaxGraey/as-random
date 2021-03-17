@@ -1,6 +1,6 @@
 # AssemblyScript Random Library
 
-Generate random numbers with various distributions.
+Generate random numbers with various distributions. Also provide some common probability functions for such distributions.
 
 ### Status
 
