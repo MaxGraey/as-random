@@ -965,13 +965,13 @@ export namespace Randomf64 {
 
   /** Gamma distribution. */
   export function gamma(alpha: f64 = 1.0, beta: f64 = 1.0): f64 {
-    const EPS = 1e-7;
+    const eps = 1e-7;
 
     if (isNaN(alpha) || isNaN(beta)) {
       return alpha + beta;
     }
 
-    if (alpha <= EPS || beta <= EPS) {
+    if (alpha <= eps || beta <= eps) {
       return 0.0;
     }
 
@@ -984,41 +984,41 @@ export namespace Randomf64 {
       // variables with non-integral shape parameters",
       // Applied Statistics, (1977), 26, No. 1, p71-74
 
-      const C0 = 1.3862943611198906; // log(4.0)
-      const C1 = 2.5040773967762740; // 1.0 + log(4.5)
+      const c0 = 1.3862943611198906; // log(4.0)
+      const c1 = 2.5040773967762740; // 1.0 + log(4.5)
 
       let a0 = Math.sqrt(2.0 * alpha - 1.0);
-      let a1 = alpha - C0;
+      let a1 = alpha - c0;
       let a2 = alpha + a0;
 
       while (true) {
         let u1 = Math.random();
-        if (u1 <= EPS || u1 >= 1.0 - EPS) continue;
+        if (u1 <= eps || u1 >= 1.0 - eps) continue;
 
         let u2 = 1.0 - Math.random();
         let v = Math.log(u1 / (1.0 - u1)) / a0;
         let x = alpha * Math.exp(v);
         let z = u1 * u1 * u2;
         let r = a1 + a2 * v - x;
-        if (r + C1 - 4.5 * z >= 0.0 || r >= Math.log(z)) {
+        if (r + c1 - 4.5 * z >= 0.0 || r >= Math.log(z)) {
           return x * beta;
         }
       }
     } else {
       // Uses Kennedy & Gentle, "Statistical Computing"
 
-      let B = (Math.E + alpha) / Math.E;
+      let b    = (Math.E + alpha) / Math.E;
       let deca = alpha - 1.0;
       let inva = 1.0 / alpha;
 
       while (true) {
         let u1 = Math.random();
         let u2 = Math.random();
-        let p  = B * u1;
+        let p  = b * u1;
 
         let x = p <= 1.0
           ? Math.pow(p, inva)
-          :-Math.log((B - p) / alpha);
+          :-Math.log((b - p) / alpha);
 
         let t = p > 1.0
           ? Math.pow(x, deca)
@@ -1787,13 +1787,13 @@ export namespace Randomf32 {
 
   /** Gamma distribution. */
   export function gamma(alpha: f32 = 1.0, beta: f32 = 1.0): f32 {
-    const EPS: f32 = 1e-6;
+    const eps: f32 = 1e-6;
 
     if (isNaN(alpha) || isNaN(beta)) {
       return alpha + beta;
     }
 
-    if (alpha <= EPS || beta <= EPS) {
+    if (alpha <= eps || beta <= eps) {
       return 0.0;
     }
 
@@ -1806,41 +1806,41 @@ export namespace Randomf32 {
       // variables with non-integral shape parameters",
       // Applied Statistics, (1977), 26, No. 1, p71-74
 
-      const C0: f32 = 1.3862943611198906; // log(4.0)
-      const C1: f32 = 2.5040773967762740; // 1.0 + log(4.5)
+      const c0: f32 = 1.3862943611198906; // log(4.0)
+      const c1: f32 = 2.5040773967762740; // 1.0 + log(4.5)
 
       let a0 = Mathf.sqrt(2.0 * alpha - 1.0);
-      let a1 = alpha - C0;
+      let a1 = alpha - c0;
       let a2 = alpha + a0;
 
       while (true) {
         let u1 = Mathf.random();
-        if (u1 <= EPS || u1 >= 1.0 - EPS) continue;
+        if (u1 <= eps || u1 >= 1.0 - eps) continue;
 
         let u2 = 1.0 as f32 - Mathf.random();
         let v = Mathf.log(u1 / (1.0 as f32 - u1)) / a0;
         let x = alpha * Mathf.exp(v);
         let z = u1 * u1 * u2;
         let r = a1 + a2 * v - x;
-        if (r + C1 - 4.5 * z >= 0.0 || r >= Mathf.log(z)) {
+        if (r + c1 - 4.5 * z >= 0.0 || r >= Mathf.log(z)) {
           return x * beta;
         }
       }
     } else {
       // Uses Kennedy & Gentle, "Statistical Computing"
 
-      let B: f32 = (Mathf.E + alpha) / Mathf.E;
+      let b    = (Mathf.E + alpha) / Mathf.E;
       let deca = alpha - 1.0 as f32;
       let inva = 1.0 as f32 / alpha;
 
       while (true) {
         let u1 = Mathf.random();
         let u2 = Mathf.random();
-        let p  = B * u1;
+        let p  = b * u1;
 
         let x = p <= 1.0
           ? Mathf.pow(p, inva)
-          :-Mathf.log((B - p) / alpha);
+          :-Mathf.log((b - p) / alpha);
 
         let t = p > 1.0
           ? Mathf.pow(x, deca)
