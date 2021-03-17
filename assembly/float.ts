@@ -757,7 +757,7 @@ export namespace Randomf64 {
     export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (sigma <= 0.0) return NaN;
       let z = (x - mean) / sigma;
-	    return 1.0 / (Math.PI * sigma * (1.0 + z * z));
+      return 1.0 / (Math.PI * sigma * (1.0 + z * z));
     }
 
     /** Eval the cumulative density function for Cauchy distribution. */
@@ -1836,7 +1836,7 @@ export namespace Randomf32 {
     export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (sigma <= 0.0) return NaN;
       let z = (x - mean) / sigma;
-	    return 1.0 / (Mathf.PI * sigma * (1 + z * z));
+      return 1.0 / (Mathf.PI * sigma * (1 + z * z));
     }
 
     /** Eval the cumulative density function for Cauchy distribution. */
