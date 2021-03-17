@@ -752,6 +752,59 @@ export namespace Randomf64 {
     return mean + sigma * Math.tan(Math.PI * (Math.random() - 0.5));
   }
 
+  export namespace cauchy {
+    /** Eval the probability mass function for Cauchy distribution. */
+    export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma <= 0.0) return NaN;
+      let z = (x - mean) / sigma;
+	    return 1.0 / (Math.PI * sigma * (1.0 + z * z));
+    }
+
+    /** Eval the cumulative density function for Cauchy distribution. */
+    export function cdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma <= 0.0) return NaN;
+      return 1.0 / Math.PI * Math.atan2(x - mean, sigma) + 0.5;
+    }
+
+    /** Eval the quantile function for Cauchy distribution. */
+    export function quantile(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma <= 0.0) return NaN;
+      return mean + sigma * Math.tan(Math.PI * (clamp01(x) - 0.5));
+    }
+
+    /** Returns the mean value of Cauchy distribution. */
+    export function mean(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return NaN;
+    }
+
+    /** Returns the median value of Cauchy distribution. */
+    export function median(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma <= 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the standard deviation of Cauchy distribution. */
+    export function stdev(amean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return NaN;
+    }
+
+    /** Returns the variance of Cauchy distribution. */
+    export function variance(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return NaN;
+    }
+
+    /** Returns the skewness of Cauchy distribution. */
+    export function skewness(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return NaN;
+    }
+
+    /** Returns the differential entropy of Cauchy distribution. */
+    export function entropy(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (sigma <= 0.0) return NaN;
+      return Math.log(sigma) + 2.5310242469692907;
+    }
+  }
+
   /** Gumbel distribution. */
   export function gumbel(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
     return alpha - beta * Math.log(-Math.log(Math.random()));
@@ -1796,6 +1849,59 @@ export namespace Randomf32 {
   /** Cauchy distribution. */
   export function cauchy(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
     return mean + sigma * Mathf.tan(Mathf.PI * (Mathf.random() - 0.5));
+  }
+
+  export namespace cauchy {
+    /** Eval the probability mass function for Cauchy distribution. */
+    export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma <= 0.0) return NaN;
+      let z = (x - mean) / sigma;
+	    return 1.0 / (Mathf.PI * sigma * (1 + z * z));
+    }
+
+    /** Eval the cumulative density function for Cauchy distribution. */
+    export function cdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma <= 0.0) return NaN;
+      return 1.0 / Mathf.PI * Mathf.atan2(x - mean, sigma) + 0.5;
+    }
+
+    /** Eval the quantile function for Cauchy distribution. */
+    export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma <= 0.0) return NaN;
+      return mean + sigma * Mathf.tan(Mathf.PI * (clamp01(x) - 0.5));
+    }
+
+    /** Returns the mean value of Cauchy distribution. */
+    export function mean(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return NaN;
+    }
+
+    /** Returns the median value of Cauchy distribution. */
+    export function median(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma <= 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the standard deviation of Cauchy distribution. */
+    export function stdev(amean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return NaN;
+    }
+
+    /** Returns the variance of Cauchy distribution. */
+    export function variance(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return NaN;
+    }
+
+    /** Returns the skewness of Cauchy distribution. */
+    export function skewness(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return NaN;
+    }
+
+    /** Returns the differential entropy of Cauchy distribution. */
+    export function entropy(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (sigma <= 0.0) return NaN;
+      return Mathf.log(sigma) + 2.5310242469692907;
+    }
   }
 
   /** Gumbel distribution. */
