@@ -186,251 +186,251 @@
  (global $assembly/utils/RND_S0_64 (mut i64) (i64.const 0))
  (global $assembly/utils/RND_S1_64 (mut i64) (i64.const 0))
  (global $~argumentsLength (mut i32) (i32.const 0))
- (export "Randomf32.seed" (func $assembly/float/Randomf32.seed))
- (export "Randomf32.uniform" (func $assembly/float/Randomf32.uniform@varargs))
- (export "Randomf32.uniform.pdf" (func $assembly/float/Randomf32.uniform.pdf@varargs))
- (export "Randomf32.uniform.cdf" (func $assembly/float/Randomf32.uniform.cdf@varargs))
- (export "Randomf32.uniform.quantile" (func $assembly/float/Randomf32.uniform.quantile@varargs))
- (export "Randomf32.uniform.mean" (func $assembly/float/Randomf32.uniform.mean@varargs))
- (export "Randomf32.uniform.median" (func $assembly/float/Randomf32.uniform.mean@varargs))
- (export "Randomf32.uniform.stdev" (func $assembly/float/Randomf32.uniform.stdev@varargs))
- (export "Randomf32.uniform.variance" (func $assembly/float/Randomf32.uniform.variance@varargs))
- (export "Randomf32.uniform.skewness" (func $assembly/float/Randomf32.uniform.skewness@varargs))
- (export "Randomf32.uniform.entropy" (func $assembly/float/Randomf32.uniform.entropy@varargs))
- (export "Randomf32.bernoulli" (func $assembly/float/Randomf32.bernoulli@varargs))
- (export "Randomf32.bernoulli.pmf" (func $assembly/float/Randomf32.bernoulli.pmf@varargs))
- (export "Randomf32.bernoulli.cdf" (func $assembly/float/Randomf32.bernoulli.cdf@varargs))
- (export "Randomf32.bernoulli.quantile" (func $assembly/float/Randomf32.bernoulli.quantile@varargs))
- (export "Randomf32.bernoulli.mean" (func $assembly/float/Randomf32.bernoulli.mean@varargs))
- (export "Randomf32.bernoulli.median" (func $assembly/float/Randomf32.bernoulli.median@varargs))
- (export "Randomf32.bernoulli.stdev" (func $assembly/float/Randomf32.bernoulli.stdev@varargs))
- (export "Randomf32.bernoulli.variance" (func $assembly/float/Randomf32.bernoulli.variance@varargs))
- (export "Randomf32.bernoulli.skewness" (func $assembly/float/Randomf32.bernoulli.skewness@varargs))
- (export "Randomf32.bernoulli.entropy" (func $assembly/float/Randomf32.bernoulli.entropy@varargs))
- (export "Randomf32.triangular" (func $assembly/float/Randomf32.triangular@varargs))
- (export "Randomf32.triangular.pdf" (func $assembly/float/Randomf32.triangular.pdf@varargs))
- (export "Randomf32.triangular.cdf" (func $assembly/float/Randomf32.triangular.cdf@varargs))
- (export "Randomf32.triangular.quantile" (func $assembly/float/Randomf32.triangular.quantile@varargs))
- (export "Randomf32.triangular.mean" (func $assembly/float/Randomf32.triangular.mean@varargs))
- (export "Randomf32.triangular.median" (func $assembly/float/Randomf32.triangular.median@varargs))
- (export "Randomf32.triangular.stdev" (func $assembly/float/Randomf32.triangular.stdev@varargs))
- (export "Randomf32.triangular.variance" (func $assembly/float/Randomf32.triangular.variance@varargs))
- (export "Randomf32.triangular.skewness" (func $assembly/float/Randomf32.triangular.skewness@varargs))
- (export "Randomf32.triangular.entropy" (func $assembly/float/Randomf32.triangular.entropy@varargs))
- (export "Randomf32.geometric" (func $assembly/float/Randomf32.geometric@varargs))
- (export "Randomf32.geometric.pmf" (func $assembly/float/Randomf32.geometric.pmf@varargs))
- (export "Randomf32.geometric.cdf" (func $assembly/float/Randomf32.geometric.cdf@varargs))
- (export "Randomf32.geometric.quantile" (func $assembly/float/Randomf32.geometric.quantile@varargs))
- (export "Randomf32.geometric.mean" (func $assembly/float/Randomf32.geometric.mean@varargs))
- (export "Randomf32.geometric.median" (func $assembly/float/Randomf32.geometric.median@varargs))
- (export "Randomf32.geometric.stdev" (func $assembly/float/Randomf32.geometric.stdev@varargs))
- (export "Randomf32.geometric.variance" (func $assembly/float/Randomf32.geometric.variance@varargs))
- (export "Randomf32.geometric.skewness" (func $assembly/float/Randomf32.geometric.skewness@varargs))
- (export "Randomf32.geometric.entropy" (func $assembly/float/Randomf32.geometric.entropy@varargs))
- (export "Randomf32.normal" (func $assembly/float/Randomf32.normal@varargs))
- (export "Randomf32.normal.pdf" (func $assembly/float/Randomf32.normal.pdf@varargs))
- (export "Randomf32.normal.cdf" (func $assembly/float/Randomf32.normal.cdf@varargs))
- (export "Randomf32.normal.quantile" (func $assembly/float/Randomf32.normal.quantile@varargs))
- (export "Randomf32.normal.mean" (func $assembly/float/Randomf32.normal.mean@varargs))
- (export "Randomf32.normal.median" (func $assembly/float/Randomf32.normal.mean@varargs))
- (export "Randomf32.normal.stdev" (func $assembly/float/Randomf32.normal.stdev@varargs))
- (export "Randomf32.normal.variance" (func $assembly/float/Randomf32.normal.variance@varargs))
- (export "Randomf32.normal.skewness" (func $assembly/float/Randomf32.uniform.skewness@varargs))
- (export "Randomf32.normal.entropy" (func $assembly/float/Randomf32.normal.entropy@varargs))
- (export "Randomf32.logNormal" (func $assembly/float/Randomf32.logNormal@varargs))
- (export "Randomf32.logNormal.pdf" (func $assembly/float/Randomf32.logNormal.pdf@varargs))
- (export "Randomf32.logNormal.cdf" (func $assembly/float/Randomf32.logNormal.cdf@varargs))
- (export "Randomf32.logNormal.quantile" (func $assembly/float/Randomf32.logNormal.quantile@varargs))
- (export "Randomf32.logNormal.mean" (func $assembly/float/Randomf32.logNormal.mean@varargs))
- (export "Randomf32.logNormal.median" (func $assembly/float/Randomf32.logNormal.median@varargs))
- (export "Randomf32.logNormal.stdev" (func $assembly/float/Randomf32.logNormal.stdev@varargs))
- (export "Randomf32.logNormal.variance" (func $assembly/float/Randomf32.logNormal.variance@varargs))
- (export "Randomf32.logNormal.skewness" (func $assembly/float/Randomf32.logNormal.skewness@varargs))
- (export "Randomf32.logNormal.entropy" (func $assembly/float/Randomf32.logNormal.entropy@varargs))
- (export "Randomf32.exponential" (func $assembly/float/Randomf32.exponential@varargs))
- (export "Randomf32.exponential.pdf" (func $assembly/float/Randomf32.exponential.pdf@varargs))
- (export "Randomf32.exponential.cdf" (func $assembly/float/Randomf32.exponential.cdf@varargs))
- (export "Randomf32.exponential.quantile" (func $assembly/float/Randomf32.exponential.quantile@varargs))
- (export "Randomf32.exponential.mean" (func $assembly/float/Randomf32.exponential.mean@varargs))
- (export "Randomf32.exponential.median" (func $assembly/float/Randomf32.exponential.median@varargs))
- (export "Randomf32.exponential.stdev" (func $assembly/float/Randomf32.exponential.mean@varargs))
- (export "Randomf32.exponential.variance" (func $assembly/float/Randomf32.exponential.variance@varargs))
- (export "Randomf32.exponential.skewness" (func $assembly/float/Randomf32.exponential.skewness@varargs))
- (export "Randomf32.exponential.entropy" (func $assembly/float/Randomf32.exponential.entropy@varargs))
- (export "Randomf32.pareto" (func $assembly/float/Randomf32.pareto@varargs))
- (export "Randomf32.pareto.pdf" (func $assembly/float/Randomf32.pareto.pdf@varargs))
- (export "Randomf32.pareto.cdf" (func $assembly/float/Randomf32.pareto.cdf@varargs))
- (export "Randomf32.pareto.quantile" (func $assembly/float/Randomf32.pareto.quantile@varargs))
- (export "Randomf32.pareto.mean" (func $assembly/float/Randomf32.pareto.mean@varargs))
- (export "Randomf32.pareto.median" (func $assembly/float/Randomf32.pareto.median@varargs))
- (export "Randomf32.pareto.stdev" (func $assembly/float/Randomf32.pareto.stdev@varargs))
- (export "Randomf32.pareto.variance" (func $assembly/float/Randomf32.pareto.variance@varargs))
- (export "Randomf32.pareto.skewness" (func $assembly/float/Randomf32.pareto.skewness@varargs))
- (export "Randomf32.pareto.entropy" (func $assembly/float/Randomf32.pareto.entropy@varargs))
- (export "Randomf32.logistic" (func $assembly/float/Randomf32.logistic@varargs))
- (export "Randomf32.logistic.pdf" (func $assembly/float/Randomf32.logistic.pdf@varargs))
- (export "Randomf32.logistic.cdf" (func $assembly/float/Randomf32.logistic.cdf@varargs))
- (export "Randomf32.logistic.quantile" (func $assembly/float/Randomf32.logistic.quantile@varargs))
- (export "Randomf32.logistic.mean" (func $assembly/float/Randomf32.logistic.mean@varargs))
- (export "Randomf32.logistic.median" (func $assembly/float/Randomf32.logistic.mean@varargs))
- (export "Randomf32.logistic.stdev" (func $assembly/float/Randomf32.logistic.stdev@varargs))
- (export "Randomf32.logistic.variance" (func $assembly/float/Randomf32.logistic.variance@varargs))
- (export "Randomf32.logistic.skewness" (func $assembly/float/Randomf32.logistic.skewness@varargs))
- (export "Randomf32.logistic.entropy" (func $assembly/float/Randomf32.logistic.entropy@varargs))
- (export "Randomf32.cauchy" (func $assembly/float/Randomf32.cauchy@varargs))
- (export "Randomf32.cauchy.pdf" (func $assembly/float/Randomf32.cauchy.pdf@varargs))
- (export "Randomf32.cauchy.cdf" (func $assembly/float/Randomf32.cauchy.cdf@varargs))
- (export "Randomf32.cauchy.quantile" (func $assembly/float/Randomf32.cauchy.quantile@varargs))
- (export "Randomf32.cauchy.median" (func $assembly/float/Randomf32.cauchy.median@varargs))
- (export "Randomf32.cauchy.entropy" (func $assembly/float/Randomf32.cauchy.entropy@varargs))
- (export "Randomf32.gumbel" (func $assembly/float/Randomf32.gumbel@varargs))
- (export "Randomf32.laplace" (func $assembly/float/Randomf32.laplace@varargs))
- (export "Randomf32.frechet" (func $assembly/float/Randomf32.frechet@varargs))
- (export "Randomf32.weibull" (func $assembly/float/Randomf32.weibull@varargs))
- (export "Randomf32.rayleigh" (func $assembly/float/Randomf32.rayleigh@varargs))
- (export "Randomf32.maxwell" (func $assembly/float/Randomf32.maxwell@varargs))
- (export "Randomf32.fisher" (func $assembly/float/Randomf32.fisher@varargs))
- (export "Randomf32.poisson" (func $assembly/float/Randomf32.poisson))
- (export "Randomf32.binominal" (func $assembly/float/Randomf32.binominal@varargs))
- (export "Randomf32.alphastable" (func $assembly/float/Randomf32.alphastable@varargs))
- (export "Randomf32.gamma" (func $assembly/float/Randomf32.gamma@varargs))
- (export "Randomf32.beta" (func $assembly/float/Randomf32.beta@varargs))
- (export "Randomf32.betaprime" (func $assembly/float/Randomf32.betaprime@varargs))
- (export "Randomf32.chi" (func $assembly/float/Randomf32.chi@varargs))
- (export "Randomf32.chisquare" (func $assembly/float/Randomf32.chisquare@varargs))
- (export "Randomf32.snedecor" (func $assembly/float/Randomf32.snedecor@varargs))
- (export "Randomf32.student" (func $assembly/float/Randomf32.student@varargs))
- (export "Randomf64.seed" (func $assembly/float/Randomf32.seed))
- (export "Randomf64.uniform" (func $assembly/float/Randomf64.uniform@varargs))
- (export "Randomf64.uniform.pdf" (func $assembly/float/Randomf64.uniform.pdf@varargs))
- (export "Randomf64.uniform.cdf" (func $assembly/float/Randomf64.uniform.cdf@varargs))
- (export "Randomf64.uniform.quantile" (func $assembly/float/Randomf64.uniform.quantile@varargs))
- (export "Randomf64.uniform.mean" (func $assembly/float/Randomf64.uniform.mean@varargs))
- (export "Randomf64.uniform.median" (func $assembly/float/Randomf64.uniform.mean@varargs))
- (export "Randomf64.uniform.stdev" (func $assembly/float/Randomf64.uniform.stdev@varargs))
- (export "Randomf64.uniform.variance" (func $assembly/float/Randomf64.uniform.variance@varargs))
- (export "Randomf64.uniform.skewness" (func $assembly/float/Randomf64.uniform.skewness@varargs))
- (export "Randomf64.uniform.entropy" (func $assembly/float/Randomf64.uniform.entropy@varargs))
- (export "Randomf64.bernoulli" (func $assembly/float/Randomf64.bernoulli@varargs))
- (export "Randomf64.bernoulli.pmf" (func $assembly/float/Randomf64.bernoulli.pmf@varargs))
- (export "Randomf64.bernoulli.cdf" (func $assembly/float/Randomf64.bernoulli.cdf@varargs))
- (export "Randomf64.bernoulli.quantile" (func $assembly/float/Randomf64.bernoulli.quantile@varargs))
- (export "Randomf64.bernoulli.mean" (func $assembly/float/Randomf64.bernoulli.mean@varargs))
- (export "Randomf64.bernoulli.median" (func $assembly/float/Randomf64.bernoulli.median@varargs))
- (export "Randomf64.bernoulli.stdev" (func $assembly/float/Randomf64.bernoulli.stdev@varargs))
- (export "Randomf64.bernoulli.variance" (func $assembly/float/Randomf64.bernoulli.variance@varargs))
- (export "Randomf64.bernoulli.skewness" (func $assembly/float/Randomf64.bernoulli.skewness@varargs))
- (export "Randomf64.bernoulli.entropy" (func $assembly/float/Randomf64.bernoulli.entropy@varargs))
- (export "Randomf64.triangular" (func $assembly/float/Randomf64.triangular@varargs))
- (export "Randomf64.triangular.pdf" (func $assembly/float/Randomf64.triangular.pdf@varargs))
- (export "Randomf64.triangular.cdf" (func $assembly/float/Randomf64.triangular.cdf@varargs))
- (export "Randomf64.triangular.quantile" (func $assembly/float/Randomf64.triangular.quantile@varargs))
- (export "Randomf64.triangular.mean" (func $assembly/float/Randomf64.triangular.mean@varargs))
- (export "Randomf64.triangular.median" (func $assembly/float/Randomf64.triangular.median@varargs))
- (export "Randomf64.triangular.stdev" (func $assembly/float/Randomf64.triangular.stdev@varargs))
- (export "Randomf64.triangular.variance" (func $assembly/float/Randomf64.triangular.variance@varargs))
- (export "Randomf64.triangular.skewness" (func $assembly/float/Randomf64.triangular.skewness@varargs))
- (export "Randomf64.triangular.entropy" (func $assembly/float/Randomf64.triangular.entropy@varargs))
- (export "Randomf64.geometric" (func $assembly/float/Randomf64.geometric@varargs))
- (export "Randomf64.geometric.pmf" (func $assembly/float/Randomf64.geometric.pmf@varargs))
- (export "Randomf64.geometric.cdf" (func $assembly/float/Randomf64.geometric.cdf@varargs))
- (export "Randomf64.geometric.quantile" (func $assembly/float/Randomf64.geometric.quantile@varargs))
- (export "Randomf64.geometric.mean" (func $assembly/float/Randomf64.geometric.mean@varargs))
- (export "Randomf64.geometric.median" (func $assembly/float/Randomf64.geometric.median@varargs))
- (export "Randomf64.geometric.stdev" (func $assembly/float/Randomf64.geometric.stdev@varargs))
- (export "Randomf64.geometric.variance" (func $assembly/float/Randomf64.geometric.variance@varargs))
- (export "Randomf64.geometric.skewness" (func $assembly/float/Randomf64.geometric.skewness@varargs))
- (export "Randomf64.geometric.entropy" (func $assembly/float/Randomf64.geometric.entropy@varargs))
- (export "Randomf64.normal" (func $assembly/float/Randomf64.normal@varargs))
- (export "Randomf64.normal.pdf" (func $assembly/float/Randomf64.normal.pdf@varargs))
- (export "Randomf64.normal.cdf" (func $assembly/float/Randomf64.normal.cdf@varargs))
- (export "Randomf64.normal.quantile" (func $assembly/float/Randomf64.normal.quantile@varargs))
- (export "Randomf64.normal.mean" (func $assembly/float/Randomf64.normal.mean@varargs))
- (export "Randomf64.normal.median" (func $assembly/float/Randomf64.normal.mean@varargs))
- (export "Randomf64.normal.stdev" (func $assembly/float/Randomf64.normal.stdev@varargs))
- (export "Randomf64.normal.variance" (func $assembly/float/Randomf64.normal.variance@varargs))
- (export "Randomf64.normal.skewness" (func $assembly/float/Randomf64.uniform.skewness@varargs))
- (export "Randomf64.normal.entropy" (func $assembly/float/Randomf64.normal.entropy@varargs))
- (export "Randomf64.logNormal" (func $assembly/float/Randomf64.logNormal@varargs))
- (export "Randomf64.logNormal.pdf" (func $assembly/float/Randomf64.logNormal.pdf@varargs))
- (export "Randomf64.logNormal.cdf" (func $assembly/float/Randomf64.logNormal.cdf@varargs))
- (export "Randomf64.logNormal.quantile" (func $assembly/float/Randomf64.logNormal.quantile@varargs))
- (export "Randomf64.logNormal.mean" (func $assembly/float/Randomf64.logNormal.mean@varargs))
- (export "Randomf64.logNormal.median" (func $assembly/float/Randomf64.logNormal.median@varargs))
- (export "Randomf64.logNormal.stdev" (func $assembly/float/Randomf64.logNormal.stdev@varargs))
- (export "Randomf64.logNormal.variance" (func $assembly/float/Randomf64.logNormal.variance@varargs))
- (export "Randomf64.logNormal.skewness" (func $assembly/float/Randomf64.logNormal.skewness@varargs))
- (export "Randomf64.logNormal.entropy" (func $assembly/float/Randomf64.logNormal.entropy@varargs))
- (export "Randomf64.exponential" (func $assembly/float/Randomf64.exponential@varargs))
- (export "Randomf64.exponential.pdf" (func $assembly/float/Randomf64.exponential.pdf@varargs))
- (export "Randomf64.exponential.cdf" (func $assembly/float/Randomf64.exponential.cdf@varargs))
- (export "Randomf64.exponential.quantile" (func $assembly/float/Randomf64.exponential.quantile@varargs))
- (export "Randomf64.exponential.mean" (func $assembly/float/Randomf64.exponential.mean@varargs))
- (export "Randomf64.exponential.median" (func $assembly/float/Randomf64.exponential.median@varargs))
- (export "Randomf64.exponential.stdev" (func $assembly/float/Randomf64.exponential.mean@varargs))
- (export "Randomf64.exponential.variance" (func $assembly/float/Randomf64.exponential.variance@varargs))
- (export "Randomf64.exponential.skewness" (func $assembly/float/Randomf64.exponential.skewness@varargs))
- (export "Randomf64.exponential.entropy" (func $assembly/float/Randomf64.exponential.entropy@varargs))
- (export "Randomf64.pareto" (func $assembly/float/Randomf64.pareto@varargs))
- (export "Randomf64.pareto.pdf" (func $assembly/float/Randomf64.pareto.pdf@varargs))
- (export "Randomf64.pareto.cdf" (func $assembly/float/Randomf64.pareto.cdf@varargs))
- (export "Randomf64.pareto.quantile" (func $assembly/float/Randomf64.pareto.quantile@varargs))
- (export "Randomf64.pareto.mean" (func $assembly/float/Randomf64.pareto.mean@varargs))
- (export "Randomf64.pareto.median" (func $assembly/float/Randomf64.pareto.median@varargs))
- (export "Randomf64.pareto.stdev" (func $assembly/float/Randomf64.pareto.stdev@varargs))
- (export "Randomf64.pareto.variance" (func $assembly/float/Randomf64.pareto.variance@varargs))
- (export "Randomf64.pareto.skewness" (func $assembly/float/Randomf64.pareto.skewness@varargs))
- (export "Randomf64.pareto.entropy" (func $assembly/float/Randomf64.pareto.entropy@varargs))
- (export "Randomf64.logistic" (func $assembly/float/Randomf64.logistic@varargs))
- (export "Randomf64.logistic.pdf" (func $assembly/float/Randomf64.logistic.pdf@varargs))
- (export "Randomf64.logistic.cdf" (func $assembly/float/Randomf64.logistic.cdf@varargs))
- (export "Randomf64.logistic.quantile" (func $assembly/float/Randomf64.logistic.quantile@varargs))
- (export "Randomf64.logistic.mean" (func $assembly/float/Randomf64.logistic.mean@varargs))
- (export "Randomf64.logistic.median" (func $assembly/float/Randomf64.logistic.mean@varargs))
- (export "Randomf64.logistic.stdev" (func $assembly/float/Randomf64.logistic.stdev@varargs))
- (export "Randomf64.logistic.variance" (func $assembly/float/Randomf64.logistic.variance@varargs))
- (export "Randomf64.logistic.skewness" (func $assembly/float/Randomf64.logistic.skewness@varargs))
- (export "Randomf64.logistic.entropy" (func $assembly/float/Randomf64.logistic.entropy@varargs))
- (export "Randomf64.cauchy" (func $assembly/float/Randomf64.cauchy@varargs))
- (export "Randomf64.cauchy.pdf" (func $assembly/float/Randomf64.cauchy.pdf@varargs))
- (export "Randomf64.cauchy.cdf" (func $assembly/float/Randomf64.cauchy.cdf@varargs))
- (export "Randomf64.cauchy.quantile" (func $assembly/float/Randomf64.cauchy.quantile@varargs))
- (export "Randomf64.cauchy.median" (func $assembly/float/Randomf64.cauchy.median@varargs))
- (export "Randomf64.cauchy.entropy" (func $assembly/float/Randomf64.cauchy.entropy@varargs))
- (export "Randomf64.gumbel" (func $assembly/float/Randomf64.gumbel@varargs))
- (export "Randomf64.laplace" (func $assembly/float/Randomf64.laplace@varargs))
- (export "Randomf64.frechet" (func $assembly/float/Randomf64.frechet@varargs))
- (export "Randomf64.weibull" (func $assembly/float/Randomf64.weibull@varargs))
- (export "Randomf64.rayleigh" (func $assembly/float/Randomf64.rayleigh@varargs))
- (export "Randomf64.maxwell" (func $assembly/float/Randomf64.maxwell@varargs))
- (export "Randomf64.maxwell.pdf" (func $assembly/float/Randomf64.maxwell.pdf@varargs))
- (export "Randomf64.maxwell.cdf" (func $assembly/float/Randomf64.maxwell.cdf@varargs))
- (export "Randomf64.maxwell.quantile" (func $assembly/float/Randomf64.maxwell.quantile@varargs))
- (export "Randomf64.maxwell.mean" (func $assembly/float/Randomf64.maxwell.mean@varargs))
- (export "Randomf64.maxwell.median" (func $assembly/float/Randomf64.maxwell.median@varargs))
- (export "Randomf64.maxwell.stdev" (func $assembly/float/Randomf64.maxwell.stdev@varargs))
- (export "Randomf64.maxwell.variance" (func $assembly/float/Randomf64.maxwell.variance@varargs))
- (export "Randomf64.maxwell.skewness" (func $assembly/float/Randomf64.maxwell.skewness@varargs))
- (export "Randomf64.maxwell.entropy" (func $assembly/float/Randomf64.maxwell.entropy@varargs))
- (export "Randomf64.fisher" (func $assembly/float/Randomf64.fisher@varargs))
- (export "Randomf64.poisson" (func $assembly/float/Randomf64.poisson))
- (export "Randomf64.binominal" (func $assembly/float/Randomf64.binominal@varargs))
- (export "Randomf64.alphastable" (func $assembly/float/Randomf64.alphastable@varargs))
- (export "Randomf64.gamma" (func $assembly/float/Randomf64.gamma@varargs))
- (export "Randomf64.beta" (func $assembly/float/Randomf64.beta@varargs))
- (export "Randomf64.betaprime" (func $assembly/float/Randomf64.betaprime@varargs))
- (export "Randomf64.chi" (func $assembly/float/Randomf64.chi@varargs))
- (export "Randomf64.chisquare" (func $assembly/float/Randomf64.chisquare@varargs))
- (export "Randomf64.snedecor" (func $assembly/float/Randomf64.snedecor@varargs))
- (export "Randomf64.student" (func $assembly/float/Randomf64.student@varargs))
- (export "Randomi32.seed" (func $assembly/integer/Randomi32.seed))
- (export "Randomi32.uniform" (func $assembly/integer/Randomi32.uniform@varargs))
- (export "Randomi32.bernoulli" (func $assembly/integer/Randomi32.bernoulli@varargs))
- (export "Randomi32.boolean" (func $assembly/integer/Randomi32.boolean))
- (export "Randomi64.seed" (func $assembly/integer/Randomi32.seed))
- (export "Randomi64.uniform" (func $assembly/integer/Randomi64.uniform@varargs))
- (export "Randomi64.bernoulli" (func $assembly/integer/Randomi64.bernoulli@varargs))
- (export "Randomi64.boolean" (func $assembly/integer/Randomi64.boolean))
+ (export "Randf32.seed" (func $assembly/float/Randf32.seed))
+ (export "Randf32.uniform" (func $assembly/float/Randf32.uniform@varargs))
+ (export "Randf32.uniform.pdf" (func $assembly/float/Randf32.uniform.pdf@varargs))
+ (export "Randf32.uniform.cdf" (func $assembly/float/Randf32.uniform.cdf@varargs))
+ (export "Randf32.uniform.quantile" (func $assembly/float/Randf32.uniform.quantile@varargs))
+ (export "Randf32.uniform.mean" (func $assembly/float/Randf32.uniform.mean@varargs))
+ (export "Randf32.uniform.median" (func $assembly/float/Randf32.uniform.mean@varargs))
+ (export "Randf32.uniform.stdev" (func $assembly/float/Randf32.uniform.stdev@varargs))
+ (export "Randf32.uniform.variance" (func $assembly/float/Randf32.uniform.variance@varargs))
+ (export "Randf32.uniform.skewness" (func $assembly/float/Randf32.uniform.skewness@varargs))
+ (export "Randf32.uniform.entropy" (func $assembly/float/Randf32.uniform.entropy@varargs))
+ (export "Randf32.bernoulli" (func $assembly/float/Randf32.bernoulli@varargs))
+ (export "Randf32.bernoulli.pmf" (func $assembly/float/Randf32.bernoulli.pmf@varargs))
+ (export "Randf32.bernoulli.cdf" (func $assembly/float/Randf32.bernoulli.cdf@varargs))
+ (export "Randf32.bernoulli.quantile" (func $assembly/float/Randf32.bernoulli.quantile@varargs))
+ (export "Randf32.bernoulli.mean" (func $assembly/float/Randf32.bernoulli.mean@varargs))
+ (export "Randf32.bernoulli.median" (func $assembly/float/Randf32.bernoulli.median@varargs))
+ (export "Randf32.bernoulli.stdev" (func $assembly/float/Randf32.bernoulli.stdev@varargs))
+ (export "Randf32.bernoulli.variance" (func $assembly/float/Randf32.bernoulli.variance@varargs))
+ (export "Randf32.bernoulli.skewness" (func $assembly/float/Randf32.bernoulli.skewness@varargs))
+ (export "Randf32.bernoulli.entropy" (func $assembly/float/Randf32.bernoulli.entropy@varargs))
+ (export "Randf32.triangular" (func $assembly/float/Randf32.triangular@varargs))
+ (export "Randf32.triangular.pdf" (func $assembly/float/Randf32.triangular.pdf@varargs))
+ (export "Randf32.triangular.cdf" (func $assembly/float/Randf32.triangular.cdf@varargs))
+ (export "Randf32.triangular.quantile" (func $assembly/float/Randf32.triangular.quantile@varargs))
+ (export "Randf32.triangular.mean" (func $assembly/float/Randf32.triangular.mean@varargs))
+ (export "Randf32.triangular.median" (func $assembly/float/Randf32.triangular.median@varargs))
+ (export "Randf32.triangular.stdev" (func $assembly/float/Randf32.triangular.stdev@varargs))
+ (export "Randf32.triangular.variance" (func $assembly/float/Randf32.triangular.variance@varargs))
+ (export "Randf32.triangular.skewness" (func $assembly/float/Randf32.triangular.skewness@varargs))
+ (export "Randf32.triangular.entropy" (func $assembly/float/Randf32.triangular.entropy@varargs))
+ (export "Randf32.geometric" (func $assembly/float/Randf32.geometric@varargs))
+ (export "Randf32.geometric.pmf" (func $assembly/float/Randf32.geometric.pmf@varargs))
+ (export "Randf32.geometric.cdf" (func $assembly/float/Randf32.geometric.cdf@varargs))
+ (export "Randf32.geometric.quantile" (func $assembly/float/Randf32.geometric.quantile@varargs))
+ (export "Randf32.geometric.mean" (func $assembly/float/Randf32.geometric.mean@varargs))
+ (export "Randf32.geometric.median" (func $assembly/float/Randf32.geometric.median@varargs))
+ (export "Randf32.geometric.stdev" (func $assembly/float/Randf32.geometric.stdev@varargs))
+ (export "Randf32.geometric.variance" (func $assembly/float/Randf32.geometric.variance@varargs))
+ (export "Randf32.geometric.skewness" (func $assembly/float/Randf32.geometric.skewness@varargs))
+ (export "Randf32.geometric.entropy" (func $assembly/float/Randf32.geometric.entropy@varargs))
+ (export "Randf32.normal" (func $assembly/float/Randf32.normal@varargs))
+ (export "Randf32.normal.pdf" (func $assembly/float/Randf32.normal.pdf@varargs))
+ (export "Randf32.normal.cdf" (func $assembly/float/Randf32.normal.cdf@varargs))
+ (export "Randf32.normal.quantile" (func $assembly/float/Randf32.normal.quantile@varargs))
+ (export "Randf32.normal.mean" (func $assembly/float/Randf32.normal.mean@varargs))
+ (export "Randf32.normal.median" (func $assembly/float/Randf32.normal.mean@varargs))
+ (export "Randf32.normal.stdev" (func $assembly/float/Randf32.normal.stdev@varargs))
+ (export "Randf32.normal.variance" (func $assembly/float/Randf32.normal.variance@varargs))
+ (export "Randf32.normal.skewness" (func $assembly/float/Randf32.uniform.skewness@varargs))
+ (export "Randf32.normal.entropy" (func $assembly/float/Randf32.normal.entropy@varargs))
+ (export "Randf32.logNormal" (func $assembly/float/Randf32.logNormal@varargs))
+ (export "Randf32.logNormal.pdf" (func $assembly/float/Randf32.logNormal.pdf@varargs))
+ (export "Randf32.logNormal.cdf" (func $assembly/float/Randf32.logNormal.cdf@varargs))
+ (export "Randf32.logNormal.quantile" (func $assembly/float/Randf32.logNormal.quantile@varargs))
+ (export "Randf32.logNormal.mean" (func $assembly/float/Randf32.logNormal.mean@varargs))
+ (export "Randf32.logNormal.median" (func $assembly/float/Randf32.logNormal.median@varargs))
+ (export "Randf32.logNormal.stdev" (func $assembly/float/Randf32.logNormal.stdev@varargs))
+ (export "Randf32.logNormal.variance" (func $assembly/float/Randf32.logNormal.variance@varargs))
+ (export "Randf32.logNormal.skewness" (func $assembly/float/Randf32.logNormal.skewness@varargs))
+ (export "Randf32.logNormal.entropy" (func $assembly/float/Randf32.logNormal.entropy@varargs))
+ (export "Randf32.exponential" (func $assembly/float/Randf32.exponential@varargs))
+ (export "Randf32.exponential.pdf" (func $assembly/float/Randf32.exponential.pdf@varargs))
+ (export "Randf32.exponential.cdf" (func $assembly/float/Randf32.exponential.cdf@varargs))
+ (export "Randf32.exponential.quantile" (func $assembly/float/Randf32.exponential.quantile@varargs))
+ (export "Randf32.exponential.mean" (func $assembly/float/Randf32.exponential.mean@varargs))
+ (export "Randf32.exponential.median" (func $assembly/float/Randf32.exponential.median@varargs))
+ (export "Randf32.exponential.stdev" (func $assembly/float/Randf32.exponential.mean@varargs))
+ (export "Randf32.exponential.variance" (func $assembly/float/Randf32.exponential.variance@varargs))
+ (export "Randf32.exponential.skewness" (func $assembly/float/Randf32.exponential.skewness@varargs))
+ (export "Randf32.exponential.entropy" (func $assembly/float/Randf32.exponential.entropy@varargs))
+ (export "Randf32.pareto" (func $assembly/float/Randf32.pareto@varargs))
+ (export "Randf32.pareto.pdf" (func $assembly/float/Randf32.pareto.pdf@varargs))
+ (export "Randf32.pareto.cdf" (func $assembly/float/Randf32.pareto.cdf@varargs))
+ (export "Randf32.pareto.quantile" (func $assembly/float/Randf32.pareto.quantile@varargs))
+ (export "Randf32.pareto.mean" (func $assembly/float/Randf32.pareto.mean@varargs))
+ (export "Randf32.pareto.median" (func $assembly/float/Randf32.pareto.median@varargs))
+ (export "Randf32.pareto.stdev" (func $assembly/float/Randf32.pareto.stdev@varargs))
+ (export "Randf32.pareto.variance" (func $assembly/float/Randf32.pareto.variance@varargs))
+ (export "Randf32.pareto.skewness" (func $assembly/float/Randf32.pareto.skewness@varargs))
+ (export "Randf32.pareto.entropy" (func $assembly/float/Randf32.pareto.entropy@varargs))
+ (export "Randf32.logistic" (func $assembly/float/Randf32.logistic@varargs))
+ (export "Randf32.logistic.pdf" (func $assembly/float/Randf32.logistic.pdf@varargs))
+ (export "Randf32.logistic.cdf" (func $assembly/float/Randf32.logistic.cdf@varargs))
+ (export "Randf32.logistic.quantile" (func $assembly/float/Randf32.logistic.quantile@varargs))
+ (export "Randf32.logistic.mean" (func $assembly/float/Randf32.logistic.mean@varargs))
+ (export "Randf32.logistic.median" (func $assembly/float/Randf32.logistic.mean@varargs))
+ (export "Randf32.logistic.stdev" (func $assembly/float/Randf32.logistic.stdev@varargs))
+ (export "Randf32.logistic.variance" (func $assembly/float/Randf32.logistic.variance@varargs))
+ (export "Randf32.logistic.skewness" (func $assembly/float/Randf32.logistic.skewness@varargs))
+ (export "Randf32.logistic.entropy" (func $assembly/float/Randf32.logistic.entropy@varargs))
+ (export "Randf32.cauchy" (func $assembly/float/Randf32.cauchy@varargs))
+ (export "Randf32.cauchy.pdf" (func $assembly/float/Randf32.cauchy.pdf@varargs))
+ (export "Randf32.cauchy.cdf" (func $assembly/float/Randf32.cauchy.cdf@varargs))
+ (export "Randf32.cauchy.quantile" (func $assembly/float/Randf32.cauchy.quantile@varargs))
+ (export "Randf32.cauchy.median" (func $assembly/float/Randf32.cauchy.median@varargs))
+ (export "Randf32.cauchy.entropy" (func $assembly/float/Randf32.cauchy.entropy@varargs))
+ (export "Randf32.gumbel" (func $assembly/float/Randf32.gumbel@varargs))
+ (export "Randf32.laplace" (func $assembly/float/Randf32.laplace@varargs))
+ (export "Randf32.frechet" (func $assembly/float/Randf32.frechet@varargs))
+ (export "Randf32.weibull" (func $assembly/float/Randf32.weibull@varargs))
+ (export "Randf32.rayleigh" (func $assembly/float/Randf32.rayleigh@varargs))
+ (export "Randf32.maxwell" (func $assembly/float/Randf32.maxwell@varargs))
+ (export "Randf32.fisher" (func $assembly/float/Randf32.fisher@varargs))
+ (export "Randf32.poisson" (func $assembly/float/Randf32.poisson))
+ (export "Randf32.binominal" (func $assembly/float/Randf32.binominal@varargs))
+ (export "Randf32.alphastable" (func $assembly/float/Randf32.alphastable@varargs))
+ (export "Randf32.gamma" (func $assembly/float/Randf32.gamma@varargs))
+ (export "Randf32.beta" (func $assembly/float/Randf32.beta@varargs))
+ (export "Randf32.betaprime" (func $assembly/float/Randf32.betaprime@varargs))
+ (export "Randf32.chi" (func $assembly/float/Randf32.chi@varargs))
+ (export "Randf32.chisquare" (func $assembly/float/Randf32.chisquare@varargs))
+ (export "Randf32.snedecor" (func $assembly/float/Randf32.snedecor@varargs))
+ (export "Randf32.student" (func $assembly/float/Randf32.student@varargs))
+ (export "Randf64.seed" (func $assembly/float/Randf32.seed))
+ (export "Randf64.uniform" (func $assembly/float/Randf64.uniform@varargs))
+ (export "Randf64.uniform.pdf" (func $assembly/float/Randf64.uniform.pdf@varargs))
+ (export "Randf64.uniform.cdf" (func $assembly/float/Randf64.uniform.cdf@varargs))
+ (export "Randf64.uniform.quantile" (func $assembly/float/Randf64.uniform.quantile@varargs))
+ (export "Randf64.uniform.mean" (func $assembly/float/Randf64.uniform.mean@varargs))
+ (export "Randf64.uniform.median" (func $assembly/float/Randf64.uniform.mean@varargs))
+ (export "Randf64.uniform.stdev" (func $assembly/float/Randf64.uniform.stdev@varargs))
+ (export "Randf64.uniform.variance" (func $assembly/float/Randf64.uniform.variance@varargs))
+ (export "Randf64.uniform.skewness" (func $assembly/float/Randf64.uniform.skewness@varargs))
+ (export "Randf64.uniform.entropy" (func $assembly/float/Randf64.uniform.entropy@varargs))
+ (export "Randf64.bernoulli" (func $assembly/float/Randf64.bernoulli@varargs))
+ (export "Randf64.bernoulli.pmf" (func $assembly/float/Randf64.bernoulli.pmf@varargs))
+ (export "Randf64.bernoulli.cdf" (func $assembly/float/Randf64.bernoulli.cdf@varargs))
+ (export "Randf64.bernoulli.quantile" (func $assembly/float/Randf64.bernoulli.quantile@varargs))
+ (export "Randf64.bernoulli.mean" (func $assembly/float/Randf64.bernoulli.mean@varargs))
+ (export "Randf64.bernoulli.median" (func $assembly/float/Randf64.bernoulli.median@varargs))
+ (export "Randf64.bernoulli.stdev" (func $assembly/float/Randf64.bernoulli.stdev@varargs))
+ (export "Randf64.bernoulli.variance" (func $assembly/float/Randf64.bernoulli.variance@varargs))
+ (export "Randf64.bernoulli.skewness" (func $assembly/float/Randf64.bernoulli.skewness@varargs))
+ (export "Randf64.bernoulli.entropy" (func $assembly/float/Randf64.bernoulli.entropy@varargs))
+ (export "Randf64.triangular" (func $assembly/float/Randf64.triangular@varargs))
+ (export "Randf64.triangular.pdf" (func $assembly/float/Randf64.triangular.pdf@varargs))
+ (export "Randf64.triangular.cdf" (func $assembly/float/Randf64.triangular.cdf@varargs))
+ (export "Randf64.triangular.quantile" (func $assembly/float/Randf64.triangular.quantile@varargs))
+ (export "Randf64.triangular.mean" (func $assembly/float/Randf64.triangular.mean@varargs))
+ (export "Randf64.triangular.median" (func $assembly/float/Randf64.triangular.median@varargs))
+ (export "Randf64.triangular.stdev" (func $assembly/float/Randf64.triangular.stdev@varargs))
+ (export "Randf64.triangular.variance" (func $assembly/float/Randf64.triangular.variance@varargs))
+ (export "Randf64.triangular.skewness" (func $assembly/float/Randf64.triangular.skewness@varargs))
+ (export "Randf64.triangular.entropy" (func $assembly/float/Randf64.triangular.entropy@varargs))
+ (export "Randf64.geometric" (func $assembly/float/Randf64.geometric@varargs))
+ (export "Randf64.geometric.pmf" (func $assembly/float/Randf64.geometric.pmf@varargs))
+ (export "Randf64.geometric.cdf" (func $assembly/float/Randf64.geometric.cdf@varargs))
+ (export "Randf64.geometric.quantile" (func $assembly/float/Randf64.geometric.quantile@varargs))
+ (export "Randf64.geometric.mean" (func $assembly/float/Randf64.geometric.mean@varargs))
+ (export "Randf64.geometric.median" (func $assembly/float/Randf64.geometric.median@varargs))
+ (export "Randf64.geometric.stdev" (func $assembly/float/Randf64.geometric.stdev@varargs))
+ (export "Randf64.geometric.variance" (func $assembly/float/Randf64.geometric.variance@varargs))
+ (export "Randf64.geometric.skewness" (func $assembly/float/Randf64.geometric.skewness@varargs))
+ (export "Randf64.geometric.entropy" (func $assembly/float/Randf64.geometric.entropy@varargs))
+ (export "Randf64.normal" (func $assembly/float/Randf64.normal@varargs))
+ (export "Randf64.normal.pdf" (func $assembly/float/Randf64.normal.pdf@varargs))
+ (export "Randf64.normal.cdf" (func $assembly/float/Randf64.normal.cdf@varargs))
+ (export "Randf64.normal.quantile" (func $assembly/float/Randf64.normal.quantile@varargs))
+ (export "Randf64.normal.mean" (func $assembly/float/Randf64.normal.mean@varargs))
+ (export "Randf64.normal.median" (func $assembly/float/Randf64.normal.mean@varargs))
+ (export "Randf64.normal.stdev" (func $assembly/float/Randf64.normal.stdev@varargs))
+ (export "Randf64.normal.variance" (func $assembly/float/Randf64.normal.variance@varargs))
+ (export "Randf64.normal.skewness" (func $assembly/float/Randf64.uniform.skewness@varargs))
+ (export "Randf64.normal.entropy" (func $assembly/float/Randf64.normal.entropy@varargs))
+ (export "Randf64.logNormal" (func $assembly/float/Randf64.logNormal@varargs))
+ (export "Randf64.logNormal.pdf" (func $assembly/float/Randf64.logNormal.pdf@varargs))
+ (export "Randf64.logNormal.cdf" (func $assembly/float/Randf64.logNormal.cdf@varargs))
+ (export "Randf64.logNormal.quantile" (func $assembly/float/Randf64.logNormal.quantile@varargs))
+ (export "Randf64.logNormal.mean" (func $assembly/float/Randf64.logNormal.mean@varargs))
+ (export "Randf64.logNormal.median" (func $assembly/float/Randf64.logNormal.median@varargs))
+ (export "Randf64.logNormal.stdev" (func $assembly/float/Randf64.logNormal.stdev@varargs))
+ (export "Randf64.logNormal.variance" (func $assembly/float/Randf64.logNormal.variance@varargs))
+ (export "Randf64.logNormal.skewness" (func $assembly/float/Randf64.logNormal.skewness@varargs))
+ (export "Randf64.logNormal.entropy" (func $assembly/float/Randf64.logNormal.entropy@varargs))
+ (export "Randf64.exponential" (func $assembly/float/Randf64.exponential@varargs))
+ (export "Randf64.exponential.pdf" (func $assembly/float/Randf64.exponential.pdf@varargs))
+ (export "Randf64.exponential.cdf" (func $assembly/float/Randf64.exponential.cdf@varargs))
+ (export "Randf64.exponential.quantile" (func $assembly/float/Randf64.exponential.quantile@varargs))
+ (export "Randf64.exponential.mean" (func $assembly/float/Randf64.exponential.mean@varargs))
+ (export "Randf64.exponential.median" (func $assembly/float/Randf64.exponential.median@varargs))
+ (export "Randf64.exponential.stdev" (func $assembly/float/Randf64.exponential.mean@varargs))
+ (export "Randf64.exponential.variance" (func $assembly/float/Randf64.exponential.variance@varargs))
+ (export "Randf64.exponential.skewness" (func $assembly/float/Randf64.exponential.skewness@varargs))
+ (export "Randf64.exponential.entropy" (func $assembly/float/Randf64.exponential.entropy@varargs))
+ (export "Randf64.pareto" (func $assembly/float/Randf64.pareto@varargs))
+ (export "Randf64.pareto.pdf" (func $assembly/float/Randf64.pareto.pdf@varargs))
+ (export "Randf64.pareto.cdf" (func $assembly/float/Randf64.pareto.cdf@varargs))
+ (export "Randf64.pareto.quantile" (func $assembly/float/Randf64.pareto.quantile@varargs))
+ (export "Randf64.pareto.mean" (func $assembly/float/Randf64.pareto.mean@varargs))
+ (export "Randf64.pareto.median" (func $assembly/float/Randf64.pareto.median@varargs))
+ (export "Randf64.pareto.stdev" (func $assembly/float/Randf64.pareto.stdev@varargs))
+ (export "Randf64.pareto.variance" (func $assembly/float/Randf64.pareto.variance@varargs))
+ (export "Randf64.pareto.skewness" (func $assembly/float/Randf64.pareto.skewness@varargs))
+ (export "Randf64.pareto.entropy" (func $assembly/float/Randf64.pareto.entropy@varargs))
+ (export "Randf64.logistic" (func $assembly/float/Randf64.logistic@varargs))
+ (export "Randf64.logistic.pdf" (func $assembly/float/Randf64.logistic.pdf@varargs))
+ (export "Randf64.logistic.cdf" (func $assembly/float/Randf64.logistic.cdf@varargs))
+ (export "Randf64.logistic.quantile" (func $assembly/float/Randf64.logistic.quantile@varargs))
+ (export "Randf64.logistic.mean" (func $assembly/float/Randf64.logistic.mean@varargs))
+ (export "Randf64.logistic.median" (func $assembly/float/Randf64.logistic.mean@varargs))
+ (export "Randf64.logistic.stdev" (func $assembly/float/Randf64.logistic.stdev@varargs))
+ (export "Randf64.logistic.variance" (func $assembly/float/Randf64.logistic.variance@varargs))
+ (export "Randf64.logistic.skewness" (func $assembly/float/Randf64.logistic.skewness@varargs))
+ (export "Randf64.logistic.entropy" (func $assembly/float/Randf64.logistic.entropy@varargs))
+ (export "Randf64.cauchy" (func $assembly/float/Randf64.cauchy@varargs))
+ (export "Randf64.cauchy.pdf" (func $assembly/float/Randf64.cauchy.pdf@varargs))
+ (export "Randf64.cauchy.cdf" (func $assembly/float/Randf64.cauchy.cdf@varargs))
+ (export "Randf64.cauchy.quantile" (func $assembly/float/Randf64.cauchy.quantile@varargs))
+ (export "Randf64.cauchy.median" (func $assembly/float/Randf64.cauchy.median@varargs))
+ (export "Randf64.cauchy.entropy" (func $assembly/float/Randf64.cauchy.entropy@varargs))
+ (export "Randf64.gumbel" (func $assembly/float/Randf64.gumbel@varargs))
+ (export "Randf64.laplace" (func $assembly/float/Randf64.laplace@varargs))
+ (export "Randf64.frechet" (func $assembly/float/Randf64.frechet@varargs))
+ (export "Randf64.weibull" (func $assembly/float/Randf64.weibull@varargs))
+ (export "Randf64.rayleigh" (func $assembly/float/Randf64.rayleigh@varargs))
+ (export "Randf64.maxwell" (func $assembly/float/Randf64.maxwell@varargs))
+ (export "Randf64.maxwell.pdf" (func $assembly/float/Randf64.maxwell.pdf@varargs))
+ (export "Randf64.maxwell.cdf" (func $assembly/float/Randf64.maxwell.cdf@varargs))
+ (export "Randf64.maxwell.quantile" (func $assembly/float/Randf64.maxwell.quantile@varargs))
+ (export "Randf64.maxwell.mean" (func $assembly/float/Randf64.maxwell.mean@varargs))
+ (export "Randf64.maxwell.median" (func $assembly/float/Randf64.maxwell.median@varargs))
+ (export "Randf64.maxwell.stdev" (func $assembly/float/Randf64.maxwell.stdev@varargs))
+ (export "Randf64.maxwell.variance" (func $assembly/float/Randf64.maxwell.variance@varargs))
+ (export "Randf64.maxwell.skewness" (func $assembly/float/Randf64.maxwell.skewness@varargs))
+ (export "Randf64.maxwell.entropy" (func $assembly/float/Randf64.maxwell.entropy@varargs))
+ (export "Randf64.fisher" (func $assembly/float/Randf64.fisher@varargs))
+ (export "Randf64.poisson" (func $assembly/float/Randf64.poisson))
+ (export "Randf64.binominal" (func $assembly/float/Randf64.binominal@varargs))
+ (export "Randf64.alphastable" (func $assembly/float/Randf64.alphastable@varargs))
+ (export "Randf64.gamma" (func $assembly/float/Randf64.gamma@varargs))
+ (export "Randf64.beta" (func $assembly/float/Randf64.beta@varargs))
+ (export "Randf64.betaprime" (func $assembly/float/Randf64.betaprime@varargs))
+ (export "Randf64.chi" (func $assembly/float/Randf64.chi@varargs))
+ (export "Randf64.chisquare" (func $assembly/float/Randf64.chisquare@varargs))
+ (export "Randf64.snedecor" (func $assembly/float/Randf64.snedecor@varargs))
+ (export "Randf64.student" (func $assembly/float/Randf64.student@varargs))
+ (export "Randi32.seed" (func $assembly/integer/Randi32.seed))
+ (export "Randi32.uniform" (func $assembly/integer/Randi32.uniform@varargs))
+ (export "Randi32.bernoulli" (func $assembly/integer/Randi32.bernoulli@varargs))
+ (export "Randi32.boolean" (func $assembly/integer/Randi32.boolean))
+ (export "Randi64.seed" (func $assembly/integer/Randi32.seed))
+ (export "Randi64.uniform" (func $assembly/integer/Randi64.uniform@varargs))
+ (export "Randi64.bernoulli" (func $assembly/integer/Randi64.bernoulli@varargs))
+ (export "Randi64.boolean" (func $assembly/integer/Randi64.boolean))
  (export "memory" (memory $0))
  (export "__setArgumentsLength" (func $~setArgumentsLength))
  (func $~lib/math/NativeMath.seedRandom (param $0 i64)
@@ -570,7 +570,7 @@
    unreachable
   end
  )
- (func $assembly/float/Randomf32.seed (param $0 i64)
+ (func $assembly/float/Randf32.seed (param $0 i64)
   local.get $0
   call $~lib/math/NativeMath.seedRandom
  )
@@ -1452,7 +1452,7 @@
    f32.demote_f64
   end
  )
- (func $assembly/float/Randomf32.normal (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.normal (param $0 f32) (param $1 f32) (result f32)
   (local $2 i32)
   (local $3 f32)
   (local $4 f32)
@@ -1834,7 +1834,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.normal.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.normal.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   local.get $2
   f64.const 0
   f64.eq
@@ -2354,7 +2354,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.normal.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.normal.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   local.get $2
   f64.const 0
   f64.eq
@@ -2543,7 +2543,7 @@
    end
   end
  )
- (func $assembly/float/Randomf32.logNormal.variance (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.variance (param $0 f32) (param $1 f32) (result f32)
   local.get $1
   local.get $1
   f32.mul
@@ -2559,7 +2559,7 @@
   call $~lib/math/NativeMathf.exp
   f32.mul
  )
- (func $assembly/float/Randomf32.exponential (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential (param $0 f32) (result f32)
   local.get $0
   f32.const 0
   f32.eq
@@ -3855,7 +3855,7 @@
   f64.add
   f32.demote_f64
  )
- (func $assembly/float/Randomf32.fisher (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.fisher (param $0 f32) (param $1 f32) (result f32)
   (local $2 i32)
   (local $3 f32)
   (local $4 f32)
@@ -4320,7 +4320,7 @@
   f64.const 1
   f64.sub
  )
- (func $assembly/float/Randomf64.poisson (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.poisson (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 f64)
   (local $3 i32)
@@ -4478,10 +4478,10 @@
   end
   local.get $0
  )
- (func $assembly/float/Randomf32.poisson (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.poisson (param $0 f32) (result f32)
   local.get $0
   f64.promote_f32
-  call $assembly/float/Randomf64.poisson
+  call $assembly/float/Randf64.poisson
   f32.demote_f64
  )
  (func $assembly/utils/logGamma (param $0 f64) (result f64)
@@ -5279,7 +5279,7 @@
   i32.sub
   call $~lib/math/tan_kern
  )
- (func $assembly/float/Randomf64.binominal (param $0 i32) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.binominal (param $0 i32) (param $1 f64) (result f64)
   (local $2 i32)
   (local $3 f64)
   (local $4 f64)
@@ -5962,7 +5962,7 @@
   f64.add
   f32.demote_f64
  )
- (func $assembly/float/Randomf32.gamma (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.gamma (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
   (local $3 f32)
   (local $4 f32)
@@ -7140,7 +7140,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.normal (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.normal (param $0 f64) (param $1 f64) (result f64)
   (local $2 i32)
   (local $3 f64)
   (local $4 f64)
@@ -7211,7 +7211,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.logNormal.variance (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.variance (param $0 f64) (param $1 f64) (result f64)
   local.get $1
   local.get $1
   f64.mul
@@ -7227,7 +7227,7 @@
   call $~lib/math/NativeMath.exp
   f64.mul
  )
- (func $assembly/float/Randomf64.exponential (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential (param $0 f64) (result f64)
   local.get $0
   f64.const 0
   f64.eq
@@ -8389,7 +8389,7 @@
   local.get $0
   f64.add
  )
- (func $assembly/float/Randomf64.fisher (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.fisher (param $0 f64) (param $1 f64) (result f64)
   (local $2 i64)
   (local $3 i64)
   (local $4 i64)
@@ -9051,7 +9051,7 @@
   i32.and
   select
  )
- (func $assembly/float/Randomf64.gamma (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.gamma (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
   (local $4 f64)
@@ -9379,11 +9379,11 @@
    unreachable
   end
  )
- (func $assembly/integer/Randomi32.seed (param $0 i64)
+ (func $assembly/integer/Randi32.seed (param $0 i64)
   local.get $0
   call $assembly/utils/randomSeedInt
  )
- (func $assembly/integer/Randomi32.bernoulli@varargs (param $0 i32) (result i32)
+ (func $assembly/integer/Randi32.bernoulli@varargs (param $0 i32) (result i32)
   (local $1 i32)
   block $1of1
    block $0of1
@@ -9430,15 +9430,15 @@
   i32.mul
   i32.le_u
  )
- (func $assembly/integer/Randomi32.boolean (result i32)
+ (func $assembly/integer/Randi32.boolean (result i32)
   i32.const 0
   global.set $~argumentsLength
   i32.const 0
-  call $assembly/integer/Randomi32.bernoulli@varargs
+  call $assembly/integer/Randi32.bernoulli@varargs
   i32.const 0
   i32.ne
  )
- (func $assembly/integer/Randomi64.bernoulli@varargs (param $0 i64) (result i64)
+ (func $assembly/integer/Randi64.bernoulli@varargs (param $0 i64) (result i64)
   (local $1 i64)
   block $1of1
    block $0of1
@@ -9484,15 +9484,15 @@
   i64.le_u
   i64.extend_i32_u
  )
- (func $assembly/integer/Randomi64.boolean (result i32)
+ (func $assembly/integer/Randi64.boolean (result i32)
   i32.const 0
   global.set $~argumentsLength
   i64.const 0
-  call $assembly/integer/Randomi64.bernoulli@varargs
+  call $assembly/integer/Randi64.bernoulli@varargs
   i64.const 0
   i64.ne
  )
- (func $assembly/float/Randomf32.uniform@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.uniform@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9516,7 +9516,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.uniform.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9550,7 +9550,7 @@
   select
   select
  )
- (func $assembly/float/Randomf32.uniform.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9568,18 +9568,18 @@
    f32.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf32.uniform.cdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.uniform.cdf (result f32)
    f32.const 0
    local.get $0
    local.get $1
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.uniform.cdf
+   br_if $__inlined_func$assembly/float/Randf32.uniform.cdf
    drop
    f32.const 1
    local.get $0
    local.get $2
    f32.ge
-   br_if $__inlined_func$assembly/float/Randomf32.uniform.cdf
+   br_if $__inlined_func$assembly/float/Randf32.uniform.cdf
    drop
    local.get $0
    local.get $1
@@ -9590,7 +9590,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.uniform.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9620,7 +9620,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.uniform.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.mean@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9642,7 +9642,7 @@
   f32.const 0.5
   f32.mul
  )
- (func $assembly/float/Randomf32.uniform.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9664,7 +9664,7 @@
   f32.const 0.28867512941360474
   f32.mul
  )
- (func $assembly/float/Randomf32.uniform.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.variance@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9689,7 +9689,7 @@
   f32.const 0.0833333358168602
   f32.mul
  )
- (func $assembly/float/Randomf32.uniform.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $outOfRange
     global.get $~argumentsLength
@@ -9699,7 +9699,7 @@
   end
   f32.const 0
  )
- (func $assembly/float/Randomf32.uniform.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.uniform.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -9720,7 +9720,7 @@
   f32.sub
   call $~lib/math/NativeMathf.log
  )
- (func $assembly/float/Randomf32.bernoulli@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9741,7 +9741,7 @@
   f32.ge
   f32.convert_i32_u
  )
- (func $assembly/float/Randomf32.bernoulli.pmf@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.pmf@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9755,7 +9755,7 @@
    f32.const 0.5
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf32.bernoulli.pmf (result f32)
+  block $__inlined_func$assembly/float/Randf32.bernoulli.pmf (result f32)
    f32.const 1
    local.get $1
    f32.const 0
@@ -9767,18 +9767,18 @@
    local.get $0
    f32.const 0
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.pmf
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.pmf
    drop
    local.get $1
    local.get $0
    f32.const 1
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.pmf
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.pmf
    drop
    f32.const 0
   end
  )
- (func $assembly/float/Randomf32.bernoulli.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9792,18 +9792,18 @@
    f32.const 0.5
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf32.bernoulli.cdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.bernoulli.cdf (result f32)
    f32.const 0
    local.get $0
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.cdf
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.cdf
    drop
    f32.const 1
    local.get $0
    f32.const 1
    f32.ge
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.cdf
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.cdf
    drop
    f32.const 1
    local.get $1
@@ -9814,7 +9814,7 @@
    f32.sub
   end
  )
- (func $assembly/float/Randomf32.bernoulli.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9839,7 +9839,7 @@
   f32.gt
   f32.convert_i32_u
  )
- (func $assembly/float/Randomf32.bernoulli.mean@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.mean@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9857,7 +9857,7 @@
   f32.const 1
   f32.min
  )
- (func $assembly/float/Randomf32.bernoulli.median@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.median@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9874,7 +9874,7 @@
   f32.gt
   f32.convert_i32_u
  )
- (func $assembly/float/Randomf32.bernoulli.stdev@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.stdev@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9898,7 +9898,7 @@
   f32.mul
   f32.sqrt
  )
- (func $assembly/float/Randomf32.bernoulli.variance@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.variance@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9921,7 +9921,7 @@
   local.get $0
   f32.mul
  )
- (func $assembly/float/Randomf32.bernoulli.skewness@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.skewness@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9933,7 +9933,7 @@
    f32.const 0.5
    local.set $0
   end
-  block $__inlined_func$assembly/float/Randomf32.bernoulli.skewness (result f32)
+  block $__inlined_func$assembly/float/Randf32.bernoulli.skewness (result f32)
    f32.const inf
    local.get $0
    f32.const 0
@@ -9943,13 +9943,13 @@
    local.tee $0
    f32.const 0
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.skewness
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.skewness
    drop
    f32.const -inf
    local.get $0
    f32.const 1
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.skewness
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.skewness
    drop
    f32.const 1
    local.get $0
@@ -9965,7 +9965,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.bernoulli.entropy@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.bernoulli.entropy@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -9977,7 +9977,7 @@
    f32.const 0.5
    local.set $0
   end
-  block $__inlined_func$assembly/float/Randomf32.bernoulli.entropy (result f32)
+  block $__inlined_func$assembly/float/Randf32.bernoulli.entropy (result f32)
    f32.const 0
    i32.const 1
    local.get $0
@@ -9992,7 +9992,7 @@
    f32.const 0
    f32.eq
    select
-   br_if $__inlined_func$assembly/float/Randomf32.bernoulli.entropy
+   br_if $__inlined_func$assembly/float/Randf32.bernoulli.entropy
    drop
    local.get $0
    f32.const 1
@@ -10009,7 +10009,7 @@
    f32.sub
   end
  )
- (func $assembly/float/Randomf32.triangular@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   (local $3 f32)
   (local $4 f32)
   block $3of3
@@ -10031,7 +10031,7 @@
    f32.const nan:0x400000
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf32.triangular (result f32)
+  block $__inlined_func$assembly/float/Randf32.triangular (result f32)
    local.get $0
    local.get $1
    local.get $0
@@ -10039,7 +10039,7 @@
    local.tee $4
    f32.const 0
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.triangular
+   br_if $__inlined_func$assembly/float/Randf32.triangular
    drop
    call $~lib/math/NativeMathf.random
    local.tee $3
@@ -10077,7 +10077,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.triangular.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
   (local $4 f32)
   block $3of3
    block $2of3
@@ -10100,7 +10100,7 @@
    f32.const 0.5
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf32.triangular.pdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.triangular.pdf (result f32)
    f32.const nan:0x400000
    i32.const 1
    local.get $2
@@ -10110,13 +10110,13 @@
    local.get $3
    f32.gt
    select
-   br_if $__inlined_func$assembly/float/Randomf32.triangular.pdf
+   br_if $__inlined_func$assembly/float/Randf32.triangular.pdf
    drop
    f32.const 0
    local.get $0
    local.get $1
    f32.le
-   br_if $__inlined_func$assembly/float/Randomf32.triangular.pdf
+   br_if $__inlined_func$assembly/float/Randf32.triangular.pdf
    drop
    local.get $2
    local.get $1
@@ -10170,7 +10170,7 @@
    end
   end
  )
- (func $assembly/float/Randomf32.triangular.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
   (local $4 f32)
   (local $5 f32)
   block $3of3
@@ -10194,7 +10194,7 @@
    f32.const 0.5
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf32.triangular.cdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.triangular.cdf (result f32)
    f32.const nan:0x400000
    i32.const 1
    local.get $2
@@ -10204,13 +10204,13 @@
    local.get $3
    f32.gt
    select
-   br_if $__inlined_func$assembly/float/Randomf32.triangular.cdf
+   br_if $__inlined_func$assembly/float/Randf32.triangular.cdf
    drop
    f32.const 0
    local.get $0
    local.get $1
    f32.le
-   br_if $__inlined_func$assembly/float/Randomf32.triangular.cdf
+   br_if $__inlined_func$assembly/float/Randf32.triangular.cdf
    drop
    local.get $2
    local.get $1
@@ -10239,7 +10239,7 @@
     f32.mul
     local.get $5
     f32.div
-    br $__inlined_func$assembly/float/Randomf32.triangular.cdf
+    br $__inlined_func$assembly/float/Randf32.triangular.cdf
    end
    local.get $0
    local.get $2
@@ -10255,12 +10255,12 @@
     local.get $4
     f32.div
     f32.sub
-    br $__inlined_func$assembly/float/Randomf32.triangular.cdf
+    br $__inlined_func$assembly/float/Randf32.triangular.cdf
    end
    f32.const 1
   end
  )
- (func $assembly/float/Randomf32.triangular.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
   (local $4 f32)
   (local $5 f32)
   (local $6 f32)
@@ -10285,7 +10285,7 @@
    f32.const 0.5
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf32.triangular.quantile (result f32)
+  block $__inlined_func$assembly/float/Randf32.triangular.quantile (result f32)
    f32.const nan:0x400000
    i32.const 1
    local.get $2
@@ -10295,7 +10295,7 @@
    local.get $3
    f32.gt
    select
-   br_if $__inlined_func$assembly/float/Randomf32.triangular.quantile
+   br_if $__inlined_func$assembly/float/Randf32.triangular.quantile
    drop
    local.get $3
    local.get $1
@@ -10332,7 +10332,7 @@
     f32.mul
     f32.sqrt
     f32.add
-    br $__inlined_func$assembly/float/Randomf32.triangular.quantile
+    br $__inlined_func$assembly/float/Randf32.triangular.quantile
    end
    local.get $2
    local.get $4
@@ -10345,12 +10345,12 @@
    local.get $0
    local.get $6
    f32.gt
-   br_if $__inlined_func$assembly/float/Randomf32.triangular.quantile
+   br_if $__inlined_func$assembly/float/Randf32.triangular.quantile
    drop
    local.get $3
   end
  )
- (func $assembly/float/Randomf32.triangular.mean@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.mean@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
     block $1of3
@@ -10378,7 +10378,7 @@
   f32.const 3
   f32.div
  )
- (func $assembly/float/Randomf32.triangular.median@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.median@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   (local $3 f32)
   block $3of3
    block $2of3
@@ -10444,7 +10444,7 @@
    end
   end
  )
- (func $assembly/float/Randomf32.triangular.stdev@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.stdev@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
     block $1of3
@@ -10503,7 +10503,7 @@
   end
   f32.sqrt
  )
- (func $assembly/float/Randomf32.triangular.variance@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.variance@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
     block $1of3
@@ -10561,7 +10561,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.triangular.skewness@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.skewness@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
     block $1of3
@@ -10647,7 +10647,7 @@
    f32.mul
   end
  )
- (func $assembly/float/Randomf32.triangular.entropy@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.triangular.entropy@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
     block $1of3
@@ -10688,7 +10688,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.geometric@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10715,7 +10715,7 @@
   f32.const 1
   f32.add
  )
- (func $assembly/float/Randomf32.geometric.pmf@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.pmf@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10744,7 +10744,7 @@
   local.get $1
   f32.mul
  )
- (func $assembly/float/Randomf32.geometric.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10770,7 +10770,7 @@
   call $~lib/math/NativeMathf.pow
   f32.sub
  )
- (func $assembly/float/Randomf32.geometric.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10797,7 +10797,7 @@
   f32.div
   f32.ceil
  )
- (func $assembly/float/Randomf32.geometric.mean@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.mean@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10817,7 +10817,7 @@
   f32.min
   f32.div
  )
- (func $assembly/float/Randomf32.geometric.median@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.median@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10841,7 +10841,7 @@
   f32.div
   f32.ceil
  )
- (func $assembly/float/Randomf32.geometric.stdev@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.stdev@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10867,7 +10867,7 @@
   f32.div
   f32.sqrt
  )
- (func $assembly/float/Randomf32.geometric.variance@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.variance@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10892,7 +10892,7 @@
   f32.mul
   f32.div
  )
- (func $assembly/float/Randomf32.geometric.skewness@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.skewness@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10918,7 +10918,7 @@
   f32.sqrt
   f32.div
  )
- (func $assembly/float/Randomf32.geometric.entropy@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.geometric.entropy@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -10951,7 +10951,7 @@
   local.get $0
   f32.div
  )
- (func $assembly/float/Randomf32.normal@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.normal@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -10969,9 +10969,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf32.normal
+  call $assembly/float/Randf32.normal
  )
- (func $assembly/float/Randomf32.normal.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.normal.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11021,7 +11021,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.normal.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.normal.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11045,10 +11045,10 @@
   f64.promote_f32
   local.get $2
   f64.promote_f32
-  call $assembly/float/Randomf64.normal.cdf
+  call $assembly/float/Randf64.normal.cdf
   f32.demote_f64
  )
- (func $assembly/float/Randomf32.normal.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.normal.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11072,10 +11072,10 @@
   f64.promote_f32
   local.get $2
   f64.promote_f32
-  call $assembly/float/Randomf64.normal.quantile
+  call $assembly/float/Randf64.normal.quantile
   f32.demote_f64
  )
- (func $assembly/float/Randomf32.normal.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.normal.mean@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $0of2
     block $outOfRange
@@ -11089,7 +11089,7 @@
   end
   local.get $0
  )
- (func $assembly/float/Randomf32.normal.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.normal.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -11103,7 +11103,7 @@
   end
   local.get $1
  )
- (func $assembly/float/Randomf32.normal.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.normal.variance@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -11119,7 +11119,7 @@
   local.get $1
   f32.mul
  )
- (func $assembly/float/Randomf32.normal.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.normal.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -11140,7 +11140,7 @@
   f32.const 0.5
   f32.mul
  )
- (func $assembly/float/Randomf32.logNormal@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11158,10 +11158,10 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf32.normal
+  call $assembly/float/Randf32.normal
   call $~lib/math/NativeMathf.exp
  )
- (func $assembly/float/Randomf32.logNormal.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11209,7 +11209,7 @@
    f32.mul
   end
  )
- (func $assembly/float/Randomf32.logNormal.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11240,11 +11240,11 @@
    f64.promote_f32
    local.get $2
    f64.promote_f32
-   call $assembly/float/Randomf64.normal.cdf
+   call $assembly/float/Randf64.normal.cdf
    f32.demote_f64
   end
  )
- (func $assembly/float/Randomf32.logNormal.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11279,14 +11279,14 @@
    f64.promote_f32
    f64.const 0
    f64.const 1
-   call $assembly/float/Randomf64.normal.quantile
+   call $assembly/float/Randf64.normal.quantile
    f32.demote_f64
    f32.mul
    f32.add
    call $~lib/math/NativeMathf.exp
   end
  )
- (func $assembly/float/Randomf32.logNormal.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.mean@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11311,7 +11311,7 @@
   f32.add
   call $~lib/math/NativeMathf.exp
  )
- (func $assembly/float/Randomf32.logNormal.median@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.median@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $0of2
     block $outOfRange
@@ -11326,7 +11326,7 @@
   local.get $0
   call $~lib/math/NativeMathf.exp
  )
- (func $assembly/float/Randomf32.logNormal.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11344,10 +11344,10 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf32.logNormal.variance
+  call $assembly/float/Randf32.logNormal.variance
   f32.sqrt
  )
- (func $assembly/float/Randomf32.logNormal.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.variance@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11365,9 +11365,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf32.logNormal.variance
+  call $assembly/float/Randf32.logNormal.variance
  )
- (func $assembly/float/Randomf32.logNormal.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -11392,7 +11392,7 @@
   f32.sqrt
   f32.mul
  )
- (func $assembly/float/Randomf32.logNormal.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logNormal.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11418,7 +11418,7 @@
   f32.mul
   call $~lib/math/NativeMathf.log
  )
- (func $assembly/float/Randomf32.exponential@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11431,9 +11431,9 @@
    local.set $0
   end
   local.get $0
-  call $assembly/float/Randomf32.exponential
+  call $assembly/float/Randf32.exponential
  )
- (func $assembly/float/Randomf32.exponential.pdf@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.pdf@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11447,18 +11447,18 @@
    f32.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf32.exponential.pdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.exponential.pdf (result f32)
    f32.const nan:0x400000
    local.get $1
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.pdf
+   br_if $__inlined_func$assembly/float/Randf32.exponential.pdf
    drop
    f32.const 0
    local.get $0
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.pdf
+   br_if $__inlined_func$assembly/float/Randf32.exponential.pdf
    drop
    local.get $1
    local.get $1
@@ -11469,7 +11469,7 @@
    f32.mul
   end
  )
- (func $assembly/float/Randomf32.exponential.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11483,18 +11483,18 @@
    f32.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf32.exponential.cdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.exponential.cdf (result f32)
    f32.const nan:0x400000
    local.get $1
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.cdf
+   br_if $__inlined_func$assembly/float/Randf32.exponential.cdf
    drop
    f32.const 0
    local.get $0
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.cdf
+   br_if $__inlined_func$assembly/float/Randf32.exponential.cdf
    drop
    f32.const 1
    local.get $1
@@ -11505,7 +11505,7 @@
    f32.sub
   end
  )
- (func $assembly/float/Randomf32.exponential.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11519,24 +11519,24 @@
    f32.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf32.exponential.quantile (result f32)
+  block $__inlined_func$assembly/float/Randf32.exponential.quantile (result f32)
    f32.const nan:0x400000
    local.get $1
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.quantile
+   br_if $__inlined_func$assembly/float/Randf32.exponential.quantile
    drop
    f32.const 0
    local.get $0
    f32.const 0
    f32.le
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.quantile
+   br_if $__inlined_func$assembly/float/Randf32.exponential.quantile
    drop
    f32.const inf
    local.get $0
    f32.const 1
    f32.ge
-   br_if $__inlined_func$assembly/float/Randomf32.exponential.quantile
+   br_if $__inlined_func$assembly/float/Randf32.exponential.quantile
    drop
    f32.const 1
    local.get $0
@@ -11547,7 +11547,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.exponential.mean@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.mean@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11568,7 +11568,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.exponential.median@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.median@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11589,7 +11589,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.exponential.variance@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.variance@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11614,7 +11614,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.exponential.skewness@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.skewness@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11633,7 +11633,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.exponential.entropy@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.exponential.entropy@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -11657,7 +11657,7 @@
    f32.sub
   end
  )
- (func $assembly/float/Randomf32.pareto@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11688,7 +11688,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.pareto.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11725,7 +11725,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.pareto.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11759,7 +11759,7 @@
    f32.neg
   end
  )
- (func $assembly/float/Randomf32.pareto.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11799,7 +11799,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.pareto.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.mean@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11830,7 +11830,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.pareto.median@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.median@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11853,7 +11853,7 @@
   call $~lib/math/NativeMathf.exp
   f32.mul
  )
- (func $assembly/float/Randomf32.pareto.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11894,7 +11894,7 @@
   end
   f32.sqrt
  )
- (func $assembly/float/Randomf32.pareto.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.variance@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11934,7 +11934,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.pareto.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $0of2
     block $outOfRange
@@ -11964,7 +11964,7 @@
   local.get $0
   f32.add
  )
- (func $assembly/float/Randomf32.pareto.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.pareto.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -11992,7 +11992,7 @@
   f32.add
   f32.add
  )
- (func $assembly/float/Randomf32.logistic@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logistic@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12020,7 +12020,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.logistic.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12038,12 +12038,12 @@
    f32.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf32.logistic.pdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.logistic.pdf (result f32)
    f32.const nan:0x400000
    local.get $2
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.logistic.pdf
+   br_if $__inlined_func$assembly/float/Randf32.logistic.pdf
    drop
    f32.const inf
    f32.const 0
@@ -12054,7 +12054,7 @@
    local.get $2
    f32.const 0
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.logistic.pdf
+   br_if $__inlined_func$assembly/float/Randf32.logistic.pdf
    drop
    local.get $0
    local.get $1
@@ -12076,7 +12076,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.logistic.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12094,12 +12094,12 @@
    f32.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf32.logistic.cdf (result f32)
+  block $__inlined_func$assembly/float/Randf32.logistic.cdf (result f32)
    f32.const nan:0x400000
    local.get $2
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.logistic.cdf
+   br_if $__inlined_func$assembly/float/Randf32.logistic.cdf
    drop
    local.get $0
    local.get $1
@@ -12108,7 +12108,7 @@
    local.get $2
    f32.const 0
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.logistic.cdf
+   br_if $__inlined_func$assembly/float/Randf32.logistic.cdf
    drop
    f32.const 1
    local.get $0
@@ -12123,7 +12123,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.logistic.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12141,18 +12141,18 @@
    f32.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf32.logistic.quantile (result f32)
+  block $__inlined_func$assembly/float/Randf32.logistic.quantile (result f32)
    f32.const nan:0x400000
    local.get $2
    f32.const 0
    f32.lt
-   br_if $__inlined_func$assembly/float/Randomf32.logistic.quantile
+   br_if $__inlined_func$assembly/float/Randf32.logistic.quantile
    drop
    local.get $1
    local.get $2
    f32.const 0
    f32.eq
-   br_if $__inlined_func$assembly/float/Randomf32.logistic.quantile
+   br_if $__inlined_func$assembly/float/Randf32.logistic.quantile
    drop
    local.get $1
    local.get $2
@@ -12171,7 +12171,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.logistic.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.mean@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12194,7 +12194,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.logistic.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -12215,7 +12215,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.logistic.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.variance@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -12238,7 +12238,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.logistic.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -12257,7 +12257,7 @@
   f32.lt
   select
  )
- (func $assembly/float/Randomf32.logistic.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.logistic.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -12281,7 +12281,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.cauchy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.cauchy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12308,7 +12308,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.cauchy.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.cauchy.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12350,7 +12350,7 @@
    f32.div
   end
  )
- (func $assembly/float/Randomf32.cauchy.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.cauchy.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -12588,7 +12588,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.cauchy.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.cauchy.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12628,7 +12628,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.cauchy.median@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.cauchy.median@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12651,7 +12651,7 @@
   f32.le
   select
  )
- (func $assembly/float/Randomf32.cauchy.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.cauchy.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $outOfRange
@@ -12675,7 +12675,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.gumbel@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.gumbel@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12700,7 +12700,7 @@
   f32.mul
   f32.sub
  )
- (func $assembly/float/Randomf32.laplace@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.laplace@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12741,7 +12741,7 @@
   f32.mul
   f32.sub
  )
- (func $assembly/float/Randomf32.frechet@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.frechet@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
     block $1of3
@@ -12773,7 +12773,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf32.weibull@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.weibull@varargs (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
   block $2of2
    block $1of2
@@ -12812,7 +12812,7 @@
   end
   f32.mul
  )
- (func $assembly/float/Randomf32.rayleigh@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.rayleigh@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -12832,7 +12832,7 @@
   f32.sqrt
   f32.mul
  )
- (func $assembly/float/Randomf32.maxwell@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.maxwell@varargs (param $0 f32) (result f32)
   (local $1 f32)
   (local $2 f32)
   block $1of1
@@ -12872,7 +12872,7 @@
   local.get $1
   f32.mul
  )
- (func $assembly/float/Randomf32.fisher@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.fisher@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -12890,9 +12890,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf32.fisher
+  call $assembly/float/Randf32.fisher
  )
- (func $assembly/float/Randomf32.binominal@varargs (param $0 i32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.binominal@varargs (param $0 i32) (param $1 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -12909,10 +12909,10 @@
   local.get $0
   local.get $1
   f64.promote_f32
-  call $assembly/float/Randomf64.binominal
+  call $assembly/float/Randf64.binominal
   f32.demote_f64
  )
- (func $assembly/float/Randomf32.alphastable@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
+ (func $assembly/float/Randf32.alphastable@varargs (param $0 f32) (param $1 f32) (param $2 f32) (param $3 f32) (result f32)
   (local $4 f32)
   (local $5 f32)
   (local $6 f32)
@@ -12939,7 +12939,7 @@
    f32.const 1
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf32.alphastable (result f32)
+  block $__inlined_func$assembly/float/Randf32.alphastable (result f32)
    call $~lib/math/NativeMathf.random
    f32.const 3.1415927410125732
    f32.mul
@@ -12947,7 +12947,7 @@
    f32.add
    local.set $4
    f32.const 1
-   call $assembly/float/Randomf32.exponential
+   call $assembly/float/Randf32.exponential
    local.set $5
    local.get $0
    f32.const 1
@@ -12987,7 +12987,7 @@
     f32.add
     f32.mul
     f32.add
-    br $__inlined_func$assembly/float/Randomf32.alphastable
+    br $__inlined_func$assembly/float/Randf32.alphastable
    end
    local.get $0
    local.get $4
@@ -13039,7 +13039,7 @@
    f32.add
   end
  )
- (func $assembly/float/Randomf32.gamma@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.gamma@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -13057,9 +13057,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
  )
- (func $assembly/float/Randomf32.beta@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.beta@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -13077,7 +13077,7 @@
   end
   local.get $0
   f32.const 1
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   local.tee $0
   f32.const 0
   f32.ne
@@ -13086,14 +13086,14 @@
    local.get $0
    local.get $1
    f32.const 1
-   call $assembly/float/Randomf32.gamma
+   call $assembly/float/Randf32.gamma
    f32.add
    f32.div
   else
    f32.const 0
   end
  )
- (func $assembly/float/Randomf32.betaprime@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.betaprime@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -13111,13 +13111,13 @@
   end
   local.get $0
   f32.const 1
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   local.get $1
   f32.const 1
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   f32.div
  )
- (func $assembly/float/Randomf32.chi@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.chi@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13133,10 +13133,10 @@
   f32.const 0.5
   f32.mul
   f32.const 0.5
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   f32.sqrt
  )
- (func $assembly/float/Randomf32.chisquare@varargs (param $0 f32) (result f32)
+ (func $assembly/float/Randf32.chisquare@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13152,9 +13152,9 @@
   f32.const 0.5
   f32.mul
   f32.const 0.5
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
  )
- (func $assembly/float/Randomf32.snedecor@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.snedecor@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -13174,19 +13174,19 @@
   f32.const 0.5
   f32.mul
   f32.const 0.5
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   local.get $0
   f32.div
   local.get $1
   f32.const 0.5
   f32.mul
   f32.const 0.5
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   local.get $1
   f32.div
   f32.div
  )
- (func $assembly/float/Randomf32.student@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+ (func $assembly/float/Randf32.student@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -13208,12 +13208,12 @@
   local.get $2
   f32.const 0
   f32.const 1
-  call $assembly/float/Randomf32.normal
+  call $assembly/float/Randf32.normal
   local.get $0
   f32.const 0.5
   f32.mul
   f32.const 0.5
-  call $assembly/float/Randomf32.gamma
+  call $assembly/float/Randf32.gamma
   local.get $0
   f32.div
   f32.sqrt
@@ -13221,7 +13221,7 @@
   f32.mul
   f32.add
  )
- (func $assembly/float/Randomf64.uniform@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.uniform@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13245,7 +13245,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.uniform.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13279,7 +13279,7 @@
   select
   select
  )
- (func $assembly/float/Randomf64.uniform.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13297,18 +13297,18 @@
    f64.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf64.uniform.cdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.uniform.cdf (result f64)
    f64.const 0
    local.get $0
    local.get $1
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.uniform.cdf
+   br_if $__inlined_func$assembly/float/Randf64.uniform.cdf
    drop
    f64.const 1
    local.get $0
    local.get $2
    f64.ge
-   br_if $__inlined_func$assembly/float/Randomf64.uniform.cdf
+   br_if $__inlined_func$assembly/float/Randf64.uniform.cdf
    drop
    local.get $0
    local.get $1
@@ -13319,7 +13319,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.uniform.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13349,7 +13349,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.uniform.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.mean@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13371,7 +13371,7 @@
   f64.const 0.5
   f64.mul
  )
- (func $assembly/float/Randomf64.uniform.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13393,7 +13393,7 @@
   f64.const 0.28867513459481287
   f64.mul
  )
- (func $assembly/float/Randomf64.uniform.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.variance@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13418,7 +13418,7 @@
   f64.const 0.08333333333333333
   f64.mul
  )
- (func $assembly/float/Randomf64.uniform.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $outOfRange
     global.get $~argumentsLength
@@ -13428,7 +13428,7 @@
   end
   f64.const 0
  )
- (func $assembly/float/Randomf64.uniform.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.uniform.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13449,7 +13449,7 @@
   f64.sub
   call $~lib/math/NativeMath.log
  )
- (func $assembly/float/Randomf64.bernoulli@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13470,7 +13470,7 @@
   f64.ge
   f64.convert_i32_u
  )
- (func $assembly/float/Randomf64.bernoulli.pmf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.pmf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13484,7 +13484,7 @@
    f64.const 0.5
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.bernoulli.pmf (result f64)
+  block $__inlined_func$assembly/float/Randf64.bernoulli.pmf (result f64)
    f64.const 1
    local.get $1
    f64.const 0
@@ -13496,18 +13496,18 @@
    local.get $0
    f64.const 0
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.pmf
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.pmf
    drop
    local.get $1
    local.get $0
    f64.const 1
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.pmf
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.pmf
    drop
    f64.const 0
   end
  )
- (func $assembly/float/Randomf64.bernoulli.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13521,18 +13521,18 @@
    f64.const 0.5
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.bernoulli.cdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.bernoulli.cdf (result f64)
    f64.const 0
    local.get $0
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.cdf
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.cdf
    drop
    f64.const 1
    local.get $0
    f64.const 1
    f64.ge
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.cdf
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.cdf
    drop
    f64.const 1
    local.get $1
@@ -13543,7 +13543,7 @@
    f64.sub
   end
  )
- (func $assembly/float/Randomf64.bernoulli.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13568,7 +13568,7 @@
   f64.gt
   f64.convert_i32_u
  )
- (func $assembly/float/Randomf64.bernoulli.mean@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.mean@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13586,7 +13586,7 @@
   f64.const 1
   f64.min
  )
- (func $assembly/float/Randomf64.bernoulli.median@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.median@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13603,7 +13603,7 @@
   f64.gt
   f64.convert_i32_u
  )
- (func $assembly/float/Randomf64.bernoulli.stdev@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.stdev@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13627,7 +13627,7 @@
   f64.mul
   f64.sqrt
  )
- (func $assembly/float/Randomf64.bernoulli.variance@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.variance@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13650,7 +13650,7 @@
   local.get $0
   f64.mul
  )
- (func $assembly/float/Randomf64.bernoulli.skewness@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.skewness@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13662,7 +13662,7 @@
    f64.const 0.5
    local.set $0
   end
-  block $__inlined_func$assembly/float/Randomf64.bernoulli.skewness (result f64)
+  block $__inlined_func$assembly/float/Randf64.bernoulli.skewness (result f64)
    f64.const inf
    local.get $0
    f64.const 0
@@ -13672,13 +13672,13 @@
    local.tee $0
    f64.const 0
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.skewness
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.skewness
    drop
    f64.const -inf
    local.get $0
    f64.const 1
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.skewness
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.skewness
    drop
    f64.const 1
    local.get $0
@@ -13694,7 +13694,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.bernoulli.entropy@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.bernoulli.entropy@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -13706,7 +13706,7 @@
    f64.const 0.5
    local.set $0
   end
-  block $__inlined_func$assembly/float/Randomf64.bernoulli.entropy (result f64)
+  block $__inlined_func$assembly/float/Randf64.bernoulli.entropy (result f64)
    f64.const 0
    i32.const 1
    local.get $0
@@ -13721,7 +13721,7 @@
    f64.const 0
    f64.eq
    select
-   br_if $__inlined_func$assembly/float/Randomf64.bernoulli.entropy
+   br_if $__inlined_func$assembly/float/Randf64.bernoulli.entropy
    drop
    local.get $0
    f64.const 1
@@ -13738,7 +13738,7 @@
    f64.sub
   end
  )
- (func $assembly/float/Randomf64.triangular@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)
   (local $4 f64)
   block $3of3
@@ -13760,7 +13760,7 @@
    f64.const nan:0x8000000000000
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf64.triangular (result f64)
+  block $__inlined_func$assembly/float/Randf64.triangular (result f64)
    local.get $0
    local.get $1
    local.get $0
@@ -13768,7 +13768,7 @@
    local.tee $4
    f64.const 0
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.triangular
+   br_if $__inlined_func$assembly/float/Randf64.triangular
    drop
    call $~lib/math/NativeMath.random
    local.tee $3
@@ -13806,7 +13806,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.triangular.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
   (local $4 f64)
   block $3of3
    block $2of3
@@ -13829,7 +13829,7 @@
    f64.const 0.5
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf64.triangular.pdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.triangular.pdf (result f64)
    f64.const nan:0x8000000000000
    i32.const 1
    local.get $2
@@ -13839,13 +13839,13 @@
    local.get $3
    f64.gt
    select
-   br_if $__inlined_func$assembly/float/Randomf64.triangular.pdf
+   br_if $__inlined_func$assembly/float/Randf64.triangular.pdf
    drop
    f64.const 0
    local.get $0
    local.get $1
    f64.le
-   br_if $__inlined_func$assembly/float/Randomf64.triangular.pdf
+   br_if $__inlined_func$assembly/float/Randf64.triangular.pdf
    drop
    local.get $2
    local.get $1
@@ -13899,7 +13899,7 @@
    end
   end
  )
- (func $assembly/float/Randomf64.triangular.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
   (local $4 f64)
   (local $5 f64)
   block $3of3
@@ -13923,7 +13923,7 @@
    f64.const 0.5
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf64.triangular.cdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.triangular.cdf (result f64)
    f64.const nan:0x8000000000000
    i32.const 1
    local.get $2
@@ -13933,13 +13933,13 @@
    local.get $3
    f64.gt
    select
-   br_if $__inlined_func$assembly/float/Randomf64.triangular.cdf
+   br_if $__inlined_func$assembly/float/Randf64.triangular.cdf
    drop
    f64.const 0
    local.get $0
    local.get $1
    f64.le
-   br_if $__inlined_func$assembly/float/Randomf64.triangular.cdf
+   br_if $__inlined_func$assembly/float/Randf64.triangular.cdf
    drop
    local.get $2
    local.get $1
@@ -13968,7 +13968,7 @@
     f64.mul
     local.get $5
     f64.div
-    br $__inlined_func$assembly/float/Randomf64.triangular.cdf
+    br $__inlined_func$assembly/float/Randf64.triangular.cdf
    end
    local.get $0
    local.get $2
@@ -13984,12 +13984,12 @@
     local.get $4
     f64.div
     f64.sub
-    br $__inlined_func$assembly/float/Randomf64.triangular.cdf
+    br $__inlined_func$assembly/float/Randf64.triangular.cdf
    end
    f64.const 1
   end
  )
- (func $assembly/float/Randomf64.triangular.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
   (local $4 f64)
   (local $5 f64)
   (local $6 f64)
@@ -14014,7 +14014,7 @@
    f64.const 0.5
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf64.triangular.quantile (result f64)
+  block $__inlined_func$assembly/float/Randf64.triangular.quantile (result f64)
    f64.const nan:0x8000000000000
    i32.const 1
    local.get $2
@@ -14024,7 +14024,7 @@
    local.get $3
    f64.gt
    select
-   br_if $__inlined_func$assembly/float/Randomf64.triangular.quantile
+   br_if $__inlined_func$assembly/float/Randf64.triangular.quantile
    drop
    local.get $3
    local.get $1
@@ -14061,7 +14061,7 @@
     f64.mul
     f64.sqrt
     f64.add
-    br $__inlined_func$assembly/float/Randomf64.triangular.quantile
+    br $__inlined_func$assembly/float/Randf64.triangular.quantile
    end
    local.get $2
    local.get $4
@@ -14074,12 +14074,12 @@
    local.get $0
    local.get $6
    f64.gt
-   br_if $__inlined_func$assembly/float/Randomf64.triangular.quantile
+   br_if $__inlined_func$assembly/float/Randf64.triangular.quantile
    drop
    local.get $3
   end
  )
- (func $assembly/float/Randomf64.triangular.mean@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.mean@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
    block $2of3
     block $1of3
@@ -14107,7 +14107,7 @@
   f64.const 3
   f64.div
  )
- (func $assembly/float/Randomf64.triangular.median@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.median@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)
   block $3of3
    block $2of3
@@ -14173,7 +14173,7 @@
    end
   end
  )
- (func $assembly/float/Randomf64.triangular.stdev@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.stdev@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
    block $2of3
     block $1of3
@@ -14232,7 +14232,7 @@
   end
   f64.sqrt
  )
- (func $assembly/float/Randomf64.triangular.variance@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.variance@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
    block $2of3
     block $1of3
@@ -14290,7 +14290,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.triangular.skewness@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.skewness@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
    block $2of3
     block $1of3
@@ -14376,7 +14376,7 @@
    f64.mul
   end
  )
- (func $assembly/float/Randomf64.triangular.entropy@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.triangular.entropy@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
    block $2of3
     block $1of3
@@ -14417,7 +14417,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.geometric@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14444,7 +14444,7 @@
   f64.const 1
   f64.add
  )
- (func $assembly/float/Randomf64.geometric.pmf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.pmf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14473,7 +14473,7 @@
   local.get $1
   f64.mul
  )
- (func $assembly/float/Randomf64.geometric.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14499,7 +14499,7 @@
   call $~lib/math/NativeMath.pow
   f64.sub
  )
- (func $assembly/float/Randomf64.geometric.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14526,7 +14526,7 @@
   f64.div
   f64.ceil
  )
- (func $assembly/float/Randomf64.geometric.mean@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.mean@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14546,7 +14546,7 @@
   f64.min
   f64.div
  )
- (func $assembly/float/Randomf64.geometric.median@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.median@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14570,7 +14570,7 @@
   f64.div
   f64.ceil
  )
- (func $assembly/float/Randomf64.geometric.stdev@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.stdev@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14596,7 +14596,7 @@
   f64.div
   f64.sqrt
  )
- (func $assembly/float/Randomf64.geometric.variance@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.variance@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14621,7 +14621,7 @@
   f64.mul
   f64.div
  )
- (func $assembly/float/Randomf64.geometric.skewness@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.skewness@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14647,7 +14647,7 @@
   f64.sqrt
   f64.div
  )
- (func $assembly/float/Randomf64.geometric.entropy@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.geometric.entropy@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -14680,7 +14680,7 @@
   local.get $0
   f64.div
  )
- (func $assembly/float/Randomf64.normal@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.normal@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14698,9 +14698,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.normal
+  call $assembly/float/Randf64.normal
  )
- (func $assembly/float/Randomf64.normal.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.normal.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14750,7 +14750,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.normal.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.normal.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14771,9 +14771,9 @@
   local.get $0
   local.get $1
   local.get $2
-  call $assembly/float/Randomf64.normal.cdf
+  call $assembly/float/Randf64.normal.cdf
  )
- (func $assembly/float/Randomf64.normal.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.normal.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14794,9 +14794,9 @@
   local.get $0
   local.get $1
   local.get $2
-  call $assembly/float/Randomf64.normal.quantile
+  call $assembly/float/Randf64.normal.quantile
  )
- (func $assembly/float/Randomf64.normal.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.normal.mean@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $0of2
     block $outOfRange
@@ -14810,7 +14810,7 @@
   end
   local.get $0
  )
- (func $assembly/float/Randomf64.normal.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.normal.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -14824,7 +14824,7 @@
   end
   local.get $1
  )
- (func $assembly/float/Randomf64.normal.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.normal.variance@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -14840,7 +14840,7 @@
   local.get $1
   f64.mul
  )
- (func $assembly/float/Randomf64.normal.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.normal.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -14861,7 +14861,7 @@
   f64.const 0.5
   f64.mul
  )
- (func $assembly/float/Randomf64.logNormal@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14879,10 +14879,10 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.normal
+  call $assembly/float/Randf64.normal
   call $~lib/math/NativeMath.exp
  )
- (func $assembly/float/Randomf64.logNormal.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14930,7 +14930,7 @@
    f64.mul
   end
  )
- (func $assembly/float/Randomf64.logNormal.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14958,10 +14958,10 @@
    call $~lib/math/NativeMath.log
    local.get $1
    local.get $2
-   call $assembly/float/Randomf64.normal.cdf
+   call $assembly/float/Randf64.normal.cdf
   end
  )
- (func $assembly/float/Randomf64.logNormal.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -14995,13 +14995,13 @@
    local.get $0
    f64.const 0
    f64.const 1
-   call $assembly/float/Randomf64.normal.quantile
+   call $assembly/float/Randf64.normal.quantile
    f64.mul
    f64.add
    call $~lib/math/NativeMath.exp
   end
  )
- (func $assembly/float/Randomf64.logNormal.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.mean@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15026,7 +15026,7 @@
   f64.add
   call $~lib/math/NativeMath.exp
  )
- (func $assembly/float/Randomf64.logNormal.median@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.median@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $0of2
     block $outOfRange
@@ -15041,7 +15041,7 @@
   local.get $0
   call $~lib/math/NativeMath.exp
  )
- (func $assembly/float/Randomf64.logNormal.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15059,10 +15059,10 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.logNormal.variance
+  call $assembly/float/Randf64.logNormal.variance
   f64.sqrt
  )
- (func $assembly/float/Randomf64.logNormal.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.variance@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15080,9 +15080,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.logNormal.variance
+  call $assembly/float/Randf64.logNormal.variance
  )
- (func $assembly/float/Randomf64.logNormal.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -15107,7 +15107,7 @@
   f64.sqrt
   f64.mul
  )
- (func $assembly/float/Randomf64.logNormal.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logNormal.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15133,7 +15133,7 @@
   f64.mul
   call $~lib/math/NativeMath.log
  )
- (func $assembly/float/Randomf64.exponential@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15146,9 +15146,9 @@
    local.set $0
   end
   local.get $0
-  call $assembly/float/Randomf64.exponential
+  call $assembly/float/Randf64.exponential
  )
- (func $assembly/float/Randomf64.exponential.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15162,18 +15162,18 @@
    f64.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.exponential.pdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.exponential.pdf (result f64)
    f64.const nan:0x8000000000000
    local.get $1
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.pdf
+   br_if $__inlined_func$assembly/float/Randf64.exponential.pdf
    drop
    f64.const 0
    local.get $0
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.pdf
+   br_if $__inlined_func$assembly/float/Randf64.exponential.pdf
    drop
    local.get $1
    local.get $1
@@ -15184,7 +15184,7 @@
    f64.mul
   end
  )
- (func $assembly/float/Randomf64.exponential.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15198,18 +15198,18 @@
    f64.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.exponential.cdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.exponential.cdf (result f64)
    f64.const nan:0x8000000000000
    local.get $1
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.cdf
+   br_if $__inlined_func$assembly/float/Randf64.exponential.cdf
    drop
    f64.const 0
    local.get $0
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.cdf
+   br_if $__inlined_func$assembly/float/Randf64.exponential.cdf
    drop
    f64.const 1
    local.get $1
@@ -15220,7 +15220,7 @@
    f64.sub
   end
  )
- (func $assembly/float/Randomf64.exponential.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15234,24 +15234,24 @@
    f64.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.exponential.quantile (result f64)
+  block $__inlined_func$assembly/float/Randf64.exponential.quantile (result f64)
    f64.const nan:0x8000000000000
    local.get $1
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.quantile
+   br_if $__inlined_func$assembly/float/Randf64.exponential.quantile
    drop
    f64.const 0
    local.get $0
    f64.const 0
    f64.le
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.quantile
+   br_if $__inlined_func$assembly/float/Randf64.exponential.quantile
    drop
    f64.const inf
    local.get $0
    f64.const 1
    f64.ge
-   br_if $__inlined_func$assembly/float/Randomf64.exponential.quantile
+   br_if $__inlined_func$assembly/float/Randf64.exponential.quantile
    drop
    f64.const 1
    local.get $0
@@ -15262,7 +15262,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.exponential.mean@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.mean@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15283,7 +15283,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.exponential.median@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.median@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15304,7 +15304,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.exponential.variance@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.variance@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15329,7 +15329,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.exponential.skewness@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.skewness@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15348,7 +15348,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.exponential.entropy@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.exponential.entropy@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -15372,7 +15372,7 @@
    f64.sub
   end
  )
- (func $assembly/float/Randomf64.pareto@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15403,7 +15403,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.pareto.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15440,7 +15440,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.pareto.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15474,7 +15474,7 @@
    f64.neg
   end
  )
- (func $assembly/float/Randomf64.pareto.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15514,7 +15514,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.pareto.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.mean@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15545,7 +15545,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.pareto.median@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.median@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15568,7 +15568,7 @@
   call $~lib/math/NativeMath.exp
   f64.mul
  )
- (func $assembly/float/Randomf64.pareto.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15609,7 +15609,7 @@
   end
   f64.sqrt
  )
- (func $assembly/float/Randomf64.pareto.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.variance@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15649,7 +15649,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.pareto.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $0of2
     block $outOfRange
@@ -15679,7 +15679,7 @@
   local.get $0
   f64.add
  )
- (func $assembly/float/Randomf64.pareto.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.pareto.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15707,7 +15707,7 @@
   f64.add
   f64.add
  )
- (func $assembly/float/Randomf64.logistic@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logistic@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15735,7 +15735,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.logistic.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15753,12 +15753,12 @@
    f64.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf64.logistic.pdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.logistic.pdf (result f64)
    f64.const nan:0x8000000000000
    local.get $2
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.logistic.pdf
+   br_if $__inlined_func$assembly/float/Randf64.logistic.pdf
    drop
    f64.const inf
    f64.const 0
@@ -15769,7 +15769,7 @@
    local.get $2
    f64.const 0
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.logistic.pdf
+   br_if $__inlined_func$assembly/float/Randf64.logistic.pdf
    drop
    local.get $0
    local.get $1
@@ -15791,7 +15791,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.logistic.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15809,12 +15809,12 @@
    f64.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf64.logistic.cdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.logistic.cdf (result f64)
    f64.const nan:0x8000000000000
    local.get $2
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.logistic.cdf
+   br_if $__inlined_func$assembly/float/Randf64.logistic.cdf
    drop
    local.get $0
    local.get $1
@@ -15823,7 +15823,7 @@
    local.get $2
    f64.const 0
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.logistic.cdf
+   br_if $__inlined_func$assembly/float/Randf64.logistic.cdf
    drop
    f64.const 1
    local.get $0
@@ -15838,7 +15838,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.logistic.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15856,18 +15856,18 @@
    f64.const 1
    local.set $2
   end
-  block $__inlined_func$assembly/float/Randomf64.logistic.quantile (result f64)
+  block $__inlined_func$assembly/float/Randf64.logistic.quantile (result f64)
    f64.const nan:0x8000000000000
    local.get $2
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.logistic.quantile
+   br_if $__inlined_func$assembly/float/Randf64.logistic.quantile
    drop
    local.get $1
    local.get $2
    f64.const 0
    f64.eq
-   br_if $__inlined_func$assembly/float/Randomf64.logistic.quantile
+   br_if $__inlined_func$assembly/float/Randf64.logistic.quantile
    drop
    local.get $1
    local.get $2
@@ -15886,7 +15886,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.logistic.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.mean@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -15909,7 +15909,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.logistic.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -15930,7 +15930,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.logistic.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.variance@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -15953,7 +15953,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.logistic.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -15972,7 +15972,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.logistic.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.logistic.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -15996,7 +15996,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.cauchy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.cauchy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16023,7 +16023,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.cauchy.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.cauchy.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16065,7 +16065,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.cauchy.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.cauchy.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 i32)
   (local $4 i32)
   (local $5 i32)
@@ -16307,7 +16307,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.cauchy.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.cauchy.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16347,7 +16347,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.cauchy.median@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.cauchy.median@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16370,7 +16370,7 @@
   f64.le
   select
  )
- (func $assembly/float/Randomf64.cauchy.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.cauchy.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $outOfRange
@@ -16394,7 +16394,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.gumbel@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.gumbel@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16419,7 +16419,7 @@
   f64.mul
   f64.sub
  )
- (func $assembly/float/Randomf64.laplace@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.laplace@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16460,7 +16460,7 @@
   f64.mul
   f64.sub
  )
- (func $assembly/float/Randomf64.frechet@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.frechet@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
    block $2of3
     block $1of3
@@ -16492,7 +16492,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/float/Randomf64.weibull@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.weibull@varargs (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   block $2of2
    block $1of2
@@ -16531,7 +16531,7 @@
   end
   f64.mul
  )
- (func $assembly/float/Randomf64.rayleigh@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.rayleigh@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16551,7 +16551,7 @@
   f64.sqrt
   f64.mul
  )
- (func $assembly/float/Randomf64.maxwell@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell@varargs (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 f64)
   block $1of1
@@ -16591,7 +16591,7 @@
   local.get $1
   f64.mul
  )
- (func $assembly/float/Randomf64.maxwell.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16605,18 +16605,18 @@
    f64.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.maxwell.pdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.maxwell.pdf (result f64)
    f64.const nan:0x8000000000000
    local.get $1
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.pdf
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.pdf
    drop
    f64.const 0
    local.get $0
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.pdf
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.pdf
    drop
    local.get $0
    local.get $1
@@ -16636,7 +16636,7 @@
    f64.div
   end
  )
- (func $assembly/float/Randomf64.maxwell.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
   block $1of1
@@ -16652,18 +16652,18 @@
    f64.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.maxwell.cdf (result f64)
+  block $__inlined_func$assembly/float/Randf64.maxwell.cdf (result f64)
    f64.const nan:0x8000000000000
    local.get $1
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.cdf
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.cdf
    drop
    f64.const 0
    local.get $0
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.cdf
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.cdf
    drop
    local.get $0
    local.get $1
@@ -16756,7 +16756,7 @@
    f64.sub
   end
  )
- (func $assembly/float/Randomf64.maxwell.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16770,29 +16770,29 @@
    f64.const 1
    local.set $1
   end
-  block $__inlined_func$assembly/float/Randomf64.maxwell.quantile (result f64)
+  block $__inlined_func$assembly/float/Randf64.maxwell.quantile (result f64)
    f64.const nan:0x8000000000000
    local.get $1
    f64.const 0
    f64.lt
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.quantile
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.quantile
    drop
    f64.const 0
    local.get $0
    f64.const 0
    f64.le
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.quantile
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.quantile
    drop
    f64.const 1
    local.get $0
    f64.const 1
    f64.ge
-   br_if $__inlined_func$assembly/float/Randomf64.maxwell.quantile
+   br_if $__inlined_func$assembly/float/Randf64.maxwell.quantile
    drop
    f64.const 0
   end
  )
- (func $assembly/float/Randomf64.maxwell.mean@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.mean@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16813,7 +16813,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.maxwell.median@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.median@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16832,7 +16832,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.maxwell.stdev@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.stdev@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16853,7 +16853,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.maxwell.variance@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.variance@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16876,7 +16876,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.maxwell.skewness@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.skewness@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16895,7 +16895,7 @@
   f64.lt
   select
  )
- (func $assembly/float/Randomf64.maxwell.entropy@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.maxwell.entropy@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16919,7 +16919,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.fisher@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.fisher@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -16937,9 +16937,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.fisher
+  call $assembly/float/Randf64.fisher
  )
- (func $assembly/float/Randomf64.binominal@varargs (param $0 i32) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.binominal@varargs (param $0 i32) (param $1 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -16955,9 +16955,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.binominal
+  call $assembly/float/Randf64.binominal
  )
- (func $assembly/float/Randomf64.alphastable@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+ (func $assembly/float/Randf64.alphastable@varargs (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
   (local $4 f64)
   (local $5 f64)
   (local $6 f64)
@@ -16984,7 +16984,7 @@
    f64.const 1
    local.set $3
   end
-  block $__inlined_func$assembly/float/Randomf64.alphastable (result f64)
+  block $__inlined_func$assembly/float/Randf64.alphastable (result f64)
    call $~lib/math/NativeMath.random
    f64.const 3.141592653589793
    f64.mul
@@ -16992,7 +16992,7 @@
    f64.add
    local.set $4
    f64.const 1
-   call $assembly/float/Randomf64.exponential
+   call $assembly/float/Randf64.exponential
    local.set $5
    local.get $0
    f64.const 1
@@ -17032,7 +17032,7 @@
     f64.add
     f64.mul
     f64.add
-    br $__inlined_func$assembly/float/Randomf64.alphastable
+    br $__inlined_func$assembly/float/Randf64.alphastable
    end
    local.get $0
    local.get $4
@@ -17084,7 +17084,7 @@
    f64.add
   end
  )
- (func $assembly/float/Randomf64.gamma@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.gamma@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -17102,9 +17102,9 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
  )
- (func $assembly/float/Randomf64.beta@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.beta@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -17122,7 +17122,7 @@
   end
   local.get $0
   f64.const 1
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   local.tee $0
   f64.const 0
   f64.ne
@@ -17131,14 +17131,14 @@
    local.get $0
    local.get $1
    f64.const 1
-   call $assembly/float/Randomf64.gamma
+   call $assembly/float/Randf64.gamma
    f64.add
    f64.div
   else
    f64.const 0
   end
  )
- (func $assembly/float/Randomf64.betaprime@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.betaprime@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -17156,13 +17156,13 @@
   end
   local.get $0
   f64.const 1
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   local.get $1
   f64.const 1
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   f64.div
  )
- (func $assembly/float/Randomf64.chi@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.chi@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -17178,10 +17178,10 @@
   f64.const 0.5
   f64.mul
   f64.const 0.5
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   f64.sqrt
  )
- (func $assembly/float/Randomf64.chisquare@varargs (param $0 f64) (result f64)
+ (func $assembly/float/Randf64.chisquare@varargs (param $0 f64) (result f64)
   block $1of1
    block $0of1
     block $outOfRange
@@ -17197,9 +17197,9 @@
   f64.const 0.5
   f64.mul
   f64.const 0.5
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
  )
- (func $assembly/float/Randomf64.snedecor@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.snedecor@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -17219,19 +17219,19 @@
   f64.const 0.5
   f64.mul
   f64.const 0.5
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   local.get $0
   f64.div
   local.get $1
   f64.const 0.5
   f64.mul
   f64.const 0.5
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   local.get $1
   f64.div
   f64.div
  )
- (func $assembly/float/Randomf64.student@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+ (func $assembly/float/Randf64.student@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -17253,12 +17253,12 @@
   local.get $2
   f64.const 0
   f64.const 1
-  call $assembly/float/Randomf64.normal
+  call $assembly/float/Randf64.normal
   local.get $0
   f64.const 0.5
   f64.mul
   f64.const 0.5
-  call $assembly/float/Randomf64.gamma
+  call $assembly/float/Randf64.gamma
   local.get $0
   f64.div
   f64.sqrt
@@ -17266,7 +17266,7 @@
   f64.mul
   f64.add
  )
- (func $assembly/integer/Randomi32.uniform@varargs (param $0 i32) (param $1 i32) (result i32)
+ (func $assembly/integer/Randi32.uniform@varargs (param $0 i32) (param $1 i32) (result i32)
   (local $2 i32)
   (local $3 i32)
   (local $4 i64)
@@ -17286,7 +17286,7 @@
    i32.const 2147483647
    local.set $1
   end
-  block $__inlined_func$assembly/integer/Randomi32.uniform (result i32)
+  block $__inlined_func$assembly/integer/Randi32.uniform (result i32)
    global.get $assembly/utils/NOT_SEEDED
    if
     call $~lib/builtins/seed
@@ -17327,7 +17327,7 @@
     i32.rotl
     i32.const 5
     i32.mul
-    br $__inlined_func$assembly/integer/Randomi32.uniform
+    br $__inlined_func$assembly/integer/Randi32.uniform
    end
    global.get $assembly/utils/RND_S0_32
    local.tee $2
@@ -17476,7 +17476,7 @@
    i32.add
   end
  )
- (func $assembly/integer/Randomi64.uniform@varargs (param $0 i64) (param $1 i64) (result i64)
+ (func $assembly/integer/Randi64.uniform@varargs (param $0 i64) (param $1 i64) (result i64)
   (local $2 i64)
   (local $3 i64)
   (local $4 i64)
@@ -17501,7 +17501,7 @@
    i64.reinterpret_f64
    call $assembly/utils/randomSeedInt
   end
-  block $__inlined_func$assembly/integer/Randomi64.uniform
+  block $__inlined_func$assembly/integer/Randi64.uniform
    local.get $1
    i64.const 9223372036854775807
    i64.eq
@@ -17533,7 +17533,7 @@
     i64.shr_u
     i64.xor
     global.set $assembly/utils/RND_S1_64
-    br $__inlined_func$assembly/integer/Randomi64.uniform
+    br $__inlined_func$assembly/integer/Randi64.uniform
    end
    global.get $assembly/utils/RND_S0_64
    local.set $3

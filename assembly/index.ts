@@ -1,2 +1,2 @@
-export { Randomf32, Randomf64 } from "./float";
-export { Randomi32, Randomi64 } from "./integer";
+export { Randf32, Randf64 } from "./float";
+export { Randi32, Randi64 } from "./integer";

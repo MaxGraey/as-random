@@ -7,7 +7,7 @@ import {
   setupSeedIfNeeded
 } from "./utils";
 
-export namespace Randomi32 {
+export namespace Randi32 {
   export function seed(value: i64): void {
     randomSeedInt(value);
   }
@@ -28,11 +28,11 @@ export namespace Randomi32 {
 
   /** Returns true or false with 50/50 probability */
   export function boolean(): bool {
-    return Randomi32.bernoulli() as bool;
+    return Randi32.bernoulli() as bool;
   }
 }
 
-export namespace Randomi64 {
+export namespace Randi64 {
   export function seed(value: i64): void {
     randomSeedInt(value);
   }
@@ -53,6 +53,6 @@ export namespace Randomi64 {
 
   /** Returns true or false with 50/50 probability */
   export function boolean(): bool {
-    return Randomi64.bernoulli() as bool;
+    return Randi64.bernoulli() as bool;
   }
 }

@@ -11,7 +11,7 @@ function clamp01<T extends number>(x: T): T {
   return min<T>(max<T>(x, <T>0), <T>1);
 }
 
-export namespace Randomf64 {
+export namespace Randf64 {
 
   export function seed(value: i64): void {
     NativeMath.seedRandom(value);
@@ -482,7 +482,7 @@ export namespace Randomf64 {
 
   /** Log-Normal distribution. */
   export function logNormal(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
-    return Math.exp(Randomf64.normal(mean, sigma));
+    return Math.exp(Randf64.normal(mean, sigma));
   }
 
   export namespace logNormal {
@@ -1166,7 +1166,7 @@ export namespace Randomf64 {
 }
 
 
-export namespace Randomf32 {
+export namespace Randf32 {
 
   export function seed(value: i64): void {
     NativeMath.seedRandom(value);
@@ -1519,12 +1519,12 @@ export namespace Randomf32 {
 
     /** Eval the cumulative density function for Normal distribution. */
     export function cdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
-      return Randomf64.normal.cdf(x as f64, mean as f64, sigma as f64) as f32;
+      return Randf64.normal.cdf(x as f64, mean as f64, sigma as f64) as f32;
     }
 
     /** Eval the quantile function for Normal distribution. */
     export function quantile(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
-      return Randomf64.normal.quantile(x as f64, mean as f64, sigma as f64) as f32;
+      return Randf64.normal.quantile(x as f64, mean as f64, sigma as f64) as f32;
     }
 
 
@@ -1561,7 +1561,7 @@ export namespace Randomf32 {
 
   /** Log-Normal distribution. */
   export function logNormal(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
-    return Mathf.exp(Randomf32.normal(mean, sigma));
+    return Mathf.exp(Randf32.normal(mean, sigma));
   }
 
   export namespace logNormal {
@@ -1944,12 +1944,12 @@ export namespace Randomf32 {
 
   /** Poisson distribution. */
   export function poisson(lambda: f32): f32 {
-    return Randomf64.poisson(lambda as f64) as f32;
+    return Randf64.poisson(lambda as f64) as f32;
   }
 
   /** Binominal distribution. */
   export function binominal(n: u32, prob: f32 = 0.5): f32 {
-    return Randomf64.binominal(n, prob as f64) as f32;
+    return Randf64.binominal(n, prob as f64) as f32;
   }
 
   /** Alpha-stable distribution. */

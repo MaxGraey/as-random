@@ -18,13 +18,13 @@ Work in Progress. Untested
 ### Usage
 
 ```ts
-import { Randomf64 } from "as-random";
+import { Randf64 } from "as-random";
 
-const rndSample = Randomf64.normal();
-const pdfSample = Randomf64.normal.pdf(0.5);
-const cdfSample = Randomf64.normal.cdf(0.5);
-const median1   = Randomf64.normal.quantile(0.5);
-const median2   = Randomf64.normal.median();
+const rndSample = Randf64.normal();
+const pdfSample = Randf64.normal.pdf(0.5);
+const cdfSample = Randf64.normal.cdf(0.5);
+const median1   = Randf64.normal.quantile(0.5);
+const median2   = Randf64.normal.median();
 ```
 
 ---
