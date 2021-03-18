@@ -15,7 +15,6 @@ Work in Progress. Untested
 - All distributions in integer namespace (Randomi32 / Randomi64) \
   don't use floating point arithmetics
 
-
 ### Usage
 
 ```ts
@@ -29,13 +28,14 @@ const median2   = Randomf64.normal.median();
 ```
 
 ---
-### Discrete integer distributions:
+
+### Discrete integer distributions
 
 - **Uniform** _(in interval)_
 - Bernoulli
 - Boolean
 
-### Floating point distributions:
+### Floating point distributions
 
 - **Uniform** _(in interval)_
 - Alpha-Stable
