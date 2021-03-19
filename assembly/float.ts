@@ -945,9 +945,61 @@ export namespace Randf64 {
 
     /** Eval the cumulative density function for von Mises-Fisher (p = 2) distribution. */
     export function cdf(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      // Geoffrey Hill, ACM TOMS Algorithm 518,
+      // Incomplete Bessel Function I0: The von Mises Distribution,
+      // ACM Transactions on Mathematical Software, Volume 3, Number 3,
+      // September 1977, pages 279-284.
       if (kappa < 0.0) return NaN;
-      // TODO:
-      return NaN;
+      if (x - mean <= -Math.PI) return 0.0;
+      if (x - mean >=  Math.PI) return 1.0;
+
+      let z = kappa;
+      let u = (x - mean + Math.PI) % (2.0 * Math.PI);
+      if (u < 0.0) u += 2.0 * Math.PI;
+      let y = u - Math.PI;
+
+      if (z <= 10.5) {
+        let v = 0.0;
+        if (0.0 < z) {
+          let p  = Math.floor(z * 0.8 - 8.0 / (z + 1.0) + 12.0);
+          let ip = i32(p);
+
+          NativeMath.sincos(y)
+          let s = NativeMath.sincos_sin;
+          let c = NativeMath.sincos_cos;
+          y *= y;
+
+          NativeMath.sincos(y);
+          let sn = NativeMath.sincos_sin;
+          let cn = NativeMath.sincos_cos;
+          let r  = 0.0;
+
+          z = 2.0 / z;
+
+          for (let n = 2; n <= ip; n++) {
+            p -= 1.0;
+            y  = sn;
+            sn = sn * c - cn * s;
+            cn = cn * c +  y * s;
+            r  = 1.0 / (p * z + r);
+            v  = (sn / p + v) * r;
+          }
+        }
+        return clamp01((u * 0.5 + v) / Math.PI);
+
+      } else {
+        let c = 24.0 * z;
+        let v = c - 56.0;
+        let r = Math.sqrt((54.0 / (347.0 / v + 26.0 - c) - 6.0 + c) / 12.0);
+        z = Math.sin(0.5 * y) * r;
+        let s = 2.0 * z * z;
+        v = v - s + 3.0;
+        y = (c - s - s - 16.0) / 3.0;
+        y = ((s + 1.75) * s + 83.5) / v - y;
+        y *= y;
+
+        return clamp01(0.5 * erf_approx(z * (1.0 - s / y)) + 0.5);
+      }
     }
 
     /** Returns the standard deviation of von Mises-Fisher (p = 2) distribution. */
@@ -2003,9 +2055,7 @@ export namespace Randf32 {
 
     /** Eval the cumulative density function for von Mises-Fisher (p = 2) distribution. */
     export function cdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
-      if (kappa < 0.0) return NaN;
-      // TODO:
-      return NaN;
+      return Randf64.vonmises.cdf(x, mean, kappa) as f32;
     }
 
     /** Returns the standard deviation of von Mises-Fisher (p = 2) distribution. */
