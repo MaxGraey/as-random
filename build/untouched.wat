@@ -7908,6 +7908,28 @@
    f32.const nan:0x400000
    return
   end
+  local.get $0
+  f64.promote_f32
+  local.get $1
+  f64.promote_f32
+  global.get $~lib/math/NativeMath.PI
+  f64.sub
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.promote_f32
+   local.get $1
+   f64.promote_f32
+   global.get $~lib/math/NativeMath.PI
+   f64.add
+   f64.gt
+  end
+  if
+   f32.const 0
+   return
+  end
   local.get $2
   local.get $0
   local.get $1
@@ -9873,9 +9895,8 @@
   end
   local.get $0
   local.get $1
-  f64.sub
   global.get $~lib/math/NativeMath.PI
-  f64.neg
+  f64.sub
   f64.le
   if
    f64.const 0
@@ -9883,8 +9904,8 @@
   end
   local.get $0
   local.get $1
-  f64.sub
   global.get $~lib/math/NativeMath.PI
+  f64.add
   f64.ge
   if
    f64.const 1
@@ -17905,6 +17926,24 @@
   f64.lt
   if
    f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  global.get $~lib/math/NativeMath.PI
+  f64.sub
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   local.get $1
+   global.get $~lib/math/NativeMath.PI
+   f64.add
+   f64.gt
+  end
+  if
+   f64.const 0
    return
   end
   local.get $2

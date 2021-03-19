@@ -940,6 +940,7 @@ export namespace Randf64 {
     /** Eval the probability density function for von Mises-Fisher (p = 2) distribution. */
     export function pdf(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
+      if (x < mean - Math.PI || x > mean + Math.PI) return 0.0;
       return Math.exp(kappa * Math.cos(x - mean)) / (2 * Math.PI * besseli0(kappa));
     }
 
@@ -950,8 +951,8 @@ export namespace Randf64 {
       // ACM Transactions on Mathematical Software, Volume 3, Number 3,
       // September 1977, pages 279-284.
       if (kappa < 0.0) return NaN;
-      if (x - mean <= -Math.PI) return 0.0;
-      if (x - mean >=  Math.PI) return 1.0;
+      if (x <= mean - Math.PI) return 0.0;
+      if (x >= mean + Math.PI) return 1.0;
 
       let z = kappa;
       let u = (x - mean + Math.PI) % (2.0 * Math.PI);
@@ -2050,6 +2051,7 @@ export namespace Randf32 {
     /** Eval the probability density function for von Mises-Fisher (p = 2) distribution. */
     export function pdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
+      if (x < mean - Math.PI || x > mean + Math.PI) return 0.0;
       return Mathf.exp(kappa * Mathf.cos(x - mean)) / (2 * Mathf.PI * (besseli0(kappa) as f32));
     }
 

@@ -5762,8 +5762,8 @@
   end
   local.get $0
   local.get $1
+  f64.const 3.141592653589793
   f64.sub
-  f64.const -3.141592653589793
   f64.le
   if
    f64.const 0
@@ -5771,8 +5771,8 @@
   end
   local.get $0
   local.get $1
-  f64.sub
   f64.const 3.141592653589793
+  f64.add
   f64.ge
   if
    f64.const 1
@@ -13767,6 +13767,8 @@
   call $assembly/float/Randf32.vonmises
  )
  (func $assembly/float/Randf32.vonmises.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f64)
+  (local $4 f64)
   block $2of2
    block $1of2
     block $0of2
@@ -13784,12 +13786,32 @@
    f32.const 2
    local.set $2
   end
-  local.get $2
-  f32.const 0
-  f32.lt
-  if (result f32)
+  block $__inlined_func$assembly/float/Randf32.vonmises.pdf (result f32)
    f32.const nan:0x400000
-  else
+   local.get $2
+   f32.const 0
+   f32.lt
+   br_if $__inlined_func$assembly/float/Randf32.vonmises.pdf
+   drop
+   f32.const 0
+   i32.const 1
+   local.get $0
+   f64.promote_f32
+   local.tee $3
+   local.get $1
+   f64.promote_f32
+   local.tee $4
+   f64.const 3.141592653589793
+   f64.add
+   f64.gt
+   local.get $3
+   local.get $4
+   f64.const 3.141592653589793
+   f64.sub
+   f64.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf32.vonmises.pdf
+   drop
    local.get $2
    local.get $0
    local.get $1
@@ -18060,12 +18082,28 @@
    f64.const 2
    local.set $2
   end
-  local.get $2
-  f64.const 0
-  f64.lt
-  if (result f64)
+  block $__inlined_func$assembly/float/Randf64.vonmises.pdf (result f64)
    f64.const nan:0x8000000000000
-  else
+   local.get $2
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randf64.vonmises.pdf
+   drop
+   f64.const 0
+   i32.const 1
+   local.get $0
+   local.get $1
+   f64.const 3.141592653589793
+   f64.add
+   f64.gt
+   local.get $0
+   local.get $1
+   f64.const 3.141592653589793
+   f64.sub
+   f64.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf64.vonmises.pdf
+   drop
    local.get $2
    local.get $0
    local.get $1
