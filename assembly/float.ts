@@ -899,7 +899,7 @@ export namespace Randf64 {
     }
   }
 
-  /** von Mises-Fisher distribution on a unit circle (p = 2). */
+  /** von Mises-Fisher distribution on a unit circle (d = 2). */
   export function vonmises(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
     // Based upon an algorithm published in: Fisher, N.I.,
     // "Statistical Analysis of Circular Data", Cambridge
@@ -937,14 +937,14 @@ export namespace Randf64 {
   }
 
   export namespace vonmises {
-    /** Eval the probability density function for von Mises-Fisher (p = 2) distribution. */
+    /** Eval the probability density function for von Mises-Fisher (d = 2) distribution. */
     export function pdf(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       if (x < mean - Math.PI || x > mean + Math.PI) return 0.0;
       return Math.exp(kappa * Math.cos(x - mean)) / (2 * Math.PI * besseli0(kappa));
     }
 
-    /** Eval the cumulative density function for von Mises-Fisher (p = 2) distribution. */
+    /** Eval the cumulative density function for von Mises-Fisher (d = 2) distribution. */
     export function cdf(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       // Geoffrey Hill, ACM TOMS Algorithm 518,
       // Incomplete Bessel Function I0: The von Mises Distribution,
@@ -1003,36 +1003,36 @@ export namespace Randf64 {
       }
     }
 
-    /** Returns the standard deviation of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the standard deviation of von Mises-Fisher (d = 2) distribution. */
     export function stdev(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       return Math.sqrt(variance(mean, kappa));
     }
 
-    /** Returns the variance of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the variance of von Mises-Fisher (d = 2) distribution. */
     export function variance(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       return 1.0 - besseli1(kappa) / besseli0(kappa);
     }
 
-    /** Returns the mean value of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the mean value of von Mises-Fisher (d = 2) distribution. */
     export function mean(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       return mean;
     }
 
-    /** Returns the median value of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the median value of von Mises-Fisher (d = 2) distribution. */
     export function median(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       return mean;
     }
 
-    /** Returns the skewness of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the skewness of von Mises-Fisher (d = 2) distribution. */
     export function skewness(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       return 0.0;
     }
 
-    /** Returns the differential entropy of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the differential entropy of von Mises-Fisher (d = 2) distribution. */
     export function entropy(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       let i0 = besseli0(kappa);
@@ -2009,7 +2009,7 @@ export namespace Randf32 {
     return sigma * y;
   }
 
-  /** von Mises-Fisher distribution on a unit circle (p = 2). */
+  /** von Mises-Fisher distribution on a unit circle (d = 2). */
   export function vonmises(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
     // Based upon an algorithm published in: Fisher, N.I.,
     // "Statistical Analysis of Circular Data", Cambridge
@@ -2048,48 +2048,48 @@ export namespace Randf32 {
   }
 
   export namespace vonmises {
-    /** Eval the probability density function for von Mises-Fisher (p = 2) distribution. */
+    /** Eval the probability density function for von Mises-Fisher (d = 2) distribution. */
     export function pdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
       if (x < mean - Math.PI || x > mean + Math.PI) return 0.0;
       return Mathf.exp(kappa * Mathf.cos(x - mean)) / (2 * Mathf.PI * (besseli0(kappa) as f32));
     }
 
-    /** Eval the cumulative density function for von Mises-Fisher (p = 2) distribution. */
+    /** Eval the cumulative density function for von Mises-Fisher (d = 2) distribution. */
     export function cdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       return Randf64.vonmises.cdf(x, mean, kappa) as f32;
     }
 
-    /** Returns the standard deviation of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the standard deviation of von Mises-Fisher (d = 2) distribution. */
     export function stdev(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       return Mathf.sqrt(variance(mean, kappa));
     }
 
-    /** Returns the variance of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the variance of von Mises-Fisher (d = 2) distribution. */
     export function variance(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
       return 1.0 - (besseli1(kappa) / besseli0(kappa)) as f32;
     }
 
-    /** Returns the mean value of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the mean value of von Mises-Fisher (d = 2) distribution. */
     export function mean(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
       return mean;
     }
 
-    /** Returns the median value of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the median value of von Mises-Fisher (d = 2) distribution. */
     export function median(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
       return mean;
     }
 
-    /** Returns the skewness of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the skewness of von Mises-Fisher (d = 2) distribution. */
     export function skewness(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
       return 0.0;
     }
 
-    /** Returns the differential entropy of von Mises-Fisher (p = 2) distribution. */
+    /** Returns the differential entropy of von Mises-Fisher (d = 2) distribution. */
     export function entropy(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       if (kappa < 0.0) return NaN;
       let i0 = besseli0(kappa) as f32;

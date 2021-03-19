@@ -47,7 +47,7 @@ const median2   = Randf64.normal.median();
 - Chi
 - Chi-Square
 - Exponential
-- von Mises _(von Mises-Fisher with p = 2)_
+- von Mises _(von Mises-Fisher with d = 2)_
 - Frechet
 - Gamma
 - Geometric
