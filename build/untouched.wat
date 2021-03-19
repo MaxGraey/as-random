@@ -179,7 +179,15 @@
  (export "Randf32.weibull" (func $assembly/float/Randf32.weibull@varargs))
  (export "Randf32.rayleigh" (func $assembly/float/Randf32.rayleigh@varargs))
  (export "Randf32.maxwell" (func $assembly/float/Randf32.maxwell@varargs))
- (export "Randf32.fisher" (func $assembly/float/Randf32.fisher@varargs))
+ (export "Randf32.vonmises" (func $assembly/float/Randf32.vonmises@varargs))
+ (export "Randf32.vonmises.pdf" (func $assembly/float/Randf32.vonmises.pdf@varargs))
+ (export "Randf32.vonmises.cdf" (func $assembly/float/Randf32.vonmises.cdf@varargs))
+ (export "Randf32.vonmises.stdev" (func $assembly/float/Randf32.vonmises.stdev@varargs))
+ (export "Randf32.vonmises.variance" (func $assembly/float/Randf32.vonmises.variance@varargs))
+ (export "Randf32.vonmises.mean" (func $assembly/float/Randf32.vonmises.mean@varargs))
+ (export "Randf32.vonmises.median" (func $assembly/float/Randf32.vonmises.median@varargs))
+ (export "Randf32.vonmises.skewness" (func $assembly/float/Randf32.vonmises.skewness@varargs))
+ (export "Randf32.vonmises.entropy" (func $assembly/float/Randf32.vonmises.entropy@varargs))
  (export "Randf32.poisson" (func $assembly/float/Randf32.poisson))
  (export "Randf32.binominal" (func $assembly/float/Randf32.binominal@varargs))
  (export "Randf32.alphastable" (func $assembly/float/Randf32.alphastable@varargs))
@@ -302,7 +310,15 @@
  (export "Randf64.maxwell.variance" (func $assembly/float/Randf64.maxwell.variance@varargs))
  (export "Randf64.maxwell.skewness" (func $assembly/float/Randf64.maxwell.skewness@varargs))
  (export "Randf64.maxwell.entropy" (func $assembly/float/Randf64.maxwell.entropy@varargs))
- (export "Randf64.fisher" (func $assembly/float/Randf64.fisher@varargs))
+ (export "Randf64.vonmises" (func $assembly/float/Randf64.vonmises@varargs))
+ (export "Randf64.vonmises.pdf" (func $assembly/float/Randf64.vonmises.pdf@varargs))
+ (export "Randf64.vonmises.cdf" (func $assembly/float/Randf64.vonmises.cdf@varargs))
+ (export "Randf64.vonmises.stdev" (func $assembly/float/Randf64.vonmises.stdev@varargs))
+ (export "Randf64.vonmises.variance" (func $assembly/float/Randf64.vonmises.variance@varargs))
+ (export "Randf64.vonmises.mean" (func $assembly/float/Randf64.vonmises.mean@varargs))
+ (export "Randf64.vonmises.median" (func $assembly/float/Randf64.vonmises.median@varargs))
+ (export "Randf64.vonmises.skewness" (func $assembly/float/Randf64.vonmises.skewness@varargs))
+ (export "Randf64.vonmises.entropy" (func $assembly/float/Randf64.vonmises.entropy@varargs))
  (export "Randf64.poisson" (func $assembly/float/Randf64.poisson))
  (export "Randf64.binominal" (func $assembly/float/Randf64.binominal@varargs))
  (export "Randf64.alphastable" (func $assembly/float/Randf64.alphastable@varargs))
@@ -7636,7 +7652,7 @@
   i32.or
   f32.reinterpret_i32
  )
- (func $assembly/float/Randf32.fisher (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.vonmises (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
   (local $3 f32)
   (local $4 f32)
@@ -7777,6 +7793,342 @@
    end
   end
   local.get $9
+ )
+ (func $assembly/utils/besseli0 (param $0 f64) (result f64)
+  (local $1 f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.abs
+  f64.const 3.75
+  f64.lt
+  if
+   local.get $0
+   f64.const 3.75
+   f64.div
+   local.set $1
+   local.get $1
+   local.get $1
+   f64.mul
+   local.set $1
+   f64.const 1
+   local.get $1
+   f64.const 3.5156229
+   local.get $1
+   f64.const 3.0899424
+   local.get $1
+   f64.const 1.2067492
+   local.get $1
+   f64.const 0.2659732
+   local.get $1
+   f64.const 0.0360768
+   local.get $1
+   f64.const 0.0045813
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   return
+  else
+   local.get $0
+   local.set $1
+   local.get $1
+   f64.abs
+   local.set $1
+   f64.const 3.75
+   local.get $1
+   f64.div
+   local.set $2
+   f64.const 0.39894228
+   local.get $2
+   f64.const 0.01328592
+   local.get $2
+   f64.const 0.00225319
+   local.get $2
+   f64.const -0.00157565
+   local.get $2
+   f64.const 0.00916281
+   local.get $2
+   f64.const -0.02057706
+   local.get $2
+   f64.const 0.02635537
+   local.get $2
+   f64.const -0.01647633
+   local.get $2
+   f64.const 0.00392377
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   local.set $3
+   local.get $1
+   call $~lib/math/NativeMath.exp
+   local.get $1
+   local.set $4
+   local.get $4
+   f64.sqrt
+   f64.div
+   local.get $3
+   f64.mul
+   return
+  end
+  unreachable
+ )
+ (func $assembly/float/Randf32.vonmises.pdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $2
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $2
+  local.get $0
+  local.get $1
+  f32.sub
+  call $~lib/math/NativeMathf.cos
+  f32.mul
+  call $~lib/math/NativeMathf.exp
+  f32.const 2
+  global.get $~lib/math/NativeMathf.PI
+  f32.mul
+  local.get $2
+  f64.promote_f32
+  call $assembly/utils/besseli0
+  f32.demote_f64
+  f32.mul
+  f32.div
+ )
+ (func $assembly/float/Randf32.vonmises.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $2
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const nan:0x400000
+ )
+ (func $assembly/utils/besseli1 (param $0 f64) (result f64)
+  (local $1 f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.abs
+  f64.const 3.75
+  f64.lt
+  if
+   local.get $0
+   f64.const 3.75
+   f64.div
+   local.set $1
+   local.get $1
+   local.get $1
+   f64.mul
+   local.set $1
+   f64.const 0.5
+   local.get $1
+   f64.const 0.87890594
+   local.get $1
+   f64.const 0.51498869
+   local.get $1
+   f64.const 0.15084934
+   local.get $1
+   f64.const 0.02658733
+   local.get $1
+   f64.const 0.00301532
+   local.get $1
+   f64.const 0.00032411
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   return
+  else
+   local.get $0
+   local.set $1
+   local.get $1
+   f64.abs
+   local.set $1
+   f64.const 3.75
+   local.get $1
+   f64.div
+   local.set $2
+   f64.const 0.39894228
+   local.get $2
+   f64.const -0.03988024
+   local.get $2
+   f64.const -0.00362018
+   local.get $2
+   f64.const 0.00163801
+   local.get $2
+   f64.const -0.01031555
+   local.get $2
+   f64.const 0.02282967
+   local.get $2
+   f64.const -0.02895312
+   local.get $2
+   f64.const 0.01787654
+   local.get $2
+   f64.const -0.00420059
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   f64.mul
+   f64.add
+   local.set $3
+   local.get $1
+   call $~lib/math/NativeMath.exp
+   local.get $1
+   local.set $4
+   local.get $4
+   f64.sqrt
+   f64.div
+   local.get $3
+   f64.mul
+   local.get $0
+   f64.copysign
+   return
+  end
+  unreachable
+ )
+ (func $assembly/float/Randf32.vonmises.variance (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 1
+  f64.promote_f32
+  local.get $1
+  f64.promote_f32
+  call $assembly/utils/besseli1
+  local.get $1
+  f64.promote_f32
+  call $assembly/utils/besseli0
+  f64.div
+  f64.sub
+  f32.demote_f64
+ )
+ (func $assembly/float/Randf32.vonmises.stdev (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.variance
+  local.set $2
+  local.get $2
+  f32.sqrt
+ )
+ (func $assembly/float/Randf32.vonmises.mean (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randf32.vonmises.median (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randf32.vonmises.skewness (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 0
+ )
+ (func $assembly/float/Randf32.vonmises.entropy (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  (local $3 f32)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  f64.promote_f32
+  call $assembly/utils/besseli0
+  f32.demote_f64
+  local.set $2
+  local.get $1
+  f64.promote_f32
+  call $assembly/utils/besseli1
+  f32.demote_f64
+  local.set $3
+  local.get $1
+  f32.neg
+  local.get $3
+  f32.mul
+  local.get $2
+  f32.div
+  f32.const 2
+  global.get $~lib/math/NativeMathf.PI
+  f32.mul
+  local.get $2
+  f32.mul
+  call $~lib/math/NativeMathf.log
+  f32.add
  )
  (func $~lib/math/NativeMath.random (result f64)
   (local $0 i64)
@@ -15965,7 +16317,7 @@
   i64.or
   f64.reinterpret_i64
  )
- (func $assembly/float/Randf64.fisher (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.vonmises (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
   (local $4 f64)
@@ -16106,6 +16458,124 @@
    end
   end
   local.get $9
+ )
+ (func $assembly/float/Randf64.vonmises.pdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $2
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $2
+  local.get $0
+  local.get $1
+  f64.sub
+  call $~lib/math/NativeMath.cos
+  f64.mul
+  call $~lib/math/NativeMath.exp
+  f64.const 2
+  global.get $~lib/math/NativeMath.PI
+  f64.mul
+  local.get $2
+  call $assembly/utils/besseli0
+  f64.mul
+  f64.div
+ )
+ (func $assembly/float/Randf64.vonmises.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $2
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const nan:0x8000000000000
+ )
+ (func $assembly/float/Randf64.vonmises.variance (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1
+  local.get $1
+  call $assembly/utils/besseli1
+  local.get $1
+  call $assembly/utils/besseli0
+  f64.div
+  f64.sub
+ )
+ (func $assembly/float/Randf64.vonmises.stdev (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.variance
+  local.set $2
+  local.get $2
+  f64.sqrt
+ )
+ (func $assembly/float/Randf64.vonmises.mean (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randf64.vonmises.median (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+ )
+ (func $assembly/float/Randf64.vonmises.skewness (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 0
+ )
+ (func $assembly/float/Randf64.vonmises.entropy (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  call $assembly/utils/besseli0
+  local.set $2
+  local.get $1
+  call $assembly/utils/besseli1
+  local.set $3
+  local.get $1
+  f64.neg
+  local.get $3
+  f64.mul
+  local.get $2
+  f64.div
+  f64.const 2
+  global.get $~lib/math/NativeMath.PI
+  f64.mul
+  local.get $2
+  f64.mul
+  call $~lib/math/NativeMath.log
+  f64.add
  )
  (func $~lib/math/NativeMath.sin (param $0 f64) (result f64)
   (local $1 i64)
@@ -19577,7 +20047,7 @@
   local.get $0
   call $assembly/float/Randf32.maxwell
  )
- (func $assembly/float/Randf32.fisher@varargs (param $0 f32) (param $1 f32) (result f32)
+ (func $assembly/float/Randf32.vonmises@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
     block $0of2
@@ -19595,7 +20065,173 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randf32.fisher
+  call $assembly/float/Randf32.vonmises
+ )
+ (func $assembly/float/Randf32.vonmises.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 2
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.vonmises.pdf
+ )
+ (func $assembly/float/Randf32.vonmises.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 2
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.vonmises.cdf
+ )
+ (func $assembly/float/Randf32.vonmises.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.stdev
+ )
+ (func $assembly/float/Randf32.vonmises.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.variance
+ )
+ (func $assembly/float/Randf32.vonmises.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.mean
+ )
+ (func $assembly/float/Randf32.vonmises.median@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.median
+ )
+ (func $assembly/float/Randf32.vonmises.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.skewness
+ )
+ (func $assembly/float/Randf32.vonmises.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.vonmises.entropy
  )
  (func $assembly/float/Randf32.binominal@varargs (param $0 i32) (param $1 f32) (result f32)
   block $1of1
@@ -21947,7 +22583,7 @@
   local.get $0
   call $assembly/float/Randf64.maxwell.entropy
  )
- (func $assembly/float/Randf64.fisher@varargs (param $0 f64) (param $1 f64) (result f64)
+ (func $assembly/float/Randf64.vonmises@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
    block $1of2
     block $0of2
@@ -21965,7 +22601,173 @@
   end
   local.get $0
   local.get $1
-  call $assembly/float/Randf64.fisher
+  call $assembly/float/Randf64.vonmises
+ )
+ (func $assembly/float/Randf64.vonmises.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 2
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.vonmises.pdf
+ )
+ (func $assembly/float/Randf64.vonmises.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 2
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.vonmises.cdf
+ )
+ (func $assembly/float/Randf64.vonmises.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.stdev
+ )
+ (func $assembly/float/Randf64.vonmises.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.variance
+ )
+ (func $assembly/float/Randf64.vonmises.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.mean
+ )
+ (func $assembly/float/Randf64.vonmises.median@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.median
+ )
+ (func $assembly/float/Randf64.vonmises.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.skewness
+ )
+ (func $assembly/float/Randf64.vonmises.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 2
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.vonmises.entropy
  )
  (func $assembly/float/Randf64.binominal@varargs (param $0 i32) (param $1 f64) (result f64)
   block $1of1

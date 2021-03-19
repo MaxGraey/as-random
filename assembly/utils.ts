@@ -167,6 +167,68 @@ export function erf_approx(x: f64): f64 {
   return r;
 }
 
+export function besseli0(x: f64): f64 {
+  const p1 = 1.00000000e+0;
+  const p2 = 3.51562290e+0;
+  const p3 = 3.08994240e+0;
+  const p4 = 1.20674920e+0;
+  const p5 = 0.26597320e+0;
+  const p6 = 0.36076800e-1;
+  const p7 = 0.45813000e-2;
+
+  const q1 = 0.39894228e+0;
+  const q2 = 0.13285920e-1;
+  const q3 = 0.22531900e-2;
+  const q4 =-0.15756500e-2;
+  const q5 = 0.91628100e-2;
+  const q6 =-0.20577060e-1;
+  const q7 = 0.26355370e-1;
+  const q8 =-0.16476330e-1;
+  const q9 = 0.39237700e-2;
+
+  if (Math.abs(x) < 3.75) {
+    let y = x / 3.75;
+    y *= y;
+    return p1 + y * (p2 + y * (p3 + y * (p4 + y * (p5 + y * (p6 + y * p7)))));
+  } else {
+    let ax = Math.abs(x);
+    let y  = 3.75 / ax;
+    let p  = (q1 + y * (q2 + y * (q3 + y * (q4 + y * (q5 + y * (q6 + y * (q7 + y * (q8 + y * q9))))))));
+    return Math.exp(ax) / Math.sqrt(ax) * p;
+  }
+}
+
+export function besseli1(x: f64): f64 {
+  const p1 = 0.50000000e+0;
+  const p2 = 0.87890594e+0;
+  const p3 = 0.51498869e+0;
+  const p4 = 0.15084934e+0;
+  const p5 = 0.26587330e-1;
+  const p6 = 0.30153200e-2;
+  const p7 = 0.32411000e-3;
+
+  const q1 = 0.39894228e+0;
+  const q2 =-0.39880240e-1;
+  const q3 =-0.36201800e-2;
+  const q4 = 0.16380100e-2;
+  const q5 =-0.10315550e-1;
+  const q6 = 0.22829670e-1;
+  const q7 =-0.28953120e-1;
+  const q8 = 0.17876540e-1;
+  const q9 =-0.42005900e-2;
+
+  if (Math.abs(x) < 3.75) {
+    let y = x / 3.75;
+    y *= y;
+    return p1 + y * (p2 + y * (p3 + y * (p4 + y * (p5 + y * (p6 + y * p7)))));
+  } else {
+    let ax = Math.abs(x);
+    let y  = 3.75 / ax;
+    let p  = q1 + y * (q2 + y * (q3 + y * (q4 + y * (q5 + y * (q6 + y * (q7 + y * (q8 + y * q9)))))));
+    return copysign(Math.exp(ax) / Math.sqrt(ax) * p, x);
+  }
+}
+
 // @ts-ignore: decorator
 @lazy const PRECOMP_254 = memory.data<f64>([
      0.000000000000000,

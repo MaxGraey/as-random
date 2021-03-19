@@ -1,4 +1,4 @@
-import { logFactorial, logGamma, erf_approx } from "./utils";
+import { logFactorial, logGamma, erf_approx, besseli0, besseli1 } from "./utils";
 
 // @ts-ignore: decorator
 @lazy let CACHED_NORM32: f32 = Infinity;
@@ -352,7 +352,7 @@ export namespace Randf64 {
   }
 
   export namespace normal {
-    /** Eval the probability mass function for Normal distribution. */
+    /** Eval the probability density function for Normal distribution. */
     export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (sigma == 0.0) {
         return x === mean ? Infinity : 0.0;
@@ -486,7 +486,7 @@ export namespace Randf64 {
   }
 
   export namespace logNormal {
-    /** Eval the probability mass function for Log-Normal distribution. */
+    /** Eval the probability density function for Log-Normal distribution. */
     export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (x <= 0.0) return 0.0;
 
@@ -553,7 +553,7 @@ export namespace Randf64 {
   }
 
   export namespace exponential {
-    /** Eval the probability mass function for Exponential distribution. */
+    /** Eval the probability density function for Exponential distribution. */
     export function pdf(x: f64, lambda: f64 = 1.0): f64 {
       if (lambda < 0.0) return NaN;
       if (x < 0.0) return 0.0;
@@ -622,7 +622,7 @@ export namespace Randf64 {
   }
 
   export namespace pareto {
-    /** Eval the probability mass function for Pareto (Type I) distribution. */
+    /** Eval the probability density function for Pareto (Type I) distribution. */
     export function pdf(x: f64, alpha: f64 = 1.0, xmin: f64 = 1.0): f64 {
       if (x < xmin) return 0.0;
       return alpha * Math.pow(xmin, alpha) / Math.pow(x, alpha + 1.0);
@@ -686,7 +686,7 @@ export namespace Randf64 {
   }
 
   export namespace logistic {
-    /** Eval the probability mass function for Logistic distribution. */
+    /** Eval the probability density function for Logistic distribution. */
     export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (sigma < 0.0) return NaN;
       if (sigma === 0.0) return x === mean ? Infinity : 0.0;
@@ -753,7 +753,7 @@ export namespace Randf64 {
   }
 
   export namespace cauchy {
-    /** Eval the probability mass function for Cauchy distribution. */
+    /** Eval the probability density function for Cauchy distribution. */
     export function pdf(x: f64, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (sigma <= 0.0) return NaN;
       let z = (x - mean) / sigma;
@@ -826,7 +826,7 @@ export namespace Randf64 {
   }
 
   export namespace maxwell {
-    /** Eval the probability mass function for Maxwell-Boltzman distribution. */
+    /** Eval the probability density function for Maxwell-Boltzman distribution. */
     export function pdf(x: f64, sigma: f64 = 1.0): f64 {
       if (sigma < 0.0) return NaN;
       if (x < 0.0) return 0.0;
@@ -899,8 +899,8 @@ export namespace Randf64 {
     }
   }
 
-  /** von Mises-Fisher distribution on a unit circle. */
-  export function fisher(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+  /** von Mises-Fisher distribution on a unit circle (p = 2). */
+  export function vonmises(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
     // Based upon an algorithm published in: Fisher, N.I.,
     // "Statistical Analysis of Circular Data", Cambridge
     // University Press, 1993.
@@ -934,6 +934,58 @@ export namespace Randf64 {
       if (a >  Math.PI) a -= pi2;
     }
     return a;
+  }
+
+  export namespace vonmises {
+    /** Eval the probability density function for von Mises-Fisher (p = 2) distribution. */
+    export function pdf(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      return Math.exp(kappa * Math.cos(x - mean)) / (2 * Math.PI * besseli0(kappa));
+    }
+
+    /** Eval the cumulative density function for von Mises-Fisher (p = 2) distribution. */
+    export function cdf(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      // TODO:
+      return NaN;
+    }
+
+    /** Returns the standard deviation of von Mises-Fisher (p = 2) distribution. */
+    export function stdev(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      return Math.sqrt(variance(mean, kappa));
+    }
+
+    /** Returns the variance of von Mises-Fisher (p = 2) distribution. */
+    export function variance(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      return 1.0 - besseli1(kappa) / besseli0(kappa);
+    }
+
+    /** Returns the mean value of von Mises-Fisher (p = 2) distribution. */
+    export function mean(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the median value of von Mises-Fisher (p = 2) distribution. */
+    export function median(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the skewness of von Mises-Fisher (p = 2) distribution. */
+    export function skewness(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of von Mises-Fisher (p = 2) distribution. */
+    export function entropy(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      let i0 = besseli0(kappa);
+      let i1 = besseli1(kappa);
+      return -kappa * i1 / i0 + Math.log(2.0 * Math.PI * i0);
+    }
   }
 
   /** Poisson distribution. */
@@ -1507,7 +1559,7 @@ export namespace Randf32 {
   }
 
   export namespace normal {
-    /** Eval the probability mass function for Normal distribution. */
+    /** Eval the probability density function for Normal distribution. */
     export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (sigma == 0.0) {
         return x === mean ? Infinity : 0.0;
@@ -1565,7 +1617,7 @@ export namespace Randf32 {
   }
 
   export namespace logNormal {
-    /** Eval the probability mass function for Log-Normal distribution. */
+    /** Eval the probability density function for Log-Normal distribution. */
     export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (x <= 0.0) return 0.0;
 
@@ -1632,7 +1684,7 @@ export namespace Randf32 {
   }
 
   export namespace exponential {
-    /** Eval the probability mass function for Exponential distribution. */
+    /** Eval the probability density function for Exponential distribution. */
     export function pdf(x: f32, lambda: f32 = 1.0): f32 {
       if (lambda < 0.0) return NaN;
       if (x < 0.0) return 0.0;
@@ -1701,7 +1753,7 @@ export namespace Randf32 {
   }
 
   export namespace pareto {
-    /** Eval the probability mass function for Pareto (Type I) distribution. */
+    /** Eval the probability density function for Pareto (Type I) distribution. */
     export function pdf(x: f32, alpha: f32 = 1.0, xmin: f32 = 1.0): f32 {
       if (x < xmin) return 0.0;
       return alpha * Mathf.pow(xmin, alpha) / Mathf.pow(x, alpha + 1.0);
@@ -1765,7 +1817,7 @@ export namespace Randf32 {
   }
 
   export namespace logistic {
-    /** Eval the probability mass function for Logistic distribution. */
+    /** Eval the probability density function for Logistic distribution. */
     export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (sigma < 0.0) return NaN;
       if (sigma === 0.0) return x === mean ? Infinity : 0.0;
@@ -1832,7 +1884,7 @@ export namespace Randf32 {
   }
 
   export namespace cauchy {
-    /** Eval the probability mass function for Cauchy distribution. */
+    /** Eval the probability density function for Cauchy distribution. */
     export function pdf(x: f32, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (sigma <= 0.0) return NaN;
       let z = (x - mean) / sigma;
@@ -1904,8 +1956,8 @@ export namespace Randf32 {
     return sigma * y;
   }
 
-  /** von Mises-Fisher distribution on a unit circle. */
-  export function fisher(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+  /** von Mises-Fisher distribution on a unit circle (p = 2). */
+  export function vonmises(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
     // Based upon an algorithm published in: Fisher, N.I.,
     // "Statistical Analysis of Circular Data", Cambridge
     // University Press, 1993.
@@ -1940,6 +1992,58 @@ export namespace Randf32 {
       if (a >  Mathf.PI) a -= pi2;
     }
     return a;
+  }
+
+  export namespace vonmises {
+    /** Eval the probability density function for von Mises-Fisher (p = 2) distribution. */
+    export function pdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      return Mathf.exp(kappa * Mathf.cos(x - mean)) / (2 * Mathf.PI * (besseli0(kappa) as f32));
+    }
+
+    /** Eval the cumulative density function for von Mises-Fisher (p = 2) distribution. */
+    export function cdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      // TODO:
+      return NaN;
+    }
+
+    /** Returns the standard deviation of von Mises-Fisher (p = 2) distribution. */
+    export function stdev(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      return Mathf.sqrt(variance(mean, kappa));
+    }
+
+    /** Returns the variance of von Mises-Fisher (p = 2) distribution. */
+    export function variance(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      return 1.0 - (besseli1(kappa) / besseli0(kappa)) as f32;
+    }
+
+    /** Returns the mean value of von Mises-Fisher (p = 2) distribution. */
+    export function mean(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the median value of von Mises-Fisher (p = 2) distribution. */
+    export function median(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      return mean;
+    }
+
+    /** Returns the skewness of von Mises-Fisher (p = 2) distribution. */
+    export function skewness(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of von Mises-Fisher (p = 2) distribution. */
+    export function entropy(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      if (kappa < 0.0) return NaN;
+      let i0 = besseli0(kappa) as f32;
+      let i1 = besseli1(kappa) as f32;
+      return -kappa * i1 / i0 + Mathf.log(2 * Mathf.PI * i0);
+    }
   }
 
   /** Poisson distribution. */
