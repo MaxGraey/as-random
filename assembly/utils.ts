@@ -229,6 +229,32 @@ export function besseli1(x: f64): f64 {
   }
 }
 
+// A Monotonically Convergent Newton Iteration (MCNI) for the quantiles of
+// any unimodal distribution. See http://www.statsci.org/smyth/pubs/qinvgaussPreprint.pdf
+export function quantile_approx(
+  pdf:  (x: f64, mean: f64, sigma: f64) => f64,
+  cdf:  (x: f64, mean: f64, sigma: f64) => f64,
+  mean: f64,
+  p: f64,
+  mu: f64,
+  sigma: f64,
+  lo: f64  = 0.0,
+  hi: f64  = 1.0,
+  eps: f64 = 1e-12
+): f64 {
+  if (p < 0.0 || p > 1.0) return NaN;
+  if (p == 0.0) return lo;
+  if (p == 1.0) return hi;
+
+  let x = mean + (p - cdf(mean, mu, sigma)) / pdf(mean, mu, sigma);
+  let x0 = mean;
+  while (Math.max(Math.abs(x), Math.abs(x0)) * eps < Math.abs(x - x0)) {
+    x0 = x;
+    x = x0 + (p - cdf(x0, mu, sigma)) / pdf(x0, mu, sigma);
+  }
+  return x;
+}
+
 // @ts-ignore: decorator
 @lazy const PRECOMP_254 = memory.data<f64>([
      0.000000000000000,

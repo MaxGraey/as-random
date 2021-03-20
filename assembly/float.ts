@@ -1,4 +1,11 @@
-import { logFactorial, logGamma, erf_approx, besseli0, besseli1 } from "./utils";
+import {
+  besseli0,
+  besseli1,
+  logGamma,
+  logFactorial,
+  erf_approx,
+  quantile_approx
+} from "./utils";
 
 // @ts-ignore: decorator
 @lazy let CACHED_NORM32: f32 = Infinity;
@@ -1001,6 +1008,21 @@ export namespace Randf64 {
 
         return clamp01(0.5 * erf_approx(z * (1.0 - s / y)) + 0.5);
       }
+    }
+
+    /** Eval the quantile function for Mises-Fisher (d = 2) distribution. */
+    export function quantile(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
+      if (kappa < 0.0) return NaN;
+      return quantile_approx(
+        pdf,
+        cdf,
+        mean,
+        x,
+        mean,
+        kappa,
+        mean - Math.PI,
+        mean + Math.PI
+      );
     }
 
     /** Returns the standard deviation of von Mises-Fisher (d = 2) distribution. */
@@ -2022,7 +2044,7 @@ export namespace Randf32 {
     const pi2: f32 = 2.0 * Mathf.PI;
 
     if (kappa <= 1e-6) {
-      return Math.PI * (2.0 * Mathf.random() - 1.0);
+      return Mathf.PI * (2.0 * Mathf.random() - 1.0);
     }
 
     let s = 0.5 as f32 / kappa;
@@ -2058,6 +2080,11 @@ export namespace Randf32 {
     /** Eval the cumulative density function for von Mises-Fisher (d = 2) distribution. */
     export function cdf(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
       return Randf64.vonmises.cdf(x, mean, kappa) as f32;
+    }
+
+    /** Eval the quantile function for Mises-Fisher (d = 2) distribution. */
+    export function quantile(x: f32, mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
+      return Randf64.vonmises.quantile(x, mean, kappa) as f32;
     }
 
     /** Returns the standard deviation of von Mises-Fisher (d = 2) distribution. */
