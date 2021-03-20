@@ -234,11 +234,11 @@ export function besseli1(x: f64): f64 {
 // @ts-ignore: decorator
 @inline
 export function quantile_approx(
-  pdf:  (x: f64, mean: f64, sigma: f64) => f64,
-  cdf:  (x: f64, mean: f64, sigma: f64) => f64,
   p: f64,
   mean: f64,
   sigma: f64,
+  pdf: (x: f64, mean: f64, sigma: f64) => f64,
+  cdf: (x: f64, mean: f64, sigma: f64) => f64,
   lo: f64  = 0.0,
   hi: f64  = 1.0,
   eps: f64 = 1e-12

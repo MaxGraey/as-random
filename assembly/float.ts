@@ -1014,11 +1014,11 @@ export namespace Randf64 {
     export function quantile(x: f64, mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
       if (kappa < 0.0) return NaN;
       return quantile_approx(
-        pdf,
-        cdf,
         x,
         mean,
         kappa,
+        pdf,
+        cdf,
         mean - Math.PI,
         mean + Math.PI
       );

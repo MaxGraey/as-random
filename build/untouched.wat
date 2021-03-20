@@ -10737,11 +10737,11 @@
  (func $assembly/float/Randf64.vonmises.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)
   (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
+  (local $5 i32)
+  (local $6 i32)
   (local $7 f64)
-  (local $8 i32)
-  (local $9 i32)
+  (local $8 f64)
+  (local $9 f64)
   (local $10 f64)
   (local $11 f64)
   (local $12 f64)
@@ -10756,15 +10756,15 @@
    return
   end
   block $assembly/utils/quantile_approx|inlined.0 (result f64)
-   i32.const 7232
-   local.set $9
-   i32.const 7264
-   local.set $8
    local.get $0
-   local.set $7
+   local.set $9
    local.get $1
-   local.set $6
+   local.set $8
    local.get $2
+   local.set $7
+   i32.const 7232
+   local.set $6
+   i32.const 7264
    local.set $5
    local.get $1
    global.get $~lib/math/NativeMath.PI
@@ -10776,13 +10776,13 @@
    local.set $3
    f64.const 1e-12
    local.set $10
-   local.get $7
+   local.get $9
    f64.const 0
    f64.lt
    if (result i32)
     i32.const 1
    else
-    local.get $7
+    local.get $9
     f64.const 1
     f64.gt
    end
@@ -10790,43 +10790,43 @@
     f64.const nan:0x8000000000000
     br $assembly/utils/quantile_approx|inlined.0
    end
-   local.get $7
+   local.get $9
    f64.const 0
    f64.eq
    if
     local.get $4
     br $assembly/utils/quantile_approx|inlined.0
    end
-   local.get $7
+   local.get $9
    f64.const 1
    f64.eq
    if
     local.get $3
     br $assembly/utils/quantile_approx|inlined.0
    end
-   local.get $6
+   local.get $8
+   local.get $9
+   local.get $8
+   local.get $8
    local.get $7
-   local.get $6
-   local.get $6
-   local.get $5
    i32.const 3
    global.set $~argumentsLength
-   local.get $8
+   local.get $5
    i32.load
    call_indirect $0 (type $f64_f64_f64_=>_f64)
    f64.sub
-   local.get $6
-   local.get $6
-   local.get $5
+   local.get $8
+   local.get $8
+   local.get $7
    i32.const 3
    global.set $~argumentsLength
-   local.get $9
+   local.get $6
    i32.load
    call_indirect $0 (type $f64_f64_f64_=>_f64)
    f64.div
    f64.add
    local.set $11
-   local.get $6
+   local.get $8
    local.set $12
    loop $while-continue|0
     local.get $11
@@ -10857,22 +10857,22 @@
      local.get $11
      local.set $12
      local.get $12
-     local.get $7
+     local.get $9
      local.get $12
-     local.get $6
-     local.get $5
+     local.get $8
+     local.get $7
      i32.const 3
      global.set $~argumentsLength
-     local.get $8
+     local.get $5
      i32.load
      call_indirect $0 (type $f64_f64_f64_=>_f64)
      f64.sub
      local.get $12
-     local.get $6
-     local.get $5
+     local.get $8
+     local.get $7
      i32.const 3
      global.set $~argumentsLength
-     local.get $9
+     local.get $6
      i32.load
      call_indirect $0 (type $f64_f64_f64_=>_f64)
      f64.div
