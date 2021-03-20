@@ -910,8 +910,8 @@ export namespace Randf64 {
       return mean + kappa;
     }
 
-    if (kappa <= 1e-7) {
-      return pi2 * Math.random();
+    if (kappa <= 1e-8) {
+      return Math.PI * (2.0 * Math.random() - 1.0);
     }
 
     let s = 0.5 / kappa;
@@ -995,7 +995,7 @@ export namespace Randf64 {
         z = Math.sin(0.5 * y) * r;
         let s = 2.0 * z * z;
         v = v - s + 3.0;
-        y = (c - s - s - 16.0) / 3.0;
+        y = (c - 2.0 * s - 16.0) / 3.0;
         y = ((s + 1.75) * s + 83.5) / v - y;
         y *= y;
 
@@ -2021,8 +2021,8 @@ export namespace Randf32 {
 
     const pi2: f32 = 2.0 * Mathf.PI;
 
-    if (kappa <= 1e-5) {
-      return pi2 * Mathf.random();
+    if (kappa <= 1e-6) {
+      return Math.PI * (2.0 * Mathf.random() - 1.0);
     }
 
     let s = 0.5 as f32 / kappa;
