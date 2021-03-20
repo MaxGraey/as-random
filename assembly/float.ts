@@ -1016,7 +1016,6 @@ export namespace Randf64 {
       return quantile_approx(
         pdf,
         cdf,
-        mean,
         x,
         mean,
         kappa,

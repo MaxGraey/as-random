@@ -23,7 +23,7 @@
  (type $none_=>_i64 (func (result i64)))
  (type $none_=>_f32 (func (result f32)))
  (type $i32_=>_f64 (func (param i32) (result f64)))
- (type $i32_i32_f64_f64_f64_f64_f64_f64_f64_=>_f64 (func (param i32 i32 f64 f64 f64 f64 f64 f64 f64) (result f64)))
+ (type $i32_i32_f64_f64_f64_f64_f64_f64_=>_f64 (func (param i32 i32 f64 f64 f64 f64 f64 f64) (result f64)))
  (type $f64_f64_i32_=>_f64 (func (param f64 f64 i32) (result f64)))
  (import "env" "abort" (func $~lib/builtins/abort (param i32 i32 i32 i32)))
  (import "env" "seed" (func $~lib/builtins/seed (result f64)))
@@ -10735,19 +10735,19 @@
   f64.mul
   f64.div
  )
- (func $assembly/utils/quantile_approx (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (param $8 f64) (result f64)
+ (func $assembly/utils/quantile_approx (param $0 i32) (param $1 i32) (param $2 f64) (param $3 f64) (param $4 f64) (param $5 f64) (param $6 f64) (param $7 f64) (result f64)
+  (local $8 f64)
   (local $9 f64)
   (local $10 f64)
   (local $11 f64)
-  (local $12 f64)
-  (local $13 i32)
-  local.get $3
+  (local $12 i32)
+  local.get $2
   f64.const 0
   f64.lt
   if (result i32)
    i32.const 1
   else
-   local.get $3
+   local.get $2
    f64.const 1
    f64.gt
   end
@@ -10755,34 +10755,34 @@
    f64.const nan:0x8000000000000
    return
   end
-  local.get $3
+  local.get $2
   f64.const 0
+  f64.eq
+  if
+   local.get $5
+   return
+  end
+  local.get $2
+  f64.const 1
   f64.eq
   if
    local.get $6
    return
   end
   local.get $3
-  f64.const 1
-  f64.eq
-  if
-   local.get $7
-   return
-  end
   local.get $2
   local.get $3
-  local.get $2
+  local.get $3
   local.get $4
-  local.get $5
   i32.const 3
   global.set $~argumentsLength
   local.get $1
   i32.load
   call_indirect $0 (type $f64_f64_f64_=>_f64)
   f64.sub
-  local.get $2
+  local.get $3
+  local.get $3
   local.get $4
-  local.get $5
   i32.const 3
   global.set $~argumentsLength
   local.get $0
@@ -10790,51 +10790,51 @@
   call_indirect $0 (type $f64_f64_f64_=>_f64)
   f64.div
   f64.add
+  local.set $8
+  local.get $3
   local.set $9
-  local.get $2
-  local.set $10
   loop $while-continue|0
-   local.get $9
-   local.set $11
-   local.get $11
-   f64.abs
-   local.set $12
-   local.get $10
-   local.set $11
-   local.get $11
-   f64.abs
-   local.set $11
-   local.get $12
-   local.get $11
-   f64.max
    local.get $8
-   f64.mul
-   local.get $9
+   local.set $10
    local.get $10
-   f64.sub
+   f64.abs
    local.set $11
+   local.get $9
+   local.set $10
+   local.get $10
+   f64.abs
+   local.set $10
    local.get $11
+   local.get $10
+   f64.max
+   local.get $7
+   f64.mul
+   local.get $8
+   local.get $9
+   f64.sub
+   local.set $10
+   local.get $10
    f64.abs
    f64.lt
-   local.set $13
-   local.get $13
+   local.set $12
+   local.get $12
    if
+    local.get $8
+    local.set $9
     local.get $9
-    local.set $10
-    local.get $10
+    local.get $2
+    local.get $9
     local.get $3
-    local.get $10
     local.get $4
-    local.get $5
     i32.const 3
     global.set $~argumentsLength
     local.get $1
     i32.load
     call_indirect $0 (type $f64_f64_f64_=>_f64)
     f64.sub
-    local.get $10
+    local.get $9
+    local.get $3
     local.get $4
-    local.get $5
     i32.const 3
     global.set $~argumentsLength
     local.get $0
@@ -10842,11 +10842,11 @@
     call_indirect $0 (type $f64_f64_f64_=>_f64)
     f64.div
     f64.add
-    local.set $9
+    local.set $8
     br $while-continue|0
    end
   end
-  local.get $9
+  local.get $8
  )
  (func $assembly/float/Randf64.vonmises.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   local.get $2
@@ -10858,7 +10858,6 @@
   end
   i32.const 7232
   i32.const 7264
-  local.get $1
   local.get $0
   local.get $1
   local.get $2

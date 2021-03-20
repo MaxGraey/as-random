@@ -234,9 +234,8 @@ export function besseli1(x: f64): f64 {
 export function quantile_approx(
   pdf:  (x: f64, mean: f64, sigma: f64) => f64,
   cdf:  (x: f64, mean: f64, sigma: f64) => f64,
-  mean: f64,
   p: f64,
-  mu: f64,
+  mean: f64,
   sigma: f64,
   lo: f64  = 0.0,
   hi: f64  = 1.0,
@@ -246,11 +245,11 @@ export function quantile_approx(
   if (p == 0.0) return lo;
   if (p == 1.0) return hi;
 
-  let x = mean + (p - cdf(mean, mu, sigma)) / pdf(mean, mu, sigma);
+  let x = mean + (p - cdf(mean, mean, sigma)) / pdf(mean, mean, sigma);
   let x0 = mean;
   while (Math.max(Math.abs(x), Math.abs(x0)) * eps < Math.abs(x - x0)) {
     x0 = x;
-    x = x0 + (p - cdf(x0, mu, sigma)) / pdf(x0, mu, sigma);
+    x = x0 + (p - cdf(x0, mean, sigma)) / pdf(x0, mean, sigma);
   }
   return x;
 }

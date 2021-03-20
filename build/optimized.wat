@@ -6404,7 +6404,6 @@
   (local $3 f64)
   (local $4 f64)
   (local $5 f64)
-  (local $6 f64)
   local.get $2
   f64.const 0
   f64.lt
@@ -6412,22 +6411,21 @@
    f64.const nan:0x8000000000000
    return
   end
-  local.get $1
-  local.set $3
   local.get $2
-  local.set $4
+  local.set $3
   local.get $1
+  local.tee $2
   f64.const 3.141592653589793
   f64.sub
-  local.set $5
-  local.get $1
+  local.set $1
+  local.get $2
   f64.const 3.141592653589793
   f64.add
-  local.set $6
+  local.set $5
   block $__inlined_func$assembly/utils/quantile_approx
    i32.const 1
    local.get $0
-   local.tee $2
+   local.tee $4
    f64.const 1
    f64.gt
    local.get $0
@@ -6439,28 +6437,28 @@
     local.set $0
     br $__inlined_func$assembly/utils/quantile_approx
    end
-   local.get $2
+   local.get $4
    f64.const 0
+   f64.eq
+   if
+    local.get $1
+    local.set $0
+    br $__inlined_func$assembly/utils/quantile_approx
+   end
+   local.get $4
+   f64.const 1
    f64.eq
    if
     local.get $5
     local.set $0
     br $__inlined_func$assembly/utils/quantile_approx
    end
-   local.get $2
-   f64.const 1
-   f64.eq
-   if
-    local.get $6
-    local.set $0
-    br $__inlined_func$assembly/utils/quantile_approx
-   end
    i32.const 3
    global.set $~argumentsLength
-   local.get $2
-   local.get $1
-   local.get $3
    local.get $4
+   local.get $2
+   local.get $2
+   local.get $3
    i32.const 8288
    i32.load
    call_indirect $0 (type $f64_f64_f64_=>_f64)
@@ -6468,17 +6466,19 @@
    local.set $0
    i32.const 3
    global.set $~argumentsLength
-   local.get $1
+   local.get $2
    local.get $0
-   local.get $1
+   local.get $2
+   local.get $2
    local.get $3
-   local.get $4
    i32.const 8256
    i32.load
    call_indirect $0 (type $f64_f64_f64_=>_f64)
    f64.div
    f64.add
    local.set $0
+   local.get $2
+   local.set $1
    loop $while-continue|0
     local.get $0
     local.get $1
@@ -6495,11 +6495,11 @@
     if
      i32.const 3
      global.set $~argumentsLength
-     local.get $2
+     local.get $4
      local.get $0
      local.tee $1
+     local.get $2
      local.get $3
-     local.get $4
      i32.const 8288
      i32.load
      call_indirect $0 (type $f64_f64_f64_=>_f64)
@@ -6510,8 +6510,8 @@
      local.get $1
      local.get $0
      local.get $1
+     local.get $2
      local.get $3
-     local.get $4
      i32.const 8256
      i32.load
      call_indirect $0 (type $f64_f64_f64_=>_f64)
