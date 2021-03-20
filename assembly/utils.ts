@@ -231,6 +231,8 @@ export function besseli1(x: f64): f64 {
 
 // A Monotonically Convergent Newton Iteration (MCNI) for the quantiles of
 // any unimodal distribution. See http://www.statsci.org/smyth/pubs/qinvgaussPreprint.pdf
+// @ts-ignore: decorator
+@inline
 export function quantile_approx(
   pdf:  (x: f64, mean: f64, sigma: f64) => f64,
   cdf:  (x: f64, mean: f64, sigma: f64) => f64,
