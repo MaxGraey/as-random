@@ -210,6 +210,15 @@
  (export "Randf32.frechet.skewness" (func $assembly/float/Randf32.frechet.skewness@varargs))
  (export "Randf32.frechet.entropy" (func $assembly/float/Randf32.frechet.entropy@varargs))
  (export "Randf32.weibull" (func $assembly/float/Randf32.weibull@varargs))
+ (export "Randf32.weibull.pdf" (func $assembly/float/Randf32.weibull.pdf@varargs))
+ (export "Randf32.weibull.cdf" (func $assembly/float/Randf32.weibull.cdf@varargs))
+ (export "Randf32.weibull.quantile" (func $assembly/float/Randf32.weibull.quantile@varargs))
+ (export "Randf32.weibull.mean" (func $assembly/float/Randf32.weibull.mean@varargs))
+ (export "Randf32.weibull.median" (func $assembly/float/Randf32.weibull.median@varargs))
+ (export "Randf32.weibull.stdev" (func $assembly/float/Randf32.weibull.stdev@varargs))
+ (export "Randf32.weibull.variance" (func $assembly/float/Randf32.weibull.variance@varargs))
+ (export "Randf32.weibull.skewness" (func $assembly/float/Randf32.weibull.skewness@varargs))
+ (export "Randf32.weibull.entropy" (func $assembly/float/Randf32.weibull.entropy@varargs))
  (export "Randf32.rayleigh" (func $assembly/float/Randf32.rayleigh@varargs))
  (export "Randf32.maxwell" (func $assembly/float/Randf32.maxwell@varargs))
  (export "Randf32.vonmises" (func $assembly/float/Randf32.vonmises@varargs))
@@ -360,6 +369,15 @@
  (export "Randf64.frechet.skewness" (func $assembly/float/Randf64.frechet.skewness@varargs))
  (export "Randf64.frechet.entropy" (func $assembly/float/Randf64.frechet.entropy@varargs))
  (export "Randf64.weibull" (func $assembly/float/Randf64.weibull@varargs))
+ (export "Randf64.weibull.pdf" (func $assembly/float/Randf64.weibull.pdf@varargs))
+ (export "Randf64.weibull.cdf" (func $assembly/float/Randf64.weibull.cdf@varargs))
+ (export "Randf64.weibull.quantile" (func $assembly/float/Randf64.weibull.quantile@varargs))
+ (export "Randf64.weibull.mean" (func $assembly/float/Randf64.weibull.mean@varargs))
+ (export "Randf64.weibull.median" (func $assembly/float/Randf64.weibull.median@varargs))
+ (export "Randf64.weibull.stdev" (func $assembly/float/Randf64.weibull.stdev@varargs))
+ (export "Randf64.weibull.variance" (func $assembly/float/Randf64.weibull.variance@varargs))
+ (export "Randf64.weibull.skewness" (func $assembly/float/Randf64.weibull.skewness@varargs))
+ (export "Randf64.weibull.entropy" (func $assembly/float/Randf64.weibull.entropy@varargs))
  (export "Randf64.rayleigh" (func $assembly/float/Randf64.rayleigh@varargs))
  (export "Randf64.maxwell" (func $assembly/float/Randf64.maxwell@varargs))
  (export "Randf64.maxwell.pdf" (func $assembly/float/Randf64.maxwell.pdf@varargs))
@@ -9507,6 +9525,329 @@
    call $~lib/math/NativeMathf.pow
   end
   f32.mul
+ )
+ (func $assembly/float/Randf32.weibull.pdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  (local $4 f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $1
+  local.get $2
+  f32.div
+  local.set $3
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   local.get $1
+   f32.const 1
+   f32.eq
+   if (result f32)
+    local.get $3
+   else
+    f32.const 0
+   end
+   return
+  end
+  local.get $0
+  local.get $2
+  f32.div
+  local.set $4
+  local.get $3
+  local.get $4
+  local.get $1
+  f32.const 1
+  f32.sub
+  call $~lib/math/NativeMathf.pow
+  f32.mul
+  local.get $4
+  local.get $1
+  call $~lib/math/NativeMathf.pow
+  f32.neg
+  call $~lib/math/NativeMathf.exp
+  f32.mul
+ )
+ (func $assembly/float/Randf32.weibull.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if
+   f32.const 0
+   return
+  end
+  local.get $0
+  local.get $2
+  f32.div
+  local.get $1
+  call $~lib/math/NativeMathf.pow
+  f32.neg
+  call $~lib/math/NativeMathf.expm1
+  f32.neg
+ )
+ (func $assembly/float/Randf32.weibull.quantile (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f32.const 1
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $2
+  local.get $0
+  f32.neg
+  call $~lib/math/NativeMathf.log1p
+  f32.neg
+  f32.const 1
+  local.get $1
+  f32.div
+  call $~lib/math/NativeMathf.pow
+  f32.mul
+ )
+ (func $assembly/float/Randf32.weibull.mean (param $0 f32) (param $1 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  f64.const 1
+  f64.const 1
+  local.get $0
+  f64.promote_f32
+  f64.div
+  f64.add
+  call $assembly/utils/gamma
+  f32.demote_f64
+  f32.mul
+ )
+ (func $assembly/float/Randf32.weibull.median (param $0 f32) (param $1 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  global.get $~lib/math/NativeMathf.LN2
+  f32.const 1
+  local.get $0
+  f32.div
+  call $~lib/math/NativeMathf.pow
+  f32.mul
+ )
+ (func $assembly/float/Randf32.weibull.variance (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.mean
+  local.set $2
+  local.get $1
+  local.get $1
+  f32.mul
+  f64.const 1
+  f64.const 2
+  local.get $0
+  f64.promote_f32
+  f64.div
+  f64.add
+  call $assembly/utils/gamma
+  f32.demote_f64
+  f32.mul
+  local.get $2
+  local.get $2
+  f32.mul
+  f32.sub
+ )
+ (func $assembly/float/Randf32.weibull.stdev (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.variance
+  local.set $2
+  local.get $2
+  f32.sqrt
+ )
+ (func $assembly/float/Randf32.weibull.skewness (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  (local $3 f32)
+  (local $4 f32)
+  (local $5 f32)
+  (local $6 f32)
+  (local $7 f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.mean
+  local.set $2
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.variance
+  local.set $3
+  local.get $1
+  local.get $1
+  f32.mul
+  local.get $1
+  f32.mul
+  local.set $4
+  f32.const 3
+  local.get $2
+  f32.mul
+  local.get $3
+  f32.mul
+  local.set $5
+  local.get $2
+  local.get $2
+  f32.mul
+  local.get $2
+  f32.mul
+  local.set $6
+  local.get $4
+  f64.const 1
+  f64.const 3
+  local.get $0
+  f64.promote_f32
+  f64.div
+  f64.add
+  call $assembly/utils/gamma
+  f32.demote_f64
+  f32.mul
+  local.get $5
+  f32.sub
+  local.get $6
+  f32.add
+  local.get $3
+  local.get $3
+  local.set $7
+  local.get $7
+  f32.sqrt
+  f32.mul
+  f32.div
+ )
+ (func $assembly/float/Randf32.weibull.entropy (param $0 f32) (param $1 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f32.const 0
+   f32.le
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 0.5772156715393066
+  f32.const 0.5772156715393066
+  local.get $0
+  f32.div
+  f32.sub
+  local.get $1
+  local.get $0
+  f32.div
+  call $~lib/math/NativeMathf.log
+  f32.add
+  f32.const 1
+  f32.add
  )
  (func $assembly/float/Randf32.rayleigh (param $0 f32) (result f32)
   (local $1 f32)
@@ -19200,6 +19541,323 @@
   end
   f64.mul
  )
+ (func $assembly/float/Randf64.weibull.pdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  (local $4 f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $1
+  local.get $2
+  f64.div
+  local.set $3
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   local.get $1
+   f64.const 1
+   f64.eq
+   if (result f64)
+    local.get $3
+   else
+    f64.const 0
+   end
+   return
+  end
+  local.get $0
+  local.get $2
+  f64.div
+  local.set $4
+  local.get $3
+  local.get $4
+  local.get $1
+  f64.const 1
+  f64.sub
+  call $~lib/math/NativeMath.pow
+  f64.mul
+  local.get $4
+  local.get $1
+  call $~lib/math/NativeMath.pow
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  f64.mul
+ )
+ (func $assembly/float/Randf64.weibull.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  local.get $2
+  f64.div
+  local.get $1
+  call $~lib/math/NativeMath.pow
+  f64.neg
+  call $~lib/math/NativeMath.expm1
+  f64.neg
+ )
+ (func $assembly/float/Randf64.weibull.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $2
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.const 1
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $2
+  local.get $0
+  f64.neg
+  call $~lib/math/NativeMath.log1p
+  f64.neg
+  f64.const 1
+  local.get $1
+  f64.div
+  call $~lib/math/NativeMath.pow
+  f64.mul
+ )
+ (func $assembly/float/Randf64.weibull.mean (param $0 f64) (param $1 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  f64.const 1
+  f64.const 1
+  local.get $0
+  f64.div
+  f64.add
+  call $assembly/utils/gamma
+  f64.mul
+ )
+ (func $assembly/float/Randf64.weibull.median (param $0 f64) (param $1 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  global.get $~lib/math/NativeMath.LN2
+  f64.const 1
+  local.get $0
+  f64.div
+  call $~lib/math/NativeMath.pow
+  f64.mul
+ )
+ (func $assembly/float/Randf64.weibull.variance (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.mean
+  local.set $2
+  local.get $1
+  local.get $1
+  f64.mul
+  f64.const 1
+  f64.const 2
+  local.get $0
+  f64.div
+  f64.add
+  call $assembly/utils/gamma
+  f64.mul
+  local.get $2
+  local.get $2
+  f64.mul
+  f64.sub
+ )
+ (func $assembly/float/Randf64.weibull.stdev (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.variance
+  local.set $2
+  local.get $2
+  f64.sqrt
+ )
+ (func $assembly/float/Randf64.weibull.skewness (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.mean
+  local.set $2
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.variance
+  local.set $3
+  local.get $1
+  local.get $1
+  f64.mul
+  local.get $1
+  f64.mul
+  local.set $4
+  f64.const 3
+  local.get $2
+  f64.mul
+  local.get $3
+  f64.mul
+  local.set $5
+  local.get $2
+  local.get $2
+  f64.mul
+  local.get $2
+  f64.mul
+  local.set $6
+  local.get $4
+  f64.const 1
+  f64.const 3
+  local.get $0
+  f64.div
+  f64.add
+  call $assembly/utils/gamma
+  f64.mul
+  local.get $5
+  f64.sub
+  local.get $6
+  f64.add
+  local.get $3
+  local.get $3
+  local.set $7
+  local.get $7
+  f64.sqrt
+  f64.mul
+  f64.div
+ )
+ (func $assembly/float/Randf64.weibull.entropy (param $0 f64) (param $1 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.le
+  if (result i32)
+   i32.const 1
+  else
+   local.get $1
+   f64.const 0
+   f64.le
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 0.5772156649015329
+  f64.const 0.5772156649015329
+  local.get $0
+  f64.div
+  f64.sub
+  local.get $1
+  local.get $0
+  f64.div
+  call $~lib/math/NativeMath.log
+  f64.add
+  f64.const 1
+  f64.add
+ )
  (func $assembly/float/Randf64.rayleigh (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
@@ -23363,6 +24021,195 @@
   local.get $1
   call $assembly/float/Randf32.weibull
  )
+ (func $assembly/float/Randf32.weibull.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.weibull.pdf
+ )
+ (func $assembly/float/Randf32.weibull.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.weibull.cdf
+ )
+ (func $assembly/float/Randf32.weibull.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.weibull.quantile
+ )
+ (func $assembly/float/Randf32.weibull.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.mean
+ )
+ (func $assembly/float/Randf32.weibull.median@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.median
+ )
+ (func $assembly/float/Randf32.weibull.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.stdev
+ )
+ (func $assembly/float/Randf32.weibull.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.variance
+ )
+ (func $assembly/float/Randf32.weibull.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.skewness
+ )
+ (func $assembly/float/Randf32.weibull.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 1
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.weibull.entropy
+ )
  (func $assembly/float/Randf32.rayleigh@varargs (param $0 f32) (result f32)
   block $1of1
    block $0of1
@@ -26389,6 +27236,195 @@
   local.get $0
   local.get $1
   call $assembly/float/Randf64.weibull
+ )
+ (func $assembly/float/Randf64.weibull.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.weibull.pdf
+ )
+ (func $assembly/float/Randf64.weibull.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.weibull.cdf
+ )
+ (func $assembly/float/Randf64.weibull.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.weibull.quantile
+ )
+ (func $assembly/float/Randf64.weibull.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.mean
+ )
+ (func $assembly/float/Randf64.weibull.median@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.median
+ )
+ (func $assembly/float/Randf64.weibull.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.stdev
+ )
+ (func $assembly/float/Randf64.weibull.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.variance
+ )
+ (func $assembly/float/Randf64.weibull.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.skewness
+ )
+ (func $assembly/float/Randf64.weibull.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 1
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.weibull.entropy
  )
  (func $assembly/float/Randf64.rayleigh@varargs (param $0 f64) (result f64)
   block $1of1

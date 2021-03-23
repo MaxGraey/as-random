@@ -1019,6 +1019,76 @@ export namespace Randf64 {
     return lambda * (k == 0.0 ? -Math.log(u) : Math.pow(u, 1.0 / k));
   }
 
+  export namespace weibull {
+    /** Eval the probability density function for Weibull distribution. */
+    export function pdf(x: f64, k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+      let a = k / lambda;
+      if (x == 0.0) {
+        return k == 1.0 ? a : 0.0;
+      }
+      let z = x / lambda;
+      return a * Math.pow(z, k - 1) * Math.exp(-Math.pow(z, k));
+    }
+
+    /** Eval the cumulative density function for Weibull distribution. */
+    export function cdf(x: f64, k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+      return -Math.expm1(-Math.pow(x / lambda, k));
+    }
+
+    /** Eval the quantile function for Weibull distribution. */
+    export function quantile(x: f64, k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return lambda * Math.pow(-Math.log1p(-x), 1.0 / k);
+    }
+
+    /** Returns the mean value of Weibull distribution. */
+    export function mean(k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      return lambda * gammaf(1.0 + 1.0 / k);
+    }
+
+    /** Returns the mean value of Weibull distribution. */
+    export function median(k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      return lambda * Math.pow(Math.LN2, 1.0 / k);
+    }
+
+    /** Returns the standard deviation of Weibull distribution. */
+    export function stdev(k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+	    return Math.sqrt(variance(k, lambda));
+    }
+
+    /** Returns the variance of Weibull distribution. */
+    export function variance(k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      let mu = mean(k, lambda);
+	    return lambda * lambda * gammaf(1.0 + 2.0 / k) - mu * mu;
+    }
+
+    /** Returns the skewness of Weibull distribution. */
+    export function skewness(k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      let mu = mean(k, lambda);
+      let s  = variance(k, lambda);
+      let l  = lambda * lambda * lambda;
+      let b  = 3.0 * mu * s;
+      let m  = mu * mu * mu;
+      return (l * gammaf(1.0 + 3.0 / k) - b + m) / (s * Math.sqrt(s));
+    }
+
+    /** Returns the differential entropy of Weibull distribution. */
+    export function entropy(k: f64 = 1.0, lambda: f64 = 1.0): f64 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      const gamma = 0.577215664901532861;
+      return gamma - gamma / k + Math.log(lambda / k) + 1.0;
+    }
+  }
+
   /** Rayleigh distribution. */
   export function rayleigh(sigma: f64 = 1.0): f64 {
     return sigma * Math.sqrt(-2.0 * Math.log(Math.random()));
@@ -2419,6 +2489,76 @@ export namespace Randf32 {
   export function weibull(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
     let u = -Mathf.log1p(-Mathf.random());
     return lambda * (k == 0.0 ? -Mathf.log(u) : Mathf.pow(u, 1.0 / k));
+  }
+
+  export namespace weibull {
+    /** Eval the probability density function for Weibull distribution. */
+    export function pdf(x: f32, k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+      let a = k / lambda;
+      if (x == 0.0) {
+        return k == 1.0 ? a : 0.0;
+      }
+      let z = x / lambda;
+      return a * Mathf.pow(z, k - 1) * Mathf.exp(-Mathf.pow(z, k));
+    }
+
+    /** Eval the cumulative density function for Weibull distribution. */
+    export function cdf(x: f32, k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+      return -Mathf.expm1(-Mathf.pow(x / lambda, k));
+    }
+
+    /** Eval the quantile function for Weibull distribution. */
+    export function quantile(x: f32, k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return lambda * Mathf.pow(-Mathf.log1p(-x), 1.0 / k);
+    }
+
+    /** Returns the mean value of Weibull distribution. */
+    export function mean(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      return lambda * (gammaf(1 + 1.0 / k) as f32);
+    }
+
+    /** Returns the mean value of Weibull distribution. */
+    export function median(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      return lambda * Mathf.pow(Mathf.LN2, 1.0 / k);
+    }
+
+    /** Returns the standard deviation of Weibull distribution. */
+    export function stdev(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+	    return Mathf.sqrt(variance(k, lambda));
+    }
+
+    /** Returns the variance of Weibull distribution. */
+    export function variance(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      let mu = mean(k, lambda);
+	    return lambda * lambda * (gammaf(1 + 2.0 / k) as f32) - mu * mu;
+    }
+
+    /** Returns the skewness of Weibull distribution. */
+    export function skewness(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      let mu = mean(k, lambda);
+      let s  = variance(k, lambda);
+      let l  = lambda * lambda * lambda;
+      let b: f32 = 3.0 * mu * s;
+      let m  = mu * mu * mu;
+      return (l * (gammaf(1 + 3.0 / k) as f32) - b + m) / (s * Mathf.sqrt(s));
+    }
+
+    /** Returns the differential entropy of Weibull distribution. */
+    export function entropy(k: f32 = 1.0, lambda: f32 = 1.0): f32 {
+      if (k <= 0.0 || lambda <= 0.0) return NaN;
+      const gamma: f32 = 0.577215664901532861;
+      return gamma - gamma / k + Mathf.log(lambda / k) + 1.0;
+    }
   }
 
   /** Rayleigh distribution. */
