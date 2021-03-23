@@ -9082,6 +9082,30 @@
   (local $2 f64)
   (local $3 f64)
   local.get $0
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.eq
+  i32.eqz
+  if
+   local.get $0
+   f64.const inf
+   f64.add
+   return
+  end
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.abs
+  f64.const 5.551115123125783e-17
+  f64.lt
+  if
+   f64.const 1
+   local.get $0
+   f64.div
+   return
+  end
+  local.get $0
   f64.const 0.5
   f64.lt
   if
@@ -9186,7 +9210,7 @@
   local.get $1
   local.get $0
   f64.const 0.5
-  f64.add
+  f64.sub
   call $~lib/math/NativeMath.pow
   f64.mul
   local.get $1

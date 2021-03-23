@@ -114,6 +114,12 @@ export function logFactorial(n: u32): f64 {
 
 
 export function gamma(x: f64): f64 {
+	if (!isFinite(x)) {
+		return x + Infinity;
+  }
+	if (Math.abs(x) < 5.551115123125783e-17) {
+		return 1.0 / x;
+  }
   if (x < 0.5) {
     return Math.PI / (Math.sin(Math.PI * x) * gamma(1.0 - x));
   }
@@ -122,8 +128,7 @@ export function gamma(x: f64): f64 {
   }
 
   let t: f64, r: f64;
-
-  r  = 0.99999999999980993;
+  r  = 0.99999999999980993e+0;
   r += 676.520368121885100e+0 / (x + 0.0);
   r -= 1259.13921672240280e+0 / (x + 1.0);
   r += 771.323428777653130e+0 / (x + 2.0);
@@ -134,9 +139,8 @@ export function gamma(x: f64): f64 {
   r += 1.50563273514931160e-7 / (x + 7.0);
 
   t = x + 6.5;
-  return Math.sqrt(2 * Math.PI) * Math.pow(t, x + 0.5) * Math.exp(-t) * r;
-};
-
+  return Math.sqrt(2 * Math.PI) * Math.pow(t, x - 0.5) * Math.exp(-t) * r;
+}
 
 // Returns the value ln(gamma(x)).
 export function logGamma(x: f64): f64 {

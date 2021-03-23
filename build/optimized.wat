@@ -4975,6 +4975,27 @@
  (func $assembly/utils/gamma (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
+  local.get $0
+  f64.sub
+  f64.const 0
+  f64.ne
+  if
+   local.get $0
+   f64.const inf
+   f64.add
+   return
+  end
+  local.get $0
+  f64.abs
+  f64.const 5.551115123125783e-17
+  f64.lt
+  if
+   f64.const 1
+   local.get $0
+   f64.div
+   return
+  end
+  local.get $0
   f64.const 0.5
   f64.lt
   if
@@ -5006,7 +5027,7 @@
   local.tee $1
   local.get $0
   f64.const 0.5
-  f64.add
+  f64.sub
   call $~lib/math/NativeMath.pow
   f64.const 2.5066282746310002
   f64.mul
