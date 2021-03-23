@@ -114,11 +114,11 @@ export function logFactorial(n: u32): f64 {
 
 
 export function gamma(x: f64): f64 {
-	if (!isFinite(x)) {
-		return x + Infinity;
+  if (!isFinite(x)) {
+    return x + Infinity;
   }
-	if (Math.abs(x) < 5.551115123125783e-17) {
-		return 1.0 / x;
+  if (Math.abs(x) < 5.551115123125783e-17) {
+    return 1.0 / x;
   }
   if (x < 0.5) {
     return Math.PI / (Math.sin(Math.PI * x) * gamma(1.0 - x));
