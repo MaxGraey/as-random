@@ -1,6 +1,7 @@
 import {
   besseli0,
   besseli1,
+  gamma as gammaf,
   logGamma,
   logFactorial,
   erf_approx,
@@ -813,7 +814,7 @@ export namespace Randf64 {
       return Math.exp(-Math.exp(-z));
     }
 
-    /** Eval the quantile function for Logistic distribution. */
+    /** Eval the quantile function for Gumbel distribution. */
     export function quantile(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
       if (beta <= 0.0) return NaN;
       if (x < 0.0 || x > 1.0) return NaN;
@@ -876,7 +877,7 @@ export namespace Randf64 {
       return 0.5 / beta * Math.exp(-z);
     }
 
-    /** Eval the cumulative density function for Gumbel distribution. */
+    /** Eval the cumulative density function for Laplace distribution. */
     export function cdf(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
       if (beta <= 0.0) return NaN;
       let z = (x - alpha) / beta;
@@ -916,13 +917,13 @@ export namespace Randf64 {
       return 2.0 * beta * beta;
     }
 
-    /** Returns the skewness of Gumbel distribution. */
+    /** Returns the skewness of Laplace distribution. */
     export function skewness(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
       if (beta <= 0.0) return NaN;
       return 0.0;
     }
 
-    /** Returns the differential entropy of Gumbel distribution. */
+    /** Returns the differential entropy of Laplace distribution. */
     export function entropy(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
       if (beta <= 0.0) return NaN;
       const ln2p1 = 1.6931471805599454; // 1 + ln(2)
@@ -933,6 +934,83 @@ export namespace Randf64 {
   /** Frechet distribution. */
   export function frechet(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
     return mean + sigma * Math.pow(-Math.log(Math.random()), -1.0 / alpha);
+  }
+
+  export namespace frechet {
+    /** Eval the probability density function for Frechet distribution. */
+    export function pdf(x: f64, alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      let a = alpha / sigma;
+      let z = (x - mean) / sigma;
+      let b = Math.pow(z, -1 - alpha);
+      let e = -Math.pow(Math.exp(z), -alpha);
+      return a * b * e;
+    }
+
+    /** Eval the cumulative density function for Frechet distribution. */
+    export function cdf(x: f64, alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (x <= mean) return 0.0;
+      let z = (x - mean) / sigma;
+      return Math.exp(-Math.pow(z, -alpha));
+    }
+
+    /** Eval the quantile function for Frechet distribution. */
+    export function quantile(x: f64, alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return mean + sigma * Math.pow(-Math.log(x), -1.0 / alpha);
+    }
+
+    /** Returns the mean value of Frechet distribution. */
+    export function mean(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (alpha <= 1.0) return Infinity;
+      return mean + sigma * gammaf(1.0 - 1.0 / alpha);
+    }
+
+    /** Returns the median value of Frechet distribution. */
+    export function median(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      return mean + sigma * Math.pow(Math.LN2, -1.0 / alpha);
+    }
+
+    /** Returns the standard deviation of Frechet distribution. */
+    export function stdev(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      return Math.sqrt(variance(alpha, mean, sigma));
+    }
+
+    /** Returns the variance of Frechet distribution. */
+    export function variance(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (alpha <= 2.0) return Infinity;
+      let g1 = gammaf(1.0 - 1.0 / alpha);
+      let g2 = gammaf(1.0 - 2.0 / alpha);
+      return sigma * sigma * (g2 - g1 * g1);
+    }
+
+    /** Returns the skewness of Frechet distribution. */
+    export function skewness(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (alpha <= 3.0) return Infinity;
+
+      let g1 = gammaf(1.0 - 1.0 / alpha);
+	    let g2 = gammaf(1.0 - 2.0 / alpha);
+	    let g3 = gammaf(1.0 - 3.0 / alpha);
+
+      let g21  = g2 * g1;
+      let g11  = g1 * g1;
+      let g111 = g11 * g1;
+
+	    return (g3 - 3.0 * g21 + 2.0 * g111) / Math.pow(g2 - g11, 1.5);
+    }
+
+    /** Returns the differential entropy of Frechet distribution. */
+    export function entropy(alpha: f64 = 1.0, mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      const gamma = 0.577215664901532861;
+      return 1.0 + gamma / alpha + gamma + Math.log(sigma / alpha);
+    }
   }
 
   /** Weibull distribution. */
@@ -2137,7 +2215,7 @@ export namespace Randf32 {
       return Mathf.exp(-Mathf.exp(-z));
     }
 
-    /** Eval the quantile function for Logistic distribution. */
+    /** Eval the quantile function for Gumbel distribution. */
     export function quantile(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
       if (beta <= 0.0) return NaN;
       if (x < 0.0 || x > 1.0) return NaN;
@@ -2200,7 +2278,7 @@ export namespace Randf32 {
       return 0.5 / beta * Mathf.exp(-z);
     }
 
-    /** Eval the cumulative density function for Gumbel distribution. */
+    /** Eval the cumulative density function for Laplace distribution. */
     export function cdf(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
       if (beta <= 0.0) return NaN;
       let z = (x - alpha) / beta;
@@ -2240,13 +2318,13 @@ export namespace Randf32 {
       return 2.0 * beta * beta;
     }
 
-    /** Returns the skewness of Gumbel distribution. */
+    /** Returns the skewness of Laplace distribution. */
     export function skewness(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
       if (beta <= 0.0) return NaN;
       return 0.0;
     }
 
-    /** Returns the differential entropy of Gumbel distribution. */
+    /** Returns the differential entropy of Laplace distribution. */
     export function entropy(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
       if (beta <= 0.0) return NaN;
       const ln2p1: f32 = 1.6931471805599454; // 1 + ln(2)
@@ -2258,6 +2336,83 @@ export namespace Randf32 {
   /** Frechet distribution. */
   export function frechet(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
     return mean + sigma * Mathf.pow(-Mathf.log(Mathf.random()), -1.0 / alpha);
+  }
+
+  export namespace frechet {
+    /** Eval the probability density function for Frechet distribution. */
+    export function pdf(x: f32, alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      let a = alpha / sigma;
+      let z = (x - mean) / sigma;
+      let b = Mathf.pow(z, -1 - alpha);
+      let e = -Mathf.pow(Mathf.exp(z), -alpha);
+      return a * b * e;
+    }
+
+    /** Eval the cumulative density function for Frechet distribution. */
+    export function cdf(x: f32, alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (x <= mean) return 0.0;
+      let z = (x - mean) / sigma;
+      return Mathf.exp(-Mathf.pow(z, -alpha));
+    }
+
+    /** Eval the quantile function for Frechet distribution. */
+    export function quantile(x: f32, alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return mean + sigma * Mathf.pow(-Mathf.log(x), -1 / alpha);
+    }
+
+    /** Returns the mean value of Frechet distribution. */
+    export function mean(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (alpha <= 1.0) return Infinity;
+      return mean + sigma * (gammaf(1.0 - 1.0 / alpha) as f32);
+    }
+
+    /** Returns the median value of Frechet distribution. */
+    export function median(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      return mean + sigma * Mathf.pow(Mathf.LN2, -1 / alpha);
+    }
+
+    /** Returns the standard deviation of Frechet distribution. */
+    export function stdev(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      return Mathf.sqrt(variance(alpha, mean, sigma));
+    }
+
+    /** Returns the variance of Frechet distribution. */
+    export function variance(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (alpha <= 2.0) return Infinity;
+      let g1 = gammaf(1 - 1.0 / alpha) as f32;
+      let g2 = gammaf(1 - 2.0 / alpha) as f32;
+      return sigma * sigma * (g2 - g1 * g1);
+    }
+
+    /** Returns the skewness of Frechet distribution. */
+    export function skewness(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      if (alpha <= 3.0) return Infinity;
+
+      let g1 = gammaf(1.0 - 1.0 / alpha) as f32;
+	    let g2 = gammaf(1.0 - 2.0 / alpha) as f32;
+	    let g3 = gammaf(1.0 - 3.0 / alpha) as f32;
+
+      let g21  = g2 * g1;
+      let g11  = g1 * g1;
+      let g111 = g11 * g1;
+
+	    return (g3 - 3.0 * g21 + 2.0 * g111) / Mathf.pow(g2 - g11, 1.5);
+    }
+
+    /** Returns the differential entropy of Frechet distribution. */
+    export function entropy(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+      if (alpha <= 0.0 || sigma <= 0.0) return NaN;
+      const gamma: f32 = 0.577215664901532861;
+      return 1 + gamma / alpha + gamma + Mathf.log(sigma / alpha);
+    }
   }
 
   /** Weibull distribution. */

@@ -112,6 +112,32 @@ export function logFactorial(n: u32): f64 {
   return (x - 0.5) * Math.log(x) - x + HALF_LOG_2PI + 1.0 / (12.0 * x);
 }
 
+
+export function gamma(x: f64): f64 {
+  if (x < 0.5) {
+    return Math.PI / (Math.sin(Math.PI * x) * gamma(1.0 - x));
+  }
+  if (x > 100) {
+    return Math.exp(logGamma(x));
+  }
+
+  let t: f64, r: f64;
+
+  r  = 0.99999999999980993;
+  r += 676.520368121885100e+0 / (x + 0.0);
+  r -= 1259.13921672240280e+0 / (x + 1.0);
+  r += 771.323428777653130e+0 / (x + 2.0);
+  r -= 176.615029162140590e+0 / (x + 3.0);
+  r += 12.5073432786869050e+0 / (x + 4.0);
+  r -= 0.13857109526572012e+0 / (x + 5.0);
+  r += 9.98436957801957160e-6 / (x + 6.0);
+  r += 1.50563273514931160e-7 / (x + 7.0);
+
+  t = x + 6.5;
+  return Math.sqrt(2 * Math.PI) * Math.pow(t, x + 0.5) * Math.exp(-t) * r;
+};
+
+
 // Returns the value ln(gamma(x)).
 export function logGamma(x: f64): f64 {
   let ax = Math.abs(x);
@@ -120,8 +146,6 @@ export function logGamma(x: f64): f64 {
   }
 
   let t: f64, r: f64;
-  t  = x + 5.5;
-  t -= (x + 0.5) * Math.log(t);
 
   r  = 1.000000000190015;
   r += 76.180091729471460e+0 / (x + 1.0);
@@ -131,6 +155,8 @@ export function logGamma(x: f64): f64 {
   r += 0.1208650973866179e-2 / (x + 5.0);
   r -= 0.5395239384953000e-5 / (x + 6.0);
 
+  t  = x + 5.5;
+  t -= (x + 0.5) * Math.log(t);
   return Math.log(2.5066282746310005 * r / x) - t;
 }
 
