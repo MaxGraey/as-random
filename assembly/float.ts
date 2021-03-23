@@ -995,14 +995,14 @@ export namespace Randf64 {
       if (alpha <= 3.0) return Infinity;
 
       let g1 = gammaf(1.0 - 1.0 / alpha);
-	    let g2 = gammaf(1.0 - 2.0 / alpha);
-	    let g3 = gammaf(1.0 - 3.0 / alpha);
+      let g2 = gammaf(1.0 - 2.0 / alpha);
+      let g3 = gammaf(1.0 - 3.0 / alpha);
 
       let g21  = g2 * g1;
       let g11  = g1 * g1;
       let g111 = g11 * g1;
 
-	    return (g3 - 3.0 * g21 + 2.0 * g111) / Math.pow(g2 - g11, 1.5);
+      return (g3 - 3.0 * g21 + 2.0 * g111) / Math.pow(g2 - g11, 1.5);
     }
 
     /** Returns the differential entropy of Frechet distribution. */
@@ -2397,14 +2397,14 @@ export namespace Randf32 {
       if (alpha <= 3.0) return Infinity;
 
       let g1 = gammaf(1.0 - 1.0 / alpha) as f32;
-	    let g2 = gammaf(1.0 - 2.0 / alpha) as f32;
-	    let g3 = gammaf(1.0 - 3.0 / alpha) as f32;
+      let g2 = gammaf(1.0 - 2.0 / alpha) as f32;
+      let g3 = gammaf(1.0 - 3.0 / alpha) as f32;
 
       let g21  = g2 * g1;
       let g11  = g1 * g1;
       let g111 = g11 * g1;
 
-	    return (g3 - 3.0 * g21 + 2.0 * g111) / Mathf.pow(g2 - g11, 1.5);
+      return (g3 - 3.0 * g21 + 2.0 * g111) / Mathf.pow(g2 - g11, 1.5);
     }
 
     /** Returns the differential entropy of Frechet distribution. */
