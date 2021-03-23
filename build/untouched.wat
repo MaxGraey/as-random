@@ -9094,6 +9094,23 @@
    return
   end
   local.get $0
+  f64.const 0
+  f64.lt
+  if (result i32)
+   local.get $0
+   local.set $1
+   local.get $1
+   f64.trunc
+   local.get $0
+   f64.eq
+  else
+   i32.const 0
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
   local.set $1
   local.get $1
   f64.abs
@@ -9129,6 +9146,20 @@
    local.get $0
    call $assembly/utils/logGamma
    call $~lib/math/NativeMath.exp
+   return
+  end
+  local.get $0
+  f64.const -170.5674972726612
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.const 171.61447887182297
+   f64.gt
+  end
+  if
+   f64.const inf
    return
   end
   f64.const 0.9999999999998099
