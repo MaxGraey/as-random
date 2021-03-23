@@ -730,7 +730,7 @@ export namespace Randf64 {
     }
 
     /** Returns the standard deviation of Logistic distribution. */
-    export function stdev(amean: f64 = 0.0, sigma: f64 = 1.0): f64 {
+    export function stdev(mean: f64 = 0.0, sigma: f64 = 1.0): f64 {
       if (sigma < 0.0) return NaN;
       return sigma * (Math.PI / Math.sqrt(3.0));
     }
@@ -866,6 +866,68 @@ export namespace Randf64 {
   export function laplace(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
     let u = Math.random() - 0.5;
     return alpha - (beta * Math.sign(u)) * Math.log1p(-2.0 * Math.abs(u));
+  }
+
+  export namespace laplace {
+    /** Eval the probability density function for Laplace distribution. */
+    export function pdf(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      let z = Math.abs(x - alpha) / beta;
+      return 0.5 / beta * Math.exp(-z);
+    }
+
+    /** Eval the cumulative density function for Gumbel distribution. */
+    export function cdf(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      let z = (x - alpha) / beta;
+      return x < alpha
+        ? 0.5 * Math.exp(z)
+        : 1.0 - 0.5 * Math.exp(-z);
+    }
+
+    /** Eval the quantile function for Laplace distribution. */
+    export function quantile(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return alpha - beta * Math.log(1 - 2 * Math.abs(x - 0.5));
+    }
+
+    /** Returns the mean value of Laplace distribution. */
+    export function mean(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      return alpha;
+    }
+
+    /** Returns the median value of Laplace distribution. */
+    export function median(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      return alpha;
+    }
+
+    /** Returns the standard deviation of Laplace distribution. */
+    export function stdev(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      return Math.SQRT2 * beta;
+    }
+
+    /** Returns the variance of Laplace distribution. */
+    export function variance(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      return 2.0 * beta * beta;
+    }
+
+    /** Returns the skewness of Gumbel distribution. */
+    export function skewness(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Gumbel distribution. */
+    export function entropy(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      const ln2p1 = 1.6931471805599454; // 1 + ln(2)
+      return ln2p1 + Math.log(beta);
+    }
   }
 
   /** Frechet distribution. */
@@ -1993,7 +2055,7 @@ export namespace Randf32 {
     }
 
     /** Returns the standard deviation of Logistic distribution. */
-    export function stdev(amean: f32 = 0.0, sigma: f32 = 1.0): f32 {
+    export function stdev(mean: f32 = 0.0, sigma: f32 = 1.0): f32 {
       if (sigma < 0.0) return NaN;
       return sigma * (Mathf.PI / Mathf.sqrt(3.0));
     }
@@ -2129,6 +2191,69 @@ export namespace Randf32 {
     let u = Mathf.random() - 0.5;
     return alpha - (beta * Mathf.sign(u)) * Mathf.log1p(-2.0 * Mathf.abs(u));
   }
+
+  export namespace laplace {
+    /** Eval the probability density function for Laplace distribution. */
+    export function pdf(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      let z = Mathf.abs(x - alpha) / beta;
+      return 0.5 / beta * Mathf.exp(-z);
+    }
+
+    /** Eval the cumulative density function for Gumbel distribution. */
+    export function cdf(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      let z = (x - alpha) / beta;
+      return x < alpha
+        ? 0.5 * Mathf.exp(z)
+        : 1 - 0.5 * Mathf.exp(-z);
+    }
+
+    /** Eval the quantile function for Laplace distribution. */
+    export function quantile(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return alpha - beta * Mathf.log(1 - 2 * Mathf.abs(x - 0.5));
+    }
+
+    /** Returns the mean value of Laplace distribution. */
+    export function mean(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      return alpha;
+    }
+
+    /** Returns the median value of Laplace distribution. */
+    export function median(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      return alpha;
+    }
+
+    /** Returns the standard deviation of Laplace distribution. */
+    export function stdev(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      return Mathf.SQRT2 * beta;
+    }
+
+    /** Returns the variance of Laplace distribution. */
+    export function variance(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      return 2.0 * beta * beta;
+    }
+
+    /** Returns the skewness of Gumbel distribution. */
+    export function skewness(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      return 0.0;
+    }
+
+    /** Returns the differential entropy of Gumbel distribution. */
+    export function entropy(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      const ln2p1: f32 = 1.6931471805599454; // 1 + ln(2)
+      return ln2p1 + Mathf.log(beta);
+    }
+  }
+
 
   /** Frechet distribution. */
   export function frechet(alpha: f32 = 1.0, mean: f32 = 0.0, sigma: f32 = 1.0): f32 {

@@ -303,6 +303,15 @@
  (export "Randf32.gumbel.skewness" (func $assembly/float/Randf32.gumbel.skewness@varargs))
  (export "Randf32.gumbel.entropy" (func $assembly/float/Randf32.gumbel.entropy@varargs))
  (export "Randf32.laplace" (func $assembly/float/Randf32.laplace@varargs))
+ (export "Randf32.laplace.pdf" (func $assembly/float/Randf32.laplace.pdf@varargs))
+ (export "Randf32.laplace.cdf" (func $assembly/float/Randf32.laplace.cdf@varargs))
+ (export "Randf32.laplace.quantile" (func $assembly/float/Randf32.laplace.quantile@varargs))
+ (export "Randf32.laplace.mean" (func $assembly/float/Randf32.cauchy.median@varargs))
+ (export "Randf32.laplace.median" (func $assembly/float/Randf32.cauchy.median@varargs))
+ (export "Randf32.laplace.stdev" (func $assembly/float/Randf32.laplace.stdev@varargs))
+ (export "Randf32.laplace.variance" (func $assembly/float/Randf32.laplace.variance@varargs))
+ (export "Randf32.laplace.skewness" (func $assembly/float/Randf32.laplace.skewness@varargs))
+ (export "Randf32.laplace.entropy" (func $assembly/float/Randf32.laplace.entropy@varargs))
  (export "Randf32.frechet" (func $assembly/float/Randf32.frechet@varargs))
  (export "Randf32.weibull" (func $assembly/float/Randf32.weibull@varargs))
  (export "Randf32.rayleigh" (func $assembly/float/Randf32.rayleigh@varargs))
@@ -435,6 +444,15 @@
  (export "Randf64.gumbel.skewness" (func $assembly/float/Randf64.gumbel.skewness@varargs))
  (export "Randf64.gumbel.entropy" (func $assembly/float/Randf64.gumbel.entropy@varargs))
  (export "Randf64.laplace" (func $assembly/float/Randf64.laplace@varargs))
+ (export "Randf64.laplace.pdf" (func $assembly/float/Randf64.laplace.pdf@varargs))
+ (export "Randf64.laplace.cdf" (func $assembly/float/Randf64.laplace.cdf@varargs))
+ (export "Randf64.laplace.quantile" (func $assembly/float/Randf64.laplace.quantile@varargs))
+ (export "Randf64.laplace.mean" (func $assembly/float/Randf64.cauchy.median@varargs))
+ (export "Randf64.laplace.median" (func $assembly/float/Randf64.cauchy.median@varargs))
+ (export "Randf64.laplace.stdev" (func $assembly/float/Randf64.laplace.stdev@varargs))
+ (export "Randf64.laplace.variance" (func $assembly/float/Randf64.laplace.variance@varargs))
+ (export "Randf64.laplace.skewness" (func $assembly/float/Randf64.laplace.skewness@varargs))
+ (export "Randf64.laplace.entropy" (func $assembly/float/Randf64.laplace.entropy@varargs))
  (export "Randf64.frechet" (func $assembly/float/Randf64.frechet@varargs))
  (export "Randf64.weibull" (func $assembly/float/Randf64.weibull@varargs))
  (export "Randf64.rayleigh" (func $assembly/float/Randf64.rayleigh@varargs))
@@ -14022,6 +14040,232 @@
   f32.mul
   f32.sub
  )
+ (func $assembly/float/Randf32.laplace.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $2
+  f32.const 0
+  f32.le
+  if (result f32)
+   f32.const nan:0x400000
+  else
+   f32.const 0.5
+   local.get $2
+   f32.div
+   local.get $0
+   local.get $1
+   f32.sub
+   f32.abs
+   local.get $2
+   f32.div
+   f32.neg
+   call $~lib/math/NativeMathf.exp
+   f32.mul
+  end
+ )
+ (func $assembly/float/Randf32.laplace.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $2
+  f32.const 0
+  f32.le
+  if (result f32)
+   f32.const nan:0x400000
+  else
+   local.get $0
+   local.get $1
+   f32.sub
+   local.get $2
+   f32.div
+   local.set $2
+   local.get $0
+   local.get $1
+   f32.lt
+   if (result f32)
+    local.get $2
+    call $~lib/math/NativeMathf.exp
+    f32.const 0.5
+    f32.mul
+   else
+    f32.const 1
+    local.get $2
+    f32.neg
+    call $~lib/math/NativeMathf.exp
+    f32.const 0.5
+    f32.mul
+    f32.sub
+   end
+  end
+ )
+ (func $assembly/float/Randf32.laplace.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  block $__inlined_func$assembly/float/Randf32.laplace.quantile (result f32)
+   f32.const nan:0x400000
+   local.get $2
+   f32.const 0
+   f32.le
+   br_if $__inlined_func$assembly/float/Randf32.laplace.quantile
+   drop
+   f32.const nan:0x400000
+   i32.const 1
+   local.get $0
+   f32.const 1
+   f32.gt
+   local.get $0
+   f32.const 0
+   f32.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf32.laplace.quantile
+   drop
+   local.get $1
+   local.get $2
+   f32.const 1
+   local.get $0
+   f32.const 0.5
+   f32.sub
+   f32.abs
+   local.tee $0
+   local.get $0
+   f32.add
+   f32.sub
+   call $~lib/math/NativeMathf.log
+   f32.mul
+   f32.sub
+  end
+ )
+ (func $assembly/float/Randf32.laplace.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  f32.const nan:0x400000
+  local.get $1
+  f32.const 1.4142135381698608
+  f32.mul
+  local.get $1
+  f32.const 0
+  f32.le
+  select
+ )
+ (func $assembly/float/Randf32.laplace.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  f32.const nan:0x400000
+  local.get $1
+  local.get $1
+  f32.add
+  local.get $1
+  f32.mul
+  local.get $1
+  f32.const 0
+  f32.le
+  select
+ )
+ (func $assembly/float/Randf32.laplace.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  f32.const nan:0x400000
+  f32.const 0
+  local.get $1
+  f32.const 0
+  f32.le
+  select
+ )
+ (func $assembly/float/Randf32.laplace.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $1
+  f32.const 0
+  f32.le
+  if (result f32)
+   f32.const nan:0x400000
+  else
+   local.get $1
+   call $~lib/math/NativeMathf.log
+   f32.const 1.6931471824645996
+   f32.add
+  end
+ )
  (func $assembly/float/Randf32.frechet@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
   block $3of3
    block $2of3
@@ -18237,6 +18481,232 @@
   call $~lib/math/NativeMath.log1p
   f64.mul
   f64.sub
+ )
+ (func $assembly/float/Randf64.laplace.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $2
+  f64.const 0
+  f64.le
+  if (result f64)
+   f64.const nan:0x8000000000000
+  else
+   f64.const 0.5
+   local.get $2
+   f64.div
+   local.get $0
+   local.get $1
+   f64.sub
+   f64.abs
+   local.get $2
+   f64.div
+   f64.neg
+   call $~lib/math/NativeMath.exp
+   f64.mul
+  end
+ )
+ (func $assembly/float/Randf64.laplace.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $2
+  f64.const 0
+  f64.le
+  if (result f64)
+   f64.const nan:0x8000000000000
+  else
+   local.get $0
+   local.get $1
+   f64.sub
+   local.get $2
+   f64.div
+   local.set $2
+   local.get $0
+   local.get $1
+   f64.lt
+   if (result f64)
+    local.get $2
+    call $~lib/math/NativeMath.exp
+    f64.const 0.5
+    f64.mul
+   else
+    f64.const 1
+    local.get $2
+    f64.neg
+    call $~lib/math/NativeMath.exp
+    f64.const 0.5
+    f64.mul
+    f64.sub
+   end
+  end
+ )
+ (func $assembly/float/Randf64.laplace.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  block $__inlined_func$assembly/float/Randf64.laplace.quantile (result f64)
+   f64.const nan:0x8000000000000
+   local.get $2
+   f64.const 0
+   f64.le
+   br_if $__inlined_func$assembly/float/Randf64.laplace.quantile
+   drop
+   f64.const nan:0x8000000000000
+   i32.const 1
+   local.get $0
+   f64.const 1
+   f64.gt
+   local.get $0
+   f64.const 0
+   f64.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf64.laplace.quantile
+   drop
+   local.get $1
+   local.get $2
+   f64.const 1
+   local.get $0
+   f64.const 0.5
+   f64.sub
+   f64.abs
+   local.tee $0
+   local.get $0
+   f64.add
+   f64.sub
+   call $~lib/math/NativeMath.log
+   f64.mul
+   f64.sub
+  end
+ )
+ (func $assembly/float/Randf64.laplace.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  f64.const nan:0x8000000000000
+  local.get $1
+  f64.const 1.4142135623730951
+  f64.mul
+  local.get $1
+  f64.const 0
+  f64.le
+  select
+ )
+ (func $assembly/float/Randf64.laplace.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  f64.const nan:0x8000000000000
+  local.get $1
+  local.get $1
+  f64.add
+  local.get $1
+  f64.mul
+  local.get $1
+  f64.const 0
+  f64.le
+  select
+ )
+ (func $assembly/float/Randf64.laplace.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  f64.const nan:0x8000000000000
+  f64.const 0
+  local.get $1
+  f64.const 0
+  f64.le
+  select
+ )
+ (func $assembly/float/Randf64.laplace.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $1of2 $1of2 $2of2 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $1
+  f64.const 0
+  f64.le
+  if (result f64)
+   f64.const nan:0x8000000000000
+  else
+   local.get $1
+   call $~lib/math/NativeMath.log
+   f64.const 1.6931471805599454
+   f64.add
+  end
  )
  (func $assembly/float/Randf64.frechet@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   block $3of3
