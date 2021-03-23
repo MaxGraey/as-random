@@ -794,7 +794,72 @@ export namespace Randf64 {
 
   /** Gumbel distribution. */
   export function gumbel(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+    if (beta <= 0.0) return NaN;
     return alpha - beta * Math.log(-Math.log(Math.random()));
+  }
+
+  export namespace gumbel {
+    /** Eval the probability density function for Gumbel distribution. */
+    export function pdf(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      let z = (x - alpha) / beta;
+      return Math.exp(-z + Math.exp(-z)) / beta;
+    }
+
+    /** Eval the cumulative density function for Gumbel distribution. */
+    export function cdf(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      let z = (x - alpha) / beta;
+      return Math.exp(-Math.exp(-z));
+    }
+
+    /** Eval the quantile function for Logistic distribution. */
+    export function quantile(x: f64, alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return alpha - beta * Math.log(-Math.log(x));
+    }
+
+    /** Returns the mean value of Gumbel distribution. */
+    export function mean(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      const gamma = 0.577215664901532861;
+      return alpha + gamma * beta;
+    }
+
+    /** Returns the median value of Gumbel distribution. */
+    export function median(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      const lnln2 = -0.36651292058166435; // ln(ln(2))
+      return alpha - lnln2 * beta;
+    }
+
+    /** Returns the standard deviation of Gumbel distribution. */
+    export function stdev(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      return (Math.PI / Math.sqrt(6.0)) * beta;
+    }
+
+    /** Returns the variance of Gumbel distribution. */
+    export function variance(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      const a = Math.PI * Math.PI / 6.0;
+      return a * beta * beta;
+    }
+
+    /** Returns the skewness of Gumbel distribution. */
+    export function skewness(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      const apery = 1.202056903159594285; // zeta(3)
+      return 12 * Math.sqrt(6) * apery / (Math.PI * Math.PI * Math.PI);
+    }
+
+    /** Returns the differential entropy of Gumbel distribution. */
+    export function entropy(alpha: f64 = 0.0, beta: f64 = 1.0): f64 {
+      if (beta <= 0.0) return NaN;
+      const gamma = 0.577215664901532861;
+      return Math.log(beta) + (gamma + 1.0);
+    }
   }
 
   /** Laplace distribution. */
@@ -1993,6 +2058,70 @@ export namespace Randf32 {
   /** Gumbel distribution. */
   export function gumbel(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
     return alpha - beta * Mathf.log(-Mathf.log(Mathf.random()));
+  }
+
+  export namespace gumbel {
+    /** Eval the probability density function for Gumbel distribution. */
+    export function pdf(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      let z = (x - alpha) / beta;
+      return Mathf.exp(-z + Mathf.exp(-z)) / beta;
+    }
+
+    /** Eval the cumulative density function for Gumbel distribution. */
+    export function cdf(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      let z = (x - alpha) / beta;
+      return Mathf.exp(-Mathf.exp(-z));
+    }
+
+    /** Eval the quantile function for Logistic distribution. */
+    export function quantile(x: f32, alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+      return alpha - beta * Mathf.log(-Mathf.log(x));
+    }
+
+    /** Returns the mean value of Gumbel distribution. */
+    export function mean(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      const gamma: f32 = 0.577215664901532861;
+      return alpha + gamma * beta;
+    }
+
+    /** Returns the median value of Gumbel distribution. */
+    export function median(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      const lnln2: f32 = -0.36651292058166435; // ln(ln(2))
+      return alpha - lnln2 * beta;
+    }
+
+    /** Returns the standard deviation of Gumbel distribution. */
+    export function stdev(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      return (Mathf.PI / Mathf.sqrt(6.0)) * beta;
+    }
+
+    /** Returns the variance of Gumbel distribution. */
+    export function variance(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      const a = Mathf.PI * Mathf.PI / 6.0;
+      return a * beta * beta;
+    }
+
+    /** Returns the skewness of Gumbel distribution. */
+    export function skewness(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      const apery: f32 = 1.202056903159594285; // zeta(3)
+      return 12 * Mathf.sqrt(6) * apery / (Mathf.PI * Mathf.PI * Mathf.PI);
+    }
+
+    /** Returns the differential entropy of Gumbel distribution. */
+    export function entropy(alpha: f32 = 0.0, beta: f32 = 1.0): f32 {
+      if (beta <= 0.0) return NaN;
+      const gamma: f32 = 0.577215664901532861;
+      return Mathf.log(beta) + (gamma + 1.0);
+    }
   }
 
   /** Laplace distribution. */

@@ -3,8 +3,8 @@
  (type $f32_f32_=>_f32 (func (param f32 f32) (result f32)))
  (type $f64_=>_f64 (func (param f64) (result f64)))
  (type $f64_f64_f64_=>_f64 (func (param f64 f64 f64) (result f64)))
- (type $f32_=>_f32 (func (param f32) (result f32)))
  (type $f32_f32_f32_=>_f32 (func (param f32 f32 f32) (result f32)))
+ (type $f32_=>_f32 (func (param f32) (result f32)))
  (type $f32_f32_f32_f32_=>_f32 (func (param f32 f32 f32 f32) (result f32)))
  (type $f64_f64_f64_f64_=>_f64 (func (param f64 f64 f64 f64) (result f64)))
  (type $i64_=>_none (func (param i64)))
@@ -180,6 +180,15 @@
  (export "Randf32.cauchy.median" (func $assembly/float/Randf32.cauchy.median@varargs))
  (export "Randf32.cauchy.entropy" (func $assembly/float/Randf32.cauchy.entropy@varargs))
  (export "Randf32.gumbel" (func $assembly/float/Randf32.gumbel@varargs))
+ (export "Randf32.gumbel.pdf" (func $assembly/float/Randf32.gumbel.pdf@varargs))
+ (export "Randf32.gumbel.cdf" (func $assembly/float/Randf32.gumbel.cdf@varargs))
+ (export "Randf32.gumbel.quantile" (func $assembly/float/Randf32.gumbel.quantile@varargs))
+ (export "Randf32.gumbel.mean" (func $assembly/float/Randf32.gumbel.mean@varargs))
+ (export "Randf32.gumbel.median" (func $assembly/float/Randf32.gumbel.median@varargs))
+ (export "Randf32.gumbel.stdev" (func $assembly/float/Randf32.gumbel.stdev@varargs))
+ (export "Randf32.gumbel.variance" (func $assembly/float/Randf32.gumbel.variance@varargs))
+ (export "Randf32.gumbel.skewness" (func $assembly/float/Randf32.gumbel.skewness@varargs))
+ (export "Randf32.gumbel.entropy" (func $assembly/float/Randf32.gumbel.entropy@varargs))
  (export "Randf32.laplace" (func $assembly/float/Randf32.laplace@varargs))
  (export "Randf32.frechet" (func $assembly/float/Randf32.frechet@varargs))
  (export "Randf32.weibull" (func $assembly/float/Randf32.weibull@varargs))
@@ -303,6 +312,15 @@
  (export "Randf64.cauchy.median" (func $assembly/float/Randf64.cauchy.median@varargs))
  (export "Randf64.cauchy.entropy" (func $assembly/float/Randf64.cauchy.entropy@varargs))
  (export "Randf64.gumbel" (func $assembly/float/Randf64.gumbel@varargs))
+ (export "Randf64.gumbel.pdf" (func $assembly/float/Randf64.gumbel.pdf@varargs))
+ (export "Randf64.gumbel.cdf" (func $assembly/float/Randf64.gumbel.cdf@varargs))
+ (export "Randf64.gumbel.quantile" (func $assembly/float/Randf64.gumbel.quantile@varargs))
+ (export "Randf64.gumbel.mean" (func $assembly/float/Randf64.gumbel.mean@varargs))
+ (export "Randf64.gumbel.median" (func $assembly/float/Randf64.gumbel.median@varargs))
+ (export "Randf64.gumbel.stdev" (func $assembly/float/Randf64.gumbel.stdev@varargs))
+ (export "Randf64.gumbel.variance" (func $assembly/float/Randf64.gumbel.variance@varargs))
+ (export "Randf64.gumbel.skewness" (func $assembly/float/Randf64.gumbel.skewness@varargs))
+ (export "Randf64.gumbel.entropy" (func $assembly/float/Randf64.gumbel.entropy@varargs))
  (export "Randf64.laplace" (func $assembly/float/Randf64.laplace@varargs))
  (export "Randf64.frechet" (func $assembly/float/Randf64.frechet@varargs))
  (export "Randf64.weibull" (func $assembly/float/Randf64.weibull@varargs))
@@ -6496,6 +6514,182 @@
   call $~lib/math/NativeMathf.log
   f32.mul
   f32.sub
+ )
+ (func $assembly/float/Randf32.gumbel.pdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  local.get $2
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.sub
+  local.get $2
+  f32.div
+  local.set $3
+  local.get $3
+  f32.neg
+  local.get $3
+  f32.neg
+  call $~lib/math/NativeMathf.exp
+  f32.add
+  call $~lib/math/NativeMathf.exp
+  local.get $2
+  f32.div
+ )
+ (func $assembly/float/Randf32.gumbel.cdf (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  (local $3 f32)
+  local.get $2
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  local.get $1
+  f32.sub
+  local.get $2
+  f32.div
+  local.set $3
+  local.get $3
+  f32.neg
+  call $~lib/math/NativeMathf.exp
+  f32.neg
+  call $~lib/math/NativeMathf.exp
+ )
+ (func $assembly/float/Randf32.gumbel.quantile (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  local.get $2
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f32.const 1
+   f32.gt
+  end
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  local.get $2
+  local.get $0
+  call $~lib/math/NativeMathf.log
+  f32.neg
+  call $~lib/math/NativeMathf.log
+  f32.mul
+  f32.sub
+ )
+ (func $assembly/float/Randf32.gumbel.mean (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const 0.5772156715393066
+  local.get $1
+  f32.mul
+  f32.add
+ )
+ (func $assembly/float/Randf32.gumbel.median (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $0
+  f32.const -0.3665129244327545
+  local.get $1
+  f32.mul
+  f32.sub
+ )
+ (func $assembly/float/Randf32.gumbel.stdev (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  global.get $~lib/math/NativeMathf.PI
+  f32.const 6
+  local.set $2
+  local.get $2
+  f32.sqrt
+  f32.div
+  local.get $1
+  f32.mul
+ )
+ (func $assembly/float/Randf32.gumbel.variance (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 1.6449341773986816
+  local.get $1
+  f32.mul
+  local.get $1
+  f32.mul
+ )
+ (func $assembly/float/Randf32.gumbel.skewness (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  f32.const 12
+  f32.const 6
+  local.set $2
+  local.get $2
+  f32.sqrt
+  f32.mul
+  f32.const 1.202056884765625
+  f32.mul
+  global.get $~lib/math/NativeMathf.PI
+  global.get $~lib/math/NativeMathf.PI
+  f32.mul
+  global.get $~lib/math/NativeMathf.PI
+  f32.mul
+  f32.div
+ )
+ (func $assembly/float/Randf32.gumbel.entropy (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   f32.const nan:0x400000
+   return
+  end
+  local.get $1
+  call $~lib/math/NativeMathf.log
+  f32.const 0.5772156715393066
+  f32.const 1
+  f32.add
+  f32.add
  )
  (func $assembly/float/Randf32.laplace (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
@@ -17485,6 +17679,13 @@
   f64.add
  )
  (func $assembly/float/Randf64.gumbel (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   local.get $0
   local.get $1
   call $~lib/math/NativeMath.random
@@ -17493,6 +17694,182 @@
   call $~lib/math/NativeMath.log
   f64.mul
   f64.sub
+ )
+ (func $assembly/float/Randf64.gumbel.pdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  local.get $2
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.sub
+  local.get $2
+  f64.div
+  local.set $3
+  local.get $3
+  f64.neg
+  local.get $3
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  f64.add
+  call $~lib/math/NativeMath.exp
+  local.get $2
+  f64.div
+ )
+ (func $assembly/float/Randf64.gumbel.cdf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  local.get $2
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.get $1
+  f64.sub
+  local.get $2
+  f64.div
+  local.set $3
+  local.get $3
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  f64.neg
+  call $~lib/math/NativeMath.exp
+ )
+ (func $assembly/float/Randf64.gumbel.quantile (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  local.get $2
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.const 1
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  local.get $2
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.neg
+  call $~lib/math/NativeMath.log
+  f64.mul
+  f64.sub
+ )
+ (func $assembly/float/Randf64.gumbel.mean (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0.5772156649015329
+  local.get $1
+  f64.mul
+  f64.add
+ )
+ (func $assembly/float/Randf64.gumbel.median (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const -0.36651292058166435
+  local.get $1
+  f64.mul
+  f64.sub
+ )
+ (func $assembly/float/Randf64.gumbel.stdev (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  global.get $~lib/math/NativeMath.PI
+  f64.const 6
+  local.set $2
+  local.get $2
+  f64.sqrt
+  f64.div
+  local.get $1
+  f64.mul
+ )
+ (func $assembly/float/Randf64.gumbel.variance (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1.6449340668482264
+  local.get $1
+  f64.mul
+  local.get $1
+  f64.mul
+ )
+ (func $assembly/float/Randf64.gumbel.skewness (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 12
+  f64.const 6
+  local.set $2
+  local.get $2
+  f64.sqrt
+  f64.mul
+  f64.const 1.2020569031595942
+  f64.mul
+  global.get $~lib/math/NativeMath.PI
+  global.get $~lib/math/NativeMath.PI
+  f64.mul
+  global.get $~lib/math/NativeMath.PI
+  f64.mul
+  f64.div
+ )
+ (func $assembly/float/Randf64.gumbel.entropy (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  call $~lib/math/NativeMath.log
+  f64.const 0.5772156649015329
+  f64.const 1
+  f64.add
+  f64.add
  )
  (func $assembly/float/Randf64.laplace (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
@@ -21061,6 +21438,195 @@
   local.get $1
   call $assembly/float/Randf32.gumbel
  )
+ (func $assembly/float/Randf32.gumbel.pdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.gumbel.pdf
+ )
+ (func $assembly/float/Randf32.gumbel.cdf@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.gumbel.cdf
+ )
+ (func $assembly/float/Randf32.gumbel.quantile@varargs (param $0 f32) (param $1 f32) (param $2 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $1
+   end
+   f32.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf32.gumbel.quantile
+ )
+ (func $assembly/float/Randf32.gumbel.mean@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.gumbel.mean
+ )
+ (func $assembly/float/Randf32.gumbel.median@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.gumbel.median
+ )
+ (func $assembly/float/Randf32.gumbel.stdev@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.gumbel.stdev
+ )
+ (func $assembly/float/Randf32.gumbel.variance@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.gumbel.variance
+ )
+ (func $assembly/float/Randf32.gumbel.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.gumbel.skewness
+ )
+ (func $assembly/float/Randf32.gumbel.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f32.const 0
+    local.set $0
+   end
+   f32.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf32.gumbel.entropy
+ )
  (func $assembly/float/Randf32.laplace@varargs (param $0 f32) (param $1 f32) (result f32)
   block $2of2
    block $1of2
@@ -23475,6 +24041,195 @@
   local.get $0
   local.get $1
   call $assembly/float/Randf64.gumbel
+ )
+ (func $assembly/float/Randf64.gumbel.pdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.gumbel.pdf
+ )
+ (func $assembly/float/Randf64.gumbel.cdf@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.gumbel.cdf
+ )
+ (func $assembly/float/Randf64.gumbel.quantile@varargs (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      i32.const 1
+      i32.sub
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $1
+   end
+   f64.const 1
+   local.set $2
+  end
+  local.get $0
+  local.get $1
+  local.get $2
+  call $assembly/float/Randf64.gumbel.quantile
+ )
+ (func $assembly/float/Randf64.gumbel.mean@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.gumbel.mean
+ )
+ (func $assembly/float/Randf64.gumbel.median@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.gumbel.median
+ )
+ (func $assembly/float/Randf64.gumbel.stdev@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.gumbel.stdev
+ )
+ (func $assembly/float/Randf64.gumbel.variance@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.gumbel.variance
+ )
+ (func $assembly/float/Randf64.gumbel.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.gumbel.skewness
+ )
+ (func $assembly/float/Randf64.gumbel.entropy@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $2of2
+   block $1of2
+    block $0of2
+     block $outOfRange
+      global.get $~argumentsLength
+      br_table $0of2 $1of2 $2of2 $outOfRange
+     end
+     unreachable
+    end
+    f64.const 0
+    local.set $0
+   end
+   f64.const 1
+   local.set $1
+  end
+  local.get $0
+  local.get $1
+  call $assembly/float/Randf64.gumbel.entropy
  )
  (func $assembly/float/Randf64.laplace@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
