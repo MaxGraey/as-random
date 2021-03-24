@@ -1094,6 +1094,72 @@ export namespace Randf64 {
     return sigma * Math.sqrt(-2.0 * Math.log(Math.random()));
   }
 
+  export namespace rayleigh {
+    /** Eval the probability density function for Rayleigh distribution. */
+    export function pdf(x: f64, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0 || x == Infinity) return 0.0;
+      let z = x / sigma;
+	    return z / sigma * Math.exp(-0.5 * z * z);
+    }
+
+    /** Eval the cumulative density function for Rayleigh distribution. */
+    export function cdf(x: f64, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+      let z = x / sigma;
+      return 1.0 - Math.exp(-0.5 * z * z);
+    }
+
+    /** Eval the quantile function for Rayleigh distribution. */
+    export function quantile(x: f64, sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+	    return sigma * Math.sqrt(-2.0 * Math.log1p(-x));
+    }
+
+    /** Returns the mean value of Rayleigh distribution. */
+    export function mean(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = Math.sqrt(Math.PI / 2);
+      return a * sigma;
+    }
+
+    /** Returns the mean value of Rayleigh distribution. */
+    export function median(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = Math.sqrt(2 * Math.LN2);
+      return a * sigma;
+    }
+
+    /** Returns the standard deviation of Rayleigh distribution. */
+    export function stdev(sigma: f64 = 1.0): f64 {
+	    if (sigma < 0.0) return NaN;
+      const a = Math.sqrt(2 - 0.5 * Math.PI);
+      return a * sigma;
+    }
+
+    /** Returns the variance of Rayleigh distribution. */
+    export function variance(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const a = 2 - 0.5 * Math.PI;
+      return a * sigma * sigma;
+    }
+
+    /** Returns the skewness of Rayleigh distribution. */
+    export function skewness(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      return 0.6311106578189364; // 2 * sqrt(pi) * (pi - 3) / pow(4 - pi, 3 / 2);
+    }
+
+    /** Returns the differential entropy of Rayleigh distribution. */
+    export function entropy(sigma: f64 = 1.0): f64 {
+      if (sigma < 0.0) return NaN;
+      const gamma = 0.577215664901532861;
+      return 1 + Math.log(sigma / Math.SQRT2) + 0.5 * gamma;
+    }
+  }
+
   /** Maxwell-Boltzmann distribution. */
   export function maxwell(sigma: f64 = 1.0): f64 {
     // Based on Nader M.A. Mohamed, title "Efficient Algorithm for Generating Maxwell Random Variables".
@@ -2564,6 +2630,72 @@ export namespace Randf32 {
   /** Rayleigh distribution. */
   export function rayleigh(sigma: f32 = 1.0): f32 {
     return sigma * Mathf.sqrt(-2.0 * Mathf.log(Mathf.random()));
+  }
+
+  export namespace rayleigh {
+    /** Eval the probability density function for Rayleigh distribution. */
+    export function pdf(x: f32, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0 || x == Infinity) return 0.0;
+      let z = x / sigma;
+	    return z / sigma * Mathf.exp(-0.5 * z * z);
+    }
+
+    /** Eval the cumulative density function for Rayleigh distribution. */
+    export function cdf(x: f32, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0) return 0.0;
+      let z = x / sigma;
+      return 1.0 - Mathf.exp(-0.5 * z * z);
+    }
+
+    /** Eval the quantile function for Rayleigh distribution. */
+    export function quantile(x: f32, sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+	    return sigma * Mathf.sqrt(-2.0 * Mathf.log1p(-x));
+    }
+
+    /** Returns the mean value of Rayleigh distribution. */
+    export function mean(sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      const a = Mathf.sqrt(Mathf.PI / 2);
+      return a * sigma;
+    }
+
+    /** Returns the mean value of Rayleigh distribution. */
+    export function median(sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      const a = Mathf.sqrt(2 * Mathf.LN2);
+      return a * sigma;
+    }
+
+    /** Returns the standard deviation of Rayleigh distribution. */
+    export function stdev(sigma: f32 = 1.0): f32 {
+	    if (sigma < 0.0) return NaN;
+      const a = Mathf.sqrt(2 - 0.5 * Mathf.PI);
+      return a * sigma;
+    }
+
+    /** Returns the variance of Rayleigh distribution. */
+    export function variance(sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      const a: f32 = 2 - 0.5 * Mathf.PI;
+      return a * sigma * sigma;
+    }
+
+    /** Returns the skewness of Rayleigh distribution. */
+    export function skewness(sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      return 0.6311106578189364; // 2 * sqrt(pi) * (pi - 3) / pow(4 - pi, 3 / 2);
+    }
+
+    /** Returns the differential entropy of Rayleigh distribution. */
+    export function entropy(sigma: f32 = 1.0): f32 {
+      if (sigma < 0.0) return NaN;
+      const gamma: f32 = 0.577215664901532861;
+      return 1 + Mathf.log(sigma / Mathf.SQRT2) + 0.5 * gamma;
+    }
   }
 
   /** Maxwell-Boltzmann distribution. */

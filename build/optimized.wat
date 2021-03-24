@@ -1,8 +1,8 @@
 (module
  (type $f64_f64_=>_f64 (func (param f64 f64) (result f64)))
  (type $f32_f32_=>_f32 (func (param f32 f32) (result f32)))
- (type $f64_f64_f64_=>_f64 (func (param f64 f64 f64) (result f64)))
  (type $f64_=>_f64 (func (param f64) (result f64)))
+ (type $f64_f64_f64_=>_f64 (func (param f64 f64 f64) (result f64)))
  (type $f32_f32_f32_=>_f32 (func (param f32 f32 f32) (result f32)))
  (type $f32_=>_f32 (func (param f32) (result f32)))
  (type $f32_f32_f32_f32_=>_f32 (func (param f32 f32 f32 f32) (result f32)))
@@ -333,6 +333,15 @@
  (export "Randf32.weibull.skewness" (func $assembly/float/Randf32.weibull.skewness@varargs))
  (export "Randf32.weibull.entropy" (func $assembly/float/Randf32.weibull.entropy@varargs))
  (export "Randf32.rayleigh" (func $assembly/float/Randf32.rayleigh@varargs))
+ (export "Randf32.rayleigh.pdf" (func $assembly/float/Randf32.rayleigh.pdf@varargs))
+ (export "Randf32.rayleigh.cdf" (func $assembly/float/Randf32.rayleigh.cdf@varargs))
+ (export "Randf32.rayleigh.quantile" (func $assembly/float/Randf32.rayleigh.quantile@varargs))
+ (export "Randf32.rayleigh.mean" (func $assembly/float/Randf32.rayleigh.mean@varargs))
+ (export "Randf32.rayleigh.median" (func $assembly/float/Randf32.rayleigh.median@varargs))
+ (export "Randf32.rayleigh.stdev" (func $assembly/float/Randf32.rayleigh.stdev@varargs))
+ (export "Randf32.rayleigh.variance" (func $assembly/float/Randf32.rayleigh.variance@varargs))
+ (export "Randf32.rayleigh.skewness" (func $assembly/float/Randf32.rayleigh.skewness@varargs))
+ (export "Randf32.rayleigh.entropy" (func $assembly/float/Randf32.rayleigh.entropy@varargs))
  (export "Randf32.maxwell" (func $assembly/float/Randf32.maxwell@varargs))
  (export "Randf32.vonmises" (func $assembly/float/Randf32.vonmises@varargs))
  (export "Randf32.vonmises.pdf" (func $assembly/float/Randf32.vonmises.pdf@varargs))
@@ -492,6 +501,15 @@
  (export "Randf64.weibull.skewness" (func $assembly/float/Randf64.weibull.skewness@varargs))
  (export "Randf64.weibull.entropy" (func $assembly/float/Randf64.weibull.entropy@varargs))
  (export "Randf64.rayleigh" (func $assembly/float/Randf64.rayleigh@varargs))
+ (export "Randf64.rayleigh.pdf" (func $assembly/float/Randf64.rayleigh.pdf@varargs))
+ (export "Randf64.rayleigh.cdf" (func $assembly/float/Randf64.rayleigh.cdf@varargs))
+ (export "Randf64.rayleigh.quantile" (func $assembly/float/Randf64.rayleigh.quantile@varargs))
+ (export "Randf64.rayleigh.mean" (func $assembly/float/Randf64.rayleigh.mean@varargs))
+ (export "Randf64.rayleigh.median" (func $assembly/float/Randf64.rayleigh.median@varargs))
+ (export "Randf64.rayleigh.stdev" (func $assembly/float/Randf64.rayleigh.stdev@varargs))
+ (export "Randf64.rayleigh.variance" (func $assembly/float/Randf64.rayleigh.variance@varargs))
+ (export "Randf64.rayleigh.skewness" (func $assembly/float/Randf64.rayleigh.skewness@varargs))
+ (export "Randf64.rayleigh.entropy" (func $assembly/float/Randf64.rayleigh.entropy@varargs))
  (export "Randf64.maxwell" (func $assembly/float/Randf64.maxwell@varargs))
  (export "Randf64.maxwell.pdf" (func $assembly/float/Randf64.maxwell.pdf@varargs))
  (export "Randf64.maxwell.cdf" (func $assembly/float/Randf64.maxwell.cdf@varargs))
@@ -15564,6 +15582,268 @@
   f32.sqrt
   f32.mul
  )
+ (func $assembly/float/Randf32.rayleigh.pdf@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randf32.rayleigh.pdf (result f32)
+   f32.const nan:0x400000
+   local.get $1
+   f32.const 0
+   f32.lt
+   br_if $__inlined_func$assembly/float/Randf32.rayleigh.pdf
+   drop
+   f32.const 0
+   i32.const 1
+   local.get $0
+   f32.const inf
+   f32.eq
+   local.get $0
+   f32.const 0
+   f32.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf32.rayleigh.pdf
+   drop
+   local.get $0
+   local.get $1
+   f32.div
+   local.tee $0
+   local.get $1
+   f32.div
+   local.get $0
+   f32.const -0.5
+   f32.mul
+   local.get $0
+   f32.mul
+   call $~lib/math/NativeMathf.exp
+   f32.mul
+  end
+ )
+ (func $assembly/float/Randf32.rayleigh.cdf@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randf32.rayleigh.cdf (result f32)
+   f32.const nan:0x400000
+   local.get $1
+   f32.const 0
+   f32.lt
+   br_if $__inlined_func$assembly/float/Randf32.rayleigh.cdf
+   drop
+   f32.const 0
+   local.get $0
+   f32.const 0
+   f32.lt
+   br_if $__inlined_func$assembly/float/Randf32.rayleigh.cdf
+   drop
+   f32.const 1
+   local.get $0
+   local.get $1
+   f32.div
+   local.tee $0
+   f32.const -0.5
+   f32.mul
+   local.get $0
+   f32.mul
+   call $~lib/math/NativeMathf.exp
+   f32.sub
+  end
+ )
+ (func $assembly/float/Randf32.rayleigh.quantile@varargs (param $0 f32) (param $1 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randf32.rayleigh.quantile (result f32)
+   f32.const nan:0x400000
+   local.get $1
+   f32.const 0
+   f32.lt
+   br_if $__inlined_func$assembly/float/Randf32.rayleigh.quantile
+   drop
+   f32.const nan:0x400000
+   i32.const 1
+   local.get $0
+   f32.const 1
+   f32.gt
+   local.get $0
+   f32.const 0
+   f32.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf32.rayleigh.quantile
+   drop
+   local.get $1
+   local.get $0
+   f32.neg
+   call $~lib/math/NativeMathf.log1p
+   f32.const -2
+   f32.mul
+   f32.sqrt
+   f32.mul
+  end
+ )
+ (func $assembly/float/Randf32.rayleigh.mean@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  f32.const nan:0x400000
+  local.get $0
+  f32.const 1.2533141374588013
+  f32.mul
+  local.get $0
+  f32.const 0
+  f32.lt
+  select
+ )
+ (func $assembly/float/Randf32.rayleigh.median@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  f32.const nan:0x400000
+  local.get $0
+  f32.const 1.1774100065231323
+  f32.mul
+  local.get $0
+  f32.const 0
+  f32.lt
+  select
+ )
+ (func $assembly/float/Randf32.rayleigh.stdev@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  f32.const nan:0x400000
+  local.get $0
+  f32.const 0.6551363468170166
+  f32.mul
+  local.get $0
+  f32.const 0
+  f32.lt
+  select
+ )
+ (func $assembly/float/Randf32.rayleigh.variance@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  f32.const nan:0x400000
+  local.get $0
+  f32.const 0.4292036294937134
+  f32.mul
+  local.get $0
+  f32.mul
+  local.get $0
+  f32.const 0
+  f32.lt
+  select
+ )
+ (func $assembly/float/Randf32.rayleigh.skewness@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  f32.const nan:0x400000
+  f32.const 0.631110668182373
+  local.get $0
+  f32.const 0
+  f32.lt
+  select
+ )
+ (func $assembly/float/Randf32.rayleigh.entropy@varargs (param $0 f32) (result f32)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f32.const 1
+   local.set $0
+  end
+  local.get $0
+  f32.const 0
+  f32.lt
+  if (result f32)
+   f32.const nan:0x400000
+  else
+   local.get $0
+   f32.const 1.4142135381698608
+   f32.div
+   call $~lib/math/NativeMathf.log
+   f32.const 1
+   f32.add
+   f32.const 0.2886078357696533
+   f32.add
+  end
+ )
  (func $assembly/float/Randf32.maxwell@varargs (param $0 f32) (result f32)
   (local $1 f32)
   (local $2 f32)
@@ -20797,6 +21077,268 @@
   f64.mul
   f64.sqrt
   f64.mul
+ )
+ (func $assembly/float/Randf64.rayleigh.pdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randf64.rayleigh.pdf (result f64)
+   f64.const nan:0x8000000000000
+   local.get $1
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randf64.rayleigh.pdf
+   drop
+   f64.const 0
+   i32.const 1
+   local.get $0
+   f64.const inf
+   f64.eq
+   local.get $0
+   f64.const 0
+   f64.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf64.rayleigh.pdf
+   drop
+   local.get $0
+   local.get $1
+   f64.div
+   local.tee $0
+   local.get $1
+   f64.div
+   local.get $0
+   f64.const -0.5
+   f64.mul
+   local.get $0
+   f64.mul
+   call $~lib/math/NativeMath.exp
+   f64.mul
+  end
+ )
+ (func $assembly/float/Randf64.rayleigh.cdf@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randf64.rayleigh.cdf (result f64)
+   f64.const nan:0x8000000000000
+   local.get $1
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randf64.rayleigh.cdf
+   drop
+   f64.const 0
+   local.get $0
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randf64.rayleigh.cdf
+   drop
+   f64.const 1
+   local.get $0
+   local.get $1
+   f64.div
+   local.tee $0
+   f64.const -0.5
+   f64.mul
+   local.get $0
+   f64.mul
+   call $~lib/math/NativeMath.exp
+   f64.sub
+  end
+ )
+ (func $assembly/float/Randf64.rayleigh.quantile@varargs (param $0 f64) (param $1 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     i32.const 1
+     i32.sub
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $1
+  end
+  block $__inlined_func$assembly/float/Randf64.rayleigh.quantile (result f64)
+   f64.const nan:0x8000000000000
+   local.get $1
+   f64.const 0
+   f64.lt
+   br_if $__inlined_func$assembly/float/Randf64.rayleigh.quantile
+   drop
+   f64.const nan:0x8000000000000
+   i32.const 1
+   local.get $0
+   f64.const 1
+   f64.gt
+   local.get $0
+   f64.const 0
+   f64.lt
+   select
+   br_if $__inlined_func$assembly/float/Randf64.rayleigh.quantile
+   drop
+   local.get $1
+   local.get $0
+   f64.neg
+   call $~lib/math/NativeMath.log1p
+   f64.const -2
+   f64.mul
+   f64.sqrt
+   f64.mul
+  end
+ )
+ (func $assembly/float/Randf64.rayleigh.mean@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 1.2533141373155001
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randf64.rayleigh.median@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 1.1774100225154747
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randf64.rayleigh.stdev@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 0.6551363775620336
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randf64.rayleigh.variance@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 0.42920367320510344
+  f64.mul
+  local.get $0
+  f64.mul
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randf64.rayleigh.skewness@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  f64.const nan:0x8000000000000
+  f64.const 0.6311106578189364
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+ )
+ (func $assembly/float/Randf64.rayleigh.entropy@varargs (param $0 f64) (result f64)
+  block $1of1
+   block $0of1
+    block $outOfRange
+     global.get $~argumentsLength
+     br_table $0of1 $1of1 $outOfRange
+    end
+    unreachable
+   end
+   f64.const 1
+   local.set $0
+  end
+  local.get $0
+  f64.const 0
+  f64.lt
+  if (result f64)
+   f64.const nan:0x8000000000000
+  else
+   local.get $0
+   f64.const 1.4142135623730951
+   f64.div
+   call $~lib/math/NativeMath.log
+   f64.const 1
+   f64.add
+   f64.const 0.28860783245076643
+   f64.add
+  end
  )
  (func $assembly/float/Randf64.maxwell@varargs (param $0 f64) (result f64)
   (local $1 f64)
