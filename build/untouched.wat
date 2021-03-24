@@ -21078,16 +21078,18 @@
    local.set $8
    local.get $8
    if
-    local.get $6
-    local.get $5
-    local.get $1
     local.get $4
     f64.const 1
     f64.add
-    local.tee $4
+    local.set $4
+    local.get $5
+    local.get $1
+    local.get $4
     f64.div
     f64.mul
-    local.tee $5
+    local.set $5
+    local.get $6
+    local.get $5
     f64.add
     local.set $6
     local.get $5

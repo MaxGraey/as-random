@@ -193,7 +193,9 @@ function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   let sum = del;
 
   for (let i = 1; i <= maxIters; i++) {
-    sum += del *= x / ++ap;
+    ap  += 1.0;
+    del *= x / ap;
+    sum += del;
     if (Math.abs(del) < Math.abs(sum) * eps) {
       return sum * Math.exp(-x + a * Math.log(x) - logGamma(a));
     }
