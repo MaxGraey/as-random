@@ -10654,7 +10654,7 @@
        f64.abs
        local.get $2
        f64.abs
-       f64.const 1e-08
+       f64.const 1e-12
        f64.mul
        f64.lt
        if
@@ -10753,7 +10753,7 @@
         f64.abs
         local.get $3
         f64.abs
-        f64.const 1e-08
+        f64.const 1e-12
         f64.mul
         f64.lt
         if

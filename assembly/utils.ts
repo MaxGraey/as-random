@@ -283,7 +283,7 @@ export function qgamma(a: f64, x: f64): f64 {
     : gcf(a, x)
 }
 
-function gser(a: f64, x: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
+function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   if (x <= 0.0) return 0.0;
   let ap  = a;
   let del = 1.0	/ ap;
@@ -298,7 +298,7 @@ function gser(a: f64, x: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
   return NaN;
 }
 
-function gcf(a: f64, x: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
+function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   let g0 = 0.0;
   let f  = 1.0;
   let b1 = 1.0;

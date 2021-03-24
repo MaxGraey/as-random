@@ -21292,14 +21292,14 @@
     f64.const 1
     local.get $3
     local.get $2
-    f64.const 1e-08
+    f64.const 1e-12
     i32.const 100
     call $assembly/utils/gser
     f64.sub
    else
     local.get $3
     local.get $2
-    f64.const 1e-08
+    f64.const 1e-12
     i32.const 100
     call $assembly/utils/gcf
    end
