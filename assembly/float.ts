@@ -1460,14 +1460,16 @@ export namespace Randf64 {
     export function cdf(x: f64, lambda: f64): f64 {
       if (lambda == 0.0 || x == Infinity) return 1.0;
       if (x <= 0.0) {
-        if (x == 0.0) return Math.exp(-lambda);
-        return 0.0;
+        return x == 0.0
+          ? Math.exp(-lambda)
+          : 0.0;
       }
       return qgamma(lambda, Math.floor(x) + 1.0);
     }
 
     /** Eval the quantile function for Poisson distribution. */
     export function quantile(x: f64, lambda: f64): f64 {
+      if (x < 0.0 || x > 1.0) return NaN;
       // TODO: implement something better
       return quantile_approx(
         x,

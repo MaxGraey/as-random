@@ -21295,13 +21295,13 @@
    local.get $0
    f64.const 0
    f64.eq
-   if
+   if (result f64)
     local.get $1
     f64.neg
     call $~lib/math/NativeMath.exp
-    return
+   else
+    f64.const 0
    end
-   f64.const 0
    return
   end
   block $assembly/specials/qgamma|inlined.0 (result f64)
@@ -21374,6 +21374,20 @@
   (local $12 f64)
   (local $13 f64)
   (local $14 i32)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if (result i32)
+   i32.const 1
+  else
+   local.get $0
+   f64.const 1
+   f64.gt
+  end
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   block $assembly/specials/quantile_approx|inlined.1 (result f64)
    local.get $0
    local.set $8

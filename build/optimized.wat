@@ -10630,13 +10630,13 @@
    local.get $0
    f64.const 0
    f64.eq
-   if
+   if (result f64)
     local.get $1
     f64.neg
     call $~lib/math/NativeMath.exp
-    return
+   else
+    f64.const 0
    end
-   f64.const 0
    return
   end
   block $assembly/specials/qgamma|inlined.0 (result f64)
@@ -10847,6 +10847,18 @@
   (local $2 f64)
   (local $3 f64)
   (local $4 f64)
+  i32.const 1
+  local.get $0
+  f64.const 1
+  f64.gt
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   local.get $1
   local.tee $2
   f64.sqrt
