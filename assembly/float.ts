@@ -1473,16 +1473,8 @@ export namespace Randf64 {
     export function quantile(x: f64, lambda: f64): f64 {
       if (lambda < 0.0) return NaN;
       if (x < 0.0 || x > 1.0) return NaN;
-      // TODO: implement something better
-      return quantile_approx(
-        x,
-        lambda,
-        Math.sqrt(lambda),
-        (x, mean) => pmf(x, mean),
-        (x, mean) => cdf(x, mean),
-        0.0,
-        Infinity
-      );
+      // TODO: implement
+      return NaN;
     }
 
     /** Returns the mean of Poisson distribution. */
