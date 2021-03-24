@@ -21221,8 +21221,6 @@
      local.get $15
      local.get $4
      f64.sub
-     local.set $4
-     local.get $4
      local.set $16
      local.get $16
      f64.abs

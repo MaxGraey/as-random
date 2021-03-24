@@ -236,8 +236,7 @@ function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
     if (a1 != 0.0) {
       f = 1.0 / a1;
       let g = b1 * f;
-      g0 = g - g0;
-      if (Math.abs(g0) < Math.abs(g) * eps) {
+      if (Math.abs(g - g0) < Math.abs(g) * eps) {
         return g * Math.exp(-x + a * Math.log(x) - logGamma(a));
       }
       g0 = g;
