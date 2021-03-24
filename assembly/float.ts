@@ -7,7 +7,7 @@ import {
   logFactorial,
   erf_approx,
   quantile_approx
-} from "./utils";
+} from "./specials";
 
 // @ts-ignore: decorator
 @lazy let CACHED_NORM32: f32 = Infinity;

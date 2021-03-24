@@ -4209,7 +4209,7 @@
   i32.and
   select
  )
- (func $assembly/utils/logGamma (param $0 f64) (result f64)
+ (func $assembly/specials/logGamma (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
   f64.abs
@@ -5017,7 +5017,7 @@
   end
   local.get $0
  )
- (func $assembly/utils/gamma (param $0 f64) (result f64)
+ (func $assembly/specials/gamma (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
   local.get $0
@@ -5065,7 +5065,7 @@
    f64.const 1
    local.get $0
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f64.mul
    f64.div
    return
@@ -5075,7 +5075,7 @@
   f64.gt
   if
    local.get $0
-   call $assembly/utils/logGamma
+   call $assembly/specials/logGamma
    call $~lib/math/NativeMath.exp
    return
   end
@@ -5210,7 +5210,7 @@
   local.tee $2
   f64.div
   f64.sub
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   f32.demote_f64
   local.set $0
   local.get $1
@@ -5221,7 +5221,7 @@
   local.get $2
   f64.div
   f64.sub
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   f32.demote_f64
   local.get $0
   local.get $0
@@ -5249,7 +5249,7 @@
   f64.div
   f64.const 1
   f64.add
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   f32.demote_f64
   f32.mul
  )
@@ -5280,7 +5280,7 @@
   f64.div
   f64.const 1
   f64.add
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   f32.demote_f64
   f32.mul
   local.get $2
@@ -6167,7 +6167,7 @@
    local.get $1
   end
  )
- (func $assembly/utils/besseli0 (param $0 f64) (result f64)
+ (func $assembly/specials/besseli0 (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
   f64.abs
@@ -6858,7 +6858,7 @@
   local.get $0
   global.set $~lib/math/NativeMath.sincos_cos
  )
- (func $assembly/utils/erf_approx (param $0 f64) (result f64)
+ (func $assembly/specials/erf_approx (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 f64)
   local.get $0
@@ -7157,7 +7157,7 @@
    f64.div
    f64.sub
    f64.mul
-   call $assembly/utils/erf_approx
+   call $assembly/specials/erf_approx
    f64.const 0.5
    f64.mul
    f64.const 0.5
@@ -7589,7 +7589,7 @@
    f64.const nan:0x8000000000000
    return
   end
-  block $assembly/utils/quantile_approx|inlined.0 (result f64)
+  block $assembly/specials/quantile_approx|inlined.0 (result f64)
    local.get $2
    local.set $3
    local.get $1
@@ -7609,18 +7609,18 @@
    f64.const 0
    f64.lt
    select
-   br_if $assembly/utils/quantile_approx|inlined.0
+   br_if $assembly/specials/quantile_approx|inlined.0
    drop
    local.get $4
    f64.const 0
    f64.eq
-   br_if $assembly/utils/quantile_approx|inlined.0
+   br_if $assembly/specials/quantile_approx|inlined.0
    drop
    local.get $5
    local.get $4
    f64.const 1
    f64.eq
-   br_if $assembly/utils/quantile_approx|inlined.0
+   br_if $assembly/specials/quantile_approx|inlined.0
    drop
    i32.const 3
    global.set $~argumentsLength
@@ -7693,7 +7693,7 @@
    local.get $2
   end
  )
- (func $assembly/utils/besseli1 (param $0 f64) (result f64)
+ (func $assembly/specials/besseli1 (param $0 f64) (result f64)
   (local $1 f64)
   (local $2 f64)
   local.get $0
@@ -7795,9 +7795,9 @@
   local.get $0
   f64.promote_f32
   local.tee $1
-  call $assembly/utils/besseli1
+  call $assembly/specials/besseli1
   local.get $1
-  call $assembly/utils/besseli0
+  call $assembly/specials/besseli0
   f64.div
   f64.sub
   f32.demote_f64
@@ -7843,7 +7843,7 @@
   f64.const 1
   f64.sub
  )
- (func $assembly/utils/logFactorial (param $0 i32) (result f64)
+ (func $assembly/specials/logFactorial (param $0 i32) (result f64)
   (local $1 f64)
   local.get $0
   i32.const 254
@@ -7994,7 +7994,7 @@
     f64.add
     local.get $0
     i32.trunc_f64_u
-    call $assembly/utils/logFactorial
+    call $assembly/specials/logFactorial
     f64.sub
     f64.le
     i32.eqz
@@ -8564,7 +8564,7 @@
     local.tee $7
     f64.const 1
     f64.add
-    call $assembly/utils/logGamma
+    call $assembly/specials/logGamma
     local.set $8
     local.get $3
     call $~lib/math/NativeMath.log
@@ -8628,12 +8628,12 @@
      local.get $3
      f64.const 1
      f64.add
-     call $assembly/utils/logGamma
+     call $assembly/specials/logGamma
      f64.sub
      local.get $6
      f64.const 1
      f64.add
-     call $assembly/utils/logGamma
+     call $assembly/specials/logGamma
      f64.sub
      local.get $3
      local.get $9
@@ -10189,7 +10189,7 @@
   local.get $0
   f64.div
   f64.sub
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   local.set $2
   local.get $1
   local.get $1
@@ -10199,7 +10199,7 @@
   local.get $0
   f64.div
   f64.sub
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   local.get $2
   local.get $2
   f64.mul
@@ -10225,7 +10225,7 @@
   f64.div
   f64.const 1
   f64.add
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   f64.mul
  )
  (func $assembly/float/Randf64.weibull.variance (param $0 f64) (param $1 f64) (result f64)
@@ -10254,7 +10254,7 @@
   f64.div
   f64.const 1
   f64.add
-  call $assembly/utils/gamma
+  call $assembly/specials/gamma
   f64.mul
   local.get $2
   local.get $2
@@ -10517,9 +10517,9 @@
   end
   f64.const 1
   local.get $0
-  call $assembly/utils/besseli1
+  call $assembly/specials/besseli1
   local.get $0
-  call $assembly/utils/besseli0
+  call $assembly/specials/besseli0
   f64.div
   f64.sub
  )
@@ -10558,7 +10558,7 @@
    local.get $0
    i64.trunc_f64_s
    i32.wrap_i64
-   call $assembly/utils/logFactorial
+   call $assembly/specials/logFactorial
    f64.sub
    call $~lib/math/NativeMath.exp
    return
@@ -10594,7 +10594,7 @@
    f64.const 1
    return
   end
-  block $assembly/utils/qgamma|inlined.0 (result f64)
+  block $assembly/specials/qgamma|inlined.0 (result f64)
    f64.const nan:0x8000000000000
    i32.const 1
    local.get $1
@@ -10608,7 +10608,7 @@
    f64.const 0
    f64.lt
    select
-   br_if $assembly/utils/qgamma|inlined.0
+   br_if $assembly/specials/qgamma|inlined.0
    drop
    local.get $0
    local.get $1
@@ -10617,12 +10617,12 @@
    f64.lt
    if (result f64)
     f64.const 1
-    block $__inlined_func$assembly/utils/gser (result f64)
+    block $__inlined_func$assembly/specials/gser (result f64)
      f64.const 0
      local.get $0
      f64.const 0
      f64.le
-     br_if $__inlined_func$assembly/utils/gser
+     br_if $__inlined_func$assembly/specials/gser
      drop
      local.get $1
      local.set $3
@@ -10667,11 +10667,11 @@
         f64.mul
         f64.add
         local.get $3
-        call $assembly/utils/logGamma
+        call $assembly/specials/logGamma
         f64.sub
         call $~lib/math/NativeMath.exp
         f64.mul
-        br $__inlined_func$assembly/utils/gser
+        br $__inlined_func$assembly/specials/gser
        end
        local.get $6
        i32.const 1
@@ -10684,7 +10684,7 @@
     end
     f64.sub
    else
-    block $__inlined_func$assembly/utils/gcf (result f64)
+    block $__inlined_func$assembly/specials/gcf (result f64)
      f64.const 1
      local.set $5
      f64.const 1
@@ -10766,11 +10766,11 @@
          f64.mul
          f64.add
          local.get $1
-         call $assembly/utils/logGamma
+         call $assembly/specials/logGamma
          f64.sub
          call $~lib/math/NativeMath.exp
          f64.mul
-         br $__inlined_func$assembly/utils/gcf
+         br $__inlined_func$assembly/specials/gcf
         end
         local.get $3
         local.set $2
@@ -15269,7 +15269,7 @@
    f64.promote_f32
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f32.demote_f64
    f32.mul
    f32.add
@@ -15400,7 +15400,7 @@
    local.tee $3
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f32.demote_f64
    local.set $0
    f64.const 1
@@ -15408,7 +15408,7 @@
    local.get $3
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f32.demote_f64
    local.set $1
    f64.const 1
@@ -15416,7 +15416,7 @@
    local.get $3
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f32.demote_f64
    local.get $1
    local.get $0
@@ -15835,7 +15835,7 @@
    f64.div
    f64.const 1
    f64.add
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f32.demote_f64
    f32.mul
    local.get $2
@@ -16295,7 +16295,7 @@
    call $~lib/math/NativeMathf.exp
    local.get $2
    f64.promote_f32
-   call $assembly/utils/besseli0
+   call $assembly/specials/besseli0
    f32.demote_f64
    f32.const 6.2831854820251465
    f32.mul
@@ -16451,13 +16451,13 @@
    local.get $1
    f64.promote_f32
    local.tee $2
-   call $assembly/utils/besseli0
+   call $assembly/specials/besseli0
    f32.demote_f64
    local.set $0
    local.get $1
    f32.neg
    local.get $2
-   call $assembly/utils/besseli1
+   call $assembly/specials/besseli1
    f32.demote_f64
    f32.mul
    local.get $0
@@ -20774,7 +20774,7 @@
    local.get $0
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f64.mul
    f64.add
   end
@@ -20901,21 +20901,21 @@
    local.get $0
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    local.set $1
    f64.const 1
    f64.const 2
    local.get $0
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    local.set $2
    f64.const 1
    f64.const 3
    local.get $0
    f64.div
    f64.sub
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    local.get $2
    local.get $1
    f64.mul
@@ -21332,7 +21332,7 @@
    f64.div
    f64.const 1
    f64.add
-   call $assembly/utils/gamma
+   call $assembly/specials/gamma
    f64.mul
    local.get $2
    f64.const 3
@@ -21794,7 +21794,7 @@
    local.tee $0
    f64.const 1.4142135623730951
    f64.div
-   call $assembly/utils/erf_approx
+   call $assembly/specials/erf_approx
    local.get $0
    f64.const 0.7978845608028654
    f64.mul
@@ -22166,7 +22166,7 @@
    f64.mul
    call $~lib/math/NativeMath.exp
    local.get $2
-   call $assembly/utils/besseli0
+   call $assembly/specials/besseli0
    f64.const 6.283185307179586
    f64.mul
    f64.div
@@ -22310,12 +22310,12 @@
    f64.const nan:0x8000000000000
   else
    local.get $1
-   call $assembly/utils/besseli0
+   call $assembly/specials/besseli0
    local.set $0
    local.get $1
    f64.neg
    local.get $1
-   call $assembly/utils/besseli1
+   call $assembly/specials/besseli1
    f64.mul
    local.get $0
    f64.div
