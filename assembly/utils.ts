@@ -285,13 +285,14 @@ export function qgamma(a: f64, x: f64): f64 {
 
 function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   if (x <= 0.0) return 0.0;
+
   let ap  = a;
-  let del = 1.0	/ ap;
+  let del = 1.0 / ap;
   let sum = del;
 
   for (let i = 1; i <= maxIters; i++) {
-    sum += del *= x	/ ++ap;
-    if (Math.abs(del)	< Math.abs(sum) * eps) {
+    sum += del *= x / ++ap;
+    if (Math.abs(del) < Math.abs(sum) * eps) {
       return sum * Math.exp(-x + a * Math.log(x) - logGamma(a));
     }
   }
@@ -317,7 +318,7 @@ function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
     a1 = x * a0 + af * a1;
 
     if (a1 != 0.0) {
-      f =	1.0 / a1;
+      f = 1.0 / a1;
       let g = b1 * f;
       g0 = g - g0;
       if (Math.abs(g0) < Math.abs(g) * eps) {
