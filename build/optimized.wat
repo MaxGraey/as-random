@@ -10570,12 +10570,11 @@
   (local $3 f64)
   (local $4 f64)
   (local $5 f64)
-  (local $6 f64)
+  (local $6 i32)
   (local $7 f64)
   (local $8 f64)
   (local $9 f64)
   (local $10 f64)
-  (local $11 i32)
   local.get $0
   f64.const 0
   f64.lt
@@ -10595,7 +10594,7 @@
    f64.const 1
    return
   end
-  block $__inlined_func$assembly/utils/qgamma (result f64)
+  block $assembly/utils/qgamma|inlined.0 (result f64)
    f64.const nan:0x8000000000000
    i32.const 1
    local.get $1
@@ -10609,17 +10608,14 @@
    f64.const 0
    f64.lt
    select
-   br_if $__inlined_func$assembly/utils/qgamma
+   br_if $assembly/utils/qgamma|inlined.0
    drop
-   local.get $1
-   call $assembly/utils/logGamma
-   local.set $4
    local.get $0
    local.get $1
    f64.const 1
    f64.add
    f64.lt
-   if
+   if (result f64)
     f64.const 1
     block $__inlined_func$assembly/utils/gser (result f64)
      f64.const 0
@@ -10636,19 +10632,19 @@
      local.tee $5
      local.set $2
      i32.const 1
-     local.set $11
+     local.set $6
      loop $for-loop|0
-      local.get $11
+      local.get $6
       i32.const 100
       i32.le_s
       if
        local.get $2
        local.get $5
        local.get $0
-       local.get $3
+       local.get $1
        f64.const 1
        f64.add
-       local.tee $3
+       local.tee $1
        f64.div
        f64.mul
        local.tee $5
@@ -10665,131 +10661,129 @@
         local.get $2
         local.get $0
         f64.neg
-        local.get $1
+        local.get $3
         local.get $0
         call $~lib/math/NativeMath.log
         f64.mul
         f64.add
-        local.get $4
+        local.get $3
+        call $assembly/utils/logGamma
         f64.sub
         call $~lib/math/NativeMath.exp
         f64.mul
         br $__inlined_func$assembly/utils/gser
        end
-       local.get $11
+       local.get $6
        i32.const 1
        i32.add
-       local.set $11
+       local.set $6
        br $for-loop|0
       end
      end
      f64.const nan:0x8000000000000
     end
     f64.sub
-    br $__inlined_func$assembly/utils/qgamma
-   end
-   block $__inlined_func$assembly/utils/gcf (result f64)
-    local.get $1
-    local.set $3
-    local.get $4
-    local.set $5
-    f64.const 1
-    local.set $10
-    f64.const 1
-    local.set $9
-    f64.const 1
-    local.set $7
-    local.get $0
-    local.set $1
-    i32.const 1
-    local.set $11
-    loop $for-loop|00
-     local.get $11
-     i32.const 100
-     i32.le_s
-     if
-      local.get $0
-      local.get $9
-      local.get $8
-      local.get $11
-      f64.convert_i32_s
-      local.tee $4
-      local.get $3
-      f64.sub
-      local.tee $6
-      f64.mul
-      f64.add
-      local.get $10
-      f64.mul
-      local.tee $8
-      f64.mul
-      local.get $4
-      local.get $10
-      f64.mul
-      local.tee $4
-      local.get $9
-      f64.mul
-      f64.add
-      local.set $9
-      local.get $0
-      local.get $1
-      local.get $7
+   else
+    block $__inlined_func$assembly/utils/gcf (result f64)
+     f64.const 1
+     local.set $5
+     f64.const 1
+     local.set $7
+     f64.const 1
+     local.set $9
+     local.get $0
+     local.set $4
+     i32.const 1
+     local.set $6
+     loop $for-loop|00
       local.get $6
-      f64.mul
-      f64.add
-      local.get $10
-      f64.mul
-      local.tee $7
-      f64.mul
-      local.get $4
-      local.get $1
-      f64.mul
-      f64.add
-      local.tee $1
-      f64.const 0
-      f64.ne
+      i32.const 100
+      i32.le_s
       if
-       local.get $9
-       f64.const 1
+       local.get $0
+       local.get $7
+       local.get $8
+       local.get $6
+       f64.convert_i32_s
+       local.tee $3
        local.get $1
-       f64.div
+       f64.sub
        local.tee $10
        f64.mul
-       local.tee $4
-       local.get $2
-       f64.sub
-       f64.abs
-       local.get $4
-       f64.abs
-       f64.const 1e-08
+       f64.add
+       local.get $5
        f64.mul
-       f64.lt
-       if
-        local.get $0
-        f64.neg
-        local.get $3
-        local.get $0
-        call $~lib/math/NativeMath.log
-        f64.mul
-        f64.add
-        local.get $5
-        f64.sub
-        call $~lib/math/NativeMath.exp
-        local.get $4
-        f64.mul
-        br $__inlined_func$assembly/utils/gcf
-       end
+       local.tee $8
+       f64.mul
+       local.get $3
+       local.get $5
+       f64.mul
+       local.tee $3
+       local.get $7
+       f64.mul
+       f64.add
+       local.set $7
+       local.get $0
        local.get $4
-       local.set $2
+       local.get $9
+       local.get $10
+       f64.mul
+       f64.add
+       local.get $5
+       f64.mul
+       local.tee $9
+       f64.mul
+       local.get $3
+       local.get $4
+       f64.mul
+       f64.add
+       local.tee $4
+       f64.const 0
+       f64.ne
+       if
+        local.get $7
+        f64.const 1
+        local.get $4
+        f64.div
+        local.tee $5
+        f64.mul
+        local.tee $3
+        local.get $2
+        f64.sub
+        f64.abs
+        local.get $3
+        f64.abs
+        f64.const 1e-08
+        f64.mul
+        f64.lt
+        if
+         local.get $3
+         local.get $0
+         f64.neg
+         local.get $1
+         local.get $0
+         call $~lib/math/NativeMath.log
+         f64.mul
+         f64.add
+         local.get $1
+         call $assembly/utils/logGamma
+         f64.sub
+         call $~lib/math/NativeMath.exp
+         f64.mul
+         br $__inlined_func$assembly/utils/gcf
+        end
+        local.get $3
+        local.set $2
+       end
+       local.get $6
+       i32.const 1
+       i32.add
+       local.set $6
+       br $for-loop|00
       end
-      local.get $11
-      i32.const 1
-      i32.add
-      local.set $11
-      br $for-loop|00
      end
+     f64.const nan:0x8000000000000
     end
-    f64.const nan:0x8000000000000
    end
   end
  )

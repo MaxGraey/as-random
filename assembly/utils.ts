@@ -274,57 +274,58 @@ export function besseli1(x: f64): f64 {
 }
 
 // Compute incompleate gamma fucntion, Q(a, x) = 1 - P(a, x).
+// @ts-ignore: decorator
+@inline
 export function qgamma(a: f64, x: f64): f64 {
   if (x < 0.0 || a <= 0.0) return NaN;
-  let lga = logGamma(a);
-  if (x < a + 1.0) {
-    return 1.0 - gser(a, x, lga);
-  }
-  return gcf(a, x, lga);
+  return x < a + 1.0
+    ? 1.0 - gser(a, x)
+    : gcf(a, x)
 }
 
-function gser(a: f64, x: f64, lgammaA: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
-	if (x <= 0.0) return 0.0;
-  let ap =	a;
-	let del = 1.0	/ ap;
+function gser(a: f64, x: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
+  if (x <= 0.0) return 0.0;
+  let ap  = a;
+  let del = 1.0	/ ap;
   let sum = del;
 
-	for (let i = 1; i <= maxIters; i++) {
-		sum += del *= x	/ ++ap;
+  for (let i = 1; i <= maxIters; i++) {
+    sum += del *= x	/ ++ap;
     if (Math.abs(del)	< Math.abs(sum) * eps) {
-      return sum * Math.exp(-x + a * Math.log(x) - lgammaA);
+      return sum * Math.exp(-x + a * Math.log(x) - logGamma(a));
     }
   }
   return NaN;
 }
 
-function gcf(a: f64, x: f64, lgammaA: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
-	let g0 = 0.0;
+function gcf(a: f64, x: f64, eps: f64 = 1e-8, maxIters: i32 = 100): f64 {
+  let g0 = 0.0;
   let f  = 1.0;
   let b1 = 1.0;
   let b0 = 0.0;
   let a0 = 1.0;
   let a1 = x;
 
-	for (let i = 1; i <= maxIters; i++) {
-		let af: f64, ai = i as f64;
-		let aia = ai - a;
+  for (let i = 1; i <= maxIters; i++) {
+    let af: f64, ai = i as f64;
+    let aia = ai - a;
 
-		a0 = (a1 + a0 *	aia) * f;
-		b0 = (b1 + b0 *	aia) * f;
-		af = ai * f;
-		b1 = x * b0 + af * b1;
-		a1 = x * a0 + af * a1;
+    a0 = (a1 + a0 *	aia) * f;
+    b0 = (b1 + b0 *	aia) * f;
+    af = ai * f;
+    b1 = x * b0 + af * b1;
+    a1 = x * a0 + af * a1;
 
-		if (a1	!= 0.0) {
-			let g = b1 * (f =	1.0 / a1);
-			g0 = g - g0;
-			if (Math.abs(g0) < Math.abs(g) * eps) {
-				return Math.exp(-x + a * Math.log(x) - lgammaA) * g;
+    if (a1	!= 0.0) {
+      f =	1.0 / a1;
+      let g = b1 * f;
+      g0 = g - g0;
+      if (Math.abs(g0) < Math.abs(g) * eps) {
+        return g * Math.exp(-x + a * Math.log(x) - logGamma(a));
       }
-			g0 = g;
-		}
-	}
+      g0 = g;
+    }
+  }
   return NaN;
 }
 

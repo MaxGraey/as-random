@@ -16,7 +16,7 @@
  (type $i32_f32_=>_f32 (func (param i32 f32) (result f32)))
  (type $none_=>_f64 (func (result f64)))
  (type $i32_f64_=>_f64 (func (param i32 f64) (result f64)))
- (type $f64_f64_f64_f64_i32_=>_f64 (func (param f64 f64 f64 f64 i32) (result f64)))
+ (type $f64_f64_f64_i32_=>_f64 (func (param f64 f64 f64 i32) (result f64)))
  (type $i32_=>_none (func (param i32)))
  (type $f64_=>_none (func (param f64)))
  (type $i32_i32_i32_i32_=>_none (func (param i32 i32 i32 i32)))
@@ -21023,13 +21023,13 @@
   f64.const inf
   f64.neg
  )
- (func $assembly/utils/gser (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 i32) (result f64)
+ (func $assembly/utils/gser (param $0 f64) (param $1 f64) (param $2 f64) (param $3 i32) (result f64)
+  (local $4 f64)
   (local $5 f64)
   (local $6 f64)
-  (local $7 f64)
+  (local $7 i32)
   (local $8 i32)
-  (local $9 i32)
-  (local $10 f64)
+  (local $9 f64)
   local.get $1
   f64.const 0
   f64.le
@@ -21038,47 +21038,47 @@
    return
   end
   local.get $0
-  local.set $5
+  local.set $4
   f64.const 1
-  local.get $5
+  local.get $4
   f64.div
+  local.set $5
+  local.get $5
   local.set $6
-  local.get $6
-  local.set $7
   i32.const 1
-  local.set $8
+  local.set $7
   loop $for-loop|0
-   local.get $8
-   local.get $4
+   local.get $7
+   local.get $3
    i32.le_s
-   local.set $9
-   local.get $9
+   local.set $8
+   local.get $8
    if
-    local.get $7
     local.get $6
-    local.get $1
     local.get $5
+    local.get $1
+    local.get $4
     f64.const 1
     f64.add
-    local.tee $5
+    local.tee $4
     f64.div
     f64.mul
-    local.tee $6
+    local.tee $5
     f64.add
-    local.set $7
+    local.set $6
+    local.get $5
+    local.set $9
+    local.get $9
+    f64.abs
     local.get $6
-    local.set $10
-    local.get $10
+    local.set $9
+    local.get $9
     f64.abs
-    local.get $7
-    local.set $10
-    local.get $10
-    f64.abs
-    local.get $3
+    local.get $2
     f64.mul
     f64.lt
     if
-     local.get $7
+     local.get $6
      local.get $1
      f64.neg
      local.get $0
@@ -21086,126 +21086,129 @@
      call $~lib/math/NativeMath.log
      f64.mul
      f64.add
-     local.get $2
+     local.get $0
+     call $assembly/utils/logGamma
      f64.sub
      call $~lib/math/NativeMath.exp
      f64.mul
      return
     end
-    local.get $8
+    local.get $7
     i32.const 1
     i32.add
-    local.set $8
+    local.set $7
     br $for-loop|0
    end
   end
   f64.const nan:0x8000000000000
  )
- (func $assembly/utils/gcf (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (param $4 i32) (result f64)
+ (func $assembly/utils/gcf (param $0 f64) (param $1 f64) (param $2 f64) (param $3 i32) (result f64)
+  (local $4 f64)
   (local $5 f64)
   (local $6 f64)
   (local $7 f64)
   (local $8 f64)
   (local $9 f64)
-  (local $10 f64)
+  (local $10 i32)
   (local $11 i32)
-  (local $12 i32)
+  (local $12 f64)
   (local $13 f64)
   (local $14 f64)
   (local $15 f64)
   (local $16 f64)
-  (local $17 f64)
   f64.const 0
+  local.set $4
+  f64.const 1
   local.set $5
   f64.const 1
   local.set $6
-  f64.const 1
-  local.set $7
   f64.const 0
-  local.set $8
+  local.set $7
   f64.const 1
-  local.set $9
+  local.set $8
   local.get $1
-  local.set $10
+  local.set $9
   i32.const 1
-  local.set $11
+  local.set $10
   loop $for-loop|0
-   local.get $11
-   local.get $4
+   local.get $10
+   local.get $3
    i32.le_s
-   local.set $12
-   local.get $12
+   local.set $11
+   local.get $11
    if
-    local.get $11
+    local.get $10
     f64.convert_i32_s
-    local.set $14
-    local.get $14
+    local.set $13
+    local.get $13
     local.get $0
     f64.sub
-    local.set $15
-    local.get $10
+    local.set $14
     local.get $9
-    local.get $15
-    f64.mul
-    f64.add
-    local.get $6
-    f64.mul
-    local.set $9
-    local.get $7
     local.get $8
-    local.get $15
+    local.get $14
     f64.mul
     f64.add
-    local.get $6
+    local.get $5
     f64.mul
     local.set $8
+    local.get $6
+    local.get $7
     local.get $14
+    f64.mul
+    f64.add
+    local.get $5
+    f64.mul
+    local.set $7
+    local.get $13
+    local.get $5
+    f64.mul
+    local.set $12
+    local.get $1
+    local.get $7
+    f64.mul
+    local.get $12
     local.get $6
     f64.mul
-    local.set $13
+    f64.add
+    local.set $6
     local.get $1
     local.get $8
     f64.mul
-    local.get $13
-    local.get $7
-    f64.mul
-    f64.add
-    local.set $7
-    local.get $1
+    local.get $12
     local.get $9
     f64.mul
-    local.get $13
-    local.get $10
-    f64.mul
     f64.add
-    local.set $10
-    local.get $10
+    local.set $9
+    local.get $9
     f64.const 0
     f64.ne
     if
-     local.get $7
      f64.const 1
-     local.get $10
+     local.get $9
      f64.div
-     local.tee $6
+     local.set $5
+     local.get $6
+     local.get $5
      f64.mul
+     local.set $15
+     local.get $15
+     local.get $4
+     f64.sub
+     local.set $4
+     local.get $4
      local.set $16
      local.get $16
-     local.get $5
-     f64.sub
-     local.set $5
-     local.get $5
-     local.set $17
-     local.get $17
      f64.abs
+     local.get $15
+     local.set $16
      local.get $16
-     local.set $17
-     local.get $17
      f64.abs
-     local.get $3
+     local.get $2
      f64.mul
      f64.lt
      if
+      local.get $15
       local.get $1
       f64.neg
       local.get $0
@@ -21213,69 +21216,28 @@
       call $~lib/math/NativeMath.log
       f64.mul
       f64.add
-      local.get $2
+      local.get $0
+      call $assembly/utils/logGamma
       f64.sub
       call $~lib/math/NativeMath.exp
-      local.get $16
       f64.mul
       return
      end
-     local.get $16
-     local.set $5
+     local.get $15
+     local.set $4
     end
-    local.get $11
+    local.get $10
     i32.const 1
     i32.add
-    local.set $11
+    local.set $10
     br $for-loop|0
    end
   end
   f64.const nan:0x8000000000000
  )
- (func $assembly/utils/qgamma (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  local.get $1
-  f64.const 0
-  f64.lt
-  if (result i32)
-   i32.const 1
-  else
-   local.get $0
-   f64.const 0
-   f64.le
-  end
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $0
-  call $assembly/utils/logGamma
-  local.set $2
-  local.get $1
-  local.get $0
-  f64.const 1
-  f64.add
-  f64.lt
-  if
-   f64.const 1
-   local.get $0
-   local.get $1
-   local.get $2
-   f64.const 1e-08
-   i32.const 100
-   call $assembly/utils/gser
-   f64.sub
-   return
-  end
-  local.get $0
-  local.get $1
-  local.get $2
-  f64.const 1e-08
-  i32.const 100
-  call $assembly/utils/gcf
- )
  (func $assembly/float/Randf64.poisson.cdf (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
+  (local $3 f64)
   local.get $0
   f64.const 0
   f64.lt
@@ -21297,14 +21259,51 @@
    f64.const 1
    return
   end
-  local.get $1
-  local.get $0
-  local.set $2
-  local.get $2
-  f64.floor
-  f64.const 1
-  f64.add
-  call $assembly/utils/qgamma
+  block $assembly/utils/qgamma|inlined.0 (result f64)
+   local.get $1
+   local.set $3
+   local.get $0
+   local.set $2
+   local.get $2
+   f64.floor
+   f64.const 1
+   f64.add
+   local.set $2
+   local.get $2
+   f64.const 0
+   f64.lt
+   if (result i32)
+    i32.const 1
+   else
+    local.get $3
+    f64.const 0
+    f64.le
+   end
+   if
+    f64.const nan:0x8000000000000
+    br $assembly/utils/qgamma|inlined.0
+   end
+   local.get $2
+   local.get $3
+   f64.const 1
+   f64.add
+   f64.lt
+   if (result f64)
+    f64.const 1
+    local.get $3
+    local.get $2
+    f64.const 1e-08
+    i32.const 100
+    call $assembly/utils/gser
+    f64.sub
+   else
+    local.get $3
+    local.get $2
+    f64.const 1e-08
+    i32.const 100
+    call $assembly/utils/gcf
+   end
+  end
  )
  (func $assembly/float/Randf64.poisson.mean (param $0 f64) (result f64)
   local.get $0
