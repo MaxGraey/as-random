@@ -175,7 +175,7 @@ export function besseli1(x: f64): f64 {
   }
 }
 
-// Compute incompleate gamma fucntion, Q(a, x) = 1 - P(a, x).
+/** Returns the incompleate gamma fucntion Q(a, x) = 1 - P(a, x). */
 // @ts-ignore: decorator
 @inline
 export function qgamma(a: f64, x: f64): f64 {
@@ -185,6 +185,17 @@ export function qgamma(a: f64, x: f64): f64 {
     : gcf(a, x)
 }
 
+/** Returns the incomplete gamma function P(a, x). */
+// @ts-ignore: decorator
+@inline
+export function pgamma(a: f64, x: f64): f64 {
+  if (x < 0.0 || a <= 0.0) return NaN;
+  return x < a + 1.0
+    ? gser(a, x)
+    : 1.0 - gcf(a, x)
+}
+
+/** Returns the incomplete gamma function P(a, x), calculated by its series representation */
 function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   if (x <= 0.0) return 0.0;
 
@@ -203,6 +214,7 @@ function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   return NaN;
 }
 
+/** Returns the incomplete gamma function Q(a, x), calculated by its continued fraction representation */
 function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
   let g0 = 0.0;
   let f  = 1.0;
