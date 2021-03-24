@@ -5061,6 +5061,32 @@
   f64.lt
   select
   if
+   local.get $0
+   f64.abs
+   f64.const 184
+   f64.ge
+   if
+    local.get $0
+    f64.const 0
+    f64.lt
+    if
+     local.get $0
+     f64.const 0.5
+     f64.mul
+     f64.floor
+     local.get $0
+     f64.floor
+     f64.const 0.5
+     f64.mul
+     f64.eq
+     if
+      f64.const 0
+      return
+     end
+     f64.const -0
+     return
+    end
+   end
    f64.const inf
    return
   end

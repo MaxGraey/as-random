@@ -117,7 +117,7 @@ export function gamma(x: f64): f64 {
   if (!isFinite(x)) {
     return x + Infinity;
   }
-  if (x < 0 && Math.trunc(x) === x) {
+  if (x < 0.0 && Math.trunc(x) == x) {
     return NaN;
   }
   if (Math.abs(x) < 5.551115123125783e-17) {
@@ -130,8 +130,16 @@ export function gamma(x: f64): f64 {
     return Math.exp(logGamma(x));
   }
   if (x < -170.5674972726612 || x > 171.61447887182298) {
-		return Infinity;
-	}
+    if (Math.abs(x) >= 184) {
+      if (x < 0.0) {
+        if (Math.floor(x) * 0.5 == Math.floor(x * 0.5)) {
+          return 0.0;
+        }
+        return -0.0;
+      }
+    }
+    return Infinity;
+  }
 
   let t: f64, r: f64;
   r  = 0.99999999999980993e+0;
