@@ -21014,19 +21014,19 @@
   (local $2 f64)
   local.get $1
   f64.const 0
-  f64.lt
+  f64.le
   if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $1
-  f64.const 0
-  f64.eq
-  if
-   local.get $0
+   local.get $1
    f64.const 0
    f64.eq
-   f64.convert_i32_u
+   if (result f64)
+    local.get $0
+    f64.const 0
+    f64.eq
+    f64.convert_i32_u
+   else
+    f64.const nan:0x8000000000000
+   end
    return
   end
   local.get $0
@@ -21401,26 +21401,26 @@
   local.get $0
   f64.const 0
   f64.lt
-  if
+  if (result f64)
    f64.const nan:0x8000000000000
-   return
+  else
+   local.get $0
   end
-  local.get $0
  )
  (func $assembly/float/Randf64.poisson.median (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
   f64.const 0
-  f64.lt
+  f64.le
   if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $0
-  f64.const 0
-  f64.eq
-  if
+   local.get $0
    f64.const 0
+   f64.eq
+   if (result f64)
+    f64.const 0
+   else
+    f64.const nan:0x8000000000000
+   end
    return
   end
   local.get $0
@@ -21441,40 +21441,40 @@
   local.get $0
   f64.const 0
   f64.lt
-  if
+  if (result f64)
    f64.const nan:0x8000000000000
-   return
+  else
+   local.get $0
+   local.set $1
+   local.get $1
+   f64.sqrt
   end
-  local.get $0
-  local.set $1
-  local.get $1
-  f64.sqrt
  )
  (func $assembly/float/Randf64.poisson.variance (param $0 f64) (result f64)
   local.get $0
   f64.const 0
   f64.lt
-  if
+  if (result f64)
    f64.const nan:0x8000000000000
-   return
+  else
+   local.get $0
   end
-  local.get $0
  )
  (func $assembly/float/Randf64.poisson.skewness (param $0 f64) (result f64)
   (local $1 f64)
   local.get $0
   f64.const 0
   f64.le
-  if
+  if (result f64)
    f64.const nan:0x8000000000000
-   return
+  else
+   f64.const 1
+   local.get $0
+   local.set $1
+   local.get $1
+   f64.sqrt
+   f64.div
   end
-  f64.const 1
-  local.get $0
-  local.set $1
-  local.get $1
-  f64.sqrt
-  f64.div
  )
  (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
   local.get $0

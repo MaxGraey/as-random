@@ -1448,8 +1448,11 @@ export namespace Randf64 {
   export namespace poisson {
     /** Eval the probability mass function for Poisson distribution. */
     export function pmf(x: f64, lambda: f64): f64 {
-      if (lambda < 0.0) return NaN;
-      if (lambda == 0.0) return f64(x == 0.0);
+      if (lambda <= 0.0) {
+        return lambda == 0.0
+          ? f64(x == 0.0)
+          : NaN;
+      }
       if (x == 0.0) return Math.exp(-lambda);
       if (x > 0 && x < u32.MAX_VALUE && Math.trunc(x) == x) {
         return Math.exp(x * Math.log(lambda) - lambda - logFactorial(x as u32));
@@ -1479,31 +1482,26 @@ export namespace Randf64 {
 
     /** Returns the mean of Poisson distribution. */
     export function mean(lambda: f64): f64 {
-      if (lambda < 0.0) return NaN;
-      return lambda;
+      return lambda < 0.0 ? NaN : lambda;
     }
 
     /** Returns the median of Poisson distribution. */
     export function median(lambda: f64): f64 {
-      if (lambda < 0.0) return NaN;
-      if (lambda == 0.0) return 0.0;
+      if (lambda <= 0.0) return lambda == 0.0 ? 0.0 : NaN;
       return Math.floor(lambda + 1 / 3.0 - 0.02 / lambda);
     }
 
     /** Returns the standard deviation of Poisson distribution. */
     export function stdev(lambda: f64): f64 {
-      if (lambda < 0.0) return NaN;
-      return Math.sqrt(lambda);
+      return lambda < 0.0 ? NaN : Math.sqrt(lambda);
     }
 
     export function variance(lambda: f64): f64 {
-      if (lambda < 0.0) return NaN;
-      return lambda;
+      return lambda < 0.0 ? NaN : lambda;
     }
 
     export function skewness(lambda: f64): f64 {
-      if (lambda <= 0.0) return NaN;
-      return 1 / Math.sqrt(lambda);
+      return lambda <= 0.0 ? NaN : 1 / Math.sqrt(lambda);
     }
 
     /** Returns the differential entropy of Poisson distribution. */
