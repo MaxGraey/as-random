@@ -1448,11 +1448,7 @@ export namespace Randf64 {
   export namespace poisson {
     /** Eval the probability mass function for Poisson distribution. */
     export function pmf(x: f64, lambda: f64): f64 {
-      if (lambda <= 0.0) {
-        return lambda == 0.0
-          ? f64(x == 0.0)
-          : NaN;
-      }
+      if (lambda <= 0.0) return lambda == 0.0 ? f64(x == 0.0) : NaN;
       if (x == 0.0) return Math.exp(-lambda);
       if (x > 0 && x < u32.MAX_VALUE && Math.trunc(x) == x) {
         return Math.exp(x * Math.log(lambda) - lambda - logFactorial(x as u32));
@@ -1464,11 +1460,7 @@ export namespace Randf64 {
     export function cdf(x: f64, lambda: f64): f64 {
       if (lambda < 0.0) return NaN;
       if (lambda == 0.0 || x == Infinity) return 1.0;
-      if (x <= 0.0) {
-        return x == 0.0
-          ? Math.exp(-lambda)
-          : 0.0;
-      }
+      if (x <= 0.0) return x == 0.0 ? Math.exp(-lambda) : 0.0;
       return qgamma(lambda, Math.floor(x) + 1.0);
     }
 
