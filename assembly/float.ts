@@ -66,7 +66,7 @@ export namespace Randf64 {
 
     /** Returns the standard deviation of Uniform distribution. */
     export function stdev(lo: f64 = 0.0, hi: f64 = 1.0): f64 {
-      return 0.28867513459481287 * (hi - lo); // sqrt(1.0 / 12.0)
+      return Math.sqrt(1.0 / 12.0) * (hi - lo);
     }
 
     /** Returns the variance of Uniform distribution. */
@@ -1749,7 +1749,7 @@ export namespace Randf32 {
 
     /** Returns the standard deviation of Uniform distribution. */
     export function stdev(lo: f32 = 0.0, hi: f32 = 1.0): f32 {
-      return 0.28867513459481287 as f32 * (hi - lo); // sqrt(1.0 / 12.0)
+      return Mathf.sqrt(1.0 / 12.0) * (hi - lo);
     }
 
     /** Returns the variance of Uniform distribution. */

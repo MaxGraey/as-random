@@ -706,7 +706,13 @@
   f32.mul
  )
  (func $assembly/float/Randf32.uniform.stdev (param $0 f32) (param $1 f32) (result f32)
-  f32.const 0.28867512941360474
+  (local $2 f32)
+  f32.const 1
+  f32.const 12
+  f32.div
+  local.set $2
+  local.get $2
+  f32.sqrt
   local.get $1
   local.get $0
   f32.sub
@@ -15898,7 +15904,13 @@
   f64.mul
  )
  (func $assembly/float/Randf64.uniform.stdev (param $0 f64) (param $1 f64) (result f64)
-  f64.const 0.28867513459481287
+  (local $2 f64)
+  f64.const 1
+  f64.const 12
+  f64.div
+  local.set $2
+  local.get $2
+  f64.sqrt
   local.get $1
   local.get $0
   f64.sub
