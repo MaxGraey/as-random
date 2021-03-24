@@ -2,6 +2,7 @@ import {
   besseli0,
   besseli1,
   gamma as gammaf,
+  qgamma,
   logGamma,
   logFactorial,
   erf_approx,
@@ -1441,6 +1442,59 @@ export namespace Randf64 {
           return n;
         }
       }
+    }
+  }
+
+  export namespace poisson {
+    /** Eval the probability mass function for Poisson distribution. */
+    export function pmf(x: f64, lambda: f64): f64 {
+      if (lambda == 0.0) return f64(x == 0.0);
+      if (x >= 0 && x != Infinity && Math.trunc(x) == x) {
+        return Math.exp(x * Math.log(lambda) - lambda - logFactorial(x as i64 as i32));
+      }
+      return -Infinity;
+    }
+
+    /** Eval the cumulative density function for Poisson distribution. */
+    export function cdf(x: f64, lambda: f64): f64 {
+      if (x < 0.0) return 0.0;
+      if (lambda == 0.0 || x == Infinity) return 1.0;
+      return qgamma(lambda, Math.floor(x) + 1.0);
+    }
+
+    /** Returns the mean of Poisson distribution. */
+    export function mean(lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
+      return lambda;
+    }
+
+    /** Returns the median of Poisson distribution. */
+    export function median(lambda: f64): f64 {
+      if (lambda == 0.0) return 0.0;
+      return Math.floor(lambda + 1 / 3.0 - 0.02 / lambda);
+    }
+
+    /** Returns the standard deviation of Poisson distribution. */
+    export function stdev(lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
+      return Math.sqrt(lambda);
+    }
+
+    export function variance(lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
+      return lambda;
+    }
+
+    export function skewness(lambda: f64): f64 {
+      if (lambda <= 0.0) return NaN;
+      return 1 / Math.sqrt(lambda);
+    }
+
+    /** Returns the differential entropy of Poisson distribution. */
+    export function entropy(lambda: f64): f64 {
+      if (lambda <= 0.0) return NaN;
+      // TODO:
+      return NaN;
     }
   }
 
