@@ -1449,11 +1449,11 @@ export namespace Randf64 {
     /** Eval the probability mass function for Poisson distribution. */
     export function pmf(x: f64, lambda: f64): f64 {
       if (lambda == 0.0) return f64(x == 0.0);
-      if (x >= 0 && x != Infinity && Math.trunc(x) == x) {
-        if (x == 0.0) return Math.exp(-lambda);
-        return Math.exp(x * Math.log(lambda) - lambda - logFactorial(x as i64 as i32));
+      if (x == 0.0) return Math.exp(-lambda);
+      if (x > 0 && x < u32.MAX_VALUE && Math.trunc(x) == x) {
+        return Math.exp(x * Math.log(lambda) - lambda - logFactorial(x as u32));
       }
-      return -Infinity;
+      return 0.0;
     }
 
     /** Eval the cumulative density function for Poisson distribution. */

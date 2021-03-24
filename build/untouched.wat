@@ -74,6 +74,7 @@
  (global $~argumentsLength (mut i32) (i32.const 0))
  (global $assembly/specials/PRECOMP_254 i32 (i32.const 11376))
  (global $assembly/float/CACHED_NORM64 (mut f64) (f64.const inf))
+ (global $~lib/builtins/u32.MAX_VALUE i32 (i32.const -1))
  (global $assembly/utils/NOT_SEEDED (mut i32) (i32.const 1))
  (global $assembly/utils/RND_S0_32 (mut i32) (i32.const 0))
  (global $assembly/utils/RND_S1_32 (mut i32) (i32.const 0))
@@ -81,7 +82,6 @@
  (global $assembly/utils/RND_S1_64 (mut i64) (i64.const 0))
  (global $~lib/builtins/i32.MIN_VALUE i32 (i32.const -2147483648))
  (global $~lib/builtins/i32.MAX_VALUE i32 (i32.const 2147483647))
- (global $~lib/builtins/u32.MAX_VALUE i32 (i32.const -1))
  (global $~lib/builtins/i64.MIN_VALUE i64 (i64.const -9223372036854775808))
  (global $~lib/builtins/i64.MAX_VALUE i64 (i64.const 9223372036854775807))
  (global $~lib/builtins/u64.MAX_VALUE i64 (i64.const -1))
@@ -21014,11 +21014,21 @@
   end
   local.get $0
   f64.const 0
-  f64.ge
+  f64.eq
+  if
+   local.get $1
+   f64.neg
+   call $~lib/math/NativeMath.exp
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.gt
   if (result i32)
    local.get $0
-   f64.const inf
-   f64.ne
+   global.get $~lib/builtins/u32.MAX_VALUE
+   f64.convert_i32_u
+   f64.lt
   else
    i32.const 0
   end
@@ -21034,30 +21044,19 @@
   end
   if
    local.get $0
-   f64.const 0
-   f64.eq
-   if
-    local.get $1
-    f64.neg
-    call $~lib/math/NativeMath.exp
-    return
-   end
-   local.get $0
    local.get $1
    call $~lib/math/NativeMath.log
    f64.mul
    local.get $1
    f64.sub
    local.get $0
-   i64.trunc_f64_s
-   i32.wrap_i64
+   i32.trunc_f64_u
    call $assembly/specials/logFactorial
    f64.sub
    call $~lib/math/NativeMath.exp
    return
   end
-  f64.const inf
-  f64.neg
+  f64.const 0
  )
  (func $assembly/specials/gser (param $0 f64) (param $1 f64) (param $2 f64) (param $3 i32) (result f64)
   (local $4 f64)

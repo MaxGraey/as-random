@@ -10562,29 +10562,29 @@
    return
   end
   local.get $0
+  f64.const 0
+  f64.eq
+  if
+   local.get $1
+   f64.neg
+   call $~lib/math/NativeMath.exp
+   return
+  end
+  local.get $0
   local.get $0
   f64.trunc
   f64.eq
   i32.const 0
   local.get $0
-  f64.const inf
-  f64.ne
+  f64.const 4294967295
+  f64.lt
   i32.const 0
   local.get $0
   f64.const 0
-  f64.ge
+  f64.gt
   select
   select
   if
-   local.get $0
-   f64.const 0
-   f64.eq
-   if
-    local.get $1
-    f64.neg
-    call $~lib/math/NativeMath.exp
-    return
-   end
    local.get $0
    local.get $1
    call $~lib/math/NativeMath.log
@@ -10592,14 +10592,13 @@
    local.get $1
    f64.sub
    local.get $0
-   i64.trunc_f64_s
-   i32.wrap_i64
+   i32.trunc_f64_u
    call $assembly/specials/logFactorial
    f64.sub
    call $~lib/math/NativeMath.exp
    return
   end
-  f64.const -inf
+  f64.const 0
  )
  (func $assembly/float/Randf64.poisson.cdf (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
