@@ -316,7 +316,7 @@ function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
     b1 = x * b0 + af * b1;
     a1 = x * a0 + af * a1;
 
-    if (a1	!= 0.0) {
+    if (a1 != 0.0) {
       f =	1.0 / a1;
       let g = b1 * f;
       g0 = g - g0;
