@@ -10553,6 +10553,13 @@
  (func $assembly/float/Randf64.poisson.pmf (param $0 f64) (param $1 f64) (result f64)
   local.get $1
   f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  f64.const 0
   f64.eq
   if
    local.get $0
@@ -10610,6 +10617,13 @@
   (local $8 f64)
   (local $9 f64)
   (local $10 i32)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   i32.const 1
   local.get $0
   f64.const inf
@@ -10846,6 +10860,13 @@
   (local $2 f64)
   (local $3 f64)
   (local $4 f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   i32.const 1
   local.get $0
   f64.const 1
@@ -10969,6 +10990,13 @@
   local.get $0
  )
  (func $assembly/float/Randf64.poisson.median (param $0 f64) (result f64)
+  local.get $0
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
   local.get $0
   f64.const 0
   f64.eq

@@ -1448,6 +1448,7 @@ export namespace Randf64 {
   export namespace poisson {
     /** Eval the probability mass function for Poisson distribution. */
     export function pmf(x: f64, lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
       if (lambda == 0.0) return f64(x == 0.0);
       if (x == 0.0) return Math.exp(-lambda);
       if (x > 0 && x < u32.MAX_VALUE && Math.trunc(x) == x) {
@@ -1458,6 +1459,7 @@ export namespace Randf64 {
 
     /** Eval the cumulative density function for Poisson distribution. */
     export function cdf(x: f64, lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
       if (lambda == 0.0 || x == Infinity) return 1.0;
       if (x <= 0.0) {
         return x == 0.0
@@ -1469,6 +1471,7 @@ export namespace Randf64 {
 
     /** Eval the quantile function for Poisson distribution. */
     export function quantile(x: f64, lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
       if (x < 0.0 || x > 1.0) return NaN;
       // TODO: implement something better
       return quantile_approx(
@@ -1490,6 +1493,7 @@ export namespace Randf64 {
 
     /** Returns the median of Poisson distribution. */
     export function median(lambda: f64): f64 {
+      if (lambda < 0.0) return NaN;
       if (lambda == 0.0) return 0.0;
       return Math.floor(lambda + 1 / 3.0 - 0.02 / lambda);
     }
