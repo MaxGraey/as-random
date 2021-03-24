@@ -59,6 +59,12 @@ export function logGamma(x: f64): f64 {
     return -Math.log(ax);
   }
 
+  if (x < 1.0) {
+    x -= 1.0;
+    let	y = Math.PI * x;
+    return Math.log(y / Math.sin(y)) - logGamma(1.0 - x);
+  }
+
   let t: f64, r: f64;
 
   r  = 1.000000000190015;

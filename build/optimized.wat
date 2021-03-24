@@ -4223,6 +4223,28 @@
    return
   end
   local.get $0
+  f64.const 1
+  f64.lt
+  if
+   local.get $0
+   f64.const 1
+   f64.sub
+   local.tee $0
+   f64.const 3.141592653589793
+   f64.mul
+   local.tee $1
+   local.get $1
+   call $~lib/math/NativeMath.sin
+   f64.div
+   call $~lib/math/NativeMath.log
+   f64.const 1
+   local.get $0
+   f64.sub
+   call $assembly/specials/logGamma
+   f64.sub
+   return
+  end
+  local.get $0
   f64.const 5.5
   f64.add
   local.tee $1

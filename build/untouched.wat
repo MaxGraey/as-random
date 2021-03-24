@@ -8070,6 +8070,30 @@
    f64.neg
    return
   end
+  local.get $0
+  f64.const 1
+  f64.lt
+  if
+   local.get $0
+   f64.const 1
+   f64.sub
+   local.set $0
+   global.get $~lib/math/NativeMath.PI
+   local.get $0
+   f64.mul
+   local.set $2
+   local.get $2
+   local.get $2
+   call $~lib/math/NativeMath.sin
+   f64.div
+   call $~lib/math/NativeMath.log
+   f64.const 1
+   local.get $0
+   f64.sub
+   call $assembly/specials/logGamma
+   f64.sub
+   return
+  end
   f64.const 1.000000000190015
   local.set $3
   local.get $3
