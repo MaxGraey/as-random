@@ -8043,6 +8043,13 @@
  )
  (func $assembly/float/Randf32.poisson.pmf (param $0 f32) (param $1 f32) (result f32)
   local.get $1
+  local.get $1
+  f32.ne
+  if
+   local.get $1
+   return
+  end
+  local.get $1
   f32.const 0
   f32.le
   if
@@ -8281,6 +8288,13 @@
   (local $2 f64)
   (local $3 f64)
   local.get $1
+  local.get $1
+  f32.ne
+  if
+   local.get $1
+   return
+  end
+  local.get $1
   f32.const 0
   f32.lt
   if
@@ -8385,6 +8399,13 @@
   (local $28 f64)
   (local $29 f64)
   (local $30 f64)
+  local.get $1
+  local.get $1
+  f64.ne
+  if
+   local.get $1
+   return
+  end
   local.get $1
   f64.const 0
   f64.lt
@@ -9489,6 +9510,13 @@
   (local $1 f64)
   (local $2 f64)
   (local $3 i32)
+  local.get $0
+  local.get $0
+  f64.ne
+  if
+   local.get $0
+   return
+  end
   local.get $0
   f64.const 0
   f64.le
@@ -12086,6 +12114,13 @@
  )
  (func $assembly/float/Randf64.poisson.pmf (param $0 f64) (param $1 f64) (result f64)
   local.get $1
+  local.get $1
+  f64.ne
+  if
+   local.get $1
+   return
+  end
+  local.get $1
   f64.const 0
   f64.le
   if
@@ -12140,6 +12175,13 @@
   f64.const 0
  )
  (func $assembly/float/Randf64.poisson.cdf (param $0 f64) (param $1 f64) (result f64)
+  local.get $1
+  local.get $1
+  f64.ne
+  if
+   local.get $1
+   return
+  end
   local.get $1
   f64.const 0
   f64.lt

@@ -1447,6 +1447,7 @@ export namespace Randf64 {
   export namespace poisson {
     /** Eval the probability mass function for Poisson distribution. */
     export function pmf(x: f64, lambda: f64): f64 {
+      if (isNaN(lambda)) return lambda;
       if (lambda <= 0.0) return lambda == 0.0 ? f64(x == 0.0) : NaN;
       if (x == 0.0) return Math.exp(-lambda);
       if (x > 0 && x < u32.MAX_VALUE && Math.trunc(x) == x) {
@@ -1457,6 +1458,7 @@ export namespace Randf64 {
 
     /** Eval the cumulative density function for Poisson distribution. */
     export function cdf(x: f64, lambda: f64): f64 {
+      if (isNaN(lambda)) return lambda;
       if (lambda < 0.0) return NaN;
       if (lambda == 0.0 || x == Infinity) return 1.0;
       if (x <= 0.0) return x == 0.0 ? Math.exp(-lambda) : 0.0;
@@ -1484,6 +1486,7 @@ export namespace Randf64 {
                     < 1e-6             for lam < 1e15
         For lam > 1e15, the errors will be about 1 ulp.
       */
+      if (isNaN(lambda)) return lambda;
       if (lambda < 0.0) return NaN;
       if (p < 0.0 || p > 1.0) return NaN;
 
@@ -1686,6 +1689,7 @@ export namespace Randf64 {
     /** Returns the differential entropy of Poisson distribution. */
     export function entropy(lambda: f64): f64 {
       let l = lambda;
+      if (isNaN(l)) return l;
       if (l <= 0.0) return l == 0.0 ? 0.0 : NaN;
       if (l > 50.0) {
         // See https://pure.tue.nl/ws/files/1959440/Metis199989.pdf
@@ -3072,6 +3076,7 @@ export namespace Randf32 {
   export namespace poisson {
     /** Eval the probability mass function for Poisson distribution. */
     export function pmf(x: f32, lambda: f32): f32 {
+      if (isNaN(lambda)) return lambda;
       if (lambda <= 0.0) return lambda == 0.0 ? f32(x == 0.0) : NaN;
       if (x == 0.0) return Mathf.exp(-lambda);
       if (x > 0 && x < f32.MAX_SAFE_INTEGER && Mathf.trunc(x) == x) {
@@ -3082,6 +3087,7 @@ export namespace Randf32 {
 
     /** Eval the cumulative density function for Poisson distribution. */
     export function cdf(x: f32, lambda: f32): f32 {
+      if (isNaN(lambda)) return lambda;
       if (lambda < 0.0) return NaN;
       if (lambda == 0.0 || x == Infinity) return 1.0;
       if (x <= 0.0) return x == 0.0 ? Mathf.exp(-lambda) : 0.0;
