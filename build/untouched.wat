@@ -14068,6 +14068,122 @@
   end
   f32.const 0
  )
+ (func $~lib/math/NativeMathf.cbrt (param $0 f32) (result f32)
+  (local $1 i32)
+  (local $2 i32)
+  (local $3 f64)
+  (local $4 f64)
+  local.get $0
+  i32.reinterpret_f32
+  local.set $1
+  local.get $1
+  i32.const 2147483647
+  i32.and
+  local.set $2
+  local.get $2
+  i32.const 2139095040
+  i32.ge_u
+  if
+   local.get $0
+   local.get $0
+   f32.add
+   return
+  end
+  local.get $2
+  i32.const 8388608
+  i32.lt_u
+  if
+   local.get $2
+   i32.const 0
+   i32.eq
+   if
+    local.get $0
+    return
+   end
+   local.get $0
+   f32.const 16777216
+   f32.mul
+   i32.reinterpret_f32
+   local.set $1
+   local.get $1
+   i32.const 2147483647
+   i32.and
+   local.set $2
+   local.get $2
+   i32.const 3
+   i32.div_u
+   i32.const 642849266
+   i32.add
+   local.set $2
+  else
+   local.get $2
+   i32.const 3
+   i32.div_u
+   i32.const 709958130
+   i32.add
+   local.set $2
+  end
+  local.get $1
+  i32.const -2147483648
+  i32.and
+  local.set $1
+  local.get $1
+  local.get $2
+  i32.or
+  local.set $1
+  local.get $1
+  f32.reinterpret_i32
+  f64.promote_f32
+  local.set $3
+  local.get $3
+  local.get $3
+  f64.mul
+  local.get $3
+  f64.mul
+  local.set $4
+  local.get $3
+  local.get $0
+  f64.promote_f32
+  local.get $0
+  f64.promote_f32
+  f64.add
+  local.get $4
+  f64.add
+  f64.mul
+  local.get $0
+  f64.promote_f32
+  local.get $4
+  f64.add
+  local.get $4
+  f64.add
+  f64.div
+  local.set $3
+  local.get $3
+  local.get $3
+  f64.mul
+  local.get $3
+  f64.mul
+  local.set $4
+  local.get $3
+  local.get $0
+  f64.promote_f32
+  local.get $0
+  f64.promote_f32
+  f64.add
+  local.get $4
+  f64.add
+  f64.mul
+  local.get $0
+  f64.promote_f32
+  local.get $4
+  f64.add
+  local.get $4
+  f64.add
+  f64.div
+  local.set $3
+  local.get $3
+  f32.demote_f64
+ )
  (func $assembly/specials/gser (param $0 f64) (param $1 f64) (param $2 f64) (param $3 i32) (result f64)
   (local $4 f64)
   (local $5 f64)
@@ -14336,6 +14452,34 @@
    else
     f32.const 0
    end
+   return
+  end
+  local.get $1
+  f32.const 1e4
+  f32.gt
+  if
+   f32.const 3
+   local.get $1
+   local.set $2
+   local.get $2
+   f32.sqrt
+   f32.mul
+   local.get $0
+   local.get $1
+   f32.div
+   call $~lib/math/NativeMathf.cbrt
+   f32.const 1
+   local.get $1
+   f32.const 9
+   f32.mul
+   f32.div
+   f32.add
+   f32.const 1
+   f32.sub
+   f32.mul
+   f32.const 0
+   f32.const 1
+   call $assembly/float/Randf32.normal.cdf
    return
   end
   block $assembly/specials/qgamma|inlined.0 (result f64)
@@ -21951,6 +22095,150 @@
   end
   f64.const 0
  )
+ (func $~lib/math/NativeMath.cbrt (param $0 f64) (result f64)
+  (local $1 i64)
+  (local $2 i32)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  local.get $0
+  i64.reinterpret_f64
+  local.set $1
+  local.get $1
+  i64.const 32
+  i64.shr_u
+  i32.wrap_i64
+  i32.const 2147483647
+  i32.and
+  local.set $2
+  local.get $2
+  i32.const 2146435072
+  i32.ge_u
+  if
+   local.get $0
+   local.get $0
+   f64.add
+   return
+  end
+  local.get $2
+  i32.const 1048576
+  i32.lt_u
+  if
+   local.get $0
+   f64.const 18014398509481984
+   f64.mul
+   i64.reinterpret_f64
+   local.set $1
+   local.get $1
+   i64.const 32
+   i64.shr_u
+   i32.wrap_i64
+   i32.const 2147483647
+   i32.and
+   local.set $2
+   local.get $2
+   i32.const 0
+   i32.eq
+   if
+    local.get $0
+    return
+   end
+   local.get $2
+   i32.const 3
+   i32.div_u
+   i32.const 696219795
+   i32.add
+   local.set $2
+  else
+   local.get $2
+   i32.const 3
+   i32.div_u
+   i32.const 715094163
+   i32.add
+   local.set $2
+  end
+  local.get $1
+  i64.const 1
+  i64.const 63
+  i64.shl
+  i64.and
+  local.set $1
+  local.get $1
+  local.get $2
+  i64.extend_i32_u
+  i64.const 32
+  i64.shl
+  i64.or
+  local.set $1
+  local.get $1
+  f64.reinterpret_i64
+  local.set $3
+  local.get $3
+  local.get $3
+  f64.mul
+  local.get $3
+  local.get $0
+  f64.div
+  f64.mul
+  local.set $4
+  local.get $3
+  f64.const 1.87595182427177
+  local.get $4
+  f64.const -1.8849797954337717
+  local.get $4
+  f64.const 1.6214297201053545
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  local.get $4
+  local.get $4
+  f64.mul
+  local.get $4
+  f64.mul
+  f64.const -0.758397934778766
+  local.get $4
+  f64.const 0.14599619288661245
+  f64.mul
+  f64.add
+  f64.mul
+  f64.add
+  f64.mul
+  local.set $3
+  local.get $3
+  i64.reinterpret_f64
+  i64.const 2147483648
+  i64.add
+  i64.const -1073741824
+  i64.and
+  f64.reinterpret_i64
+  local.set $3
+  local.get $3
+  local.get $3
+  f64.mul
+  local.set $5
+  local.get $0
+  local.get $5
+  f64.div
+  local.set $4
+  local.get $4
+  local.get $3
+  f64.sub
+  f64.const 2
+  local.get $3
+  f64.mul
+  local.get $4
+  f64.add
+  f64.div
+  local.set $4
+  local.get $3
+  local.get $3
+  local.get $4
+  f64.mul
+  f64.add
+  local.set $3
+  local.get $3
+ )
  (func $assembly/float/Randf64.poisson.cdf (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
@@ -22006,6 +22294,34 @@
    else
     f64.const 0
    end
+   return
+  end
+  local.get $1
+  f64.const 1e4
+  f64.gt
+  if
+   f64.const 3
+   local.get $1
+   local.set $2
+   local.get $2
+   f64.sqrt
+   f64.mul
+   local.get $0
+   local.get $1
+   f64.div
+   call $~lib/math/NativeMath.cbrt
+   f64.const 1
+   local.get $1
+   f64.const 9
+   f64.mul
+   f64.div
+   f64.add
+   f64.const 1
+   f64.sub
+   f64.mul
+   f64.const 0
+   f64.const 1
+   call $assembly/float/Randf64.normal.cdf
    return
   end
   block $assembly/specials/qgamma|inlined.1 (result f64)

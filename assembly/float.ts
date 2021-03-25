@@ -1462,6 +1462,12 @@ export namespace Randf64 {
       if (lambda < 0.0) return NaN;
       if (lambda == 0.0 || x == Infinity) return 1.0;
       if (x <= 0.0) return x == 0.0 ? Math.exp(-lambda) : 0.0;
+      if (lambda > 10000.0) {
+        // See Numerical Recipes, with normal approximation from Appl. Stat. 239
+        return normal.cdf(
+          3.0 * Math.sqrt(lambda) * (Math.cbrt(x / lambda) + 1.0 / (lambda * 9.0) - 1.0)
+        );
+      }
       return qgamma(lambda, Math.floor(x) + 1.0);
     }
 
@@ -2906,6 +2912,12 @@ export namespace Randf32 {
       if (lambda < 0.0) return NaN;
       if (lambda == 0.0 || x == Infinity) return 1.0;
       if (x <= 0.0) return x == 0.0 ? Mathf.exp(-lambda) : 0.0;
+      if (lambda > 10000.0) {
+        // See Numerical Recipes, with normal approximation from Appl. Stat. 239
+        return normal.cdf(
+          3.0 * Mathf.sqrt(lambda) * (Mathf.cbrt(x / lambda) + 1.0 / (lambda * 9.0) - 1.0)
+        );
+      }
       return qgamma(lambda, Mathf.floor(x) + 1.0, 1e-7) as f32;
     }
 
