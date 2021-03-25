@@ -11773,16 +11773,6 @@
    f64.div
   end
  )
- (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
-  local.get $0
-  f64.const 0
-  f64.le
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  f64.const nan:0x8000000000000
- )
  (func $assembly/float/Randf64.gamma (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
@@ -11971,6 +11961,101 @@
     f64.mul
    end
   end
+ )
+ (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
+  (local $1 f64)
+  (local $2 f64)
+  (local $3 i32)
+  local.get $0
+  f64.const 0
+  f64.le
+  if
+   f64.const 0
+   f64.const nan:0x8000000000000
+   local.get $0
+   f64.const 0
+   f64.eq
+   select
+   return
+  end
+  local.get $0
+  f64.const 50
+  f64.gt
+  if
+   local.get $0
+   f64.const 17.079468445347132
+   f64.mul
+   call $~lib/math/NativeMath.log
+   f64.const 0.5
+   f64.mul
+   f64.const 1
+   local.get $0
+   f64.const 12
+   f64.mul
+   f64.div
+   f64.sub
+   f64.const 1
+   local.get $0
+   local.get $0
+   f64.mul
+   local.tee $1
+   f64.const 24
+   f64.mul
+   f64.div
+   f64.sub
+   f64.const 19
+   local.get $1
+   local.get $0
+   f64.mul
+   f64.const 720
+   f64.mul
+   f64.div
+   f64.sub
+   return
+  end
+  f64.const 1
+  local.set $1
+  i32.const 1
+  local.set $3
+  loop $for-loop|0
+   local.get $3
+   i32.const 100
+   i32.le_s
+   if
+    local.get $2
+    local.get $1
+    local.get $0
+    f64.mul
+    local.tee $1
+    local.get $3
+    i32.const 1
+    i32.add
+    local.tee $3
+    f64.convert_i32_s
+    local.tee $2
+    call $assembly/specials/logGamma
+    f64.mul
+    local.get $2
+    f64.const 1
+    call $assembly/float/Randf64.gamma
+    f64.div
+    f64.add
+    local.set $2
+    br $for-loop|0
+   end
+  end
+  local.get $0
+  f64.const 1
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.sub
+  f64.mul
+  local.get $0
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  local.get $2
+  f64.mul
+  f64.add
  )
  (func $assembly/utils/randomSeedInt (param $0 i64)
   (local $1 i32)

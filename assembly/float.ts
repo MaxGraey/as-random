@@ -1685,9 +1685,23 @@ export namespace Randf64 {
 
     /** Returns the differential entropy of Poisson distribution. */
     export function entropy(lambda: f64): f64 {
-      if (lambda <= 0.0) return NaN;
-      // TODO:
-      return NaN;
+      let l = lambda;
+      if (l <= 0.0) return l == 0.0 ? 0.0 : NaN;
+      if (l > 50.0) {
+        // See https://pure.tue.nl/ws/files/1959440/Metis199989.pdf
+        let l2 = l * l;
+        let l3 = l2 * l;
+        return 0.5 * Math.log(2.0 * Math.PI * Math.E * l) -
+          1.0  / (12.0  * l)  -
+          1.0  / (24.0  * l2) -
+          19.0 / (720.0 * l3);
+      }
+      let r = 0.0, p = 1.0;
+      for (let i = 1; i <= 100; i++) {
+        p *= l;
+        r += p * logGamma(i + 1) / gamma(i + 1);
+      }
+      return l * (1 - Math.log(l)) + Math.exp(-l) * r;
     }
   }
 

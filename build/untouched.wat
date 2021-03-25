@@ -22585,133 +22585,6 @@
    f64.div
   end
  )
- (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
-  local.get $0
-  f64.const 0
-  f64.le
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  f64.const nan:0x8000000000000
- )
- (func $assembly/float/Randf64.alphastable (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  (local $7 f64)
-  (local $8 f64)
-  (local $9 f64)
-  (local $10 f64)
-  f64.const 1.5707963267948966
-  f64.neg
-  f64.const 1.5707963267948966
-  call $assembly/float/Randf64.uniform
-  local.set $4
-  f64.const 1
-  call $assembly/float/Randf64.exponential
-  local.set $5
-  local.get $0
-  f64.const 1
-  f64.eq
-  if
-   f64.const 1.5707963267948966
-   local.get $1
-   local.get $4
-   f64.mul
-   f64.add
-   local.set $6
-   local.get $6
-   local.get $4
-   call $~lib/math/NativeMath.tan
-   f64.mul
-   local.get $1
-   f64.const 1.5707963267948966
-   local.get $5
-   f64.mul
-   local.get $4
-   call $~lib/math/NativeMath.cos
-   f64.mul
-   local.get $6
-   f64.div
-   call $~lib/math/NativeMath.log
-   f64.mul
-   f64.sub
-   f64.const 1.5707963267948966
-   f64.div
-   local.set $7
-   local.get $2
-   local.get $3
-   local.get $7
-   local.get $1
-   local.get $3
-   call $~lib/math/NativeMath.log
-   f64.mul
-   f64.const 1.5707963267948966
-   f64.div
-   f64.add
-   f64.mul
-   f64.add
-   return
-  end
-  local.get $1
-  f64.neg
-  f64.const 1.5707963267948966
-  local.get $0
-  f64.mul
-  call $~lib/math/NativeMath.tan
-  f64.mul
-  local.set $7
-  local.get $7
-  f64.neg
-  call $~lib/math/NativeMath.atan
-  local.get $0
-  f64.div
-  local.set $6
-  local.get $0
-  local.get $4
-  local.get $6
-  f64.add
-  f64.mul
-  local.set $8
-  f64.const 1
-  local.get $7
-  local.get $7
-  f64.mul
-  f64.add
-  local.set $9
-  local.get $9
-  f64.sqrt
-  local.get $4
-  local.get $8
-  f64.sub
-  call $~lib/math/NativeMath.cos
-  local.get $5
-  f64.div
-  f64.const 1
-  local.get $0
-  f64.sub
-  call $~lib/math/NativeMath.pow
-  f64.mul
-  local.get $4
-  call $~lib/math/NativeMath.cos
-  f64.div
-  local.set $9
-  local.get $9
-  f64.const 1
-  local.get $0
-  f64.div
-  call $~lib/math/NativeMath.pow
-  local.get $8
-  call $~lib/math/NativeMath.sin
-  f64.mul
-  local.set $10
-  local.get $2
-  local.get $3
-  local.get $10
-  f64.mul
-  f64.add
- )
  (func $assembly/float/Randf64.gamma (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
   (local $3 f64)
@@ -22945,6 +22818,241 @@
    unreachable
   end
   unreachable
+ )
+ (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
+  (local $1 f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 i32)
+  (local $5 i32)
+  local.get $0
+  local.set $1
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   local.get $1
+   f64.const 0
+   f64.eq
+   if (result f64)
+    f64.const 0
+   else
+    f64.const nan:0x8000000000000
+   end
+   return
+  end
+  local.get $1
+  f64.const 50
+  f64.gt
+  if
+   local.get $1
+   local.get $1
+   f64.mul
+   local.set $2
+   local.get $2
+   local.get $1
+   f64.mul
+   local.set $3
+   f64.const 0.5
+   f64.const 2
+   global.get $~lib/math/NativeMath.PI
+   f64.mul
+   global.get $~lib/math/NativeMath.E
+   f64.mul
+   local.get $1
+   f64.mul
+   call $~lib/math/NativeMath.log
+   f64.mul
+   f64.const 1
+   f64.const 12
+   local.get $1
+   f64.mul
+   f64.div
+   f64.sub
+   f64.const 1
+   f64.const 24
+   local.get $2
+   f64.mul
+   f64.div
+   f64.sub
+   f64.const 19
+   f64.const 720
+   local.get $3
+   f64.mul
+   f64.div
+   f64.sub
+   return
+  end
+  f64.const 0
+  local.set $3
+  f64.const 1
+  local.set $2
+  i32.const 1
+  local.set $4
+  loop $for-loop|0
+   local.get $4
+   i32.const 100
+   i32.le_s
+   local.set $5
+   local.get $5
+   if
+    local.get $2
+    local.get $1
+    f64.mul
+    local.set $2
+    local.get $3
+    local.get $2
+    local.get $4
+    i32.const 1
+    i32.add
+    f64.convert_i32_s
+    call $assembly/specials/logGamma
+    f64.mul
+    local.get $4
+    i32.const 1
+    i32.add
+    f64.convert_i32_s
+    f64.const 1
+    call $assembly/float/Randf64.gamma
+    f64.div
+    f64.add
+    local.set $3
+    local.get $4
+    i32.const 1
+    i32.add
+    local.set $4
+    br $for-loop|0
+   end
+  end
+  local.get $1
+  f64.const 1
+  local.get $1
+  call $~lib/math/NativeMath.log
+  f64.sub
+  f64.mul
+  local.get $1
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  local.get $3
+  f64.mul
+  f64.add
+ )
+ (func $assembly/float/Randf64.alphastable (param $0 f64) (param $1 f64) (param $2 f64) (param $3 f64) (result f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  (local $9 f64)
+  (local $10 f64)
+  f64.const 1.5707963267948966
+  f64.neg
+  f64.const 1.5707963267948966
+  call $assembly/float/Randf64.uniform
+  local.set $4
+  f64.const 1
+  call $assembly/float/Randf64.exponential
+  local.set $5
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   f64.const 1.5707963267948966
+   local.get $1
+   local.get $4
+   f64.mul
+   f64.add
+   local.set $6
+   local.get $6
+   local.get $4
+   call $~lib/math/NativeMath.tan
+   f64.mul
+   local.get $1
+   f64.const 1.5707963267948966
+   local.get $5
+   f64.mul
+   local.get $4
+   call $~lib/math/NativeMath.cos
+   f64.mul
+   local.get $6
+   f64.div
+   call $~lib/math/NativeMath.log
+   f64.mul
+   f64.sub
+   f64.const 1.5707963267948966
+   f64.div
+   local.set $7
+   local.get $2
+   local.get $3
+   local.get $7
+   local.get $1
+   local.get $3
+   call $~lib/math/NativeMath.log
+   f64.mul
+   f64.const 1.5707963267948966
+   f64.div
+   f64.add
+   f64.mul
+   f64.add
+   return
+  end
+  local.get $1
+  f64.neg
+  f64.const 1.5707963267948966
+  local.get $0
+  f64.mul
+  call $~lib/math/NativeMath.tan
+  f64.mul
+  local.set $7
+  local.get $7
+  f64.neg
+  call $~lib/math/NativeMath.atan
+  local.get $0
+  f64.div
+  local.set $6
+  local.get $0
+  local.get $4
+  local.get $6
+  f64.add
+  f64.mul
+  local.set $8
+  f64.const 1
+  local.get $7
+  local.get $7
+  f64.mul
+  f64.add
+  local.set $9
+  local.get $9
+  f64.sqrt
+  local.get $4
+  local.get $8
+  f64.sub
+  call $~lib/math/NativeMath.cos
+  local.get $5
+  f64.div
+  f64.const 1
+  local.get $0
+  f64.sub
+  call $~lib/math/NativeMath.pow
+  f64.mul
+  local.get $4
+  call $~lib/math/NativeMath.cos
+  f64.div
+  local.set $9
+  local.get $9
+  f64.const 1
+  local.get $0
+  f64.div
+  call $~lib/math/NativeMath.pow
+  local.get $8
+  call $~lib/math/NativeMath.sin
+  f64.mul
+  local.set $10
+  local.get $2
+  local.get $3
+  local.get $10
+  f64.mul
+  f64.add
  )
  (func $assembly/float/Randf64.beta (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
