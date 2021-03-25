@@ -13988,11 +13988,20 @@
  )
  (func $assembly/float/Randf32.poisson.pmf (param $0 f32) (param $1 f32) (result f32)
   (local $2 f32)
-  local.get $1
-  local.get $1
+  local.get $0
+  local.get $0
   f32.ne
-  if
+  if (result i32)
+   i32.const 1
+  else
    local.get $1
+   local.get $1
+   f32.ne
+  end
+  if
+   local.get $0
+   local.get $1
+   f32.add
    return
   end
   local.get $1
@@ -14276,11 +14285,20 @@
   (local $3 f64)
   (local $4 f64)
   (local $5 f64)
-  local.get $1
-  local.get $1
+  local.get $0
+  local.get $0
   f32.ne
-  if
+  if (result i32)
+   i32.const 1
+  else
    local.get $1
+   local.get $1
+   f32.ne
+  end
+  if
+   local.get $0
+   local.get $1
+   f32.add
    return
   end
   local.get $1
@@ -14392,11 +14410,20 @@
   (local $13 f64)
   (local $14 i32)
   (local $15 i32)
-  local.get $1
-  local.get $1
+  local.get $0
+  local.get $0
   f64.ne
-  if
+  if (result i32)
+   i32.const 1
+  else
    local.get $1
+   local.get $1
+   f64.ne
+  end
+  if
+   local.get $0
+   local.get $1
+   f64.add
    return
   end
   local.get $1
@@ -22999,11 +23026,20 @@
  )
  (func $assembly/float/Randf64.poisson.pmf (param $0 f64) (param $1 f64) (result f64)
   (local $2 f64)
-  local.get $1
-  local.get $1
+  local.get $0
+  local.get $0
   f64.ne
-  if
+  if (result i32)
+   i32.const 1
+  else
    local.get $1
+   local.get $1
+   f64.ne
+  end
+  if
+   local.get $0
+   local.get $1
+   f64.add
    return
   end
   local.get $1
@@ -23073,11 +23109,20 @@
   (local $2 f64)
   (local $3 f64)
   (local $4 f64)
-  local.get $1
-  local.get $1
+  local.get $0
+  local.get $0
   f64.ne
-  if
+  if (result i32)
+   i32.const 1
+  else
    local.get $1
+   local.get $1
+   f64.ne
+  end
+  if
+   local.get $0
+   local.get $1
+   f64.add
    return
   end
   local.get $1

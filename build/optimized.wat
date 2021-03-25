@@ -8042,11 +8042,18 @@
   f32.demote_f64
  )
  (func $assembly/float/Randf32.poisson.pmf (param $0 f32) (param $1 f32) (result f32)
+  i32.const 1
   local.get $1
   local.get $1
   f32.ne
+  local.get $0
+  local.get $0
+  f32.ne
+  select
   if
+   local.get $0
    local.get $1
+   f32.add
    return
   end
   local.get $1
@@ -8287,11 +8294,18 @@
  (func $assembly/float/Randf32.poisson.cdf (param $0 f32) (param $1 f32) (result f32)
   (local $2 f64)
   (local $3 f64)
+  i32.const 1
   local.get $1
   local.get $1
   f32.ne
+  local.get $0
+  local.get $0
+  f32.ne
+  select
   if
+   local.get $0
    local.get $1
+   f32.add
    return
   end
   local.get $1
@@ -8399,11 +8413,18 @@
   (local $28 f64)
   (local $29 f64)
   (local $30 f64)
+  i32.const 1
   local.get $1
   local.get $1
   f64.ne
+  local.get $0
+  local.get $0
+  f64.ne
+  select
   if
+   local.get $0
    local.get $1
+   f64.add
    return
   end
   local.get $1
@@ -12113,11 +12134,18 @@
   f64.add
  )
  (func $assembly/float/Randf64.poisson.pmf (param $0 f64) (param $1 f64) (result f64)
+  i32.const 1
   local.get $1
   local.get $1
   f64.ne
+  local.get $0
+  local.get $0
+  f64.ne
+  select
   if
+   local.get $0
    local.get $1
+   f64.add
    return
   end
   local.get $1
@@ -12175,11 +12203,18 @@
   f64.const 0
  )
  (func $assembly/float/Randf64.poisson.cdf (param $0 f64) (param $1 f64) (result f64)
+  i32.const 1
   local.get $1
   local.get $1
   f64.ne
+  local.get $0
+  local.get $0
+  f64.ne
+  select
   if
+   local.get $0
    local.get $1
+   f64.add
    return
   end
   local.get $1
