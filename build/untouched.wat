@@ -21486,11 +21486,11 @@
    f64.lt
    if
     local.get $1
-    local.set $8
-    local.get $8
+    local.set $10
+    local.get $10
     f64.sqrt
-    local.set $8
-    local.get $8
+    local.set $10
+    local.get $10
     local.get $9
     f64.mul
     f64.const 1
@@ -21507,7 +21507,7 @@
     f64.const 1
     local.get $9
     f64.const 12
-    local.get $8
+    local.get $10
     f64.mul
     f64.div
     f64.sub
@@ -21523,17 +21523,17 @@
     local.get $9
     f64.mul
     f64.mul
-    local.set $10
+    local.set $8
     f64.const 1
     f64.const 80
     f64.div
-    local.get $10
+    local.get $8
     f64.add
     local.set $4
     f64.const 1
     f64.const 40
     f64.div
-    local.get $10
+    local.get $8
     f64.add
     local.set $4
     local.get $4
@@ -22423,8 +22423,8 @@
      local.get $7
      f64.mul
      local.set $9
-     local.get $9
      local.get $8
+     local.get $9
      f64.mul
      local.set $8
      local.get $9

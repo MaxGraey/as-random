@@ -11639,6 +11639,7 @@
     f64.const 0
     f64.lt
     if
+     local.get $2
      local.get $3
      f64.const 1
      f64.add
@@ -11646,7 +11647,6 @@
      local.get $6
      f64.mul
      local.tee $1
-     local.get $2
      f64.mul
      local.set $2
      local.get $1

@@ -1503,10 +1503,10 @@ export namespace Randf64 {
         if (u > v) w = -w;
 
         if (Math.abs(w) < 3) {
-          let lam = Math.sqrt(lambda);
-          s = lam * w + (1.0 / 3.0 + (1.0 / 6.0) * w * w) * (1.0 - w / (12 * lam));
+          let t: f64, slam = Math.sqrt(lambda);
+          s = slam * w + (1.0 / 3.0 + (1.0 / 6.0) * w * w) * (1.0 - w / (12 * slam));
           d = 1.0 / 160.0;
-          let t = d * (w * w);
+          t = d * (w * w);
           d = (1.0 / 80.0) + t;
           d = (1.0 / 40.0) + t;
           d *= ilam;
@@ -1542,7 +1542,6 @@ export namespace Randf64 {
           if (x > 0.5 * lambda && x < 2.0 * lambda) {
             let xi  = 1.0 / x;
             let eta = x * ilam;
-
             eta = Math.sqrt(2.0 * (1 - eta + eta * Math.log(eta)) / eta);
             if (x > lambda) eta = -eta;
 
@@ -1624,18 +1623,19 @@ export namespace Randf64 {
       // bottom-up summation
       if (x < 10) {
         x = 0.0;
+
         let t = Math.exp(0.5 * lambda);
         let d = u > 0.5 ? 1e-13 * t * t : 0.0;
         let s = 1.0 - u * t * t + d;
 
         while (s < 0.0) {
           x += 1.0;
-          t = x * ilam;
-          d = t * d;
-          s = t * s + 1.0;
+          t  = x * ilam;
+          d *= t;
+          s  = t * s + 1.0;
         }
 
-        /* top-down summation if needed */
+        // top-down summation if needed
         if (s < 2.0 * d) {
           d *= 1e13;
           t  = 1e17 * d;
@@ -1648,6 +1648,7 @@ export namespace Randf64 {
 
           s = d;
           t = 1.0;
+
           while (s > 0.0) {
             t *= x * ilam;
             s -= t;
