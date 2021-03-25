@@ -3095,9 +3095,133 @@ export namespace Randf32 {
     }
 
     /** Eval the quantile function for Poisson distribution. */
-    export function quantile(x: f32, lambda: f32): f32 {
-      // TODO: implement faster variant
-      return Randf64.poisson.quantile(x, lambda) as f32;
+    export function quantile(p: f32, lambda: f32): f32 {
+      /*
+        Adopted from poissinv_cuda.h.
+        This is Mike Giles's Poisson inverse code, under GPL. See
+        https://people.maths.ox.ac.uk/gilesm/codes/poissinv/
+        The method is explicated in Giles's paper "Algorithm 955:
+        Approximation of the Inverse Poisson Cumulative Distribution
+        Function", ACM Transactions on Mathematical Software, Volume 42
+        Issue 1, February 2016.
+      */
+
+      if (p  < 0.0) return NaN;
+      if (p == 0.0) return 0.0;
+      if (p == 1.0) return Infinity;
+      if (p  > 1.0) return NaN;
+
+      let s: f32, t: f32, x: f32 = 0.0;
+      if (lambda > 4) {
+        s = normal.quantile(p) / Mathf.sqrt(lambda);
+
+        // use polynomial approximations in central region
+        if (s > -0.6833501 && s < 1.777993) {
+          let rm: f32;
+
+          rm =  2.82298751e-07;
+          rm = -2.58136133e-06 + rm * s;
+          rm =  1.02118025e-05 + rm * s;
+          rm = -2.37996199e-05 + rm * s;
+          rm =  4.05347462e-05 + rm * s;
+          rm = -6.63730967e-05 + rm * s;
+          rm =  0.000124762566 + rm * s;
+          rm = -0.000256970731 + rm * s;
+          rm =  0.000558953132 + rm * s;
+          rm =  -0.00133129194 + rm * s;
+          rm =   0.00370367937 + rm * s;
+          rm =   -0.0138888706 + rm * s;
+          rm =     0.166666667 + rm * s;
+          rm =          s + s * (rm * s);
+
+          t  =   1.86386867e-05;
+          t  =  -0.000207319499 + t * rm;
+          t  =     0.0009689451 + t * rm;
+          t  =   -0.00247340054 + t * rm;
+          t  =    0.00379952985 + t * rm;
+          t  =   -0.00386717047 + t * rm;
+          t  =    0.00346960934 + t * rm;
+          t  =   -0.00414125511 + t * rm;
+          t  =    0.00586752093 + t * rm;
+          t  =   -0.00838583787 + t * rm;
+          t  =     0.0132793933 + t * rm;
+          t  =     -0.027775536 + t * rm;
+          t  =      0.333333333 + t * rm;
+
+          x  =   -0.00014585224;
+          x  =    0.00146121529 + x * rm;
+          x  =   -0.00610328845 + x * rm;
+          x  =     0.0138117964 + x * rm;
+          x  =    -0.0186988746 + x * rm;
+          x  =     0.0168155118 + x * rm;
+          x  =     -0.013394797 + x * rm;
+          x  =     0.0135698573 + x * rm;
+          x  =    -0.0155377333 + x * rm;
+          x  =     0.0174065334 + x * rm;
+          x  =    -0.0198011178 + x * rm;
+
+          x = Mathf.floor(lambda + (x / lambda + t) + lambda * rm);
+        } else if (s > -Mathf.SQRT2) {
+          // otherwise use Newton iteration
+          let r2: f32, s2: f32;
+          let r = Mathf.max(1 + s, 0.1);
+
+          do {
+            t  = Mathf.log(r);
+            r2 = r;
+            s2 = Mathf.sqrt(2.0 * ((1 - r) + r * t));
+            if (r < 1.0) s2 = -s2;
+
+            r = r2 - (s2 - s) * s2 / t;
+            if (r < 0.1 * r2) r = 0.1 * r2;
+
+          } while (Mathf.abs(r - r2) > 1e-5);
+
+          t = Mathf.log(r);
+          x = lambda * r + Mathf.log(Mathf.sqrt(2.0 * r * ((1 - r) + r * t)) / Mathf.abs(r - 1.0)) / t;
+          x = Mathf.floor(x - 0.0218 / (x + 0.065 * lambda));
+        }
+      }
+
+      // bottom-up summation
+      if (x < 10) {
+        let d: f32 = 0.0, x: f32 = 0.0;
+
+        let ilam: f32 = 1.0 / lambda;
+        let t = Mathf.exp(0.5 * lambda);
+
+        if (p > 0.5) d = 1e-6 * t * t;
+        s = 1 - p * t * t + d;
+
+        while (s < 0.0) {
+          x += 1.0;
+          t  = x * ilam;
+          d *= t;
+          s  = t * s + 1.0;
+        }
+
+        // top-down summation if needed
+        if (s < d + d) {
+          d = 1e+6 * d;
+          t = 1e+7 * d;
+          d = (1 - p) * d;
+
+          while (d < t) {
+            x += 1.0;
+            d *= x * ilam;
+          }
+
+          s = d;
+          t = 1.0;
+          while (s > 0.0) {
+            t *= x * ilam;
+            s -= t;
+            x -= 1.0;
+          }
+        }
+      }
+
+      return x;
     }
 
     /** Returns the standard deviation of Poisson distribution. */
