@@ -2914,11 +2914,11 @@ export namespace Randf32 {
       if (x <= 0.0) return x == 0.0 ? Mathf.exp(-lambda) : 0.0;
       if (lambda > 10000.0) {
         // See Numerical Recipes, with normal approximation from Appl. Stat. 239
-        return normal.cdf(
+        return 1.0 - normal.cdf(
           3.0 * Mathf.sqrt(lambda) * (Mathf.cbrt(x / lambda) + 1.0 / (lambda * 9.0) - 1.0)
         );
       }
-      return qgamma(lambda, Mathf.floor(x) + 1.0, 1e-7) as f32;
+      return qgamma(lambda, Mathf.floor(x) + 1.0) as f32;
     }
 
     /** Eval the quantile function for Poisson distribution. */
