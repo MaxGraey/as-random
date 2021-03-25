@@ -201,7 +201,7 @@ export function pgamma(a: f64, x: f64, eps: f64 = 1e-12): f64 {
 }
 
 /** Returns the incomplete gamma function P(a, x), calculated by its series representation */
-function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
+function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 200): f64 {
   if (x <= 0.0) return 0.0;
 
   let ap  = a;
@@ -212,15 +212,15 @@ function gser(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
     ap  += 1.0;
     del *= x / ap;
     sum += del;
-    if (Math.abs(del) < Math.abs(sum) * eps) {
-      return sum * Math.exp(-x + a * Math.log(x) - logGamma(a));
-    }
+    if (Math.abs(del) < Math.abs(sum) * eps) break;
   }
-  return NaN;
+
+  return sum * Math.exp(-x + a * Math.log(x) - logGamma(a));
 }
 
 /** Returns the incomplete gamma function Q(a, x), calculated by its continued fraction representation */
-function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
+function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 200): f64 {
+  let g  = 0.0;
   let g0 = 0.0;
   let f  = 1.0;
   let b1 = 1.0;
@@ -240,14 +240,13 @@ function gcf(a: f64, x: f64, eps: f64 = 1e-12, maxIters: i32 = 100): f64 {
 
     if (a1 != 0.0) {
       f = 1.0 / a1;
-      let g = b1 * f;
-      if (Math.abs(g - g0) < Math.abs(g) * eps) {
-        return g * Math.exp(-x + a * Math.log(x) - logGamma(a));
-      }
+      g = b1 * f;
+      if (Math.abs(g - g0) < Math.abs(g) * eps) break;
       g0 = g;
     }
   }
-  return NaN;
+
+  return g * Math.exp(-x + a * Math.log(x) - logGamma(a));
 }
 
 // A Monotonically Convergent Newton Iteration (MCNI) for the quantiles of

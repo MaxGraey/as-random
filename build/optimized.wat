@@ -8135,52 +8135,51 @@
   local.set $6
   loop $for-loop|0
    local.get $6
-   i32.const 100
+   i32.const 200
    i32.le_s
    if
-    local.get $4
-    local.get $5
-    local.get $1
-    local.get $3
-    f64.const 1
-    f64.add
-    local.tee $3
-    f64.div
-    f64.mul
-    local.tee $5
-    f64.add
-    local.set $4
-    local.get $5
-    f64.abs
-    local.get $4
-    f64.abs
-    local.get $2
-    f64.mul
-    f64.lt
-    if
+    block $for-break0
      local.get $4
+     local.get $5
      local.get $1
-     f64.neg
-     local.get $0
-     local.get $1
-     call $~lib/math/NativeMath.log
-     f64.mul
+     local.get $3
+     f64.const 1
      f64.add
-     local.get $0
-     call $assembly/specials/logGamma
-     f64.sub
-     call $~lib/math/NativeMath.exp
+     local.tee $3
+     f64.div
      f64.mul
-     return
+     local.tee $5
+     f64.add
+     local.set $4
+     local.get $5
+     f64.abs
+     local.get $4
+     f64.abs
+     local.get $2
+     f64.mul
+     f64.lt
+     br_if $for-break0
+     local.get $6
+     i32.const 1
+     i32.add
+     local.set $6
+     br $for-loop|0
     end
-    local.get $6
-    i32.const 1
-    i32.add
-    local.set $6
-    br $for-loop|0
    end
   end
-  f64.const nan:0x8000000000000
+  local.get $4
+  local.get $1
+  f64.neg
+  local.get $0
+  local.get $1
+  call $~lib/math/NativeMath.log
+  f64.mul
+  f64.add
+  local.get $0
+  call $assembly/specials/logGamma
+  f64.sub
+  call $~lib/math/NativeMath.exp
+  f64.mul
  )
  (func $assembly/specials/gcf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
   (local $3 f64)
@@ -8188,108 +8187,108 @@
   (local $5 f64)
   (local $6 f64)
   (local $7 f64)
-  (local $8 f64)
-  (local $9 i32)
+  (local $8 i32)
+  (local $9 f64)
   (local $10 f64)
   (local $11 f64)
+  (local $12 f64)
   f64.const 1
-  local.set $11
+  local.set $6
+  f64.const 1
+  local.set $7
   f64.const 1
   local.set $10
-  f64.const 1
-  local.set $8
   local.get $1
   local.set $4
   i32.const 1
-  local.set $9
+  local.set $8
   loop $for-loop|0
-   local.get $9
-   i32.const 100
+   local.get $8
+   i32.const 200
    i32.le_s
    if
-    local.get $1
-    local.get $10
-    local.get $7
-    local.get $9
-    f64.convert_i32_s
-    local.tee $5
-    local.get $0
-    f64.sub
-    local.tee $6
-    f64.mul
-    f64.add
-    local.get $11
-    f64.mul
-    local.tee $7
-    f64.mul
-    local.get $5
-    local.get $11
-    f64.mul
-    local.tee $5
-    local.get $10
-    f64.mul
-    f64.add
-    local.set $10
-    local.get $1
-    local.get $4
-    local.get $8
-    local.get $6
-    f64.mul
-    f64.add
-    local.get $11
-    f64.mul
-    local.tee $8
-    f64.mul
-    local.get $5
-    local.get $4
-    f64.mul
-    f64.add
-    local.tee $4
-    f64.const 0
-    f64.ne
-    if
-     local.get $10
-     f64.const 1
-     local.get $4
-     f64.div
+    block $for-break0
+     local.get $1
+     local.get $7
+     local.get $11
+     local.get $8
+     f64.convert_i32_s
+     local.tee $9
+     local.get $0
+     f64.sub
+     local.tee $12
+     f64.mul
+     f64.add
+     local.get $6
+     f64.mul
      local.tee $11
      f64.mul
-     local.tee $5
-     local.get $3
-     f64.sub
-     f64.abs
-     local.get $5
-     f64.abs
-     local.get $2
+     local.get $9
+     local.get $6
      f64.mul
-     f64.lt
+     local.tee $9
+     local.get $7
+     f64.mul
+     f64.add
+     local.set $7
+     local.get $1
+     local.get $4
+     local.get $10
+     local.get $12
+     f64.mul
+     f64.add
+     local.get $6
+     f64.mul
+     local.tee $10
+     f64.mul
+     local.get $9
+     local.get $4
+     f64.mul
+     f64.add
+     local.tee $4
+     f64.const 0
+     f64.ne
      if
-      local.get $5
-      local.get $1
-      f64.neg
-      local.get $0
-      local.get $1
-      call $~lib/math/NativeMath.log
+      local.get $7
+      f64.const 1
+      local.get $4
+      f64.div
+      local.tee $6
       f64.mul
-      f64.add
-      local.get $0
-      call $assembly/specials/logGamma
+      local.tee $5
+      local.get $3
       f64.sub
-      call $~lib/math/NativeMath.exp
+      f64.abs
+      local.get $5
+      f64.abs
+      local.get $2
       f64.mul
-      return
+      f64.lt
+      br_if $for-break0
+      local.get $5
+      local.set $3
      end
-     local.get $5
-     local.set $3
+     local.get $8
+     i32.const 1
+     i32.add
+     local.set $8
+     br $for-loop|0
     end
-    local.get $9
-    i32.const 1
-    i32.add
-    local.set $9
-    br $for-loop|0
    end
   end
-  f64.const nan:0x8000000000000
+  local.get $5
+  local.get $1
+  f64.neg
+  local.get $0
+  local.get $1
+  call $~lib/math/NativeMath.log
+  f64.mul
+  f64.add
+  local.get $0
+  call $assembly/specials/logGamma
+  f64.sub
+  call $~lib/math/NativeMath.exp
+  f64.mul
  )
  (func $assembly/float/Randf32.poisson.cdf (param $0 f32) (param $1 f32) (result f32)
   (local $2 f64)
@@ -8349,7 +8348,7 @@
    return
   end
   local.get $1
-  f32.const 3e3
+  f32.const 1e4
   f32.gt
   if
    local.get $1
@@ -11480,13 +11479,14 @@
    return
   end
   local.get $1
-  f64.const 3e3
+  f64.const 1e4
   f64.gt
   if
    local.get $1
    f64.sqrt
    f64.const 3
    f64.mul
+   local.set $6
    block $__inlined_func$~lib/math/NativeMath.cbrt
     local.get $0
     local.get $1
@@ -11606,6 +11606,8 @@
     f64.add
     local.set $0
    end
+   f64.const 1
+   local.get $6
    local.get $0
    f64.const 1
    local.get $1
@@ -11619,6 +11621,7 @@
    f64.const 0
    f64.const 1
    call $assembly/float/Randf64.normal.cdf
+   f64.sub
    return
   end
   block $assembly/specials/qgamma|inlined.1 (result f64)
