@@ -113,6 +113,11 @@ export function erf_approx(x: f64): f64 {
   return r;
 }
 
+export function erfc_approx(x: f64): f64 {
+  // TODO: make this better
+  return 1.0 - erf_approx(x);
+}
+
 export function besseli0(x: f64): f64 {
   const p1 = 1.00000000e+0;
   const p2 = 3.51562290e+0;
