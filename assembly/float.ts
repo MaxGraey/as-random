@@ -1374,26 +1374,24 @@ export namespace Randf64 {
 
     /** Returns the variance of von Mises-Fisher (d = 2) distribution. */
     export function variance(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
-      if (kappa < 0.0) return NaN;
-      return 1.0 - besseli1(kappa) / besseli0(kappa);
+      return kappa >= 0.0
+        ? 1.0 - besseli1(kappa) / besseli0(kappa)
+        : NaN;
     }
 
     /** Returns the mean value of von Mises-Fisher (d = 2) distribution. */
     export function mean(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
-      if (kappa < 0.0) return NaN;
-      return mean;
+      return kappa >= 0.0 ? mean : NaN;
     }
 
     /** Returns the median value of von Mises-Fisher (d = 2) distribution. */
     export function median(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
-      if (kappa < 0.0) return NaN;
-      return mean;
+      return kappa >= 0.0 ? mean : NaN;
     }
 
     /** Returns the skewness of von Mises-Fisher (d = 2) distribution. */
     export function skewness(mean: f64 = 0.0, kappa: f64 = 2.0): f64 {
-      if (kappa < 0.0) return NaN;
-      return 0.0;
+      return kappa >= 0.0 ? 0.0 : NaN;
     }
 
     /** Returns the differential entropy of von Mises-Fisher (d = 2) distribution. */
@@ -1659,9 +1657,19 @@ export namespace Randf64 {
       return x;
     }
 
+    /** Returns the standard deviation of Poisson distribution. */
+    export function stdev(lambda: f64): f64 {
+      return lambda >= 0.0 ? Math.sqrt(lambda) : NaN;
+    }
+
+    /** Returns the variance of von Poisson distribution. */
+    export function variance(lambda: f64): f64 {
+      return lambda >= 0.0 ? lambda : NaN;
+    }
+
     /** Returns the mean of Poisson distribution. */
     export function mean(lambda: f64): f64 {
-      return lambda < 0.0 ? NaN : lambda;
+      return lambda >= 0.0 ? lambda : NaN;
     }
 
     /** Returns the median of Poisson distribution. */
@@ -1670,17 +1678,9 @@ export namespace Randf64 {
       return Math.floor(lambda + 1 / 3.0 - 0.02 / lambda);
     }
 
-    /** Returns the standard deviation of Poisson distribution. */
-    export function stdev(lambda: f64): f64 {
-      return lambda < 0.0 ? NaN : Math.sqrt(lambda);
-    }
-
-    export function variance(lambda: f64): f64 {
-      return lambda < 0.0 ? NaN : lambda;
-    }
-
+    /** Returns the skewness of von Poisson distribution. */
     export function skewness(lambda: f64): f64 {
-      return lambda <= 0.0 ? NaN : 1 / Math.sqrt(lambda);
+      return lambda > 0.0 ? 1 / Math.sqrt(lambda) : NaN;
     }
 
     /** Returns the differential entropy of Poisson distribution. */
@@ -3035,26 +3035,24 @@ export namespace Randf32 {
 
     /** Returns the variance of von Mises-Fisher (d = 2) distribution. */
     export function variance(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
-      if (kappa < 0.0) return NaN;
-      return 1.0 - (besseli1(kappa) / besseli0(kappa)) as f32;
+      return kappa >= 0.0
+        ? 1.0 - (besseli1(kappa) / besseli0(kappa)) as f32
+        : NaN;
     }
 
     /** Returns the mean value of von Mises-Fisher (d = 2) distribution. */
     export function mean(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
-      if (kappa < 0.0) return NaN;
-      return mean;
+      return kappa >= 0.0 ? mean : NaN;
     }
 
     /** Returns the median value of von Mises-Fisher (d = 2) distribution. */
     export function median(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
-      if (kappa < 0.0) return NaN;
-      return mean;
+      return kappa >= 0.0 ? mean : NaN;
     }
 
     /** Returns the skewness of von Mises-Fisher (d = 2) distribution. */
     export function skewness(mean: f32 = 0.0, kappa: f32 = 2.0): f32 {
-      if (kappa < 0.0) return NaN;
-      return 0.0;
+      return kappa >= 0.0 ? 0.0 : NaN;
     }
 
     /** Returns the differential entropy of von Mises-Fisher (d = 2) distribution. */
@@ -3069,6 +3067,63 @@ export namespace Randf32 {
   /** Poisson distribution. */
   export function poisson(lambda: f32): f32 {
     return Randf64.poisson(lambda as f64) as f32;
+  }
+
+  export namespace poisson {
+    /** Eval the probability mass function for Poisson distribution. */
+    export function pmf(x: f32, lambda: f32): f32 {
+      if (lambda <= 0.0) return lambda == 0.0 ? f32(x == 0.0) : NaN;
+      if (x == 0.0) return Mathf.exp(-lambda);
+      if (x > 0 && x < f32.MAX_SAFE_INTEGER && Mathf.trunc(x) == x) {
+        return Mathf.exp(x * Mathf.log(lambda) - lambda - logFactorial(x as u32) as f32);
+      }
+      return 0.0;
+    }
+
+    /** Eval the cumulative density function for Poisson distribution. */
+    export function cdf(x: f32, lambda: f32): f32 {
+      if (lambda < 0.0) return NaN;
+      if (lambda == 0.0 || x == Infinity) return 1.0;
+      if (x <= 0.0) return x == 0.0 ? Mathf.exp(-lambda) : 0.0;
+      return qgamma(lambda, Mathf.floor(x) + 1.0, 1e-7) as f32;
+    }
+
+    /** Eval the quantile function for Poisson distribution. */
+    export function quantile(x: f32, lambda: f32): f32 {
+      // TODO: implement faster variant
+      return Randf64.poisson.quantile(x, lambda) as f32;
+    }
+
+    /** Returns the standard deviation of Poisson distribution. */
+    export function stdev(lambda: f32): f32 {
+      return lambda >= 0.0 ? Mathf.sqrt(lambda) : NaN;
+    }
+
+    /** Returns the variance of Poisson distribution. */
+    export function variance(lambda: f32): f32 {
+      return lambda >= 0.0 ? lambda : NaN;
+    }
+
+    /** Returns the mean of Poisson distribution. */
+    export function mean(lambda: f32): f32 {
+      return lambda >= 0.0 ? lambda : NaN;
+    }
+
+    /** Returns the median of Poisson distribution. */
+    export function median(lambda: f32): f32 {
+      if (lambda <= 0.0) return lambda == 0.0 ? 0.0 : NaN;
+      return Mathf.floor(lambda + 1 / 3.0 - 0.02 / lambda);
+    }
+
+    /** Returns the skewness of Poisson distribution. */
+    export function skewness(lambda: f32): f32 {
+      return lambda > 0.0 ? 1 / Mathf.sqrt(lambda) : NaN;
+    }
+
+    /** Returns the differential entropy of Poisson distribution. */
+    export function entropy(lambda: f32): f32 {
+      return Randf64.poisson.entropy(lambda) as f32;
+    }
   }
 
   /** Binominal distribution. */

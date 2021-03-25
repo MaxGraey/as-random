@@ -3,8 +3,8 @@
  (type $f32_f32_=>_f32 (func (param f32 f32) (result f32)))
  (type $f64_=>_f64 (func (param f64) (result f64)))
  (type $f64_f64_f64_=>_f64 (func (param f64 f64 f64) (result f64)))
- (type $f32_f32_f32_=>_f32 (func (param f32 f32 f32) (result f32)))
  (type $f32_=>_f32 (func (param f32) (result f32)))
+ (type $f32_f32_f32_=>_f32 (func (param f32 f32 f32) (result f32)))
  (type $f32_f32_f32_f32_=>_f32 (func (param f32 f32 f32 f32) (result f32)))
  (type $f64_f64_f64_f64_=>_f64 (func (param f64 f64 f64 f64) (result f64)))
  (type $i64_=>_none (func (param i64)))
@@ -355,6 +355,15 @@
  (export "Randf32.vonmises.skewness" (func $assembly/float/Randf32.vonmises.skewness@varargs))
  (export "Randf32.vonmises.entropy" (func $assembly/float/Randf32.vonmises.entropy@varargs))
  (export "Randf32.poisson" (func $assembly/float/Randf32.poisson))
+ (export "Randf32.poisson.pmf" (func $assembly/float/Randf32.poisson.pmf))
+ (export "Randf32.poisson.cdf" (func $assembly/float/Randf32.poisson.cdf))
+ (export "Randf32.poisson.quantile" (func $assembly/float/Randf32.poisson.quantile))
+ (export "Randf32.poisson.stdev" (func $assembly/float/Randf32.poisson.stdev))
+ (export "Randf32.poisson.variance" (func $assembly/float/Randf32.poisson.variance))
+ (export "Randf32.poisson.mean" (func $assembly/float/Randf32.poisson.variance))
+ (export "Randf32.poisson.median" (func $assembly/float/Randf32.poisson.median))
+ (export "Randf32.poisson.skewness" (func $assembly/float/Randf32.poisson.skewness))
+ (export "Randf32.poisson.entropy" (func $assembly/float/Randf32.poisson.entropy))
  (export "Randf32.binominal" (func $assembly/float/Randf32.binominal@varargs))
  (export "Randf32.alphastable" (func $assembly/float/Randf32.alphastable@varargs))
  (export "Randf32.gamma" (func $assembly/float/Randf32.gamma@varargs))
@@ -535,10 +544,10 @@
  (export "Randf64.poisson.pmf" (func $assembly/float/Randf64.poisson.pmf))
  (export "Randf64.poisson.cdf" (func $assembly/float/Randf64.poisson.cdf))
  (export "Randf64.poisson.quantile" (func $assembly/float/Randf64.poisson.quantile))
- (export "Randf64.poisson.mean" (func $assembly/float/Randf64.poisson.mean))
- (export "Randf64.poisson.median" (func $assembly/float/Randf64.poisson.median))
  (export "Randf64.poisson.stdev" (func $assembly/float/Randf64.poisson.stdev))
- (export "Randf64.poisson.variance" (func $assembly/float/Randf64.poisson.mean))
+ (export "Randf64.poisson.variance" (func $assembly/float/Randf64.poisson.variance))
+ (export "Randf64.poisson.mean" (func $assembly/float/Randf64.poisson.variance))
+ (export "Randf64.poisson.median" (func $assembly/float/Randf64.poisson.median))
  (export "Randf64.poisson.skewness" (func $assembly/float/Randf64.poisson.skewness))
  (export "Randf64.poisson.entropy" (func $assembly/float/Randf64.poisson.entropy))
  (export "Randf64.binominal" (func $assembly/float/Randf64.binominal@varargs))
@@ -7809,21 +7818,21 @@
   (local $1 f64)
   local.get $0
   f32.const 0
-  f32.lt
-  if
+  f32.ge
+  if (result f32)
+   f64.const 1
+   local.get $0
+   f64.promote_f32
+   local.tee $1
+   call $assembly/specials/besseli1
+   local.get $1
+   call $assembly/specials/besseli0
+   f64.div
+   f64.sub
+   f32.demote_f64
+  else
    f32.const nan:0x400000
-   return
   end
-  f64.const 1
-  local.get $0
-  f64.promote_f32
-  local.tee $1
-  call $assembly/specials/besseli1
-  local.get $1
-  call $assembly/specials/besseli0
-  f64.div
-  f64.sub
-  f32.demote_f64
  )
  (func $~lib/math/NativeMath.random (result f64)
   (local $0 i64)
@@ -8030,6 +8039,1551 @@
   local.get $0
   f64.promote_f32
   call $assembly/float/Randf64.poisson
+  f32.demote_f64
+ )
+ (func $assembly/float/Randf32.poisson.pmf (param $0 f32) (param $1 f32) (result f32)
+  local.get $1
+  f32.const 0
+  f32.le
+  if
+   local.get $0
+   f32.const 0
+   f32.eq
+   f32.convert_i32_u
+   f32.const nan:0x400000
+   local.get $1
+   f32.const 0
+   f32.eq
+   select
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.eq
+  if
+   local.get $1
+   f32.neg
+   call $~lib/math/NativeMathf.exp
+   return
+  end
+  local.get $0
+  local.get $0
+  f32.trunc
+  f32.eq
+  i32.const 0
+  local.get $0
+  f32.const 16777215
+  f32.lt
+  i32.const 0
+  local.get $0
+  f32.const 0
+  f32.gt
+  select
+  select
+  if
+   local.get $0
+   local.get $1
+   call $~lib/math/NativeMathf.log
+   f32.mul
+   local.get $1
+   f32.sub
+   f64.promote_f32
+   local.get $0
+   i32.trunc_f32_u
+   call $assembly/specials/logFactorial
+   f64.sub
+   f32.demote_f64
+   call $~lib/math/NativeMathf.exp
+   return
+  end
+  f32.const 0
+ )
+ (func $assembly/specials/gser (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 i32)
+  local.get $1
+  f64.const 0
+  f64.le
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  local.set $3
+  f64.const 1
+  local.get $0
+  f64.div
+  local.tee $5
+  local.set $4
+  i32.const 1
+  local.set $6
+  loop $for-loop|0
+   local.get $6
+   i32.const 100
+   i32.le_s
+   if
+    local.get $4
+    local.get $5
+    local.get $1
+    local.get $3
+    f64.const 1
+    f64.add
+    local.tee $3
+    f64.div
+    f64.mul
+    local.tee $5
+    f64.add
+    local.set $4
+    local.get $5
+    f64.abs
+    local.get $4
+    f64.abs
+    local.get $2
+    f64.mul
+    f64.lt
+    if
+     local.get $4
+     local.get $1
+     f64.neg
+     local.get $0
+     local.get $1
+     call $~lib/math/NativeMath.log
+     f64.mul
+     f64.add
+     local.get $0
+     call $assembly/specials/logGamma
+     f64.sub
+     call $~lib/math/NativeMath.exp
+     f64.mul
+     return
+    end
+    local.get $6
+    i32.const 1
+    i32.add
+    local.set $6
+    br $for-loop|0
+   end
+  end
+  f64.const nan:0x8000000000000
+ )
+ (func $assembly/specials/gcf (param $0 f64) (param $1 f64) (param $2 f64) (result f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  (local $9 i32)
+  (local $10 f64)
+  (local $11 f64)
+  f64.const 1
+  local.set $11
+  f64.const 1
+  local.set $10
+  f64.const 1
+  local.set $8
+  local.get $1
+  local.set $4
+  i32.const 1
+  local.set $9
+  loop $for-loop|0
+   local.get $9
+   i32.const 100
+   i32.le_s
+   if
+    local.get $1
+    local.get $10
+    local.get $7
+    local.get $9
+    f64.convert_i32_s
+    local.tee $5
+    local.get $0
+    f64.sub
+    local.tee $6
+    f64.mul
+    f64.add
+    local.get $11
+    f64.mul
+    local.tee $7
+    f64.mul
+    local.get $5
+    local.get $11
+    f64.mul
+    local.tee $5
+    local.get $10
+    f64.mul
+    f64.add
+    local.set $10
+    local.get $1
+    local.get $4
+    local.get $8
+    local.get $6
+    f64.mul
+    f64.add
+    local.get $11
+    f64.mul
+    local.tee $8
+    f64.mul
+    local.get $5
+    local.get $4
+    f64.mul
+    f64.add
+    local.tee $4
+    f64.const 0
+    f64.ne
+    if
+     local.get $10
+     f64.const 1
+     local.get $4
+     f64.div
+     local.tee $11
+     f64.mul
+     local.tee $5
+     local.get $3
+     f64.sub
+     f64.abs
+     local.get $5
+     f64.abs
+     local.get $2
+     f64.mul
+     f64.lt
+     if
+      local.get $5
+      local.get $1
+      f64.neg
+      local.get $0
+      local.get $1
+      call $~lib/math/NativeMath.log
+      f64.mul
+      f64.add
+      local.get $0
+      call $assembly/specials/logGamma
+      f64.sub
+      call $~lib/math/NativeMath.exp
+      f64.mul
+      return
+     end
+     local.get $5
+     local.set $3
+    end
+    local.get $9
+    i32.const 1
+    i32.add
+    local.set $9
+    br $for-loop|0
+   end
+  end
+  f64.const nan:0x8000000000000
+ )
+ (func $assembly/float/Randf32.poisson.cdf (param $0 f32) (param $1 f32) (result f32)
+  (local $2 f64)
+  (local $3 f64)
+  local.get $1
+  f32.const 0
+  f32.lt
+  if
+   f32.const nan:0x400000
+   return
+  end
+  i32.const 1
+  local.get $0
+  f32.const inf
+  f32.eq
+  local.get $1
+  f32.const 0
+  f32.eq
+  select
+  if
+   f32.const 1
+   return
+  end
+  local.get $0
+  f32.const 0
+  f32.le
+  if
+   local.get $0
+   f32.const 0
+   f32.eq
+   if (result f32)
+    local.get $1
+    f32.neg
+    call $~lib/math/NativeMathf.exp
+   else
+    f32.const 0
+   end
+   return
+  end
+  block $assembly/specials/qgamma|inlined.0 (result f64)
+   f64.const nan:0x8000000000000
+   i32.const 1
+   local.get $1
+   f64.promote_f32
+   local.tee $2
+   f64.const 0
+   f64.le
+   local.get $0
+   f32.floor
+   f32.const 1
+   f32.add
+   f64.promote_f32
+   local.tee $3
+   f64.const 0
+   f64.lt
+   select
+   br_if $assembly/specials/qgamma|inlined.0
+   drop
+   local.get $3
+   local.get $2
+   f64.const 1
+   f64.add
+   f64.lt
+   if (result f64)
+    f64.const 1
+    local.get $2
+    local.get $3
+    f64.const 1e-07
+    call $assembly/specials/gser
+    f64.sub
+   else
+    local.get $2
+    local.get $3
+    f64.const 1e-07
+    call $assembly/specials/gcf
+   end
+  end
+  f32.demote_f64
+ )
+ (func $assembly/float/Randf64.poisson.quantile (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 i32)
+  (local $8 f64)
+  (local $9 f64)
+  (local $10 f64)
+  (local $11 f64)
+  (local $12 f64)
+  (local $13 f64)
+  (local $14 f64)
+  (local $15 f64)
+  (local $16 f64)
+  (local $17 f64)
+  (local $18 f64)
+  (local $19 f64)
+  (local $20 f64)
+  (local $21 f64)
+  (local $22 f64)
+  (local $23 f64)
+  (local $24 f64)
+  (local $25 f64)
+  (local $26 f64)
+  (local $27 f64)
+  (local $28 f64)
+  (local $29 f64)
+  (local $30 f64)
+  local.get $1
+  f64.const 0
+  f64.lt
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  i32.const 1
+  local.get $0
+  f64.const 1
+  f64.gt
+  local.get $0
+  f64.const 0
+  f64.lt
+  select
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  local.tee $4
+  f64.const 0
+  f64.eq
+  if
+   f64.const 0
+   return
+  end
+  f64.const 1
+  local.get $4
+  f64.sub
+  local.tee $8
+  f64.const 0
+  f64.eq
+  if
+   f64.const inf
+   return
+  end
+  i32.const 1
+  local.get $8
+  f64.const 0
+  f64.le
+  local.get $4
+  f64.const 0
+  f64.le
+  select
+  if
+   f64.const nan:0x8000000000000
+   return
+  end
+  f64.const 1
+  local.get $1
+  f64.div
+  local.set $6
+  local.get $1
+  f64.const 4
+  f64.gt
+  if
+   local.get $4
+   local.get $8
+   f64.min
+   f64.const 0
+   f64.const 1
+   call $assembly/float/Randf64.normal.quantile
+   local.tee $2
+   f64.neg
+   local.get $2
+   local.get $4
+   local.get $8
+   f64.gt
+   select
+   local.tee $2
+   f64.abs
+   f64.const 3
+   f64.lt
+   if (result f64)
+    local.get $1
+    local.get $1
+    f64.sqrt
+    local.tee $3
+    local.get $2
+    f64.mul
+    local.get $2
+    f64.const 0.16666666666666666
+    f64.mul
+    local.get $2
+    f64.mul
+    f64.const 0.3333333333333333
+    f64.add
+    f64.const 1
+    local.get $2
+    local.get $3
+    f64.const 12
+    f64.mul
+    f64.div
+    f64.sub
+    f64.mul
+    f64.add
+    local.get $2
+    local.get $2
+    f64.mul
+    f64.const 0.00625
+    f64.mul
+    f64.const 0.025
+    f64.add
+    local.get $6
+    f64.mul
+    local.tee $0
+    f64.add
+    f64.add
+   else
+    local.get $2
+    local.get $1
+    f64.sqrt
+    f64.div
+    local.tee $3
+    f64.const 1
+    f64.add
+    f64.const 0.1
+    f64.max
+    local.set $2
+    loop $do-continue|0
+     f64.const 1
+     local.get $2
+     f64.sub
+     local.get $2
+     local.get $2
+     call $~lib/math/NativeMath.log
+     local.tee $9
+     f64.mul
+     f64.add
+     local.tee $0
+     local.get $0
+     f64.add
+     f64.sqrt
+     local.tee $5
+     f64.neg
+     local.get $5
+     local.get $2
+     local.tee $0
+     f64.const 1
+     f64.lt
+     select
+     local.set $5
+     local.get $0
+     local.get $5
+     local.get $3
+     f64.sub
+     local.get $5
+     f64.mul
+     local.get $9
+     f64.div
+     f64.sub
+     local.tee $2
+     local.get $0
+     f64.const 0.1
+     f64.mul
+     f64.lt
+     if
+      local.get $0
+      f64.const 0.1
+      f64.mul
+      local.set $2
+     end
+     local.get $2
+     local.get $0
+     f64.sub
+     f64.abs
+     f64.const 1e-08
+     f64.gt
+     br_if $do-continue|0
+    end
+    f64.const 0.01
+    local.get $1
+    local.get $2
+    f64.mul
+    local.get $2
+    local.get $2
+    f64.add
+    f64.const 1
+    local.get $2
+    f64.sub
+    local.get $2
+    local.get $2
+    call $~lib/math/NativeMath.log
+    local.tee $0
+    f64.mul
+    f64.add
+    f64.mul
+    f64.sqrt
+    local.get $2
+    f64.const 1
+    f64.sub
+    f64.abs
+    f64.div
+    call $~lib/math/NativeMath.log
+    local.get $0
+    f64.div
+    f64.add
+    local.tee $0
+    f64.const 0.0218
+    local.get $0
+    local.get $1
+    f64.const 0.065
+    f64.mul
+    f64.add
+    f64.div
+    f64.sub
+    local.tee $3
+    f64.div
+    local.set $0
+    local.get $3
+    local.get $0
+    f64.add
+   end
+   local.tee $2
+   local.get $2
+   f64.floor
+   local.tee $3
+   local.get $0
+   local.get $0
+   f64.add
+   f64.add
+   f64.lt
+   i32.const 0
+   local.get $2
+   f64.const 10
+   f64.gt
+   select
+   if
+    local.get $3
+    local.get $1
+    local.get $1
+    f64.add
+    f64.lt
+    i32.const 0
+    local.get $3
+    local.get $1
+    f64.const 0.5
+    f64.mul
+    f64.gt
+    select
+    if
+     f64.const 1
+     local.get $3
+     local.get $6
+     f64.mul
+     local.tee $2
+     f64.sub
+     local.get $2
+     local.get $2
+     call $~lib/math/NativeMath.log
+     f64.mul
+     f64.add
+     local.tee $0
+     local.get $0
+     f64.add
+     local.get $2
+     f64.div
+     f64.sqrt
+     local.set $5
+     f64.const 1
+     local.get $3
+     f64.div
+     local.tee $0
+     f64.const -4.7405491906438586e-14
+     f64.mul
+     f64.const 2.853489380704746e-14
+     f64.add
+     local.tee $9
+     f64.const 22
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 3.3717632624009806e-13
+     f64.add
+     local.tee $10
+     f64.const 20
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -5.027669280114176e-12
+     f64.add
+     local.tee $11
+     f64.const 18
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -5.830772132550417e-11
+     f64.add
+     local.tee $12
+     f64.const 16
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 9.147699582236793e-10
+     f64.add
+     local.tee $13
+     f64.const 14
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 1.0261809784240299e-08
+     f64.add
+     local.tee $14
+     f64.const 12
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -1.7665952736826086e-07
+     f64.add
+     local.tee $15
+     f64.const 10
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -1.8540622107151585e-06
+     f64.add
+     local.tee $16
+     f64.const 8
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 3.9192631785224383e-05
+     f64.add
+     local.tee $17
+     f64.const 6
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 3.527336860670192e-04
+     f64.add
+     local.tee $18
+     f64.const 4
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -0.014814814814814815
+     f64.add
+     local.tee $2
+     local.get $2
+     f64.add
+     local.get $0
+     f64.mul
+     f64.const -0.3333333333333333
+     f64.add
+     local.get $0
+     f64.const 2.0248802891761395e-14
+     f64.mul
+     f64.const -5.139111834242681e-16
+     f64.add
+     local.tee $19
+     f64.const 23
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -1.3923887224181616e-13
+     f64.add
+     local.tee $20
+     f64.const 21
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 1.1004392031956284e-13
+     f64.add
+     local.tee $21
+     f64.const 19
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 2.4361948020667402e-11
+     f64.add
+     local.tee $22
+     f64.const 17
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -2.5514193994946487e-11
+     f64.add
+     local.tee $23
+     f64.const 15
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -4.382036018453352e-09
+     f64.add
+     local.tee $24
+     f64.const 13
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 6.707853543401533e-09
+     f64.add
+     local.tee $25
+     f64.const 11
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 8.296711340953083e-07
+     f64.add
+     local.tee $26
+     f64.const 9
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -2.185448510679998e-06
+     f64.add
+     local.tee $27
+     f64.const 7
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const -1.7875514403292177e-04
+     f64.add
+     local.tee $28
+     f64.const 5
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 1.1574074074074078e-03
+     f64.add
+     local.tee $29
+     f64.const 3
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 0.08333333333333333
+     f64.add
+     local.tee $30
+     local.get $2
+     local.get $29
+     local.get $18
+     local.get $28
+     local.get $17
+     local.get $27
+     local.get $16
+     local.get $26
+     local.get $15
+     local.get $25
+     local.get $14
+     local.get $24
+     local.get $13
+     local.get $23
+     local.get $12
+     local.get $22
+     local.get $11
+     local.get $21
+     local.get $10
+     local.get $20
+     local.get $9
+     local.get $19
+     local.get $5
+     f64.neg
+     local.get $5
+     local.get $1
+     local.get $3
+     f64.lt
+     select
+     local.tee $5
+     f64.const 8.099521156704558e-16
+     f64.mul
+     f64.const -1.975228829434941e-15
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $5
+     f64.mul
+     f64.add
+     local.get $30
+     local.get $0
+     f64.mul
+     f64.const 1
+     f64.add
+     f64.div
+     local.get $3
+     f64.const -0.5
+     f64.mul
+     local.get $5
+     f64.mul
+     local.get $5
+     f64.mul
+     call $~lib/math/NativeMath.exp
+     local.get $3
+     f64.const 6.283185307179586
+     f64.mul
+     f64.sqrt
+     f64.div
+     f64.mul
+     local.set $0
+     local.get $1
+     local.get $3
+     f64.gt
+     if
+      local.get $3
+      f64.const 1
+      f64.sub
+      local.get $3
+      local.get $4
+      local.get $0
+      f64.const 1
+      local.get $5
+      local.get $3
+      f64.const 0.5
+      f64.mul
+      f64.sqrt
+      f64.mul
+      call $assembly/specials/erf_approx
+      f64.sub
+      f64.const 0.5
+      f64.mul
+      f64.add
+      f64.lt
+      select
+      local.set $3
+     else
+      local.get $5
+      f64.neg
+      local.get $3
+      f64.const 0.5
+      f64.mul
+      f64.sqrt
+      f64.mul
+      call $assembly/specials/erf_approx
+      drop
+     end
+    else
+     local.get $3
+     local.get $1
+     f64.sub
+     local.get $3
+     local.get $3
+     local.get $6
+     f64.mul
+     call $~lib/math/NativeMath.log
+     f64.mul
+     f64.sub
+     local.get $2
+     f64.const 1
+     local.get $3
+     f64.div
+     local.tee $0
+     f64.mul
+     local.get $0
+     f64.mul
+     f64.const 0.08333333333333333
+     f64.add
+     local.get $0
+     f64.mul
+     f64.sub
+     local.set $2
+     local.get $1
+     local.get $3
+     f64.gt
+     if (result f64)
+      f64.const 1
+      local.get $4
+      local.get $2
+      f64.const -0.5
+      f64.mul
+      call $~lib/math/NativeMath.exp
+      local.tee $2
+      f64.mul
+      local.get $2
+      f64.mul
+      local.get $0
+      f64.const 6.283185307179586
+      f64.mul
+      f64.sqrt
+      f64.mul
+      local.get $1
+      f64.mul
+      f64.sub
+      local.set $2
+      f64.const 1
+      local.set $5
+      local.get $3
+      local.set $0
+      i32.const 1
+      local.set $7
+      loop $for-loop|1
+       local.get $7
+       i32.const 50
+       i32.lt_s
+       if
+        local.get $2
+        local.get $5
+        local.get $0
+        f64.const 1
+        f64.sub
+        local.tee $0
+        local.get $6
+        f64.mul
+        f64.mul
+        local.tee $5
+        f64.add
+        local.set $2
+        local.get $7
+        i32.const 1
+        i32.add
+        local.set $7
+        br $for-loop|1
+       end
+      end
+      local.get $3
+      f64.const 1
+      f64.sub
+      local.get $3
+      local.get $2
+      f64.const 0
+      f64.gt
+      select
+     else
+      f64.const 1
+      local.get $8
+      local.get $2
+      f64.const -0.5
+      f64.mul
+      call $~lib/math/NativeMath.exp
+      local.tee $0
+      f64.mul
+      local.get $0
+      f64.mul
+      local.get $3
+      f64.const 6.283185307179586
+      f64.mul
+      f64.sqrt
+      f64.mul
+      f64.sub
+      local.set $2
+      local.get $3
+      local.set $0
+      loop $for-loop|2
+       local.get $7
+       i32.const 50
+       i32.lt_s
+       if
+        local.get $2
+        local.get $0
+        f64.const 1
+        f64.add
+        local.tee $0
+        f64.mul
+        local.get $6
+        f64.mul
+        f64.const 1
+        f64.add
+        local.set $2
+        local.get $7
+        i32.const 1
+        i32.add
+        local.set $7
+        br $for-loop|2
+       end
+      end
+      local.get $3
+      f64.const 1
+      f64.sub
+      local.get $3
+      local.get $2
+      f64.const 0
+      f64.lt
+      select
+     end
+     local.set $3
+    end
+   end
+  end
+  local.get $3
+  f64.const 10
+  f64.lt
+  if
+   f64.const 0
+   local.set $3
+   local.get $1
+   f64.const 0.5
+   f64.mul
+   call $~lib/math/NativeMath.exp
+   local.tee $0
+   f64.const 1e-13
+   f64.mul
+   local.get $0
+   f64.mul
+   f64.const 0
+   local.get $4
+   f64.const 0.5
+   f64.gt
+   select
+   local.set $2
+   f64.const 1
+   local.get $4
+   local.get $0
+   f64.mul
+   local.get $0
+   f64.mul
+   f64.sub
+   local.get $2
+   f64.add
+   local.set $0
+   loop $while-continue|3
+    local.get $0
+    f64.const 0
+    f64.lt
+    if
+     local.get $2
+     local.get $3
+     f64.const 1
+     f64.add
+     local.tee $3
+     local.get $6
+     f64.mul
+     local.tee $1
+     f64.mul
+     local.set $2
+     local.get $1
+     local.get $0
+     f64.mul
+     f64.const 1
+     f64.add
+     local.set $0
+     br $while-continue|3
+    end
+   end
+   local.get $0
+   local.get $2
+   local.get $2
+   f64.add
+   f64.lt
+   if
+    local.get $2
+    f64.const 1e13
+    f64.mul
+    local.tee $0
+    f64.const 1e17
+    f64.mul
+    local.set $1
+    local.get $0
+    local.get $8
+    f64.mul
+    local.set $2
+    loop $while-continue|4
+     local.get $1
+     local.get $2
+     f64.gt
+     if
+      local.get $2
+      local.get $3
+      f64.const 1
+      f64.add
+      local.tee $3
+      local.get $6
+      f64.mul
+      f64.mul
+      local.set $2
+      br $while-continue|4
+     end
+    end
+    local.get $2
+    local.set $0
+    f64.const 1
+    local.set $2
+    loop $while-continue|5
+     local.get $0
+     f64.const 0
+     f64.gt
+     if
+      local.get $0
+      local.get $2
+      local.get $3
+      local.get $6
+      f64.mul
+      f64.mul
+      local.tee $2
+      f64.sub
+      local.set $0
+      local.get $3
+      f64.const 1
+      f64.sub
+      local.set $3
+      br $while-continue|5
+     end
+    end
+   end
+  end
+  local.get $3
+ )
+ (func $assembly/float/Randf32.poisson.quantile (param $0 f32) (param $1 f32) (result f32)
+  local.get $0
+  f64.promote_f32
+  local.get $1
+  f64.promote_f32
+  call $assembly/float/Randf64.poisson.quantile
+  f32.demote_f64
+ )
+ (func $assembly/float/Randf32.poisson.stdev (param $0 f32) (result f32)
+  local.get $0
+  f32.sqrt
+  f32.const nan:0x400000
+  local.get $0
+  f32.const 0
+  f32.ge
+  select
+ )
+ (func $assembly/float/Randf32.poisson.variance (param $0 f32) (result f32)
+  local.get $0
+  f32.const nan:0x400000
+  local.get $0
+  f32.const 0
+  f32.ge
+  select
+ )
+ (func $assembly/float/Randf32.poisson.median (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.le
+  if
+   f32.const 0
+   f32.const nan:0x400000
+   local.get $0
+   f32.const 0
+   f32.eq
+   select
+   return
+  end
+  local.get $0
+  f32.const 0.3333333432674408
+  f32.add
+  f32.const 0.019999999552965164
+  local.get $0
+  f32.div
+  f32.sub
+  f32.floor
+ )
+ (func $assembly/float/Randf32.poisson.skewness (param $0 f32) (result f32)
+  local.get $0
+  f32.const 0
+  f32.gt
+  if (result f32)
+   f32.const 1
+   local.get $0
+   f32.sqrt
+   f32.div
+  else
+   f32.const nan:0x400000
+  end
+ )
+ (func $assembly/float/Randf64.gamma (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
+  (local $5 f64)
+  (local $6 f64)
+  (local $7 f64)
+  (local $8 f64)
+  i32.const 1
+  local.get $1
+  local.get $1
+  f64.ne
+  local.get $0
+  local.get $0
+  f64.ne
+  select
+  if
+   local.get $0
+   local.get $1
+   f64.add
+   return
+  end
+  i32.const 1
+  local.get $1
+  f64.const 1e-07
+  f64.le
+  local.get $0
+  f64.const 1e-07
+  f64.le
+  select
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   call $~lib/math/NativeMath.random
+   f64.neg
+   call $~lib/math/NativeMath.log1p
+   f64.neg
+   local.get $1
+   f64.mul
+   return
+  end
+  local.get $0
+  f64.const 1
+  f64.gt
+  if (result f64)
+   local.get $0
+   f64.const 1.3862943611198906
+   f64.sub
+   local.set $4
+   local.get $0
+   local.get $0
+   local.get $0
+   f64.add
+   f64.const 1
+   f64.sub
+   f64.sqrt
+   local.tee $5
+   f64.add
+   local.set $6
+   loop $while-continue|0 (result f64)
+    i32.const 1
+    call $~lib/math/NativeMath.random
+    local.tee $2
+    f64.const 0.9999999
+    f64.ge
+    local.get $2
+    f64.const 1e-07
+    f64.le
+    select
+    br_if $while-continue|0
+    f64.const 1
+    call $~lib/math/NativeMath.random
+    f64.sub
+    local.set $7
+    local.get $0
+    local.get $2
+    f64.const 1
+    local.get $2
+    f64.sub
+    f64.div
+    call $~lib/math/NativeMath.log
+    local.get $5
+    f64.div
+    local.tee $8
+    call $~lib/math/NativeMath.exp
+    f64.mul
+    local.set $3
+    local.get $4
+    local.get $6
+    local.get $8
+    f64.mul
+    f64.add
+    local.get $3
+    f64.sub
+    local.tee $8
+    f64.const 2.504077396776274
+    f64.add
+    local.get $2
+    local.get $2
+    f64.mul
+    local.get $7
+    f64.mul
+    local.tee $2
+    f64.const 4.5
+    f64.mul
+    f64.sub
+    f64.const 0
+    f64.ge
+    if (result i32)
+     i32.const 1
+    else
+     local.get $2
+     call $~lib/math/NativeMath.log
+     local.get $8
+     f64.le
+    end
+    i32.eqz
+    br_if $while-continue|0
+    local.get $3
+    local.get $1
+    f64.mul
+   end
+  else
+   local.get $0
+   f64.const 2.718281828459045
+   f64.add
+   f64.const 2.718281828459045
+   f64.div
+   local.set $4
+   local.get $0
+   f64.const 1
+   f64.sub
+   local.set $5
+   f64.const 1
+   local.get $0
+   f64.div
+   local.set $6
+   loop $while-continue|1 (result f64)
+    call $~lib/math/NativeMath.random
+    local.set $2
+    call $~lib/math/NativeMath.random
+    local.set $7
+    local.get $4
+    local.get $2
+    f64.mul
+    local.tee $2
+    f64.const 1
+    f64.le
+    if (result f64)
+     local.get $2
+     local.get $6
+     call $~lib/math/NativeMath.pow
+    else
+     local.get $4
+     local.get $2
+     f64.sub
+     local.get $0
+     f64.div
+     call $~lib/math/NativeMath.log
+     f64.neg
+    end
+    local.set $3
+    local.get $2
+    f64.const 1
+    f64.gt
+    if (result f64)
+     local.get $3
+     local.get $5
+     call $~lib/math/NativeMath.pow
+    else
+     local.get $3
+     f64.neg
+     call $~lib/math/NativeMath.exp
+    end
+    local.get $7
+    f64.ge
+    i32.eqz
+    br_if $while-continue|1
+    local.get $3
+    local.get $1
+    f64.mul
+   end
+  end
+ )
+ (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
+  (local $1 f64)
+  (local $2 f64)
+  (local $3 i32)
+  local.get $0
+  f64.const 0
+  f64.le
+  if
+   f64.const 0
+   f64.const nan:0x8000000000000
+   local.get $0
+   f64.const 0
+   f64.eq
+   select
+   return
+  end
+  local.get $0
+  f64.const 50
+  f64.gt
+  if
+   local.get $0
+   f64.const 17.079468445347132
+   f64.mul
+   call $~lib/math/NativeMath.log
+   f64.const 0.5
+   f64.mul
+   f64.const 1
+   local.get $0
+   f64.const 12
+   f64.mul
+   f64.div
+   f64.sub
+   f64.const 1
+   local.get $0
+   local.get $0
+   f64.mul
+   local.tee $1
+   f64.const 24
+   f64.mul
+   f64.div
+   f64.sub
+   f64.const 19
+   local.get $1
+   local.get $0
+   f64.mul
+   f64.const 720
+   f64.mul
+   f64.div
+   f64.sub
+   return
+  end
+  f64.const 1
+  local.set $1
+  i32.const 1
+  local.set $3
+  loop $for-loop|0
+   local.get $3
+   i32.const 100
+   i32.le_s
+   if
+    local.get $2
+    local.get $1
+    local.get $0
+    f64.mul
+    local.tee $1
+    local.get $3
+    i32.const 1
+    i32.add
+    local.tee $3
+    f64.convert_i32_s
+    local.tee $2
+    call $assembly/specials/logGamma
+    f64.mul
+    local.get $2
+    f64.const 1
+    call $assembly/float/Randf64.gamma
+    f64.div
+    f64.add
+    local.set $2
+    br $for-loop|0
+   end
+  end
+  local.get $0
+  f64.const 1
+  local.get $0
+  call $~lib/math/NativeMath.log
+  f64.sub
+  f64.mul
+  local.get $0
+  f64.neg
+  call $~lib/math/NativeMath.exp
+  local.get $2
+  f64.mul
+  f64.add
+ )
+ (func $assembly/float/Randf32.poisson.entropy (param $0 f32) (result f32)
+  local.get $0
+  f64.promote_f32
+  call $assembly/float/Randf64.poisson.entropy
   f32.demote_f64
  )
  (func $~lib/math/tan_kern (param $0 f64) (param $1 f64) (param $2 i32) (result f64)
@@ -10530,22 +12084,6 @@
   local.get $0
   f64.add
  )
- (func $assembly/float/Randf64.vonmises.variance (param $0 f64) (result f64)
-  local.get $0
-  f64.const 0
-  f64.lt
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  f64.const 1
-  local.get $0
-  call $assembly/specials/besseli1
-  local.get $0
-  call $assembly/specials/besseli0
-  f64.div
-  f64.sub
- )
  (func $assembly/float/Randf64.poisson.pmf (param $0 f64) (param $1 f64) (result f64)
   local.get $1
   f64.const 0
@@ -10602,15 +12140,6 @@
   f64.const 0
  )
  (func $assembly/float/Randf64.poisson.cdf (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  (local $7 f64)
-  (local $8 f64)
-  (local $9 f64)
-  (local $10 i32)
   local.get $1
   f64.const 0
   f64.lt
@@ -10646,7 +12175,7 @@
    end
    return
   end
-  block $assembly/specials/qgamma|inlined.0 (result f64)
+  block $assembly/specials/qgamma|inlined.1 (result f64)
    f64.const nan:0x8000000000000
    i32.const 1
    local.get $1
@@ -10660,7 +12189,7 @@
    f64.const 0
    f64.lt
    select
-   br_if $assembly/specials/qgamma|inlined.0
+   br_if $assembly/specials/qgamma|inlined.1
    drop
    local.get $0
    local.get $1
@@ -10669,1064 +12198,34 @@
    f64.lt
    if (result f64)
     f64.const 1
-    block $__inlined_func$assembly/specials/gser (result f64)
-     f64.const 0
-     local.get $0
-     f64.const 0
-     f64.le
-     br_if $__inlined_func$assembly/specials/gser
-     drop
-     f64.const 1
-     local.get $1
-     local.tee $3
-     f64.div
-     local.tee $2
-     local.set $4
-     i32.const 1
-     local.set $10
-     loop $for-loop|0
-      local.get $10
-      i32.const 100
-      i32.le_s
-      if
-       local.get $4
-       local.get $2
-       local.get $0
-       local.get $1
-       f64.const 1
-       f64.add
-       local.tee $1
-       f64.div
-       f64.mul
-       local.tee $2
-       f64.add
-       local.set $4
-       local.get $2
-       f64.abs
-       local.get $4
-       f64.abs
-       f64.const 1e-12
-       f64.mul
-       f64.lt
-       if
-        local.get $4
-        local.get $0
-        f64.neg
-        local.get $3
-        local.get $0
-        call $~lib/math/NativeMath.log
-        f64.mul
-        f64.add
-        local.get $3
-        call $assembly/specials/logGamma
-        f64.sub
-        call $~lib/math/NativeMath.exp
-        f64.mul
-        br $__inlined_func$assembly/specials/gser
-       end
-       local.get $10
-       i32.const 1
-       i32.add
-       local.set $10
-       br $for-loop|0
-      end
-     end
-     f64.const nan:0x8000000000000
-    end
+    local.get $1
+    local.get $0
+    f64.const 1e-12
+    call $assembly/specials/gser
     f64.sub
    else
-    block $__inlined_func$assembly/specials/gcf (result f64)
-     local.get $1
-     local.set $3
-     f64.const 1
-     local.set $9
-     f64.const 1
-     local.set $8
-     f64.const 1
-     local.set $6
-     local.get $0
-     local.set $1
-     i32.const 1
-     local.set $10
-     loop $for-loop|00
-      local.get $10
-      i32.const 100
-      i32.le_s
-      if
-       local.get $0
-       local.get $8
-       local.get $7
-       local.get $10
-       f64.convert_i32_s
-       local.tee $4
-       local.get $3
-       f64.sub
-       local.tee $5
-       f64.mul
-       f64.add
-       local.get $9
-       f64.mul
-       local.tee $7
-       f64.mul
-       local.get $4
-       local.get $9
-       f64.mul
-       local.tee $4
-       local.get $8
-       f64.mul
-       f64.add
-       local.set $8
-       local.get $0
-       local.get $1
-       local.get $6
-       local.get $5
-       f64.mul
-       f64.add
-       local.get $9
-       f64.mul
-       local.tee $6
-       f64.mul
-       local.get $4
-       local.get $1
-       f64.mul
-       f64.add
-       local.tee $1
-       f64.const 0
-       f64.ne
-       if
-        local.get $8
-        f64.const 1
-        local.get $1
-        f64.div
-        local.tee $9
-        f64.mul
-        local.tee $4
-        local.get $2
-        f64.sub
-        f64.abs
-        local.get $4
-        f64.abs
-        f64.const 1e-12
-        f64.mul
-        f64.lt
-        if
-         local.get $4
-         local.get $0
-         f64.neg
-         local.get $3
-         local.get $0
-         call $~lib/math/NativeMath.log
-         f64.mul
-         f64.add
-         local.get $3
-         call $assembly/specials/logGamma
-         f64.sub
-         call $~lib/math/NativeMath.exp
-         f64.mul
-         br $__inlined_func$assembly/specials/gcf
-        end
-        local.get $4
-        local.set $2
-       end
-       local.get $10
-       i32.const 1
-       i32.add
-       local.set $10
-       br $for-loop|00
-      end
-     end
-     f64.const nan:0x8000000000000
-    end
+    local.get $1
+    local.get $0
+    f64.const 1e-12
+    call $assembly/specials/gcf
    end
   end
  )
- (func $assembly/float/Randf64.poisson.quantile (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  (local $7 i32)
-  (local $8 f64)
-  (local $9 f64)
-  (local $10 f64)
-  (local $11 f64)
-  (local $12 f64)
-  (local $13 f64)
-  (local $14 f64)
-  (local $15 f64)
-  (local $16 f64)
-  (local $17 f64)
-  (local $18 f64)
-  (local $19 f64)
-  (local $20 f64)
-  (local $21 f64)
-  (local $22 f64)
-  (local $23 f64)
-  (local $24 f64)
-  (local $25 f64)
-  (local $26 f64)
-  (local $27 f64)
-  (local $28 f64)
-  (local $29 f64)
-  (local $30 f64)
-  local.get $1
-  f64.const 0
-  f64.lt
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  i32.const 1
+ (func $assembly/float/Randf64.poisson.stdev (param $0 f64) (result f64)
   local.get $0
-  f64.const 1
-  f64.gt
-  local.get $0
-  f64.const 0
-  f64.lt
-  select
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  local.get $0
-  local.tee $4
-  f64.const 0
-  f64.eq
-  if
-   f64.const 0
-   return
-  end
-  f64.const 1
-  local.get $4
-  f64.sub
-  local.tee $8
-  f64.const 0
-  f64.eq
-  if
-   f64.const inf
-   return
-  end
-  i32.const 1
-  local.get $8
-  f64.const 0
-  f64.le
-  local.get $4
-  f64.const 0
-  f64.le
-  select
-  if
-   f64.const nan:0x8000000000000
-   return
-  end
-  f64.const 1
-  local.get $1
-  f64.div
-  local.set $6
-  local.get $1
-  f64.const 4
-  f64.gt
-  if
-   local.get $4
-   local.get $8
-   f64.min
-   f64.const 0
-   f64.const 1
-   call $assembly/float/Randf64.normal.quantile
-   local.tee $2
-   f64.neg
-   local.get $2
-   local.get $4
-   local.get $8
-   f64.gt
-   select
-   local.tee $2
-   f64.abs
-   f64.const 3
-   f64.lt
-   if (result f64)
-    local.get $1
-    local.get $1
-    f64.sqrt
-    local.tee $3
-    local.get $2
-    f64.mul
-    local.get $2
-    f64.const 0.16666666666666666
-    f64.mul
-    local.get $2
-    f64.mul
-    f64.const 0.3333333333333333
-    f64.add
-    f64.const 1
-    local.get $2
-    local.get $3
-    f64.const 12
-    f64.mul
-    f64.div
-    f64.sub
-    f64.mul
-    f64.add
-    local.get $2
-    local.get $2
-    f64.mul
-    f64.const 0.00625
-    f64.mul
-    f64.const 0.025
-    f64.add
-    local.get $6
-    f64.mul
-    local.tee $0
-    f64.add
-    f64.add
-   else
-    local.get $2
-    local.get $1
-    f64.sqrt
-    f64.div
-    local.tee $3
-    f64.const 1
-    f64.add
-    f64.const 0.1
-    f64.max
-    local.set $2
-    loop $do-continue|0
-     f64.const 1
-     local.get $2
-     f64.sub
-     local.get $2
-     local.get $2
-     call $~lib/math/NativeMath.log
-     local.tee $9
-     f64.mul
-     f64.add
-     local.tee $0
-     local.get $0
-     f64.add
-     f64.sqrt
-     local.tee $5
-     f64.neg
-     local.get $5
-     local.get $2
-     local.tee $0
-     f64.const 1
-     f64.lt
-     select
-     local.set $5
-     local.get $0
-     local.get $5
-     local.get $3
-     f64.sub
-     local.get $5
-     f64.mul
-     local.get $9
-     f64.div
-     f64.sub
-     local.tee $2
-     local.get $0
-     f64.const 0.1
-     f64.mul
-     f64.lt
-     if
-      local.get $0
-      f64.const 0.1
-      f64.mul
-      local.set $2
-     end
-     local.get $2
-     local.get $0
-     f64.sub
-     f64.abs
-     f64.const 1e-08
-     f64.gt
-     br_if $do-continue|0
-    end
-    f64.const 0.01
-    local.get $1
-    local.get $2
-    f64.mul
-    local.get $2
-    local.get $2
-    f64.add
-    f64.const 1
-    local.get $2
-    f64.sub
-    local.get $2
-    local.get $2
-    call $~lib/math/NativeMath.log
-    local.tee $0
-    f64.mul
-    f64.add
-    f64.mul
-    f64.sqrt
-    local.get $2
-    f64.const 1
-    f64.sub
-    f64.abs
-    f64.div
-    call $~lib/math/NativeMath.log
-    local.get $0
-    f64.div
-    f64.add
-    local.tee $0
-    f64.const 0.0218
-    local.get $0
-    local.get $1
-    f64.const 0.065
-    f64.mul
-    f64.add
-    f64.div
-    f64.sub
-    local.tee $3
-    f64.div
-    local.set $0
-    local.get $3
-    local.get $0
-    f64.add
-   end
-   local.tee $2
-   local.get $2
-   f64.floor
-   local.tee $3
-   local.get $0
-   local.get $0
-   f64.add
-   f64.add
-   f64.lt
-   i32.const 0
-   local.get $2
-   f64.const 10
-   f64.gt
-   select
-   if
-    local.get $3
-    local.get $1
-    local.get $1
-    f64.add
-    f64.lt
-    i32.const 0
-    local.get $3
-    local.get $1
-    f64.const 0.5
-    f64.mul
-    f64.gt
-    select
-    if
-     f64.const 1
-     local.get $3
-     local.get $6
-     f64.mul
-     local.tee $2
-     f64.sub
-     local.get $2
-     local.get $2
-     call $~lib/math/NativeMath.log
-     f64.mul
-     f64.add
-     local.tee $0
-     local.get $0
-     f64.add
-     local.get $2
-     f64.div
-     f64.sqrt
-     local.set $5
-     f64.const 1
-     local.get $3
-     f64.div
-     local.tee $0
-     f64.const -4.7405491906438586e-14
-     f64.mul
-     f64.const 2.853489380704746e-14
-     f64.add
-     local.tee $9
-     f64.const 22
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 3.3717632624009806e-13
-     f64.add
-     local.tee $10
-     f64.const 20
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -5.027669280114176e-12
-     f64.add
-     local.tee $11
-     f64.const 18
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -5.830772132550417e-11
-     f64.add
-     local.tee $12
-     f64.const 16
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 9.147699582236793e-10
-     f64.add
-     local.tee $13
-     f64.const 14
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 1.0261809784240299e-08
-     f64.add
-     local.tee $14
-     f64.const 12
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -1.7665952736826086e-07
-     f64.add
-     local.tee $15
-     f64.const 10
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -1.8540622107151585e-06
-     f64.add
-     local.tee $16
-     f64.const 8
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 3.9192631785224383e-05
-     f64.add
-     local.tee $17
-     f64.const 6
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 3.527336860670192e-04
-     f64.add
-     local.tee $18
-     f64.const 4
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -0.014814814814814815
-     f64.add
-     local.tee $2
-     local.get $2
-     f64.add
-     local.get $0
-     f64.mul
-     f64.const -0.3333333333333333
-     f64.add
-     local.get $0
-     f64.const 2.0248802891761395e-14
-     f64.mul
-     f64.const -5.139111834242681e-16
-     f64.add
-     local.tee $19
-     f64.const 23
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -1.3923887224181616e-13
-     f64.add
-     local.tee $20
-     f64.const 21
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 1.1004392031956284e-13
-     f64.add
-     local.tee $21
-     f64.const 19
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 2.4361948020667402e-11
-     f64.add
-     local.tee $22
-     f64.const 17
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -2.5514193994946487e-11
-     f64.add
-     local.tee $23
-     f64.const 15
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -4.382036018453352e-09
-     f64.add
-     local.tee $24
-     f64.const 13
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 6.707853543401533e-09
-     f64.add
-     local.tee $25
-     f64.const 11
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 8.296711340953083e-07
-     f64.add
-     local.tee $26
-     f64.const 9
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -2.185448510679998e-06
-     f64.add
-     local.tee $27
-     f64.const 7
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const -1.7875514403292177e-04
-     f64.add
-     local.tee $28
-     f64.const 5
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 1.1574074074074078e-03
-     f64.add
-     local.tee $29
-     f64.const 3
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 0.08333333333333333
-     f64.add
-     local.tee $30
-     local.get $2
-     local.get $29
-     local.get $18
-     local.get $28
-     local.get $17
-     local.get $27
-     local.get $16
-     local.get $26
-     local.get $15
-     local.get $25
-     local.get $14
-     local.get $24
-     local.get $13
-     local.get $23
-     local.get $12
-     local.get $22
-     local.get $11
-     local.get $21
-     local.get $10
-     local.get $20
-     local.get $9
-     local.get $19
-     local.get $5
-     f64.neg
-     local.get $5
-     local.get $1
-     local.get $3
-     f64.lt
-     select
-     local.tee $5
-     f64.const 8.099521156704558e-16
-     f64.mul
-     f64.const -1.975228829434941e-15
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $5
-     f64.mul
-     f64.add
-     local.get $30
-     local.get $0
-     f64.mul
-     f64.const 1
-     f64.add
-     f64.div
-     local.get $3
-     f64.const -0.5
-     f64.mul
-     local.get $5
-     f64.mul
-     local.get $5
-     f64.mul
-     call $~lib/math/NativeMath.exp
-     local.get $3
-     f64.const 6.283185307179586
-     f64.mul
-     f64.sqrt
-     f64.div
-     f64.mul
-     local.set $0
-     local.get $1
-     local.get $3
-     f64.gt
-     if
-      local.get $3
-      f64.const 1
-      f64.sub
-      local.get $3
-      local.get $4
-      local.get $0
-      f64.const 1
-      local.get $5
-      local.get $3
-      f64.const 0.5
-      f64.mul
-      f64.sqrt
-      f64.mul
-      call $assembly/specials/erf_approx
-      f64.sub
-      f64.const 0.5
-      f64.mul
-      f64.add
-      f64.lt
-      select
-      local.set $3
-     else
-      local.get $5
-      f64.neg
-      local.get $3
-      f64.const 0.5
-      f64.mul
-      f64.sqrt
-      f64.mul
-      call $assembly/specials/erf_approx
-      drop
-     end
-    else
-     local.get $3
-     local.get $1
-     f64.sub
-     local.get $3
-     local.get $3
-     local.get $6
-     f64.mul
-     call $~lib/math/NativeMath.log
-     f64.mul
-     f64.sub
-     local.get $2
-     f64.const 1
-     local.get $3
-     f64.div
-     local.tee $0
-     f64.mul
-     local.get $0
-     f64.mul
-     f64.const 0.08333333333333333
-     f64.add
-     local.get $0
-     f64.mul
-     f64.sub
-     local.set $2
-     local.get $1
-     local.get $3
-     f64.gt
-     if (result f64)
-      f64.const 1
-      local.get $4
-      local.get $2
-      f64.const -0.5
-      f64.mul
-      call $~lib/math/NativeMath.exp
-      local.tee $2
-      f64.mul
-      local.get $2
-      f64.mul
-      local.get $0
-      f64.const 6.283185307179586
-      f64.mul
-      f64.sqrt
-      f64.mul
-      local.get $1
-      f64.mul
-      f64.sub
-      local.set $2
-      f64.const 1
-      local.set $5
-      local.get $3
-      local.set $0
-      i32.const 1
-      local.set $7
-      loop $for-loop|1
-       local.get $7
-       i32.const 50
-       i32.lt_s
-       if
-        local.get $2
-        local.get $5
-        local.get $0
-        f64.const 1
-        f64.sub
-        local.tee $0
-        local.get $6
-        f64.mul
-        f64.mul
-        local.tee $5
-        f64.add
-        local.set $2
-        local.get $7
-        i32.const 1
-        i32.add
-        local.set $7
-        br $for-loop|1
-       end
-      end
-      local.get $3
-      f64.const 1
-      f64.sub
-      local.get $3
-      local.get $2
-      f64.const 0
-      f64.gt
-      select
-     else
-      f64.const 1
-      local.get $8
-      local.get $2
-      f64.const -0.5
-      f64.mul
-      call $~lib/math/NativeMath.exp
-      local.tee $0
-      f64.mul
-      local.get $0
-      f64.mul
-      local.get $3
-      f64.const 6.283185307179586
-      f64.mul
-      f64.sqrt
-      f64.mul
-      f64.sub
-      local.set $2
-      local.get $3
-      local.set $0
-      loop $for-loop|2
-       local.get $7
-       i32.const 50
-       i32.lt_s
-       if
-        local.get $2
-        local.get $0
-        f64.const 1
-        f64.add
-        local.tee $0
-        f64.mul
-        local.get $6
-        f64.mul
-        f64.const 1
-        f64.add
-        local.set $2
-        local.get $7
-        i32.const 1
-        i32.add
-        local.set $7
-        br $for-loop|2
-       end
-      end
-      local.get $3
-      f64.const 1
-      f64.sub
-      local.get $3
-      local.get $2
-      f64.const 0
-      f64.lt
-      select
-     end
-     local.set $3
-    end
-   end
-  end
-  local.get $3
-  f64.const 10
-  f64.lt
-  if
-   f64.const 0
-   local.set $3
-   local.get $1
-   f64.const 0.5
-   f64.mul
-   call $~lib/math/NativeMath.exp
-   local.tee $0
-   f64.const 1e-13
-   f64.mul
-   local.get $0
-   f64.mul
-   f64.const 0
-   local.get $4
-   f64.const 0.5
-   f64.gt
-   select
-   local.set $2
-   f64.const 1
-   local.get $4
-   local.get $0
-   f64.mul
-   local.get $0
-   f64.mul
-   f64.sub
-   local.get $2
-   f64.add
-   local.set $0
-   loop $while-continue|3
-    local.get $0
-    f64.const 0
-    f64.lt
-    if
-     local.get $2
-     local.get $3
-     f64.const 1
-     f64.add
-     local.tee $3
-     local.get $6
-     f64.mul
-     local.tee $1
-     f64.mul
-     local.set $2
-     local.get $1
-     local.get $0
-     f64.mul
-     f64.const 1
-     f64.add
-     local.set $0
-     br $while-continue|3
-    end
-   end
-   local.get $0
-   local.get $2
-   local.get $2
-   f64.add
-   f64.lt
-   if
-    local.get $2
-    f64.const 1e13
-    f64.mul
-    local.tee $0
-    f64.const 1e17
-    f64.mul
-    local.set $1
-    local.get $0
-    local.get $8
-    f64.mul
-    local.set $2
-    loop $while-continue|4
-     local.get $1
-     local.get $2
-     f64.gt
-     if
-      local.get $2
-      local.get $3
-      f64.const 1
-      f64.add
-      local.tee $3
-      local.get $6
-      f64.mul
-      f64.mul
-      local.set $2
-      br $while-continue|4
-     end
-    end
-    local.get $2
-    local.set $0
-    f64.const 1
-    local.set $2
-    loop $while-continue|5
-     local.get $0
-     f64.const 0
-     f64.gt
-     if
-      local.get $0
-      local.get $2
-      local.get $3
-      local.get $6
-      f64.mul
-      f64.mul
-      local.tee $2
-      f64.sub
-      local.set $0
-      local.get $3
-      f64.const 1
-      f64.sub
-      local.set $3
-      br $while-continue|5
-     end
-    end
-   end
-  end
-  local.get $3
- )
- (func $assembly/float/Randf64.poisson.mean (param $0 f64) (result f64)
+  f64.sqrt
   f64.const nan:0x8000000000000
   local.get $0
+  f64.const 0
+  f64.ge
+  select
+ )
+ (func $assembly/float/Randf64.poisson.variance (param $0 f64) (result f64)
+  local.get $0
+  f64.const nan:0x8000000000000
   local.get $0
   f64.const 0
-  f64.lt
+  f64.ge
   select
  )
  (func $assembly/float/Randf64.poisson.median (param $0 f64) (result f64)
@@ -11751,311 +12250,18 @@
   f64.sub
   f64.floor
  )
- (func $assembly/float/Randf64.poisson.stdev (param $0 f64) (result f64)
-  f64.const nan:0x8000000000000
-  local.get $0
-  f64.sqrt
-  local.get $0
-  f64.const 0
-  f64.lt
-  select
- )
  (func $assembly/float/Randf64.poisson.skewness (param $0 f64) (result f64)
   local.get $0
   f64.const 0
-  f64.le
+  f64.gt
   if (result f64)
-   f64.const nan:0x8000000000000
-  else
    f64.const 1
    local.get $0
    f64.sqrt
    f64.div
-  end
- )
- (func $assembly/float/Randf64.gamma (param $0 f64) (param $1 f64) (result f64)
-  (local $2 f64)
-  (local $3 f64)
-  (local $4 f64)
-  (local $5 f64)
-  (local $6 f64)
-  (local $7 f64)
-  (local $8 f64)
-  i32.const 1
-  local.get $1
-  local.get $1
-  f64.ne
-  local.get $0
-  local.get $0
-  f64.ne
-  select
-  if
-   local.get $0
-   local.get $1
-   f64.add
-   return
-  end
-  i32.const 1
-  local.get $1
-  f64.const 1e-07
-  f64.le
-  local.get $0
-  f64.const 1e-07
-  f64.le
-  select
-  if
-   f64.const 0
-   return
-  end
-  local.get $0
-  f64.const 1
-  f64.eq
-  if
-   call $~lib/math/NativeMath.random
-   f64.neg
-   call $~lib/math/NativeMath.log1p
-   f64.neg
-   local.get $1
-   f64.mul
-   return
-  end
-  local.get $0
-  f64.const 1
-  f64.gt
-  if (result f64)
-   local.get $0
-   f64.const 1.3862943611198906
-   f64.sub
-   local.set $4
-   local.get $0
-   local.get $0
-   local.get $0
-   f64.add
-   f64.const 1
-   f64.sub
-   f64.sqrt
-   local.tee $5
-   f64.add
-   local.set $6
-   loop $while-continue|0 (result f64)
-    i32.const 1
-    call $~lib/math/NativeMath.random
-    local.tee $2
-    f64.const 0.9999999
-    f64.ge
-    local.get $2
-    f64.const 1e-07
-    f64.le
-    select
-    br_if $while-continue|0
-    f64.const 1
-    call $~lib/math/NativeMath.random
-    f64.sub
-    local.set $7
-    local.get $0
-    local.get $2
-    f64.const 1
-    local.get $2
-    f64.sub
-    f64.div
-    call $~lib/math/NativeMath.log
-    local.get $5
-    f64.div
-    local.tee $8
-    call $~lib/math/NativeMath.exp
-    f64.mul
-    local.set $3
-    local.get $4
-    local.get $6
-    local.get $8
-    f64.mul
-    f64.add
-    local.get $3
-    f64.sub
-    local.tee $8
-    f64.const 2.504077396776274
-    f64.add
-    local.get $2
-    local.get $2
-    f64.mul
-    local.get $7
-    f64.mul
-    local.tee $2
-    f64.const 4.5
-    f64.mul
-    f64.sub
-    f64.const 0
-    f64.ge
-    if (result i32)
-     i32.const 1
-    else
-     local.get $2
-     call $~lib/math/NativeMath.log
-     local.get $8
-     f64.le
-    end
-    i32.eqz
-    br_if $while-continue|0
-    local.get $3
-    local.get $1
-    f64.mul
-   end
   else
-   local.get $0
-   f64.const 2.718281828459045
-   f64.add
-   f64.const 2.718281828459045
-   f64.div
-   local.set $4
-   local.get $0
-   f64.const 1
-   f64.sub
-   local.set $5
-   f64.const 1
-   local.get $0
-   f64.div
-   local.set $6
-   loop $while-continue|1 (result f64)
-    call $~lib/math/NativeMath.random
-    local.set $2
-    call $~lib/math/NativeMath.random
-    local.set $7
-    local.get $4
-    local.get $2
-    f64.mul
-    local.tee $2
-    f64.const 1
-    f64.le
-    if (result f64)
-     local.get $2
-     local.get $6
-     call $~lib/math/NativeMath.pow
-    else
-     local.get $4
-     local.get $2
-     f64.sub
-     local.get $0
-     f64.div
-     call $~lib/math/NativeMath.log
-     f64.neg
-    end
-    local.set $3
-    local.get $2
-    f64.const 1
-    f64.gt
-    if (result f64)
-     local.get $3
-     local.get $5
-     call $~lib/math/NativeMath.pow
-    else
-     local.get $3
-     f64.neg
-     call $~lib/math/NativeMath.exp
-    end
-    local.get $7
-    f64.ge
-    i32.eqz
-    br_if $while-continue|1
-    local.get $3
-    local.get $1
-    f64.mul
-   end
-  end
- )
- (func $assembly/float/Randf64.poisson.entropy (param $0 f64) (result f64)
-  (local $1 f64)
-  (local $2 f64)
-  (local $3 i32)
-  local.get $0
-  f64.const 0
-  f64.le
-  if
-   f64.const 0
    f64.const nan:0x8000000000000
-   local.get $0
-   f64.const 0
-   f64.eq
-   select
-   return
   end
-  local.get $0
-  f64.const 50
-  f64.gt
-  if
-   local.get $0
-   f64.const 17.079468445347132
-   f64.mul
-   call $~lib/math/NativeMath.log
-   f64.const 0.5
-   f64.mul
-   f64.const 1
-   local.get $0
-   f64.const 12
-   f64.mul
-   f64.div
-   f64.sub
-   f64.const 1
-   local.get $0
-   local.get $0
-   f64.mul
-   local.tee $1
-   f64.const 24
-   f64.mul
-   f64.div
-   f64.sub
-   f64.const 19
-   local.get $1
-   local.get $0
-   f64.mul
-   f64.const 720
-   f64.mul
-   f64.div
-   f64.sub
-   return
-  end
-  f64.const 1
-  local.set $1
-  i32.const 1
-  local.set $3
-  loop $for-loop|0
-   local.get $3
-   i32.const 100
-   i32.le_s
-   if
-    local.get $2
-    local.get $1
-    local.get $0
-    f64.mul
-    local.tee $1
-    local.get $3
-    i32.const 1
-    i32.add
-    local.tee $3
-    f64.convert_i32_s
-    local.tee $2
-    call $assembly/specials/logGamma
-    f64.mul
-    local.get $2
-    f64.const 1
-    call $assembly/float/Randf64.gamma
-    f64.div
-    f64.add
-    local.set $2
-    br $for-loop|0
-   end
-  end
-  local.get $0
-  f64.const 1
-  local.get $0
-  call $~lib/math/NativeMath.log
-  f64.sub
-  f64.mul
-  local.get $0
-  f64.neg
-  call $~lib/math/NativeMath.exp
-  local.get $2
-  f64.mul
-  f64.add
  )
  (func $assembly/utils/randomSeedInt (param $0 i64)
   (local $1 i32)
@@ -17423,11 +17629,11 @@
    f32.const 2
    local.set $1
   end
-  f32.const nan:0x400000
   local.get $0
+  f32.const nan:0x400000
   local.get $1
   f32.const 0
-  f32.lt
+  f32.ge
   select
  )
  (func $assembly/float/Randf32.vonmises.skewness@varargs (param $0 f32) (param $1 f32) (result f32)
@@ -17442,11 +17648,11 @@
    f32.const 2
    local.set $1
   end
-  f32.const nan:0x400000
   f32.const 0
+  f32.const nan:0x400000
   local.get $1
   f32.const 0
-  f32.lt
+  f32.ge
   select
  )
  (func $assembly/float/Randf32.vonmises.entropy@varargs (param $0 f32) (param $1 f32) (result f32)
@@ -23251,7 +23457,19 @@
    local.set $1
   end
   local.get $1
-  call $assembly/float/Randf64.vonmises.variance
+  f64.const 0
+  f64.ge
+  if (result f64)
+   f64.const 1
+   local.get $1
+   call $assembly/specials/besseli1
+   local.get $1
+   call $assembly/specials/besseli0
+   f64.div
+   f64.sub
+  else
+   f64.const nan:0x8000000000000
+  end
   f64.sqrt
  )
  (func $assembly/float/Randf64.vonmises.variance@varargs (param $0 f64) (param $1 f64) (result f64)
@@ -23267,7 +23485,19 @@
    local.set $1
   end
   local.get $1
-  call $assembly/float/Randf64.vonmises.variance
+  f64.const 0
+  f64.ge
+  if (result f64)
+   f64.const 1
+   local.get $1
+   call $assembly/specials/besseli1
+   local.get $1
+   call $assembly/specials/besseli0
+   f64.div
+   f64.sub
+  else
+   f64.const nan:0x8000000000000
+  end
  )
  (func $assembly/float/Randf64.vonmises.mean@varargs (param $0 f64) (param $1 f64) (result f64)
   block $2of2
@@ -23285,11 +23515,11 @@
    f64.const 2
    local.set $1
   end
-  f64.const nan:0x8000000000000
   local.get $0
+  f64.const nan:0x8000000000000
   local.get $1
   f64.const 0
-  f64.lt
+  f64.ge
   select
  )
  (func $assembly/float/Randf64.vonmises.skewness@varargs (param $0 f64) (param $1 f64) (result f64)
@@ -23304,11 +23534,11 @@
    f64.const 2
    local.set $1
   end
-  f64.const nan:0x8000000000000
   f64.const 0
+  f64.const nan:0x8000000000000
   local.get $1
   f64.const 0
-  f64.lt
+  f64.ge
   select
  )
  (func $assembly/float/Randf64.vonmises.entropy@varargs (param $0 f64) (param $1 f64) (result f64)

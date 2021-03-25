@@ -183,21 +183,21 @@ export function besseli1(x: f64): f64 {
 /** Returns the incompleate gamma fucntion Q(a, x) = 1 - P(a, x). */
 // @ts-ignore: decorator
 @inline
-export function qgamma(a: f64, x: f64): f64 {
+export function qgamma(a: f64, x: f64, eps: f64 = 1e-12): f64 {
   if (x < 0.0 || a <= 0.0) return NaN;
   return x < a + 1.0
-    ? 1.0 - gser(a, x)
-    : gcf(a, x)
+    ? 1.0 - gser(a, x, eps)
+    : gcf(a, x, eps)
 }
 
 /** Returns the incomplete gamma function P(a, x). */
 // @ts-ignore: decorator
 @inline
-export function pgamma(a: f64, x: f64): f64 {
+export function pgamma(a: f64, x: f64, eps: f64 = 1e-12): f64 {
   if (x < 0.0 || a <= 0.0) return NaN;
   return x < a + 1.0
-    ? gser(a, x)
-    : 1.0 - gcf(a, x)
+    ? gser(a, x, eps)
+    : 1.0 - gcf(a, x, eps)
 }
 
 /** Returns the incomplete gamma function P(a, x), calculated by its series representation */
