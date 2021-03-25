@@ -1470,6 +1470,7 @@ export namespace Randf64 {
       /*
         This software was written by Mike Giles, copyright University of Oxford,
         and is provided under the terms of the GNU GPLv3 license.
+        https://people.maths.ox.ac.uk/gilesm/codes/poissinv
 
         The method is explicated in Giles's paper "Algorithm 955:
         Approximation of the Inverse Poisson Cumulative Distribution
