@@ -8349,7 +8349,7 @@
    return
   end
   local.get $1
-  f32.const 1e4
+  f32.const 3e3
   f32.gt
   if
    local.get $1
@@ -11480,7 +11480,7 @@
    return
   end
   local.get $1
-  f64.const 1e4
+  f64.const 3e3
   f64.gt
   if
    local.get $1
