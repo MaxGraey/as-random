@@ -3097,9 +3097,13 @@ export namespace Randf32 {
     /** Eval the quantile function for Poisson distribution. */
     export function quantile(p: f32, lambda: f32): f32 {
       /*
-        Adopted from poissinv_cuda.h.
-        This is Mike Giles's Poisson inverse code, under GPL. See
+        Adopted from poissinv_cuda.h of
         https://people.maths.ox.ac.uk/gilesm/codes/poissinv/
+
+        This software was written by Mike Giles, copyright University of Oxford,
+        and is provided under the terms of the GNU GPLv3 license:
+        http://www.gnu.org/licenses/gpl.html
+
         The method is explicated in Giles's paper "Algorithm 955:
         Approximation of the Inverse Poisson Cumulative Distribution
         Function", ACM Transactions on Mathematical Software, Volume 42
