@@ -11698,6 +11698,13 @@
    return
   end
   local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const 0
+   return
+  end
+  local.get $0
   f64.const 1
   f64.eq
   if
@@ -11711,15 +11718,15 @@
    local.get $1
    f64.neg
    call $~lib/math/NativeMath.exp
-   local.tee $3
-   local.set $2
+   local.tee $2
+   local.set $3
    loop $while-continue|0
     local.get $0
-    local.get $2
+    local.get $3
     f64.gt
     if
-     local.get $2
      local.get $3
+     local.get $2
      local.get $1
      f64.mul
      local.get $4
@@ -11727,16 +11734,69 @@
      f64.add
      local.tee $4
      f64.div
-     local.tee $3
+     local.tee $2
      f64.add
-     local.set $2
+     local.set $3
      br $while-continue|0
     end
    end
    local.get $4
    return
   end
-  f64.const nan:0x8000000000000
+  f64.const 1
+  local.get $1
+  local.get $1
+  f64.sqrt
+  local.tee $3
+  local.get $0
+  f64.const 0
+  f64.const 1
+  call $assembly/float/Randf64.normal.quantile
+  local.tee $2
+  f64.const 1
+  local.get $3
+  f64.div
+  local.get $2
+  local.get $2
+  f64.mul
+  f64.const 1
+  f64.sub
+  f64.mul
+  f64.const 6
+  f64.div
+  f64.add
+  f64.mul
+  f64.add
+  f64.const 0.5
+  f64.add
+  f64.floor
+  f64.const 0
+  f64.max
+  local.tee $3
+  local.get $1
+  call $assembly/float/Randf64.poisson.cdf
+  f64.sub
+  local.set $2
+  loop $while-continue|1
+   local.get $0
+   local.get $2
+   f64.gt
+   if
+    local.get $2
+    f64.const 1
+    local.get $3
+    f64.const 1
+    f64.add
+    local.tee $3
+    local.get $1
+    call $assembly/float/Randf64.poisson.pmf
+    f64.sub
+    f64.add
+    local.set $2
+    br $while-continue|1
+   end
+  end
+  local.get $3
  )
  (func $assembly/float/Randf64.poisson.stdev (param $0 f64) (result f64)
   local.get $0

@@ -1476,6 +1476,7 @@ export namespace Randf64 {
       if (isNaN(x) || isNaN(lambda)) return x + lambda;
       if (lambda < 0.0) return NaN;
       if (x < 0.0 || x > 1.0) return NaN;
+      if (x == 0.0) return 0.0;
       if (x == 1.0) return Infinity;
 
       if (lambda < 30.0) {
@@ -1490,8 +1491,14 @@ export namespace Randf64 {
         return q;
       }
 
-      // TODO:
-      return NaN;
+      // Approximate by normal approximation and Cornish-Fisher expansion
+      let z = normal.quantile(x);
+      let s = Math.sqrt(lambda);
+      let i = Math.max(Math.floor(lambda + s * (z + (1.0 / s) * (z * z - 1.0) / 6.0) + 0.5), 0);
+      // simple forward search
+      let cdf = 1.0 - poisson.cdf(i, lambda);
+      while (x > cdf) cdf += 1.0 - poisson.pmf(++i, lambda);
+      return i;
     }
 
     /** Returns the standard deviation of Poisson distribution. */

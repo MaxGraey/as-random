@@ -22385,6 +22385,7 @@
   (local $3 f64)
   (local $4 f64)
   (local $5 i32)
+  (local $6 f64)
   local.get $0
   local.get $0
   f64.ne
@@ -22420,6 +22421,13 @@
   end
   if
    f64.const nan:0x8000000000000
+   return
+  end
+  local.get $0
+  f64.const 0
+  f64.eq
+  if
+   f64.const 0
    return
   end
   local.get $0
@@ -22468,7 +22476,73 @@
    local.get $2
    return
   end
-  f64.const nan:0x8000000000000
+  local.get $0
+  f64.const 0
+  f64.const 1
+  call $assembly/float/Randf64.normal.quantile
+  local.set $4
+  local.get $1
+  local.set $2
+  local.get $2
+  f64.sqrt
+  local.set $2
+  local.get $1
+  local.get $2
+  local.get $4
+  f64.const 1
+  local.get $2
+  f64.div
+  local.get $4
+  local.get $4
+  f64.mul
+  f64.const 1
+  f64.sub
+  f64.mul
+  f64.const 6
+  f64.div
+  f64.add
+  f64.mul
+  f64.add
+  f64.const 0.5
+  f64.add
+  local.set $3
+  local.get $3
+  f64.floor
+  local.set $6
+  f64.const 0
+  local.set $3
+  local.get $6
+  local.get $3
+  f64.max
+  local.set $6
+  f64.const 1
+  local.get $6
+  local.get $1
+  call $assembly/float/Randf64.poisson.cdf
+  f64.sub
+  local.set $3
+  loop $while-continue|1
+   local.get $0
+   local.get $3
+   f64.gt
+   local.set $5
+   local.get $5
+   if
+    local.get $3
+    f64.const 1
+    local.get $6
+    f64.const 1
+    f64.add
+    local.tee $6
+    local.get $1
+    call $assembly/float/Randf64.poisson.pmf
+    f64.sub
+    f64.add
+    local.set $3
+    br $while-continue|1
+   end
+  end
+  local.get $6
  )
  (func $assembly/float/Randf64.poisson.stdev (param $0 f64) (result f64)
   (local $1 f64)
