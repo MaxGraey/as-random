@@ -1472,10 +1472,22 @@ export namespace Randf64 {
     }
 
     /** Eval the quantile function for Poisson distribution. */
-    export function quantile(p: f64, lambda: f64): f64 {
-      if (isNaN(p) || isNaN(lambda)) return p + lambda;
+    export function quantile(x: f64, lambda: f64): f64 {
+      if (isNaN(x) || isNaN(lambda)) return x + lambda;
       if (lambda < 0.0) return NaN;
-      if (p < 0.0 || p > 1.0) return NaN;
+      if (x < 0.0 || x > 1.0) return NaN;
+
+      if (lambda < 50.0) {
+        let q = 0.0;
+        let p = Math.exp(-lambda);
+        let t = p;
+        while (x > t) {
+          q += 1.0;
+          p  = p * lambda / q;
+          t += p;
+        }
+        return q;
+      }
 
       // TODO:
       return NaN;

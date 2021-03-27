@@ -11661,6 +11661,9 @@
   end
  )
  (func $assembly/float/Randf64.poisson.quantile (param $0 f64) (param $1 f64) (result f64)
+  (local $2 f64)
+  (local $3 f64)
+  (local $4 f64)
   i32.const 1
   local.get $1
   local.get $1
@@ -11692,6 +11695,38 @@
   select
   if
    f64.const nan:0x8000000000000
+   return
+  end
+  local.get $1
+  f64.const 50
+  f64.lt
+  if
+   local.get $1
+   f64.neg
+   call $~lib/math/NativeMath.exp
+   local.tee $3
+   local.set $2
+   loop $while-continue|0
+    local.get $0
+    local.get $2
+    f64.gt
+    if
+     local.get $2
+     local.get $3
+     local.get $1
+     f64.mul
+     local.get $4
+     f64.const 1
+     f64.add
+     local.tee $4
+     f64.div
+     local.tee $3
+     f64.add
+     local.set $2
+     br $while-continue|0
+    end
+   end
+   local.get $4
    return
   end
   f64.const nan:0x8000000000000
