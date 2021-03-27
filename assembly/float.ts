@@ -1476,8 +1476,9 @@ export namespace Randf64 {
       if (isNaN(x) || isNaN(lambda)) return x + lambda;
       if (lambda < 0.0) return NaN;
       if (x < 0.0 || x > 1.0) return NaN;
+      if (x == 1.0) return Infinity;
 
-      if (lambda < 50.0) {
+      if (lambda < 30.0) {
         let q = 0.0;
         let p = Math.exp(-lambda);
         let t = p;

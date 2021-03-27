@@ -22422,8 +22422,15 @@
    f64.const nan:0x8000000000000
    return
   end
+  local.get $0
+  f64.const 1
+  f64.eq
+  if
+   f64.const inf
+   return
+  end
   local.get $1
-  f64.const 50
+  f64.const 30
   f64.lt
   if
    f64.const 0
